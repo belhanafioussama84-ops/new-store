@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order received · Duka Bora</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1f4d3a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo/logo.png" />
+  <link rel="stylesheet" href="css/product.css" />
+</head>
+<!-- Shown after an order: thank-you.html?order=<order number> -->
+<body>
+
+  <div class="ticker" aria-label="Why order from us">
+    <div class="ticker__track">
+      <span>🚚 Fast delivery nationwide</span><span>💵 Pay on delivery</span><span>📞 Phone confirmation before shipping</span><span>🔒 Simple &amp; secure ordering</span><span>⭐ Trusted, reliable store</span>
+      <span aria-hidden="true">🚚 Fast delivery nationwide</span><span aria-hidden="true">💵 Pay on delivery</span><span aria-hidden="true">📞 Phone confirmation before shipping</span><span aria-hidden="true">🔒 Simple &amp; secure ordering</span><span aria-hidden="true">⭐ Trusted, reliable store</span>
+    </div>
+  </div>
+
+  <header class="top">
+    <div class="wrap top__inner">
+      <nav class="top__nav">
+        <a href="index.html#shop">Products</a>
+      </nav>
+      <a href="index.html" class="brand" aria-label="Duka Bora home">
+        <img src="images/logo/logo.png" alt="" onerror="this.remove()" />
+        <span>
+          <strong>Duka<em>Bora</em></strong>
+          <small>Quality you can trust</small>
+        </span>
+      </a>
+      <span class="top__cod"><svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg> COD</span>
+    </div>
+  </header>
+
+  <main class="wrap wrap--narrow thanks">
+    <div class="card summary" id="summary" hidden>
+      <p class="label">Order summary</p>
+      <div class="summary__row">
+        <div class="summary__media" id="sMedia"></div>
+        <div class="summary__info">
+          <strong id="sName"></strong>
+          <span id="sOffer"></span>
+          <small id="sQty"></small>
+        </div>
+        <div class="summary__total">
+          <p class="label">To pay on delivery</p>
+          <strong id="sTotal"></strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="card ask">
+      <div class="ask__star">✦</div>
+      <h1>Thank you, your order is received!</h1>
+      <p class="muted">Please keep your phone available. Our team will call you shortly to confirm your delivery details.</p>
+      <a href="index.html" class="btn">Back to home</a>
+    </div>
+
+    <div class="note">
+      <span>✦</span>
+      <p><strong>Important:</strong> We only send orders after phone confirmation. Please answer the call so your order can be prepared. Unanswered orders may be delayed.</p>
+    </div>
+
+    <p class="label label--center">What happens next</p>
+    <ol class="steps">
+      <li><span>01</span><h3>We call to confirm</h3><p>Within a few hours, our team will call to verify your address and delivery time.</p></li>
+      <li><span>02</span><h3>We prepare &amp; ship</h3><p>Your order is packed and dispatched after confirmation.</p></li>
+      <li><span>03</span><h3>You pay on delivery</h3><p>Pay in cash when our delivery agent hands you the order.</p></li>
+    </ol>
+
+    <p class="back"><a href="index.html">Return to Duka Bora home →</a></p>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__inner">
+      <span>© <span id="year"></span> Duka Bora</span>
+      <a href="#" id="footerPhone"></a>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/thank-you.js"></script>
+</body>
+</html>

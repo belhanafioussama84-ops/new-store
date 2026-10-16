@@ -1,0 +1,87 @@
+/* ==========================================================
+   Home page (premium) — loaded after style.css + landing.css
+   ========================================================== */
+
+/* ---------- White theme (home page only; product pages stay dark) ---------- */
+.home { background: #fff; }
+.home .announce { background: #fff; color: var(--ink-2); border-bottom: 1px solid #ece4d3; }
+.home .announce strong { color: var(--lux-gold-dark); }
+.home .header { background: rgba(255, 255, 255, .94); }
+.home .header.is-scrolled { border-color: var(--line); box-shadow: var(--shadow-sm); }
+.home .logo--light .logo__text { color: var(--ink); }
+.home .logo--light .logo__text span { color: var(--lux-gold-dark); }
+.home .nav a { color: var(--ink-2); }
+.home .nav a:hover { color: var(--ink); }
+.home .nav a::after { background: var(--lux-gold); }
+.home .menu-btn span { background: var(--ink); }
+
+/* Hero on white */
+.home .lp-hero { color: var(--ink); background: radial-gradient(900px 520px at 78% 40%, rgba(230, 163, 61, .12), transparent 60%), #fff; border-bottom: 1px solid #ece4d3; }
+.home .lp-kicker { color: var(--lux-gold-dark); border-color: rgba(168, 112, 28, .35); }
+.home .lp-desc { color: var(--ink-2); }
+.home .lp-btn-line { color: var(--ink); border-color: var(--line); }
+.home .lp-btn-line:hover { border-color: var(--ink); }
+.home .lp-mini strong { color: var(--lux-gold-dark); }
+.home .lp-mini span { color: var(--muted); }
+
+/* Sections that were cream or dark */
+.home .lp-cream { background: #fff; }
+.home .lp-dark, .home .lp-final { color: var(--ink); background: #fff; border-top: 1px solid #ece4d3; }
+.home .lp-dark .eyebrow { color: var(--lux-gold-dark); }
+.home .lp-dark .lead, .home .lp-final p { color: var(--muted); }
+.home .lp-dark .lp-h2 em, .home .lp-final .lp-h2 em { color: var(--lux-gold-dark); }
+.home .lp-promise > div { background: #fff; border-color: #ece4d3; border-top-color: var(--lux-gold); }
+.home .lp-promise strong { color: var(--lux-gold-dark); }
+.home .lp-promise span { color: var(--ink-2); }
+.home #delivery, .home #faq { border-top: 1px solid #ece4d3; }
+
+/* ---------- Hero ---------- */
+.home-hero h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); margin-bottom: 1.25rem; }
+.home-hero h1 em { font-style: italic; color: var(--lux-gold-2); }
+.home-hero .lp-desc { margin-bottom: 2rem; }
+
+/* Featured product card */
+.home-featured { position: relative; }
+.home-featured__card {
+  position: relative; display: block; border-radius: 28px; overflow: hidden; background: #fff; color: var(--ink);
+  border: 1px solid #ece4d3; box-shadow: 0 30px 60px -30px rgba(13, 31, 23, .35); transition: transform .35s var(--ease);
+}
+.home-featured__card:hover { transform: translateY(-6px); }
+.home-featured__card .card__media::before { font-size: 9rem; }
+.home-featured__card .card__badge { top: 18px; left: 18px; font-size: .78rem; padding: .4rem .8rem; }
+.home-featured__info { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem 1.4rem; }
+.home-featured__label { display: block; font-size: .7rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--lux-gold-dark); }
+.home-featured__info strong { display: block; font-family: var(--serif); font-size: 1.45rem; line-height: 1.2; margin: .15rem 0 .2rem; }
+.home-featured__price { display: block; font-weight: 800; font-size: 1.1rem; color: var(--green-800); }
+.home-featured__price s { color: var(--muted); font-weight: 500; font-size: .85rem; }
+.home-featured__info small { display: block; color: var(--muted); font-size: .8rem; margin-top: .15rem; }
+.home-featured__info .btn { flex: none; }
+
+/* ---------- Shop ---------- */
+.home .filters { justify-content: center; margin-top: 1.25rem; }
+.home .filters[hidden] { display: none; }
+.home-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 300px)); justify-content: center; }
+.home .card { border-color: #ece4d3; }
+.home .card:hover { box-shadow: 0 24px 50px -24px rgba(13, 31, 23, .35); }
+.home .card__title { font-family: var(--serif); font-size: 1.25rem; }
+
+/* ---------- Footer ---------- */
+.home .footer { background: #fff; color: var(--ink-2); border-top: 1px solid #ece4d3; }
+.home .footer h4 { color: var(--ink); }
+.home .footer .muted, .home .footer__bottom { color: var(--muted); }
+.home .footer__bottom { border-color: var(--line); }
+.home .footer__grid a:hover { color: var(--lux-gold-dark); }
+.home .pay-chips span { background: var(--lux-cream); border-color: #ece4d3; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .home .nav { background: #fff; border-color: var(--line); }
+  .home .nav a { border-color: var(--line); }
+}
+
+@media (max-width: 560px) {
+  .home-featured__info { flex-direction: column; align-items: stretch; text-align: center; }
+  .home-featured__info .btn { width: 100%; }
+  .home-grid { grid-template-columns: 1fr; }
+  .home .card__desc { display: -webkit-box; }
+}

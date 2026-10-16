@@ -1,0 +1,7 @@
+Put your logo in this folder and name it exactly:  logo.png
+
+- Best size: about 400 x 120 px (wide logo) or 200 x 200 px (square)
+- Use a transparent background (PNG) so it looks good on white and on the dark footer
+- It shows in the header, the footer and the browser tab
+
+If there is no logo.png here, the site shows the "DB Duka Bora" text logo instead.

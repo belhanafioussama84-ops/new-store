@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Duka Bora · Pay on Delivery</title>
+  <meta name="description" content="Order online in Tanzania. Fast delivery and pay cash when your order arrives." />
+  <meta name="theme-color" content="#1f4d3a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo/logo.png" />
+  <link rel="stylesheet" href="css/product.css" />
+</head>
+<!-- Product page: one page for every product.
+     Open it as product.html?id=<product id>, e.g. product.html?id=reward-watch
+     Name, price, photos, offers and description come from js/products.js. -->
+<body>
+
+  <!-- Scrolling trust bar (the list is repeated so the loop has no gap) -->
+  <div class="ticker" aria-label="Why order from us">
+    <div class="ticker__track">
+      <span>🚚 Fast delivery nationwide</span><span>💵 Pay on delivery</span><span>📞 Phone confirmation before shipping</span><span>🔒 Simple &amp; secure ordering</span><span>⭐ Trusted, reliable store</span>
+      <span aria-hidden="true">🚚 Fast delivery nationwide</span><span aria-hidden="true">💵 Pay on delivery</span><span aria-hidden="true">📞 Phone confirmation before shipping</span><span aria-hidden="true">🔒 Simple &amp; secure ordering</span><span aria-hidden="true">⭐ Trusted, reliable store</span>
+    </div>
+  </div>
+
+  <header class="top">
+    <div class="wrap top__inner">
+      <nav class="top__nav">
+        <a href="index.html#shop">Products</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="index.html" class="brand" aria-label="Duka Bora home">
+        <img src="images/logo/logo.png" alt="" onerror="this.remove()" />
+        <span>
+          <strong>Duka<em>Bora</em></strong>
+          <small>Quality you can trust</small>
+        </span>
+      </a>
+      <span class="top__cod"><svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg> COD</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap crumbs">
+      <a href="index.html">Home</a><span>/</span><span id="crumbName"></span>
+    </div>
+
+    <!-- ============ Product + order form ============ -->
+    <section class="wrap product">
+      <div class="gallery">
+        <div class="gallery__main" id="galleryMain"></div>
+        <div class="gallery__thumbs" id="galleryThumbs"></div>
+      </div>
+
+      <div class="buy">
+        <div class="buy__head">
+          <p class="buy__cat" id="pCat"></p>
+          <h1 id="pName"></h1>
+          <p class="buy__desc" id="pDesc" hidden></p>
+          <p class="buy__hot"><span></span>Selling fast – limited stock at this price</p>
+          <div class="buy__price" id="pPrice"></div>
+          <ul class="buy__perks">
+            <li>🚚 Free delivery</li>
+            <li>💵 Pay on delivery</li>
+            <li>📞 We call to confirm</li>
+          </ul>
+        </div>
+
+        <div class="card order" id="order">
+          <div class="order__step"><h2>1. Choose your offer</h2><span>✓ Delivery FREE</span></div>
+          <div class="offers" id="offers" role="radiogroup" aria-label="Choose your offer"></div>
+
+          <div class="order__step order__step--line"><h2>2. Your delivery details</h2><span>💵 Pay on delivery</span></div>
+          <form id="orderForm" novalidate>
+            <div class="field">
+              <label for="fullName">Full name <b>*</b></label>
+              <div class="input"><span>👤</span><input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="e.g. Juma Hassan" required /></div>
+              <small class="error"></small>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number <b>*</b></label>
+              <div class="input"><span>📞</span><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+255 7XX XXX XXX" required /></div>
+              <small class="hint">Use a number you can answer. We'll call to confirm.</small>
+              <small class="error"></small>
+            </div>
+            <div class="field">
+              <label for="address">City &amp; delivery address <b>*</b></label>
+              <div class="input"><span>📍</span><input id="address" name="address" type="text" autocomplete="street-address" placeholder="e.g. Dar es Salaam, Kinondoni, Mikocheni B" required /></div>
+              <small class="error"></small>
+            </div>
+
+            <p class="form-error" id="formError" role="alert" hidden></p>
+            <button type="submit" class="btn btn--big" id="submitBtn">Order now</button>
+          </form>
+
+          <div class="secure">
+            <p class="label label--center">Secure checkout</p>
+            <ul>
+              <li>💵 Pay on delivery</li>
+              <li>📞 Phone confirmation</li>
+              <li>🚚 1–3 day delivery</li>
+              <li>✓ Free shipping</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Photos, each with its explanation ("sections" in products.js) ============ -->
+    <div id="story"></div>
+
+    <!-- ============ FAQ ============ -->
+    <section class="wrap faq" id="faq">
+      <h2>Questions</h2>
+      <details>
+        <summary>What payment methods do you accept?</summary>
+        <p>We offer Cash on Delivery (COD) only. You pay in cash when your order is delivered to your doorstep.</p>
+      </details>
+      <details>
+        <summary>How long does delivery take?</summary>
+        <p>Major cities: 1–3 business days. Other areas: 3–7 days. We call or message you before delivery.</p>
+      </details>
+      <details>
+        <summary>What if I am not available at delivery time?</summary>
+        <p>Our agent will try to reach you by phone or WhatsApp to reschedule. You can also contact us anytime to arrange a new time.</p>
+      </details>
+      <details>
+        <summary>What if there is a problem with my product?</summary>
+        <p>Contact us within 30 days. If something is wrong or not as described, we will replace it or make it right — no hassle.</p>
+      </details>
+      <details>
+        <summary>Is shipping free?</summary>
+        <p>Yes — standard delivery is free on Duka Bora orders. You only pay the product price in cash at your door.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__inner">
+      <span>© <span id="year"></span> Duka Bora</span>
+      <a href="#" id="footerPhone"></a>
+    </div>
+  </footer>
+
+  <!-- Order button that stays on screen on phones -->
+  <a href="#order" class="sticky btn" id="sticky">Order now</a>
+
+  <script src="js/products.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>
