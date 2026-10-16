@@ -115,7 +115,7 @@ const PRODUCTS = [
     id: "car-nano-spray",
     name: "Car Nano Repairing Spray",
     category: "Car care",
-    price: 35000, // TODO: confirm price with the owner
+    price: 81000,
     oldPrice: null,
     rating: 4.7,
     reviews: 0,
@@ -166,9 +166,9 @@ const PRODUCTS = [
       },
     ],
     offers: [
-      { qty: 1, price: 35000 },
-      { qty: 2, price: 60000, tag: "Best value" },
-      { qty: 3, price: 85000 },
+      { qty: 1, price: 81000 },
+      { qty: 2, price: 150000, tag: "Best value" },
+      { qty: 3, price: 210000 },
     ],
     description: "Spray, wipe, and your car shines like new. This nano coating cleans without water, hides fine scratches and leaves a water-repellent layer that keeps rain, mud and dust off the paint.",
     landing: {
