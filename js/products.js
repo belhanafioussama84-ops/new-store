@@ -1,3 +1,4 @@
+/* Live site: https://dukaabora.netlify.app/ (Netlify deploys every push to GitHub main) */
 /* ==========================================================
    STORE SETTINGS — edit these to match your business
    ========================================================== */
