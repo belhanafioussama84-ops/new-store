@@ -5,8 +5,8 @@
 const STORE = {
   name: "Duka Bora",
   // Phone number in international format, digits only (no + or spaces) — used for "Call" links
-  phone: "255700000000",
-  phoneDisplay: "+255 700 000 000",
+  phone: "212672511063",
+  phoneDisplay: "+212 672 511 063",
   // WhatsApp number, international format, digits only (e.g. "255712345678").
   // Shows a green WhatsApp button on every page. Empty = no button.
   whatsapp: "212672511063",
