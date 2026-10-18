@@ -16,6 +16,14 @@
  * If you change this code later: Deploy → Manage deployments → edit → Version: New version → Deploy
  * (the URL stays the same).
  *
+ * SOUND ON YOUR PHONE FOR EVERY NEW ORDER (Telegram, free):
+ *  1. In Telegram open @BotFather → send /newbot → choose a name → copy the token it gives you.
+ *  2. Paste it below in TELEGRAM_TOKEN. Open your new bot in Telegram and press Start.
+ *  3. In the Apps Script editor choose "getTelegramChatId" in the function list at the top → Run
+ *     (allow the permissions). Copy the number shown in the log into TELEGRAM_CHAT_ID.
+ *  4. Choose "testTelegram" → Run: your phone should ring. Then Deploy → Manage deployments →
+ *     edit → Version: New version → Deploy.
+ *
  * Rows received before this format: in the Apps Script editor choose "fixOldRows" in the
  * function list at the top and click Run (once).
  */
@@ -29,6 +37,9 @@ const HEADERS = [
 ];
 // First CODE SUIVI when the sheet has none yet; after that each order gets the last code + 1.
 const FIRST_CODE = 1;
+// Telegram message on every new order (setup above). Empty = no message.
+const TELEGRAM_TOKEN = "";
+const TELEGRAM_CHAT_ID = "";
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -36,8 +47,9 @@ function doPost(e) {
   try {
     const o = JSON.parse(e.postData.contents);
     const sheet = getOrdersSheet_();
+    const code = nextCode_(sheet);
     sheet.appendRow([
-      nextCode_(sheet),
+      code,
       text_(o.customer.fullName),
       localPhone_(o.customer.phone),
       text_(o.customer.city), // the "City & delivery address" field
@@ -49,6 +61,7 @@ function doPost(e) {
       "OUI",
       "NON",
     ]);
+    notifyTelegram_(code, o);
     return json_({ ok: true });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
@@ -88,6 +101,43 @@ function nextCode_(sheet) {
 function localPhone_(v) {
   const digits = String(v == null ? "" : v).replace(/\D/g, "").replace(/^255/, "").replace(/^0/, "");
   return digits ? "'0" + digits : "";
+}
+
+// Sends the new order to your Telegram. A failure here never loses the order (the row is already saved).
+function notifyTelegram_(code, o) {
+  if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return;
+  try {
+    sendTelegram_([
+      "🛒 New order #" + code,
+      o.product.name + " × " + (Number(o.product.qty) || 1),
+      "💰 TSh " + (Number(o.total) || 0).toLocaleString("en-US"),
+      "👤 " + o.customer.fullName,
+      "📞 " + localPhone_(o.customer.phone).replace(/^'/, ""),
+      "📍 " + o.customer.city,
+    ].join("\n"));
+  } catch (err) {
+    console.error("Telegram: " + err);
+  }
+}
+
+function sendTelegram_(text) {
+  UrlFetchApp.fetch("https://api.telegram.org/bot" + TELEGRAM_TOKEN + "/sendMessage", {
+    method: "post",
+    payload: { chat_id: TELEGRAM_CHAT_ID, text: text },
+  });
+}
+
+// Run by hand once (setup step 3): shows your chat ID after you pressed Start in your bot.
+function getTelegramChatId() {
+  const res = JSON.parse(UrlFetchApp.fetch("https://api.telegram.org/bot" + TELEGRAM_TOKEN + "/getUpdates").getContentText());
+  const chats = (res.result || []).map((u) => (u.message || {}).chat).filter(Boolean);
+  if (!chats.length) return console.log("No message yet: open your bot in Telegram, press Start, then run this again.");
+  console.log("TELEGRAM_CHAT_ID = " + chats[chats.length - 1].id);
+}
+
+// Run by hand (setup step 4) to check your phone rings.
+function testTelegram() {
+  sendTelegram_("✅ Duka Bora: Telegram notifications are working.");
 }
 
 // Converts rows received in the old layout

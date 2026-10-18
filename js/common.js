@@ -98,19 +98,24 @@ const Shop = (() => {
   }
 
   // Sends the order to the Google Sheet (STORE.ordersUrl, see google-sheet/orders.gs).
-  // Throws if the network request fails, so the customer can try again.
+  // Throws if the customer is offline or the request fails quickly, so they can try again.
+  // Google takes 2–4 s to answer, so after 1.5 s we stop waiting: "keepalive" lets the
+  // request finish even after the browser moves on to the thank-you page.
   async function sendOrder(o) {
     if (!STORE.ordersUrl) {
       console.warn("STORE.ordersUrl is empty — this order was NOT sent to your Google Sheet.");
       return;
     }
+    if (navigator.onLine === false) throw new Error("offline");
     // "no-cors" + text/plain: the simplest request Google Apps Script accepts from any website.
-    await fetch(STORE.ordersUrl, {
+    const request = fetch(STORE.ordersUrl, {
       method: "POST",
       mode: "no-cors",
+      keepalive: true,
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(o),
     });
+    await Promise.race([request, new Promise((resolve) => setTimeout(resolve, 1500))]);
   }
 
   // The order saved in this browser by createOrder, or undefined.
