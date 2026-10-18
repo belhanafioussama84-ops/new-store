@@ -45,6 +45,7 @@
     $("#galleryMain").innerHTML = `<img src="${esc(images[i])}" alt="${esc(p.name)}"
       onerror="this.parentElement.classList.add('is-empty'); this.parentElement.textContent = '${esc(p.icon || "")}';" />`;
     document.querySelectorAll(".thumb").forEach((t) => t.classList.toggle("is-active", Number(t.dataset.img) === i));
+    $("#galleryCount").textContent = `${i + 1} / ${images.length}`;
   }
   if (images.length > 1) {
     // A thumbnail whose photo is missing is removed; a single remaining thumbnail is hidden too.
@@ -53,7 +54,7 @@
         <img src="${esc(src)}" alt="" onerror="const box = this.closest('.gallery__thumbs'); this.parentElement.remove(); if (box.children.length < 2) box.innerHTML = '';" />
       </button>`).join("");
     // ‹ › arrows on the big photo, and swipe left / right on phones
-    $("#galleryPrev").hidden = $("#galleryNext").hidden = false;
+    $("#galleryPrev").hidden = $("#galleryNext").hidden = $("#galleryCount").hidden = false;
     $("#galleryPrev").addEventListener("click", () => showImage(current - 1));
     $("#galleryNext").addEventListener("click", () => showImage(current + 1));
     let startX = null;
@@ -122,10 +123,23 @@
       ? `<s>${fmt(full)}</s><span class="buy__save">Save ${fmt(save)}</span>` : ""}`;
   };
 
+  // Order summary inside the form
+  const renderRecap = () => {
+    const o = offer();
+    const save = unitFull * o.qty - o.price;
+    $("#recap").innerHTML = `
+      <div><span>${esc(p.name)} × ${o.qty}</span><span>${fmt(unitFull * o.qty)}</span></div>
+      ${save > 0 ? `<div class="recap__save"><span>You save</span><span>− ${fmt(save)}</span></div>` : ""}
+      <div><span>Delivery</span><span class="recap__free">FREE</span></div>
+      <div class="recap__total"><span>Total to pay on delivery</span><strong>${fmt(o.price)}</strong></div>`;
+  };
+
   const renderButton = () => {
     renderPrice();
+    renderRecap();
     $("#submitBtn").textContent = `Order now · ${fmt(offer().price)}`;
     $("#sticky").textContent = `Order now · ${fmt(offer().price)}`;
+    $("#closingOrder").textContent = `Order now · ${fmt(offer().price)}`;
   };
 
   $("#offers").addEventListener("change", (e) => {
@@ -179,6 +193,11 @@
   Pixel.track("ViewContent", Pixel.product(p));
   renderOffers();
   renderButton();
+  const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
+  if (wa) {
+    $("#closingWa").href = `https://wa.me/${wa}?text=${encodeURIComponent(`${STORE.whatsappText || ""} ${p.name}`.trim())}`;
+    $("#closingWa").hidden = false;
+  }
   $("#footerPhone").href = `tel:+${STORE.phone}`;
   $("#footerPhone").textContent = `📞 ${STORE.phoneDisplay}`;
   $("#year").textContent = new Date().getFullYear();

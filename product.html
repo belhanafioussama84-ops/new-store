@@ -52,6 +52,7 @@
       <div class="gallery">
         <div class="gallery__stage">
           <div class="gallery__main" id="galleryMain"></div>
+          <span class="gallery__count" id="galleryCount" hidden></span>
           <button type="button" class="gallery__arrow gallery__arrow--prev" id="galleryPrev" aria-label="Previous photo" hidden>‹</button>
           <button type="button" class="gallery__arrow gallery__arrow--next" id="galleryNext" aria-label="Next photo" hidden>›</button>
         </div>
@@ -95,8 +96,12 @@
               <small class="error"></small>
             </div>
 
+            <!-- Order summary, follows the chosen offer -->
+            <div class="recap" id="recap"></div>
+
             <p class="form-error" id="formError" role="alert" hidden></p>
             <button type="submit" class="btn btn--big" id="submitBtn">Order now</button>
+            <p class="order__note">💵 Pay cash when you receive it · <strong>TSh 0 now</strong></p>
           </form>
 
           <div class="secure">
@@ -138,6 +143,23 @@
         <summary>Is shipping free?</summary>
         <p>Yes — standard delivery is free on Duka Bora orders. You only pay the product price in cash at your door.</p>
       </details>
+    </section>
+
+    <!-- ============ Last call before leaving ============ -->
+    <section class="wrap closing">
+      <p class="label label--center">100% risk-free</p>
+      <h2>Still thinking?</h2>
+      <p class="muted">Order now and pay only when it arrives at your door.</p>
+      <ul class="closing__points">
+        <li><strong>TSh 0</strong> to pay now</li>
+        <li><strong>Free</strong> delivery</li>
+        <li><strong>📞 We call</strong> to confirm</li>
+        <li><strong>30 days</strong> replacement</li>
+      </ul>
+      <div class="closing__btns">
+        <a href="#order" class="btn" id="closingOrder">Order now</a>
+        <a href="#" class="btn btn--wa" id="closingWa" target="_blank" rel="noopener" hidden>💬 Order on WhatsApp</a>
+      </div>
     </section>
   </main>
 

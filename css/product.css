@@ -107,6 +107,33 @@ p { margin: 0 0 1em; }
 .gallery__arrow[hidden] { display: none; }
 .gallery__arrow--prev { left: 10px; }
 .gallery__arrow--next { right: 10px; }
+.gallery__count { position: absolute; right: 12px; bottom: 12px; padding: .2rem .65rem; border-radius: 999px; background: rgba(0, 0, 0, .6); color: #fff; font-size: .78rem; font-weight: 600; }
+.gallery__count[hidden] { display: none; }
+
+/* Order summary in the form + note under the button */
+.recap { margin: .25rem 0 1rem; padding: .9rem 1rem; border-radius: 14px; background: var(--accent-soft); font-size: .92rem; }
+.recap div { display: flex; justify-content: space-between; gap: 1rem; padding: .2rem 0; }
+.recap__save { color: var(--accent); font-weight: 600; }
+.recap__free { color: var(--accent); font-weight: 700; }
+.recap .recap__total { margin-top: .4rem; padding-top: .6rem; border-top: 1px dashed rgba(31, 77, 58, .3); font-weight: 700; }
+.recap__total strong { font-size: 1.1rem; color: var(--accent); }
+.order__note { margin: .7rem 0 0; text-align: center; font-size: .85rem; color: var(--muted); }
+
+/* "Still thinking?" block at the bottom */
+.closing { max-width: 760px; margin-bottom: 3rem; padding: 2.25rem 1.5rem; border: 2px solid var(--gold); border-radius: var(--radius); background: #fff; text-align: center; }
+.closing h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--accent); }
+.closing__points { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin: 1.25rem 0 1.5rem; padding: 0; list-style: none; font-size: .9rem; }
+.closing__points li { padding: .8rem .5rem; border-radius: 12px; background: var(--accent-soft); }
+.closing__points strong { display: block; font-size: 1.05rem; color: var(--accent); }
+.closing__btns { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+.btn--wa { background: #25d366; border-color: #25d366; }
+.btn--wa:hover { background: #1ebe5a; }
+.btn--wa[hidden] { display: none; }
+@media (max-width: 600px) {
+  .closing { width: auto; margin: 0 16px 3rem; padding: 1.75rem 1rem; }
+  .closing__points { grid-template-columns: 1fr 1fr; }
+  .closing__btns .btn { width: 100%; }
+}
 .gallery__thumbs { display: flex; gap: .6rem; margin-top: .75rem; }
 .gallery__thumbs:empty { display: none; }
 .gallery__thumbs { overflow-x: auto; }
