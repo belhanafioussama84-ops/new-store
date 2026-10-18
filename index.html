@@ -66,8 +66,70 @@
           </ul>
         </div>
 
-        <!-- The first products from js/products.js, shown as floating cards -->
-        <div class="h-hero__visual" id="heroVisual" aria-hidden="true"></div>
+        <!-- Delivery map: Tanzania drawn from real coordinates (x = (lon − 29) × 32, y = (−lat − 0.8) × 32),
+             gold routes go out from Dar es Salaam with a dot travelling along each one -->
+        <div class="h-hero__visual">
+          <div class="tzm">
+            <div class="tzm__head">
+              <strong>Karibu! <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg></strong>
+              <span>We deliver across Tanzania</span>
+            </div>
+            <svg class="tzm__map" viewBox="-6 -4 420 362" role="img" aria-label="Delivery map of Tanzania: Dar es Salaam same or next day; Arusha, Dodoma, Mwanza and Mbeya 1–3 days; Zanzibar 2–3 days; Kigoma and Mtwara 3–7 days">
+              <text class="tzm__sea" x="385" y="230" transform="rotate(72 385 230)">INDIAN OCEAN</text>
+              <path class="tzm__land" d="M48 6.4 L156.8 6.4 L275.2 70.4 L278.4 80 L326.4 124.8 L323.2 137.6 L316.8 153.6 L313.6 179.2 L329.6 192 L336 217.6 L329.6 240 L336 262.4 L342.4 294.4 L358.4 304 L366.4 309.4 L332.8 326.4 L304 339.2 L272 345.6 L230.4 348.8 L192 342.4 L179.2 336 L182.4 307.2 L179.2 288 L160 278.4 L134.4 281.6 L124.8 275.2 L92.8 262.4 L64 249.6 L57.6 240 L48 211.2 L38.4 188.8 L19.2 169.6 L28.8 153.6 L19.2 131.2 L12.8 115.2 L35.2 99.2 L51.2 83.2 L57.6 67.2 L48 51.2 L57.6 25.6 Z" />
+              <!-- Lakes Victoria, Tanganyika and Nyasa -->
+              <path class="tzm__lake" d="M89.6 6.4 L156.8 6.4 L153.6 25.6 L156.8 41.6 L137.6 48 L124.8 57.6 L108.8 51.2 L86.4 41.6 L89.6 19.2 Z" />
+              <path class="tzm__lake" d="M12.8 115.2 L19.2 131.2 L28.8 153.6 L19.2 169.6 L38.4 188.8 L48 211.2 L57.6 240 L41.6 246.4 L28.8 214.4 L12.8 182.4 L6.4 150.4 L3.2 118.4 Z" />
+              <path class="tzm__lake" d="M179.2 336 L182.4 307.2 L179.2 288 L160 278.4 L160 291.2 L166.4 313.6 L169.6 339.2 Z" />
+              <!-- Zanzibar (Unguja) and Pemba -->
+              <ellipse class="tzm__land" cx="333" cy="170" rx="5" ry="13" />
+              <ellipse class="tzm__land" cx="345" cy="141" rx="4" ry="9" />
+
+              <path id="r1" class="tzm__route" d="M326 192 Q230 60 125 62" />
+              <path id="r2" class="tzm__route" d="M326 192 Q305 120 246 82" />
+              <path id="r3" class="tzm__route" d="M326 192 Q272 160 216 172" />
+              <path id="r4" class="tzm__route" d="M326 192 Q235 275 143 259" />
+              <path id="r5" class="tzm__route" d="M326 192 Q170 100 28 131" />
+              <path id="r6" class="tzm__route" d="M326 192 Q362 250 352 300" />
+              <path id="r7" class="tzm__route" d="M326 192 Q338 186 333 170" />
+
+              <g class="tzm__dots">
+                <circle r="3.2"><animateMotion dur="3.4s" repeatCount="indefinite"><mpath href="#r1" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.6s" begin="-.8s" repeatCount="indefinite"><mpath href="#r2" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.2s" begin="-1.4s" repeatCount="indefinite"><mpath href="#r3" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3s" begin="-.4s" repeatCount="indefinite"><mpath href="#r4" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3.8s" begin="-2s" repeatCount="indefinite"><mpath href="#r5" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.4s" begin="-1s" repeatCount="indefinite"><mpath href="#r6" /></animateMotion></circle>
+              </g>
+
+              <circle class="tzm__pulse" cx="326" cy="192" r="8" />
+              <circle class="tzm__pin tzm__pin--hub" cx="326" cy="192" r="7" />
+              <circle class="tzm__pin" cx="125" cy="62" r="4.5" />
+              <circle class="tzm__pin" cx="246" cy="82" r="4.5" />
+              <circle class="tzm__pin" cx="216" cy="172" r="4.5" />
+              <circle class="tzm__pin" cx="143" cy="259" r="4.5" />
+              <circle class="tzm__pin" cx="28" cy="131" r="4.5" />
+              <circle class="tzm__pin" cx="352" cy="300" r="4.5" />
+              <circle class="tzm__pin" cx="333" cy="170" r="3.5" />
+
+              <text x="318" y="214" text-anchor="end"><tspan class="tzm__city">Dar es Salaam</tspan><tspan x="318" dy="14">Same / next day</tspan></text>
+              <text x="125" y="80" text-anchor="middle"><tspan class="tzm__city">Mwanza</tspan><tspan x="125" dy="14">1–3 days</tspan></text>
+              <text x="240" y="100" text-anchor="end"><tspan class="tzm__city">Arusha</tspan><tspan x="240" dy="14">1–3 days</tspan></text>
+              <text x="212" y="146" text-anchor="middle"><tspan class="tzm__city">Dodoma</tspan><tspan x="212" dy="14">1–3 days</tspan></text>
+              <text x="143" y="241" text-anchor="middle"><tspan class="tzm__city">Mbeya</tspan><tspan x="143" dy="14">1–3 days</tspan></text>
+              <text x="38" y="128"><tspan class="tzm__city">Kigoma</tspan><tspan x="38" dy="14">3–7 days</tspan></text>
+              <text x="344" y="324" text-anchor="end"><tspan class="tzm__city">Mtwara</tspan><tspan x="344" dy="14">3–7 days</tspan></text>
+              <text x="343" y="174"><tspan class="tzm__city">Zanzibar</tspan><tspan x="343" dy="14">2–3 days</tspan></text>
+            </svg>
+            <ul class="tzm__legend">
+              <li><i class="is-hub"></i>Dar: same / next day</li>
+              <li><i></i>Big cities: 1–3 days</li>
+              <li><i class="is-far"></i>Other regions: 3–7 days</li>
+            </ul>
+          </div>
+          <span class="h-pill h-pill--1">💵 Lipa ukipokea</span>
+          <span class="h-pill h-pill--2">🚚 Free delivery</span>
+        </div>
       </div>
     </section>
 
@@ -150,40 +212,14 @@
     <!-- ============ Delivery ============ -->
     <section class="h-band" id="delivery">
       <div class="wrap h-section h-delivery">
-        <div class="h-delivery__map">
-          <!-- Simplified Tanzania map: routes go out from Dar es Salaam to the main cities -->
-          <svg class="tz-map" viewBox="-10 -10 400 350" role="img" aria-label="Delivery map of Tanzania: Dar es Salaam same or next day; Arusha, Dodoma, Mwanza and Mbeya 1–3 days; Zanzibar 2–3 days">
-            <path class="tz-map__land" d="M42 6 L147 6 L153 7.5 L258 66 L262.5 84 L306 116 L303 128 L294 156 L309 180 L315 201 L309 216 L315 243 L321 276 L336 285 L343.5 291 L300 312 L270 315 L255 324 L225 327 L198 318 L177 322.5 L168 306 L159 264 L150 261 L129 255 L117 258 L90 246 L66 237 L45 216 L30 186 L12 150 L12 111 L21 108 L42 84 L54 75 L45 48 L54 48 L45 9 Z" />
-            <path class="tz-map__lake" d="M84 6 L150 6 L144 30 L126 45 L108 49 L87 45 L81 24 Z" />
-            <ellipse class="tz-map__land" cx="311" cy="160" rx="5" ry="10" />
-
-            <path class="tz-map__route" d="M308 180 Q290 110 230 77" />
-            <path class="tz-map__route" d="M308 180 Q255 150 202 161" />
-            <path class="tz-map__route" d="M308 180 Q200 60 117 56" />
-            <path class="tz-map__route" d="M308 180 Q220 250 133 243" />
-
-            <circle class="tz-map__pulse" cx="308" cy="180" r="7" />
-            <circle class="tz-map__pin tz-map__pin--hub" cx="308" cy="180" r="7" />
-            <circle class="tz-map__pin" cx="230" cy="77" r="5" />
-            <circle class="tz-map__pin" cx="202" cy="161" r="5" />
-            <circle class="tz-map__pin" cx="117" cy="56" r="5" />
-            <circle class="tz-map__pin" cx="133" cy="243" r="5" />
-            <circle class="tz-map__pin" cx="311" cy="160" r="4" />
-
-            <text x="330" y="206" text-anchor="end"><tspan class="tz-map__city">Dar es Salaam</tspan><tspan x="330" dy="15">Same / next day</tspan></text>
-            <text x="220" y="62" text-anchor="end"><tspan class="tz-map__city">Arusha</tspan><tspan x="220" dy="15">1–3 days</tspan></text>
-            <text x="192" y="158" text-anchor="end"><tspan class="tz-map__city">Dodoma</tspan><tspan x="192" dy="15">1–3 days</tspan></text>
-            <text x="117" y="78" text-anchor="middle"><tspan class="tz-map__city">Mwanza</tspan><tspan x="117" dy="15">1–3 days</tspan></text>
-            <text x="133" y="267" text-anchor="middle"><tspan class="tz-map__city">Mbeya</tspan><tspan x="133" dy="15">1–3 days</tspan></text>
-            <text x="322" y="156"><tspan class="tz-map__city">Zanzibar</tspan><tspan x="322" dy="15">2–3 days</tspan></text>
-          </svg>
-        </div>
         <div class="h-delivery__text">
           <p class="label">Delivery</p>
           <h2>We come to you.<br /><span>Everywhere in Tanzania.</span></h2>
           <ul class="h-cities">
-            <li>Dar es Salaam</li><li>Arusha</li><li>Dodoma</li><li>Mwanza</li><li>Mbeya</li><li>Zanzibar</li><li>Morogoro</li><li>Tanga</li><li>Moshi</li><li>+ all other regions</li>
+            <li>Dar es Salaam</li><li>Arusha</li><li>Dodoma</li><li>Mwanza</li><li>Mbeya</li><li>Zanzibar</li><li>Morogoro</li><li>Tanga</li><li>Moshi</li><li>Kigoma</li><li>Mtwara</li><li>+ all other regions</li>
           </ul>
+        </div>
+        <div class="h-delivery__tips">
           <p class="h-tips__title">For a fast delivery:</p>
           <ul class="h-tips">
             <li><span>📱</span>Keep your phone ON after you order</li>

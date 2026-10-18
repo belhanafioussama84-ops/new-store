@@ -43,15 +43,6 @@
     </a>`;
   }).join("");
 
-  /* ---------- Hero: the first two products as floating cards ---------- */
-  $("#heroVisual").innerHTML = list.slice(0, 2).map((p, i) => `
-    <a class="h-float h-float--${i + 1}" href="${esc(productUrl(p))}" tabindex="-1">
-      <div class="h-float__photo">${photo(p)}</div>
-      <span class="h-float__tag"><small>${esc(p.name)}</small><strong>${fmt(p.price)}</strong></span>
-    </a>`).join("") + (list.length ? `
-    <span class="h-pill h-pill--1">💵 Lipa ukipokea</span>
-    <span class="h-pill h-pill--2">🚚 Free delivery</span>` : "");
-
   $("#footProducts").innerHTML = list.map((p) =>
     `<li><a href="${esc(productUrl(p))}">${esc(p.name)}</a></li>`).join("");
 

@@ -33,7 +33,7 @@
 .h-hero::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px); background-size: 22px 22px; mask-image: linear-gradient(180deg, #000, transparent 85%); pointer-events: none; }
 .h-hero__inner { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; padding-top: 4.5rem; padding-bottom: 6.5rem; }
 .h-kicker { display: inline-flex; align-items: center; gap: .55rem; margin: 0 0 1.4rem; padding: .45rem 1rem; border: 1px solid rgba(243, 195, 107, .4); border-radius: 999px; background: rgba(255, 255, 255, .06); color: var(--gold-2); font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-.h-hero h1 { margin-bottom: 1.25rem; font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 900; line-height: 1.02; letter-spacing: -.03em; }
+.h-hero h1 { margin-bottom: 1.25rem; font-size: clamp(2.6rem, 5.4vw, 4.2rem); font-weight: 900; line-height: 1.02; letter-spacing: -.03em; }
 .h-hero h1 span { color: var(--gold-2); background: linear-gradient(90deg, var(--gold-2), var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .h-hero__text { max-width: 500px; margin-bottom: 2rem; color: #cfe2d8; font-size: 1.15rem; }
 .h-hero__btns { display: flex; flex-wrap: wrap; gap: .75rem; }
@@ -42,21 +42,36 @@
 .h-btn--ghost:hover { background: rgba(255, 255, 255, .1); }
 .h-chips { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin: 2rem 0 0; padding: 0; list-style: none; color: #cfe2d8; font-size: .92rem; font-weight: 500; }
 
-/* Floating product cards */
-.h-hero__visual { position: relative; min-height: 480px; }
-.h-float { position: absolute; display: block; width: 62%; padding: 10px; border-radius: 26px; background: rgba(255, 255, 255, .96); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .65); transition: transform .35s; }
-.h-float__photo { aspect-ratio: 1; overflow: hidden; border-radius: 18px; background: var(--bg); }
-.h-float__photo img { width: 100%; height: 100%; object-fit: cover; }
-.h-float__tag { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; padding: .7rem .4rem .2rem; color: var(--ink); }
-.h-float__tag small { overflow: hidden; font-size: .85rem; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
-.h-float__tag strong { flex: none; color: var(--accent); font-size: 1.05rem; }
-.h-float--1 { top: 0; left: 4%; z-index: 2; transform: rotate(-4deg); }
-.h-float--2 { right: 0; bottom: 0; width: 54%; transform: rotate(5deg); }
-.h-float--1:only-of-type { left: 18%; }
-.h-float:hover { transform: rotate(0) translateY(-6px); }
+/* Delivery map card (glass card on the dark hero) */
+.h-hero__visual { position: relative; padding: 1.25rem 0; }
+.tzm { position: relative; overflow: hidden; padding: 1.5rem 1.5rem 1.25rem; border: 1px solid rgba(255, 255, 255, .14); border-radius: 28px; background: linear-gradient(160deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .03)); backdrop-filter: blur(6px); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .8); }
+/* Tanzania flag colours on top of the card */
+.tzm::before { content: ""; position: absolute; inset: 0 0 auto; height: 5px; background: linear-gradient(90deg, #1eb53a 0 40%, #fcd116 40% 44%, #000 44% 56%, #fcd116 56% 60%, #00a3dd 60%); }
+.tzm__head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .25rem 1rem; margin-bottom: .5rem; }
+.tzm__head strong { font-size: 1.4rem; }
+.tzm__head span { color: #cfe2d8; font-size: .92rem; }
+.tzm__map { display: block; width: 100%; height: auto; overflow: visible; }
+.tzm__land { fill: rgba(255, 255, 255, .09); stroke: var(--gold-2); stroke-width: 1.3; stroke-linejoin: round; stroke-opacity: .7; }
+.tzm__lake { fill: rgba(110, 185, 230, .35); stroke: rgba(150, 205, 240, .6); stroke-width: .8; }
+.tzm__sea { fill: rgba(150, 205, 240, .35); font-size: 10px; font-weight: 700; letter-spacing: .35em; }
+.tzm__route { fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 3 5; opacity: .85; }
+.tzm__dots circle { fill: #fff; filter: drop-shadow(0 0 4px var(--gold-2)); }
+.tzm__pin { fill: var(--deep); stroke: var(--gold-2); stroke-width: 2.5; }
+.tzm__pin--hub { fill: var(--gold); stroke: #fff; stroke-width: 2.5; }
+.tzm__pulse { fill: var(--gold); transform-box: fill-box; transform-origin: center; animation: tzm-pulse 2s ease-out infinite; }
+@keyframes tzm-pulse { from { transform: scale(1); opacity: .7; } to { transform: scale(3.2); opacity: 0; } }
+.tzm__map text { fill: var(--gold-2); font-size: 11px; font-weight: 600; stroke: var(--deep); stroke-width: 3.5px; stroke-linejoin: round; paint-order: stroke; }
+.tzm__map .tzm__city { fill: #fff; font-size: 13px; font-weight: 800; }
+.tzm__legend { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; margin: .75rem 0 0; padding: .8rem 0 0; border-top: 1px solid rgba(255, 255, 255, .12); list-style: none; color: #cfe2d8; font-size: .8rem; }
+.tzm__legend li { display: flex; align-items: center; gap: .45rem; }
+.tzm__legend i { width: 10px; height: 10px; border: 2px solid var(--gold-2); border-radius: 50%; background: var(--deep); }
+.tzm__legend i.is-hub { border-color: #fff; background: var(--gold); }
+.tzm__legend i.is-far { border-style: dashed; }
+@media (prefers-reduced-motion: reduce) { .tzm__pulse { animation: none; } .tzm__dots { display: none; } }
+
 .h-pill { position: absolute; z-index: 3; padding: .6rem 1rem; border-radius: 999px; background: #fff; color: var(--accent); font-size: .88rem; font-weight: 700; box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .5); animation: h-bob 4s ease-in-out infinite; }
-.h-pill--1 { top: 8%; right: 2%; }
-.h-pill--2 { bottom: 12%; left: 0; animation-delay: -2s; }
+.h-pill--1 { top: 0; right: -12px; }
+.h-pill--2 { bottom: 0; right: 28px; animation-delay: -2s; }
 @keyframes h-bob { 50% { transform: translateY(-8px); } }
 @media (prefers-reduced-motion: reduce) { .h-pill { animation: none; } }
 
@@ -138,9 +153,7 @@
 .h-chat__btn[hidden] { display: none; }
 
 /* ---------- Delivery ---------- */
-.h-delivery { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-.h-delivery__map { padding: 1.75rem; border: 1px solid var(--line); border-radius: 26px; background: #fff; box-shadow: 0 30px 60px -40px rgba(16, 40, 30, .5); }
-.h-delivery__map .tz-map { margin: 0; }
+.h-delivery { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end; }
 .h-delivery__text h2 { margin-bottom: 1.4rem; font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 900; letter-spacing: -.025em; line-height: 1.08; }
 .h-delivery__text h2 span { color: var(--accent); }
 .h-cities { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.75rem; padding: 0; list-style: none; }
@@ -183,7 +196,7 @@
 @media (max-width: 960px) {
   .h-nav { display: none; }
   .h-hero__inner { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 3rem; }
-  .h-hero__visual { min-height: 0; aspect-ratio: 1.15; max-width: 520px; width: 100%; margin: 0 auto; }
+  .h-hero__visual { max-width: 560px; width: 100%; margin: 0 auto; }
   .h-steps { grid-template-columns: repeat(2, 1fr); }
   .h-steps li:last-child { grid-column: 1 / -1; }
   .h-why, .h-delivery { grid-template-columns: 1fr; }
@@ -202,6 +215,9 @@
   .h-hero__text { font-size: 1.02rem; }
   .h-hero__btns .btn { flex: 1 1 100%; }
   .h-pill { font-size: .78rem; padding: .5rem .8rem; }
+  .h-pill--1 { right: 6px; }
+  .h-pill--2 { right: 6px; }
+  .tzm { padding: 1.25rem 1rem 1rem; }
   .h-stats { grid-template-columns: 1fr 1fr; }
   .h-stats li:nth-child(3) { border-left: 0; }
   .h-stats li:nth-child(n + 3) { border-top: 1px solid var(--line); }
@@ -210,7 +226,6 @@
   .h-steps { grid-template-columns: 1fr; }
   .h-promises { grid-template-columns: 1fr; }
   .h-compare th, .h-compare td { padding: .8rem .65rem; font-size: .84rem; }
-  .h-delivery__map { padding: 1rem; }
   .h-guarantee { padding: 2rem 1.25rem; }
   .h-guarantee .btn, .h-final .btn { width: 100%; }
   .h-final { padding: 2.75rem 1.25rem; }
