@@ -18,7 +18,7 @@ const STORE = {
   // Instagram / Facebook page links (full https:// address). Shown as icons at the bottom of every page.
   // Empty = no icon.
   instagram: "https://www.instagram.com/dukaabora/",
-  facebook: "",
+  facebook: "https://www.facebook.com/profile.php?id=100070066074275",
   currency: "TSh",
   // Google Sheet that receives every order — paste your Apps Script web app URL here
   // (setup steps: google-sheet/orders.gs). Empty = orders are NOT sent to you.
