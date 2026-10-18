@@ -50,7 +50,11 @@
     <!-- ============ Product + order form ============ -->
     <section class="wrap product">
       <div class="gallery">
-        <div class="gallery__main" id="galleryMain"></div>
+        <div class="gallery__stage">
+          <div class="gallery__main" id="galleryMain"></div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" id="galleryPrev" aria-label="Previous photo" hidden>‹</button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" id="galleryNext" aria-label="Next photo" hidden>›</button>
+        </div>
         <div class="gallery__thumbs" id="galleryThumbs"></div>
       </div>
 

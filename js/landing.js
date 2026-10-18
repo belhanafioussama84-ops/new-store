@@ -37,7 +37,10 @@
   }
 
   /* ---------- Gallery ---------- */
+  let current = 0;
   function showImage(i) {
+    current = (i + images.length) % images.length; // the arrows loop from the last photo to the first
+    i = current;
     $("#galleryMain").classList.remove("is-empty");
     $("#galleryMain").innerHTML = `<img src="${esc(images[i])}" alt="${esc(p.name)}"
       onerror="this.parentElement.classList.add('is-empty'); this.parentElement.textContent = '${esc(p.icon || "")}';" />`;
@@ -49,6 +52,17 @@
       <button type="button" class="thumb" data-img="${i}" aria-label="Photo ${i + 1}">
         <img src="${esc(src)}" alt="" onerror="const box = this.closest('.gallery__thumbs'); this.parentElement.remove(); if (box.children.length < 2) box.innerHTML = '';" />
       </button>`).join("");
+    // ‹ › arrows on the big photo, and swipe left / right on phones
+    $("#galleryPrev").hidden = $("#galleryNext").hidden = false;
+    $("#galleryPrev").addEventListener("click", () => showImage(current - 1));
+    $("#galleryNext").addEventListener("click", () => showImage(current + 1));
+    let startX = null;
+    $("#galleryMain").addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    $("#galleryMain").addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (startX !== null && Math.abs(dx) > 40) showImage(current + (dx < 0 ? 1 : -1));
+      startX = null;
+    });
   }
   showImage(0);
 
