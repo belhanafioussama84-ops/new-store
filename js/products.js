@@ -55,6 +55,8 @@ const PRODUCTS = [
     badge: "New",
     icon: "⌚",
     image: "images/rw1.webp",
+    // Photos at the top of the product page (‹ › arrows to go from one to the next)
+    images: ["images/rw1.webp", "images/rw-front.webp"],
     // Photos shown under the order form, each with its explanation
     sections: [
       {
