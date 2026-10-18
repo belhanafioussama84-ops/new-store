@@ -17,7 +17,7 @@ const STORE = {
   metaPixel: "2505097906522683",
   // Instagram / Facebook page links (full https:// address). Shown as icons at the bottom of every page.
   // Empty = no icon.
-  instagram: "",
+  instagram: "https://www.instagram.com/dukaabora/",
   facebook: "",
   currency: "TSh",
   // Google Sheet that receives every order — paste your Apps Script web app URL here
