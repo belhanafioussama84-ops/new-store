@@ -9,35 +9,59 @@
   const photo = (p) => `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"
     onerror="this.parentElement.classList.add('is-empty'); this.parentElement.dataset.icon = '${esc(p.icon || "")}'; this.remove();" />`;
 
+  // The "2 pieces" offer of a product and what it saves, or null.
+  const bundle = (p) => {
+    const o = (p.offers || []).find((x) => x.qty === 2);
+    if (!o) return null;
+    return { price: o.price, save: (p.oldPrice || p.price) * 2 - o.price };
+  };
+
   /* ---------- Products (those with home: false only have their own page) ---------- */
   const list = PRODUCTS.filter((p) => p.home !== false);
   if (!list.length) {
     $("#productGrid").outerHTML = `<p class="shop__soon">✦ New products are coming soon. Check back shortly!</p>`;
   } else $("#productGrid").innerHTML = list.map((p) => {
-    const url = esc(productUrl(p));
+    const b = bundle(p);
     return `
-    <a class="item" href="${url}">
-      <div class="item__photo">
-        ${p.badge ? `<span class="item__badge">${esc(p.badge)}</span>` : ""}
+    <a class="h-card" href="${esc(productUrl(p))}">
+      <div class="h-card__photo">
+        ${p.badge ? `<span class="h-card__badge">${esc(p.badge)}</span>` : ""}
+        ${b ? `<span class="h-card__duo">2 for ${fmt(b.price)}</span>` : ""}
         ${photo(p)}
-        <span class="item__tag">${fmt(p.price)}</span>
       </div>
-      <div class="item__body">
+      <div class="h-card__body">
+        ${p.category ? `<p class="h-card__cat">${esc(p.category)}</p>` : ""}
         <h3>${esc(p.name)}</h3>
-        <p>${esc(p.description)}</p>
-        <div class="item__price">
+        <p class="h-card__desc">${esc(p.description)}</p>
+        <div class="h-card__price">
           <strong>${fmt(p.price)}</strong>
           ${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s>` : ""}
         </div>
-        <span class="btn item__btn">Order now</span>
+        ${b && b.save > 0 ? `<p class="h-card__save">🔥 Buy 2, save ${fmt(b.save)}</p>` : ""}
+        <span class="btn h-card__btn">Order now · Pay on delivery</span>
       </div>
     </a>`;
   }).join("");
 
+  /* ---------- Hero: the first two products as floating cards ---------- */
+  $("#heroVisual").innerHTML = list.slice(0, 2).map((p, i) => `
+    <a class="h-float h-float--${i + 1}" href="${esc(productUrl(p))}" tabindex="-1">
+      <div class="h-float__photo">${photo(p)}</div>
+      <span class="h-float__tag"><small>${esc(p.name)}</small><strong>${fmt(p.price)}</strong></span>
+    </a>`).join("") + (list.length ? `
+    <span class="h-pill h-pill--1">💵 Lipa ukipokea</span>
+    <span class="h-pill h-pill--2">🚚 Free delivery</span>` : "");
+
+  $("#footProducts").innerHTML = list.map((p) =>
+    `<li><a href="${esc(productUrl(p))}">${esc(p.name)}</a></li>`).join("");
+
   /* ---------- Init ---------- */
-  ["#footerPhone", "#ctaPhone"].forEach((s) => {
-    $(s).href = `tel:+${STORE.phone}`;
-    $(s).textContent = `📞 ${STORE.phoneDisplay}`;
-  });
+  $("#footerPhone").href = `tel:+${STORE.phone}`;
+  $("#footerPhone").textContent = `📞 ${STORE.phoneDisplay}`;
+  const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
+  if (wa) {
+    const href = `https://wa.me/${wa}${STORE.whatsappText ? `?text=${encodeURIComponent(STORE.whatsappText)}` : ""}`;
+    ["#chatWa", "#footerWa"].forEach((s) => { $(s).href = href; $(s).hidden = false; });
+  }
   $("#year").textContent = new Date().getFullYear();
 })();

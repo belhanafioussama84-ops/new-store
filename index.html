@@ -4,31 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Duka Bora · Fast Delivery Across Tanzania · Pay on Delivery</title>
-  <meta name="description" content="Shop quality products online in Tanzania. Fast delivery and pay cash when your order arrives." />
+  <meta name="description" content="Shop quality products online in Tanzania. Free delivery to your door and pay cash when your order arrives." />
   <meta name="theme-color" content="#1f4d3a" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="icon" href="images/logo/logo.png" />
   <link rel="stylesheet" href="css/product.css" />
+  <link rel="stylesheet" href="css/index.css" />
 </head>
-<body>
+<!-- Home page. Products, prices and photos come from js/products.js (filled by js/app.js). -->
+<body class="home">
 
   <!-- Scrolling trust bar (the list is repeated so the loop has no gap) -->
   <div class="ticker" aria-label="Why order from us">
     <div class="ticker__track">
-      <span>🚚 Fast delivery nationwide</span><span>💵 Pay on delivery</span><span>📞 Phone confirmation before shipping</span><span>🔒 Simple &amp; secure ordering</span><span>⭐ Trusted, reliable store</span>
-      <span aria-hidden="true">🚚 Fast delivery nationwide</span><span aria-hidden="true">💵 Pay on delivery</span><span aria-hidden="true">📞 Phone confirmation before shipping</span><span aria-hidden="true">🔒 Simple &amp; secure ordering</span><span aria-hidden="true">⭐ Trusted, reliable store</span>
+      <span>🚚 Free delivery across Tanzania · Usafirishaji bure</span><span>💵 Pay on delivery · Lipa ukipokea</span><span>📞 We call to confirm every order</span><span>🔄 30-day replacement</span><span>💬 WhatsApp support 7 days a week</span>
+      <span aria-hidden="true">🚚 Free delivery across Tanzania · Usafirishaji bure</span><span aria-hidden="true">💵 Pay on delivery · Lipa ukipokea</span><span aria-hidden="true">📞 We call to confirm every order</span><span aria-hidden="true">🔄 30-day replacement</span><span aria-hidden="true">💬 WhatsApp support 7 days a week</span>
     </div>
   </div>
 
-  <header class="top">
-    <div class="wrap top__inner">
-      <nav class="top__nav">
-        <a href="#shop">Products</a>
-        <a href="#how">How it works</a>
-        <a href="#faq">FAQ</a>
-      </nav>
+  <header class="top h-top">
+    <div class="wrap h-top__inner">
       <a href="index.html" class="brand" aria-label="Duka Bora home">
         <img src="images/logo/logo.png" alt="" onerror="this.remove()" />
         <span>
@@ -36,116 +33,198 @@
           <small>Quality you can trust</small>
         </span>
       </a>
-      <span class="top__cod"><svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg> COD</span>
+      <nav class="h-nav">
+        <a href="#shop">Shop</a>
+        <a href="#how">How it works</a>
+        <a href="#why">Why us</a>
+        <a href="#delivery">Delivery</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#shop" class="btn h-top__btn">Shop now</a>
     </div>
   </header>
 
   <main>
     <!-- ============ Hero ============ -->
-    <section class="hero">
-      <div class="wrap hero__inner">
-        <div class="hero__copy">
-          <p class="label"><svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg> Delivering all over Tanzania</p>
-          <h1>Quality products, <span>delivered to your door.</span></h1>
-          <p class="hero__text">Order in one minute. We call you to confirm, deliver fast, and you pay only when the product is in your hands.</p>
-          <div class="hero__btns">
-            <a href="#shop" class="btn">Shop now</a>
-            <a href="#how" class="btn btn--line">How it works</a>
+    <section class="h-hero">
+      <div class="wrap h-hero__inner">
+        <div class="h-hero__copy">
+          <p class="h-kicker">
+            <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg>
+            Karibu · Delivering all over Tanzania
+          </p>
+          <h1>Your order first.<br /><span>Pay later.</span></h1>
+          <p class="h-hero__text">Quality products delivered free to your door. Check your order, then pay the agent in cash. No card, no risk.</p>
+          <div class="h-hero__btns">
+            <a href="#shop" class="btn btn--gold">Shop the collection →</a>
+            <a href="#how" class="btn h-btn--ghost">How it works</a>
           </div>
-          <ul class="hero__facts">
-            <li><strong>TSh 0</strong><span>to pay now</span></li>
-            <li><strong>1–3 days</strong><span>delivery</span></li>
-            <li><strong>100%</strong><span>check before you pay</span></li>
+          <ul class="h-chips">
+            <li>✓ Free delivery</li>
+            <li>✓ Lipa ukipokea</li>
+            <li>✓ 30-day replacement</li>
           </ul>
         </div>
 
-        <!-- Delivery card for Tanzanian customers: cities + product categories -->
-        <div class="hero__brand">
-          <div class="tz-card">
-            <div class="tz-card__flag" aria-hidden="true"></div>
-            <div class="tz-card__head">
-              <strong>Karibu! <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg></strong>
-              <span>We deliver across Tanzania</span>
-            </div>
-            <!-- Simplified Tanzania map: routes go out from Dar es Salaam to the main cities -->
-            <svg class="tz-map" viewBox="-10 -10 400 350" role="img" aria-label="Delivery map of Tanzania: Dar es Salaam same or next day; Arusha, Dodoma, Mwanza and Mbeya 1–3 days; Zanzibar 2–3 days">
-              <path class="tz-map__land" d="M42 6 L147 6 L153 7.5 L258 66 L262.5 84 L306 116 L303 128 L294 156 L309 180 L315 201 L309 216 L315 243 L321 276 L336 285 L343.5 291 L300 312 L270 315 L255 324 L225 327 L198 318 L177 322.5 L168 306 L159 264 L150 261 L129 255 L117 258 L90 246 L66 237 L45 216 L30 186 L12 150 L12 111 L21 108 L42 84 L54 75 L45 48 L54 48 L45 9 Z" />
-              <path class="tz-map__lake" d="M84 6 L150 6 L144 30 L126 45 L108 49 L87 45 L81 24 Z" />
-              <ellipse class="tz-map__land" cx="311" cy="160" rx="5" ry="10" />
+        <!-- The first products from js/products.js, shown as floating cards -->
+        <div class="h-hero__visual" id="heroVisual" aria-hidden="true"></div>
+      </div>
+    </section>
 
-              <path class="tz-map__route" d="M308 180 Q290 110 230 77" />
-              <path class="tz-map__route" d="M308 180 Q255 150 202 161" />
-              <path class="tz-map__route" d="M308 180 Q200 60 117 56" />
-              <path class="tz-map__route" d="M308 180 Q220 250 133 243" />
+    <!-- ============ Key numbers ============ -->
+    <section class="wrap">
+      <ul class="h-stats">
+        <li><strong>TSh 0</strong><span>to pay now</span></li>
+        <li><strong>1–3 days</strong><span>delivery to big cities</span></li>
+        <li><strong>FREE</strong><span>delivery to your door</span></li>
+        <li><strong>7 / 7</strong><span>WhatsApp support</span></li>
+      </ul>
+    </section>
 
-              <circle class="tz-map__pulse" cx="308" cy="180" r="7" />
-              <circle class="tz-map__pin tz-map__pin--hub" cx="308" cy="180" r="7" />
-              <circle class="tz-map__pin" cx="230" cy="77" r="5" />
-              <circle class="tz-map__pin" cx="202" cy="161" r="5" />
-              <circle class="tz-map__pin" cx="117" cy="56" r="5" />
-              <circle class="tz-map__pin" cx="133" cy="243" r="5" />
-              <circle class="tz-map__pin" cx="311" cy="160" r="4" />
+    <!-- ============ Products ============ -->
+    <section class="wrap h-section" id="shop">
+      <p class="label label--center">Our collection</p>
+      <h2 class="h-title">Chosen for quality.<br /><span>Priced for you.</span></h2>
+      <div class="h-grid" id="productGrid"></div>
+    </section>
 
-              <text x="330" y="206" text-anchor="end"><tspan class="tz-map__city">Dar es Salaam</tspan><tspan x="330" dy="15">Same / next day</tspan></text>
-              <text x="220" y="62" text-anchor="end"><tspan class="tz-map__city">Arusha</tspan><tspan x="220" dy="15">1–3 days</tspan></text>
-              <text x="192" y="158" text-anchor="end"><tspan class="tz-map__city">Dodoma</tspan><tspan x="192" dy="15">1–3 days</tspan></text>
-              <text x="117" y="78" text-anchor="middle"><tspan class="tz-map__city">Mwanza</tspan><tspan x="117" dy="15">1–3 days</tspan></text>
-              <text x="133" y="267" text-anchor="middle"><tspan class="tz-map__city">Mbeya</tspan><tspan x="133" dy="15">1–3 days</tspan></text>
-              <text x="322" y="156"><tspan class="tz-map__city">Zanzibar</tspan><tspan x="322" dy="15">2–3 days</tspan></text>
-            </svg>
-            <p class="tz-card__sub">Products for every home</p>
-            <div class="tz-cats">
-              <a href="#shop"><span>🍳</span>Kitchen</a>
-              <a href="#shop"><span>🏠</span>Home</a>
-              <a href="#shop"><span>📱</span>Electronics</a>
-              <a href="#shop"><span>💄</span>Beauty</a>
-              <a href="#shop"><span>👟</span>Fashion</a>
-              <a href="#shop"><span>🧸</span>Kids</a>
-            </div>
+    <!-- ============ How it works ============ -->
+    <section class="h-band" id="how">
+      <div class="wrap h-section">
+        <p class="label label--center">Simple &amp; safe</p>
+        <h2 class="h-title">How ordering works</h2>
+        <ol class="h-steps">
+          <li><span class="h-steps__n">1</span><h3>Order online</h3><p>Choose your product and leave your name, phone and address.</p><small>⏱ 1 minute</small></li>
+          <li class="is-key"><span class="h-steps__n">2</span><h3>We call you</h3><p>Our team calls to confirm your address and delivery time.</p><small>📞 Keep your phone ON</small></li>
+          <li><span class="h-steps__n">3</span><h3>We check &amp; pack</h3><p>Every order is checked and packed carefully before it leaves.</p><small>📦 Checked by hand</small></li>
+          <li><span class="h-steps__n">4</span><h3>Free delivery</h3><p>The agent brings the parcel to your door, anywhere in Tanzania.</p><small>🚚 TSh 0 delivery</small></li>
+          <li><span class="h-steps__n">5</span><h3>Check, then pay</h3><p>Open your order, check it, and pay the agent in cash.</p><small>💵 TSh 0 upfront</small></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ Promises ============ -->
+    <section class="wrap h-section" id="why">
+      <p class="label label--center">Why Duka Bora</p>
+      <h2 class="h-title">Shopping online,<br /><span>without the fear.</span></h2>
+      <div class="h-promises">
+        <article><span class="h-promises__n">01</span><h3>Trust <small>· Uaminifu</small></h3><p>You never pay before you see your order. Cash on delivery, always.</p></article>
+        <article><span class="h-promises__n">02</span><h3>Quality <small>· Ubora</small></h3><p>We choose every product carefully and check each order before shipping.</p></article>
+        <article><span class="h-promises__n">03</span><h3>Service <small>· Huduma</small></h3><p>A real person calls you, and we answer on WhatsApp 7 days a week.</p></article>
+      </div>
+
+      <!-- Comparison + example WhatsApp chat -->
+      <div class="h-why">
+        <div class="h-compare">
+          <table>
+            <thead>
+              <tr><th></th><th>Typical online shop</th><th class="is-us">Duka Bora</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>When you pay</td><td>✗ Before delivery</td><td class="is-us">✓ When it arrives</td></tr>
+              <tr><td>Delivery fee</td><td>✗ Extra cost</td><td class="is-us">✓ Free</td></tr>
+              <tr><td>Check before paying</td><td>✗ No</td><td class="is-us">✓ Yes</td></tr>
+              <tr><td>Problem with product</td><td>✗ Hard to solve</td><td class="is-us">✓ 30-day replacement</td></tr>
+              <tr><td>Support</td><td>✗ Hard to reach</td><td class="is-us">✓ Call &amp; WhatsApp</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="h-chat" aria-label="Example of an order confirmation on WhatsApp">
+          <div class="h-chat__head">
+            <img src="images/logo/logo.png" alt="" onerror="this.remove()" />
+            <span><strong>Duka Bora</strong><small>online</small></span>
           </div>
-          <span class="hero__chip hero__chip--1">💵 Lipa baada ya kupokea</span>
-          <span class="hero__chip hero__chip--2">📞 We call to confirm</span>
+          <div class="h-chat__body">
+            <p class="h-chat__day">Example</p>
+            <p class="h-msg">Habari Juma! 👋 We received your order. Our agent will call you today to confirm your address.<time>10:02 ✓✓</time></p>
+            <p class="h-msg h-msg--me">Asante! Can I check it before I pay?<time>10:03</time></p>
+            <p class="h-msg">Yes ✅ You open it, check it, then pay the agent in cash. Delivery is free.<time>10:03 ✓✓</time></p>
+            <p class="h-msg h-msg--me">Perfect 🙏<time>10:04</time></p>
+          </div>
+          <a href="#" class="btn btn--wa h-chat__btn" id="chatWa" target="_blank" rel="noopener" hidden>💬 Chat with us on WhatsApp</a>
         </div>
       </div>
     </section>
 
-    <!-- ============ Trust row ============ -->
-    <section class="wrap trust">
-      <div><span>💵</span><strong>Pay on delivery</strong><small>Cash when it arrives</small></div>
-      <div><span>🚚</span><strong>Fast delivery</strong><small>To all regions</small></div>
-      <div><span>📞</span><strong>We call you</strong><small>Before every shipment</small></div>
-      <div><span>🔄</span><strong>Easy returns</strong><small>Within 30 days</small></div>
+    <!-- ============ Delivery ============ -->
+    <section class="h-band" id="delivery">
+      <div class="wrap h-section h-delivery">
+        <div class="h-delivery__map">
+          <!-- Simplified Tanzania map: routes go out from Dar es Salaam to the main cities -->
+          <svg class="tz-map" viewBox="-10 -10 400 350" role="img" aria-label="Delivery map of Tanzania: Dar es Salaam same or next day; Arusha, Dodoma, Mwanza and Mbeya 1–3 days; Zanzibar 2–3 days">
+            <path class="tz-map__land" d="M42 6 L147 6 L153 7.5 L258 66 L262.5 84 L306 116 L303 128 L294 156 L309 180 L315 201 L309 216 L315 243 L321 276 L336 285 L343.5 291 L300 312 L270 315 L255 324 L225 327 L198 318 L177 322.5 L168 306 L159 264 L150 261 L129 255 L117 258 L90 246 L66 237 L45 216 L30 186 L12 150 L12 111 L21 108 L42 84 L54 75 L45 48 L54 48 L45 9 Z" />
+            <path class="tz-map__lake" d="M84 6 L150 6 L144 30 L126 45 L108 49 L87 45 L81 24 Z" />
+            <ellipse class="tz-map__land" cx="311" cy="160" rx="5" ry="10" />
+
+            <path class="tz-map__route" d="M308 180 Q290 110 230 77" />
+            <path class="tz-map__route" d="M308 180 Q255 150 202 161" />
+            <path class="tz-map__route" d="M308 180 Q200 60 117 56" />
+            <path class="tz-map__route" d="M308 180 Q220 250 133 243" />
+
+            <circle class="tz-map__pulse" cx="308" cy="180" r="7" />
+            <circle class="tz-map__pin tz-map__pin--hub" cx="308" cy="180" r="7" />
+            <circle class="tz-map__pin" cx="230" cy="77" r="5" />
+            <circle class="tz-map__pin" cx="202" cy="161" r="5" />
+            <circle class="tz-map__pin" cx="117" cy="56" r="5" />
+            <circle class="tz-map__pin" cx="133" cy="243" r="5" />
+            <circle class="tz-map__pin" cx="311" cy="160" r="4" />
+
+            <text x="330" y="206" text-anchor="end"><tspan class="tz-map__city">Dar es Salaam</tspan><tspan x="330" dy="15">Same / next day</tspan></text>
+            <text x="220" y="62" text-anchor="end"><tspan class="tz-map__city">Arusha</tspan><tspan x="220" dy="15">1–3 days</tspan></text>
+            <text x="192" y="158" text-anchor="end"><tspan class="tz-map__city">Dodoma</tspan><tspan x="192" dy="15">1–3 days</tspan></text>
+            <text x="117" y="78" text-anchor="middle"><tspan class="tz-map__city">Mwanza</tspan><tspan x="117" dy="15">1–3 days</tspan></text>
+            <text x="133" y="267" text-anchor="middle"><tspan class="tz-map__city">Mbeya</tspan><tspan x="133" dy="15">1–3 days</tspan></text>
+            <text x="322" y="156"><tspan class="tz-map__city">Zanzibar</tspan><tspan x="322" dy="15">2–3 days</tspan></text>
+          </svg>
+        </div>
+        <div class="h-delivery__text">
+          <p class="label">Delivery</p>
+          <h2>We come to you.<br /><span>Everywhere in Tanzania.</span></h2>
+          <ul class="h-cities">
+            <li>Dar es Salaam</li><li>Arusha</li><li>Dodoma</li><li>Mwanza</li><li>Mbeya</li><li>Zanzibar</li><li>Morogoro</li><li>Tanga</li><li>Moshi</li><li>+ all other regions</li>
+          </ul>
+          <p class="h-tips__title">For a fast delivery:</p>
+          <ul class="h-tips">
+            <li><span>📱</span>Keep your phone ON after you order</li>
+            <li><span>📞</span>Answer our call to confirm</li>
+            <li><span>📍</span>Give a clear landmark near your home</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <!-- ============ Products ============ -->
-    <section class="wrap shop" id="shop">
-      <p class="label label--center">Our collection</p>
-      <h2 class="title">Shop our products</h2>
-      <div class="shop__grid" id="productGrid"></div>
-    </section>
-
-    <!-- ============ How it works ============ -->
-    <section class="wrap how" id="how">
-      <p class="label label--center">Simple &amp; safe</p>
-      <h2 class="title">How ordering works</h2>
-      <ol class="steps">
-        <li><span>01</span><h3>Choose &amp; order</h3><p>Pick a product and fill in your name, phone and address.</p></li>
-        <li><span>02</span><h3>We call to confirm</h3><p>Our team calls you to check your address and delivery time.</p></li>
-        <li><span>03</span><h3>You pay on delivery</h3><p>Check your order, then pay the delivery agent in cash.</p></li>
-      </ol>
+    <!-- ============ Guarantee ============ -->
+    <section class="wrap h-section">
+      <div class="h-guarantee">
+        <span class="h-guarantee__seal">100%<small>risk-free</small></span>
+        <div>
+          <h2>See it. Check it. <span>Then pay.</span></h2>
+          <p>If your product is not as described, contact us within 30 days and we replace it or make it right. No hassle.</p>
+        </div>
+        <a href="#shop" class="btn btn--gold">Choose my product →</a>
+      </div>
     </section>
 
     <!-- ============ FAQ ============ -->
     <section class="wrap faq" id="faq">
       <p class="label label--center">Questions</p>
-      <h2 class="title">Frequently asked questions</h2>
+      <h2 class="h-title">Frequently asked questions</h2>
       <details>
         <summary>What payment methods do you accept?</summary>
         <p>We offer Cash on Delivery (COD) only. You pay in cash when your order is delivered to your doorstep.</p>
       </details>
       <details>
+        <summary>Can I check my order before paying?</summary>
+        <p>Yes. When the agent arrives, you open your parcel and check it. You pay only after that.</p>
+      </details>
+      <details>
         <summary>How long does delivery take?</summary>
         <p>Major cities: 1–3 business days. Other areas: 3–7 days. We call or message you before delivery.</p>
+      </details>
+      <details>
+        <summary>Is shipping free?</summary>
+        <p>Yes — standard delivery is free on Duka Bora orders. You only pay the product price in cash at your door.</p>
       </details>
       <details>
         <summary>What if I am not available at delivery time?</summary>
@@ -155,28 +234,51 @@
         <summary>What if there is a problem with my product?</summary>
         <p>Contact us within 30 days. If something is wrong or not as described, we will replace it or make it right — no hassle.</p>
       </details>
-      <details>
-        <summary>Is shipping free?</summary>
-        <p>Yes — standard delivery is free on Duka Bora orders. You only pay the product price in cash at your door.</p>
-      </details>
     </section>
 
-    <!-- ============ Help ============ -->
+    <!-- ============ Final call ============ -->
     <section class="wrap">
-      <div class="help">
-        <div>
-          <h2>Need help with your order?</h2>
-          <p>Call us 7 days a week, 8:00 – 20:00.</p>
-        </div>
-        <a class="btn btn--white" id="ctaPhone" href="#"></a>
+      <div class="h-final">
+        <h2>Ready to order?</h2>
+        <p>Free delivery · Lipa ukipokea · We call to confirm</p>
+        <a href="#shop" class="btn btn--gold">Order now →</a>
       </div>
     </section>
   </main>
 
-  <footer class="foot">
-    <div class="wrap foot__inner">
-      <span>© <span id="year"></span> Duka Bora · Pay on delivery · Tanzania</span>
-      <a href="#" id="footerPhone"></a>
+  <footer class="h-foot">
+    <div class="wrap h-foot__grid">
+      <div class="h-foot__brand">
+        <a href="index.html" class="brand">
+          <img src="images/logo/logo.png" alt="" onerror="this.remove()" />
+          <span><strong>Duka<em>Bora</em></strong><small>Quality you can trust</small></span>
+        </a>
+        <p>Quality products delivered to your door across Tanzania. You pay only when your order arrives.</p>
+      </div>
+      <div>
+        <h3>Shop</h3>
+        <ul id="footProducts"></ul>
+      </div>
+      <div>
+        <h3>Help</h3>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#delivery">Delivery</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="#" id="footerPhone"></a></li>
+          <li><a href="#" id="footerWa" target="_blank" rel="noopener" hidden>💬 WhatsApp</a></li>
+          <li>🕗 7 days, 8:00 – 20:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap h-foot__bottom">
+      <span>© <span id="year"></span> Duka Bora · Tanzania</span>
+      <span>💵 Pay on delivery · 🚚 Free shipping</span>
     </div>
   </footer>
 
