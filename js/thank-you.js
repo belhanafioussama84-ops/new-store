@@ -6,18 +6,80 @@
 
   const number = new URLSearchParams(location.search).get("order") || "";
   const o = findOrder(number);
+  const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
+  const waLink = (text) => `https://wa.me/${wa}?text=${encodeURIComponent(text)}`;
+  const day = (d) => d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+  const addDays = (d, n) => new Date(d.getTime() + n * 864e5);
 
-  // Order summary (the order is read from this browser's saved copy).
+  // Order details (read from this browser's saved copy). Without it the page stays generic.
   if (o) {
     const p = findProduct(o.product.id) || {};
-    $("#sMedia").innerHTML = p.image
+    const qty = o.product.qty;
+    const unitFull = p.oldPrice || p.price || o.product.price;
+    const full = unitFull * qty;
+    const save = full - o.total;
+    const firstName = o.customer.fullName.split(/\s+/)[0];
+    const placed = new Date(o.date);
+
+    $("#tTitle").innerHTML = `Asante, ${esc(firstName)}! <span>Your order is confirmed.</span>`;
+    $("#tNumber").textContent = o.number;
+    $("#tDate").textContent = day(placed);
+    // Same / next day in Dar es Salaam, 1–3 days elsewhere (see the FAQ).
+    $("#tEta").textContent = /dar/i.test(o.customer.city)
+      ? `${day(addDays(placed, 1))}`
+      : `${day(addDays(placed, 1))} – ${day(addDays(placed, 3))}`;
+    $("#tMeta").hidden = false;
+    $("#tPhone").textContent = o.customer.phone;
+
+    $("#tPhoto").innerHTML = p.image
       ? `<img src="${esc(p.image)}" alt="" onerror="this.parentElement.textContent = '${esc(p.icon || "")}';" />`
       : esc(p.icon || "");
-    $("#sName").textContent = o.product.name;
-    $("#sOffer").textContent = `${o.product.qty} piece${o.product.qty > 1 ? "s" : ""}`;
-    $("#sQty").textContent = `Order ${o.number}`;
-    $("#sTotal").textContent = fmt(o.total);
-    $("#summary").hidden = false;
+    $("#tName").textContent = o.product.name;
+    $("#tQty").textContent = `${qty} piece${qty > 1 ? "s" : ""} · ${fmt(unitFull)} each`;
+    $("#tLine").textContent = fmt(full);
+    $("#tTotals").innerHTML = `
+      <div><dt>Subtotal</dt><dd>${fmt(full)}</dd></div>
+      ${save > 0 ? `<div class="is-save"><dt>Bundle discount</dt><dd>− ${fmt(save)}</dd></div>` : ""}
+      <div><dt>Delivery</dt><dd class="is-free">FREE</dd></div>
+      <div class="is-total"><dt>Total to pay on delivery</dt><dd>${fmt(o.total)}</dd></div>`;
+    $("#tCustomer").textContent = o.customer.fullName;
+    $("#tAddress").textContent = `${o.customer.city}\n${o.customer.phone}`;
+    $("#tCash").textContent = `Prepare ${fmt(o.total)} in cash`;
+    $("#tSummary").hidden = false;
+
+    /* ---------- Bigger order: one more piece of the same product, then the other products ---------- */
+    if (wa) {
+      const cards = [];
+      const next = (p.offers || []).find((x) => x.qty === qty + 1);
+      if (next && p.image) {
+        const extra = next.price - o.total;
+        cards.push(`
+          <article class="t-offer t-offer--best">
+            <span class="t-offer__tag">Best value</span>
+            <div class="t-offer__photo"><img src="${esc(p.image)}" alt="" /></div>
+            <div class="t-offer__body">
+              <strong>+1 ${esc(p.name)}</strong>
+              <p>Make it ${next.qty} pieces for ${fmt(next.price)} in total: only <b>${fmt(extra)}</b> more.</p>
+              <a class="btn btn--wa" target="_blank" rel="noopener" href="${esc(waLink(`Hello Duka Bora, order ${o.number}: please make it ${next.qty} × ${p.name} (${fmt(next.price)}).`))}">💬 Add it on WhatsApp</a>
+            </div>
+          </article>`);
+      }
+      PRODUCTS.filter((x) => x.id !== p.id && x.home !== false).slice(0, 2).forEach((x) => {
+        cards.push(`
+          <article class="t-offer">
+            <div class="t-offer__photo"><img src="${esc(x.image)}" alt="" onerror="this.remove()" /></div>
+            <div class="t-offer__body">
+              <strong>${esc(x.name)}</strong>
+              <p>${fmt(x.price)} · delivered together with your order.</p>
+              <a class="btn btn--wa" target="_blank" rel="noopener" href="${esc(waLink(`Hello Duka Bora, order ${o.number}: please add 1 × ${x.name} (${fmt(x.price)}).`))}">💬 Add it on WhatsApp</a>
+            </div>
+          </article>`);
+      });
+      if (cards.length) {
+        $("#tMoreGrid").innerHTML = cards.join("");
+        $("#tMore").hidden = false;
+      }
+    }
 
     // Purchase event once per order (a page reload doesn't count it twice).
     // eventID lets Meta drop duplicates too.
@@ -31,7 +93,14 @@
     }
   }
 
-  $("#footerPhone").href = `tel:+${STORE.phone}`;
-  $("#footerPhone").textContent = `📞 ${STORE.phoneDisplay}`;
+  /* ---------- Share, help, footer ---------- */
+  const home = `${location.origin}${location.pathname.replace(/thank-you\.html$/, "")}`;
+  $("#tShare").href = `https://wa.me/?text=${encodeURIComponent(`I just ordered from Duka Bora 🇹🇿 Free delivery and you pay only when it arrives: ${home}`)}`;
+  if (wa) {
+    $("#tWa").href = waLink(`Hello Duka Bora${o ? `, about my order ${o.number}` : ""}:`);
+    $("#tWa").hidden = false;
+  }
+  $("#tCallUs").href = `tel:+${STORE.phone}`;
+  $("#tCallUs").textContent = `📞 ${STORE.phoneDisplay}`;
   $("#year").textContent = new Date().getFullYear();
 })();
