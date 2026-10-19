@@ -1,0 +1,7 @@
+# Files Cloudflare must not put online
+.git
+.vscode
+google-sheet
+README.md
+wrangler.jsonc
+.assetsignore

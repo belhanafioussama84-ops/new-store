@@ -1,0 +1,6 @@
+// Cloudflare settings: the site is plain HTML/CSS/JS, served as-is from this folder.
+{
+  "name": "dukabora",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./" }
+}
