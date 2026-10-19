@@ -211,6 +211,7 @@
   .h-top .brand img { width: 34px; height: 34px; }
   .h-top .brand strong { font-size: 1.15rem; }
   .h-top__btn { padding: .5rem 1rem; font-size: .85rem; }
+  .h-top .top__cod { display: none; } /* thank-you page: room for the SW / EN buttons */
   .h-hero__inner { padding-bottom: 5.5rem; }
   .h-hero__text { font-size: 1.02rem; }
   .h-hero__btns .btn { flex: 1 1 100%; }

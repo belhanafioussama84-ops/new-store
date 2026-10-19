@@ -8,7 +8,7 @@
   const o = findOrder(number);
   const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
   const waLink = (text) => `https://wa.me/${wa}?text=${encodeURIComponent(text)}`;
-  const day = (d) => d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+  const day = (d) => d.toLocaleDateString(LANG === "sw" ? "sw-TZ" : "en-GB", { weekday: "short", day: "numeric", month: "short" });
   const addDays = (d, n) => new Date(d.getTime() + n * 864e5);
 
   // Order details (read from this browser's saved copy). Without it the page stays generic.
@@ -21,7 +21,7 @@
     const firstName = o.customer.fullName.split(/\s+/)[0];
     const placed = new Date(o.date);
 
-    $("#tTitle").innerHTML = `Asante, ${esc(firstName)}! <span>Your order is confirmed.</span>`;
+    $("#tTitle").innerHTML = `${T("Asante, {name}!", { name: esc(firstName) })} <span>${T("Your order is confirmed.")}</span>`;
     $("#tNumber").textContent = o.number;
     $("#tDate").textContent = day(placed);
     // Same / next day in Dar es Salaam, 1–3 days elsewhere (see the FAQ).
@@ -35,16 +35,16 @@
       ? `<img src="${esc(p.image)}" alt="" onerror="this.parentElement.textContent = '${esc(p.icon || "")}';" />`
       : esc(p.icon || "");
     $("#tName").textContent = o.product.name;
-    $("#tQty").textContent = `${qty} piece${qty > 1 ? "s" : ""} · ${fmt(unitFull)} each`;
+    $("#tQty").textContent = T(qty > 1 ? "{n} pieces · {price} each" : "{n} piece · {price} each", { n: qty, price: fmt(unitFull) });
     $("#tLine").textContent = fmt(full);
     $("#tTotals").innerHTML = `
-      <div><dt>Subtotal</dt><dd>${fmt(full)}</dd></div>
-      ${save > 0 ? `<div class="is-save"><dt>Bundle discount</dt><dd>− ${fmt(save)}</dd></div>` : ""}
-      <div><dt>Delivery</dt><dd class="is-free">FREE</dd></div>
-      <div class="is-total"><dt>Total to pay on delivery</dt><dd>${fmt(o.total)}</dd></div>`;
+      <div><dt>${T("Subtotal")}</dt><dd>${fmt(full)}</dd></div>
+      ${save > 0 ? `<div class="is-save"><dt>${T("Bundle discount")}</dt><dd>− ${fmt(save)}</dd></div>` : ""}
+      <div><dt>${T("Delivery")}</dt><dd class="is-free">${T("FREE")}</dd></div>
+      <div class="is-total"><dt>${T("Total to pay on delivery")}</dt><dd>${fmt(o.total)}</dd></div>`;
     $("#tCustomer").textContent = o.customer.fullName;
     $("#tAddress").textContent = `${o.customer.city}\n${o.customer.phone}`;
-    $("#tCash").textContent = `Prepare ${fmt(o.total)} in cash`;
+    $("#tCash").textContent = T("Prepare {price} in cash", { price: fmt(o.total) });
     $("#tSummary").hidden = false;
 
     /* ---------- Bigger order: one more piece of the same product, then the other products ---------- */
@@ -55,12 +55,12 @@
         const extra = next.price - o.total;
         cards.push(`
           <article class="t-offer t-offer--best">
-            <span class="t-offer__tag">Best value</span>
+            <span class="t-offer__tag">${T("Best value")}</span>
             <div class="t-offer__photo"><img src="${esc(p.image)}" alt="" /></div>
             <div class="t-offer__body">
               <strong>+1 ${esc(p.name)}</strong>
-              <p>Make it ${next.qty} pieces for ${fmt(next.price)} in total: only <b>${fmt(extra)}</b> more.</p>
-              <a class="btn btn--wa" target="_blank" rel="noopener" href="${esc(waLink(`Hello Duka Bora, order ${o.number}: please make it ${next.qty} × ${p.name} (${fmt(next.price)}).`))}">💬 Add it on WhatsApp</a>
+              <p>${T("Make it {n} pieces for {price} in total: only <b>{extra}</b> more.", { n: next.qty, price: fmt(next.price), extra: fmt(extra) })}</p>
+              <a class="btn btn--wa" target="_blank" rel="noopener" href="${esc(waLink(`Hello Duka Bora, order ${o.number}: please make it ${next.qty} × ${p.name} (${fmt(next.price)}).`))}">${T("💬 Add it on WhatsApp")}</a>
             </div>
           </article>`);
       }
@@ -70,8 +70,8 @@
             <div class="t-offer__photo"><img src="${esc(x.image)}" alt="" onerror="this.remove()" /></div>
             <div class="t-offer__body">
               <strong>${esc(x.name)}</strong>
-              <p>${fmt(x.price)} · delivered together with your order.</p>
-              <a class="btn btn--wa" target="_blank" rel="noopener" href="${esc(waLink(`Hello Duka Bora, order ${o.number}: please add 1 × ${x.name} (${fmt(x.price)}).`))}">💬 Add it on WhatsApp</a>
+              <p>${T("{price} · delivered together with your order.", { price: fmt(x.price) })}</p>
+              <a class="btn btn--wa" target="_blank" rel="noopener" href="${esc(waLink(`Hello Duka Bora, order ${o.number}: please add 1 × ${x.name} (${fmt(x.price)}).`))}">${T("💬 Add it on WhatsApp")}</a>
             </div>
           </article>`);
       });
@@ -95,7 +95,7 @@
 
   /* ---------- Share, help, footer ---------- */
   const home = `${location.origin}${location.pathname.replace(/thank-you\.html$/, "")}`;
-  $("#tShare").href = `https://wa.me/?text=${encodeURIComponent(`I just ordered from Duka Bora 🇹🇿 Free delivery and you pay only when it arrives: ${home}`)}`;
+  $("#tShare").href = `https://wa.me/?text=${encodeURIComponent(T("I just ordered from Duka Bora 🇹🇿 Free delivery and you pay only when it arrives: {url}", { url: home }))}`;
   if (wa) {
     $("#tWa").href = waLink(`Hello Duka Bora${o ? `, about my order ${o.number}` : ""}:`);
     $("#tWa").hidden = false;

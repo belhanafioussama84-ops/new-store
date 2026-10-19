@@ -46,6 +46,8 @@ const STORE = {
      showcaseTitle, showcaseText, showcaseList, finalTitle.
      Titles are ["normal part", "gold italic part"].
      Anything left out uses a general text that fits any product.
+   Swahili: add the Swahili of every new text in js/i18n.js
+   (texts without a translation show in English).
    ========================================================== */
 const PRODUCTS = [
   {

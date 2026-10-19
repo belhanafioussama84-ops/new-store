@@ -11,7 +11,7 @@
       <section class="wrap faq">
         <h2>Product not found</h2>
         <p class="muted" style="text-align:center">No product in js/products.js has the id "${esc(id)}".</p>
-        <p style="text-align:center"><a href="index.html" class="btn">Back to shop</a></p>
+        <p style="text-align:center"><a href="index.html" class="btn">${T("Back to shop")}</a></p>
       </section>`;
     $("#sticky").remove();
     return;
@@ -29,10 +29,10 @@
   document.title = `${p.name} · ${STORE.name}`;
   $("#crumbName").textContent = p.name;
   $("#pName").textContent = p.name;
-  $("#pCat").textContent = `${p.category ? `${p.category} · ` : ""}${STORE.name}`;
+  $("#pCat").textContent = `${p.category ? `${T(p.category)} · ` : ""}${STORE.name}`;
   // Short text under the title, from the product's "description"
   if (p.description) {
-    $("#pDesc").textContent = p.description;
+    $("#pDesc").textContent = T(p.description);
     $("#pDesc").hidden = false;
   }
 
@@ -50,7 +50,7 @@
   if (images.length > 1) {
     // A thumbnail whose photo is missing is removed; a single remaining thumbnail is hidden too.
     $("#galleryThumbs").innerHTML = images.map((src, i) => `
-      <button type="button" class="thumb" data-img="${i}" aria-label="Photo ${i + 1}">
+      <button type="button" class="thumb" data-img="${i}" aria-label="${T("Photo {n}", { n: i + 1 })}">
         <img src="${esc(src)}" alt="" onerror="const box = this.closest('.gallery__thumbs'); this.parentElement.remove(); if (box.children.length < 2) box.innerHTML = '';" />
       </button>`).join("");
     // ‹ › arrows on the big photo, and swipe left / right on phones
@@ -76,15 +76,15 @@
     text: L.showcaseText || p.description,
     list: L.showcaseList,
   }];
-  // A section without "image" is shown as text only.
+  // A section without "image" is shown as text only. Swahili texts: js/i18n.js
   $("#story").innerHTML = sections.map((s) => `
     <section class="wrap about${s.image ? "" : " about--text"}">
-      ${s.image ? `<div class="about__media"><img src="${esc(s.image)}" alt="${esc(s.title)}" loading="lazy" onerror="this.remove()" /></div>` : ""}
+      ${s.image ? `<div class="about__media"><img src="${esc(s.image)}" alt="${esc(T(s.title))}" loading="lazy" onerror="this.remove()" /></div>` : ""}
       <div class="about__text">
-        <h2>${esc(s.title)}</h2>
-        <p>${esc(s.text)}</p>
-        ${s.list?.length ? `<ul class="checks">${s.list.map((li) => `<li>${esc(li)}</li>`).join("")}</ul>` : ""}
-        <a href="#order" class="btn">Order now · Pay on delivery</a>
+        <h2>${esc(T(s.title))}</h2>
+        <p>${esc(T(s.text))}</p>
+        ${s.list?.length ? `<ul class="checks">${s.list.map((li) => `<li>${esc(T(li))}</li>`).join("")}</ul>` : ""}
+        <a href="#order" class="btn">${T("Order now · Pay on delivery")}</a>
       </div>
     </section>`).join("");
 
@@ -97,19 +97,19 @@
     $("#offers").innerHTML = offers.map((o, i) => {
       const save = unitFull * o.qty - o.price;
       const note = o.qty > 1
-        ? `${save > 0 ? `Save ${fmt(save)}<br>` : ""}${fmt(Math.round(o.price / o.qty))} each`
-        : "Perfect for you";
+        ? `${save > 0 ? `${T("Save {amount}", { amount: fmt(save) })}<br>` : ""}${T("{price} each", { price: fmt(Math.round(o.price / o.qty)) })}`
+        : T("Perfect for you");
       return `
       <label class="offer ${i === offerIndex ? "is-active" : ""}">
         <input type="radio" name="offer" value="${i}" ${i === offerIndex ? "checked" : ""} />
         <span class="offer__dot"></span>
         ${thumbs(o.qty)}
         <span class="offer__main">
-          <strong>${esc(o.label || `${o.qty} piece${o.qty > 1 ? "s" : ""}`)}</strong>
+          <strong>${esc(o.label ? T(o.label) : T(o.qty > 1 ? "{n} pieces" : "{n} piece", { n: o.qty }))}</strong>
           <small${save > 0 ? ' class="is-save"' : ""}>${note}</small>
         </span>
         <span class="offer__price">${fmt(o.price)}${save > 0 ? `<s>${fmt(unitFull * o.qty)}</s>` : ""}</span>
-        ${o.tag ? `<span class="offer__tag">${esc(o.tag)}</span>` : ""}
+        ${o.tag ? `<span class="offer__tag">${esc(T(o.tag))}</span>` : ""}
       </label>`;
     }).join("");
   }
@@ -120,7 +120,7 @@
     const full = unitFull * o.qty;
     const save = full - o.price;
     $("#pPrice").innerHTML = `<strong>${fmt(o.price)}</strong>${save > 0
-      ? `<s>${fmt(full)}</s><span class="buy__save">Save ${fmt(save)}</span>` : ""}`;
+      ? `<s>${fmt(full)}</s><span class="buy__save">${T("Save {amount}", { amount: fmt(save) })}</span>` : ""}`;
   };
 
   // Order summary inside the form
@@ -129,17 +129,16 @@
     const save = unitFull * o.qty - o.price;
     $("#recap").innerHTML = `
       <div><span>${esc(p.name)} × ${o.qty}</span><span>${fmt(unitFull * o.qty)}</span></div>
-      ${save > 0 ? `<div class="recap__save"><span>You save</span><span>− ${fmt(save)}</span></div>` : ""}
-      <div><span>Delivery</span><span class="recap__free">FREE</span></div>
-      <div class="recap__total"><span>Total to pay on delivery</span><strong>${fmt(o.price)}</strong></div>`;
+      ${save > 0 ? `<div class="recap__save"><span>${T("You save")}</span><span>− ${fmt(save)}</span></div>` : ""}
+      <div><span>${T("Delivery")}</span><span class="recap__free">${T("FREE")}</span></div>
+      <div class="recap__total"><span>${T("Total to pay on delivery")}</span><strong>${fmt(o.price)}</strong></div>`;
   };
 
   const renderButton = () => {
     renderPrice();
     renderRecap();
-    $("#submitBtn").textContent = `Order now · ${fmt(offer().price)}`;
-    $("#sticky").textContent = `Order now · ${fmt(offer().price)}`;
-    $("#closingOrder").textContent = `Order now · ${fmt(offer().price)}`;
+    const label = T("Order now · {price}", { price: fmt(offer().price) });
+    ["#submitBtn", "#sticky", "#closingOrder"].forEach((s) => { $(s).textContent = label; });
   };
 
   $("#offers").addEventListener("change", (e) => {
@@ -158,12 +157,12 @@
     Pixel.track("InitiateCheckout", Pixel.product(p, offer().qty, offer().price));
     const o = createOrder(form, p, offer().qty, offer().price);
     btn.disabled = true;
-    btn.textContent = "Sending your order…";
+    btn.textContent = T("Sending your order…");
     $("#formError").hidden = true;
     try {
       await sendOrder(o);
     } catch {
-      $("#formError").textContent = "We couldn't send your order. Please check your internet connection and try again.";
+      $("#formError").textContent = T("We couldn't send your order. Please check your internet connection and try again.");
       $("#formError").hidden = false;
       btn.disabled = false;
       renderButton();

@@ -19,26 +19,26 @@
   /* ---------- Products (those with home: false only have their own page) ---------- */
   const list = PRODUCTS.filter((p) => p.home !== false);
   if (!list.length) {
-    $("#productGrid").outerHTML = `<p class="shop__soon">✦ New products are coming soon. Check back shortly!</p>`;
+    $("#productGrid").outerHTML = `<p class="shop__soon">${T("✦ New products are coming soon. Check back shortly!")}</p>`;
   } else $("#productGrid").innerHTML = list.map((p) => {
     const b = bundle(p);
     return `
     <a class="h-card" href="${esc(productUrl(p))}">
       <div class="h-card__photo">
-        ${p.badge ? `<span class="h-card__badge">${esc(p.badge)}</span>` : ""}
-        ${b ? `<span class="h-card__duo">2 for ${fmt(b.price)}</span>` : ""}
+        ${p.badge ? `<span class="h-card__badge">${esc(T(p.badge))}</span>` : ""}
+        ${b ? `<span class="h-card__duo">${T("2 for {price}", { price: fmt(b.price) })}</span>` : ""}
         ${photo(p)}
       </div>
       <div class="h-card__body">
-        ${p.category ? `<p class="h-card__cat">${esc(p.category)}</p>` : ""}
+        ${p.category ? `<p class="h-card__cat">${esc(T(p.category))}</p>` : ""}
         <h3>${esc(p.name)}</h3>
-        <p class="h-card__desc">${esc(p.description)}</p>
+        <p class="h-card__desc">${esc(T(p.description))}</p>
         <div class="h-card__price">
           <strong>${fmt(p.price)}</strong>
           ${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s>` : ""}
         </div>
-        ${b && b.save > 0 ? `<p class="h-card__save">🔥 Buy 2, save ${fmt(b.save)}</p>` : ""}
-        <span class="btn h-card__btn">Order now · Pay on delivery</span>
+        ${b && b.save > 0 ? `<p class="h-card__save">${T("🔥 Buy 2, save {price}", { price: fmt(b.save) })}</p>` : ""}
+        <span class="btn h-card__btn">${T("Order now · Pay on delivery")}</span>
       </div>
     </a>`;
   }).join("");
