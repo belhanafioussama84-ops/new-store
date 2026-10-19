@@ -1,4 +1,4 @@
-/* Live site: https://dukaabora.netlify.app/ (Netlify deploys every push to GitHub main) */
+/* Live site: https://belhanafioussama84-ops.github.io/new-store/ (GitHub Pages publishes every push to main) */
 /* ==========================================================
    STORE SETTINGS — edit these to match your business
    ========================================================== */
