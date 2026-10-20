@@ -16,6 +16,11 @@
 <!-- Home page. Products, prices and photos come from js/products.js (filled by js/app.js). -->
 <body class="home">
 
+  <!-- Country choice (Tanzania / Zambia), filled by js/common.js -->
+  <div class="country-bar">
+    <div class="wrap country-bar__inner"><span>Choose your country:</span><div class="lang" data-country-switch></div></div>
+  </div>
+
   <!-- Scrolling trust bar (the list is repeated so the loop has no gap) -->
   <div class="ticker" aria-label="Why order from us">
     <div class="ticker__track">
@@ -376,7 +381,6 @@
     </div>
     <div class="wrap h-foot__bottom">
       <span>© <span id="year"></span> Duka Bora · Tanzania</span>
-      <div class="lang" data-country-switch></div>
       <span>💵 Pay on delivery · 🚚 Free shipping</span>
     </div>
   </footer>

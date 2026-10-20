@@ -350,6 +350,7 @@ const SW = {
 
   /* ---------- Country buttons ---------- */
   "Country": "Nchi",
+  "Choose your country:": "Chagua nchi yako:",
 };
 
 /* ==========================================================

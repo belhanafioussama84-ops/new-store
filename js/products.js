@@ -28,7 +28,7 @@ const STORE = {
    COUNTRIES — the same site sells in Tanzania and Zambia.
    - The visitor's country: ?country=zm in the link (use it in Zambian ads,
      e.g. product.html?id=reward-watch&country=zm), else the one chosen before
-     with the buttons at the bottom of the page, else Zambia for a phone set to
+     with the buttons at the top of the page, else Zambia for a phone set to
      Zambian time, else Tanzania.
    - Zambian prices: the "zm" part of each product. A product without it is not
      shown in Zambia.

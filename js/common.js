@@ -138,13 +138,17 @@ const Shop = (() => {
   return { MAX_QTY, $, fmt, esc, findProduct, productMedia, fillRegions, setError, validate, createOrder, sendOrder, findOrder, initReveal };
 })();
 
-/* Country buttons at the bottom of every page (<div class="lang" data-country-switch></div>) */
+/* Country buttons at the top of every page (<div class="lang" data-country-switch></div>) */
 (() => {
+  const flags = {
+    tz: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg>`,
+    zm: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg>`,
+  };
   document.querySelectorAll("[data-country-switch]").forEach((box) => {
     box.setAttribute("role", "group");
     box.setAttribute("aria-label", T("Country"));
     box.innerHTML = Object.values(COUNTRIES).map((c) =>
-      `<button type="button" data-set-country="${c.id}" aria-pressed="${c === COUNTRY}"${c === COUNTRY ? ' class="is-active"' : ""}>${T(c.name)}</button>`).join("");
+      `<button type="button" data-set-country="${c.id}" aria-pressed="${c === COUNTRY}"${c === COUNTRY ? ' class="is-active"' : ""}>${flags[c.id] || ""} ${T(c.name)}</button>`).join("");
   });
   document.addEventListener("click", (e) => {
     const c = e.target.closest("[data-set-country]")?.dataset.setCountry;
