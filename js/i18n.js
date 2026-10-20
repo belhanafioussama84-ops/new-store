@@ -347,37 +347,99 @@ const SW = {
   "Chrome and tyres": "Chrome na matairi",
   "Cars, motorcycles and bajaji": "Magari, pikipiki na bajaji",
   "120 ml bottle with spray trigger": "Chupa ya ml 120 yenye kipulizi",
+
+  /* ---------- Country buttons ---------- */
+  "Country": "Nchi",
+};
+
+/* ==========================================================
+   Zambia (English only): the texts that talk about Tanzania or
+   use Swahili words, and what to show instead.
+   ========================================================== */
+const ZM = {
+  /* ---------- Shared ---------- */
+  "🚚 Free delivery across Tanzania · Usafirishaji bure": "🚚 Free delivery across Zambia",
+  "💵 Pay on delivery · Lipa ukipokea": "💵 Pay cash on delivery",
+  "Duka Bora · Tanzania": "Duka Bora · Zambia",
+  "Quality products delivered to your door across Tanzania. You pay only when your order arrives.":
+    "Quality products delivered to your door across Zambia. You pay only when your order arrives.",
+
+  /* ---------- Home page ---------- */
+  "Duka Bora · Fast Delivery Across Tanzania · Pay on Delivery": "Duka Bora · Fast Delivery Across Zambia · Pay on Delivery",
+  "Karibu · Delivering all over Tanzania": "Welcome · Delivering all over Zambia",
+  "✓ Lipa ukipokea": "✓ Pay on delivery",
+  "💵 Lipa ukipokea": "💵 Pay on delivery",
+  "TSh 0": "K 0",
+  "The agent brings the parcel to your door, anywhere in Tanzania.": "The agent brings the parcel to your door, anywhere in Zambia.",
+  "🚚 TSh 0 delivery": "🚚 K 0 delivery",
+  "💵 TSh 0 upfront": "💵 K 0 upfront",
+  "· Uaminifu": "",
+  "· Ubora": "",
+  "· Huduma": "",
+  "Habari Juma! 👋 We received your order. Our agent will call you today to confirm your address.":
+    "Hello Mwila! 👋 We received your order. Our agent will call you today to confirm your address.",
+  "Asante! Can I check it before I pay?": "Thank you! Can I check it before I pay?",
+  "Everywhere in Tanzania.": "Everywhere in Zambia.",
+  "Free delivery · Lipa ukipokea · We call to confirm": "Free delivery · Pay on delivery · We call to confirm",
+
+  /* ---------- Product page ---------- */
+  "e.g. Juma Hassan": "e.g. Mwila Banda",
+  "+255 7XX XXX XXX": "+260 9XX XXX XXX",
+  "e.g. Dar es Salaam, Kinondoni, Mikocheni B": "e.g. Lusaka, Kabulonga, Leopards Hill Road",
+  "TSh 0 now": "K 0 now",
+  "Enter a valid Tanzanian number, e.g. 712 345 678.": "Enter a valid Zambian number, e.g. 971 234 567.",
+
+  /* ---------- Thank-you page ---------- */
+  "Asante sana · Order confirmed": "Thank you · Order confirmed",
+  "Asante, {name}!": "Thank you, {name}!",
+  "I just ordered from Duka Bora 🇹🇿 Free delivery and you pay only when it arrives: {url}":
+    "I just ordered from Duka Bora 🇿🇲 Free delivery and you pay only when it arrives: {url}",
+
+  /* ---------- Products (js/products.js) ---------- */
+  "From the café to the market, from Dar es Salaam to Dodoma: a watch that matches your jeans as well as your suit.":
+    "From the café to the market, from Lusaka to Ndola: a watch that matches your jeans as well as your suit.",
+  "Premium design, water-resistant and a great gift for men. Order now: free delivery across Tanzania and you pay only when it arrives.":
+    "Premium design, water-resistant and a great gift for men. Order now: free delivery across Zambia and you pay only when it arrives.",
+  "Use it on the body, glass, mirrors, headlights, chrome and tyres. Cars, motorcycles, bajaji and more: the shine comes back like new.":
+    "Use it on the body, glass, mirrors, headlights, chrome and tyres. Cars, motorcycles, minibuses and more: the shine comes back like new.",
+  "Cars, motorcycles and bajaji": "Cars, motorcycles and minibuses",
 };
 
 const { LANG, T } = (() => {
   "use strict";
 
   const KEY = "dukabora_lang";
+  const LANGS = COUNTRY.languages; // Zambia: English only
   const asked = new URLSearchParams(location.search).get("lang");
   let saved = null;
   try {
-    if (asked === "sw" || asked === "en") localStorage.setItem(KEY, asked);
+    if (LANGS.includes(asked)) localStorage.setItem(KEY, asked);
     saved = localStorage.getItem(KEY);
   } catch { /* storage unavailable */ }
-  const LANG = [asked, saved].find((l) => l === "sw" || l === "en") || "sw";
+  const LANG = [asked, saved].find((l) => LANGS.includes(l)) || LANGS[0];
+  // Swahili texts, or in Zambia the English texts adapted to Zambia
+  const DICT = LANG === "sw" ? SW : COUNTRY.id === "zm" ? ZM : null;
 
   const T = (en, vars) => {
-    let s = LANG === "sw" && SW[en] != null ? SW[en] : en;
+    let s = DICT && DICT[en] != null ? DICT[en] : en;
     if (vars) s = s.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
     return s;
   };
 
+  /* ---------- Parts of the page for one country only (data-country="tz" / "zm") ---------- */
+  document.querySelectorAll("[data-country]").forEach((el) => { if (el.dataset.country !== COUNTRY.id) el.remove(); });
+
   /* ---------- Translate the page's own HTML (text written by JavaScript uses T) ---------- */
-  if (LANG === "sw") {
-    document.documentElement.lang = "sw";
+  if (DICT) {
+    document.documentElement.lang = LANG;
     document.title = T(document.title);
-    document.querySelectorAll("[data-sw]").forEach((el) => { el.innerHTML = el.dataset.sw; });
+    if (LANG === "sw") document.querySelectorAll("[data-sw]").forEach((el) => { el.innerHTML = el.dataset.sw; });
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     for (let n; (n = walker.nextNode());) {
       const key = n.nodeValue.replace(/\s+/g, " ").trim();
-      if (!key || SW[key] == null) continue;
+      if (!key || DICT[key] == null) continue;
       const [, before, after] = n.nodeValue.match(/^(\s*)[\s\S]*?(\s*)$/);
-      n.nodeValue = before + SW[key] + after;
+      n.nodeValue = before + DICT[key] + after;
     }
     document.querySelectorAll("[aria-label], [placeholder]").forEach((el) => {
       ["aria-label", "placeholder"].forEach((a) => {
@@ -388,9 +450,10 @@ const { LANG, T } = (() => {
 
   /* ---------- SW / EN buttons (in every header: <div class="lang" data-lang></div>) ---------- */
   document.querySelectorAll("[data-lang]").forEach((box) => {
+    if (LANGS.length < 2) return box.remove();
     box.setAttribute("role", "group");
     box.setAttribute("aria-label", T("Language"));
-    box.innerHTML = ["sw", "en"].map((l) =>
+    box.innerHTML = LANGS.map((l) =>
       `<button type="button" data-set-lang="${l}" aria-pressed="${l === LANG}"${l === LANG ? ' class="is-active"' : ""}>${l.toUpperCase()}</button>`).join("");
   });
   document.addEventListener("click", (e) => {

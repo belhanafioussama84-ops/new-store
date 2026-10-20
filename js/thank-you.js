@@ -24,8 +24,8 @@
     $("#tTitle").innerHTML = `${T("Asante, {name}!", { name: esc(firstName) })} <span>${T("Your order is confirmed.")}</span>`;
     $("#tNumber").textContent = o.number;
     $("#tDate").textContent = day(placed);
-    // Same / next day in Dar es Salaam, 1–3 days elsewhere (see the FAQ).
-    $("#tEta").textContent = /dar/i.test(o.customer.city)
+    // Same / next day in Dar es Salaam (Lusaka in Zambia), 1–3 days elsewhere (see the FAQ).
+    $("#tEta").textContent = new RegExp(COUNTRY.fastCity, "i").test(o.customer.city)
       ? `${day(addDays(placed, 1))}`
       : `${day(addDays(placed, 1))} – ${day(addDays(placed, 3))}`;
     $("#tMeta").hidden = false;

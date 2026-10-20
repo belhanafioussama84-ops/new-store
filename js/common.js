@@ -17,7 +17,7 @@ const Shop = (() => {
   const MAX_QTY = 10;
 
   const $ = (sel) => document.querySelector(sel);
-  const fmt = (n) => `${STORE.currency} ${Number(n).toLocaleString("en-US")}`;
+  const fmt = (n) => `${COUNTRY.currency} ${Number(n).toLocaleString("en-US")}`;
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
 
@@ -45,7 +45,7 @@ const Shop = (() => {
 
   function normalizePhone(raw) {
     let d = raw.replace(/\D/g, "");
-    if (d.startsWith("255")) d = d.slice(3);
+    if (d.startsWith(COUNTRY.dial)) d = d.slice(COUNTRY.dial.length);
     if (d.startsWith("0")) d = d.slice(1);
     return d;
   }
@@ -62,7 +62,7 @@ const Shop = (() => {
     const check = (el, cond, msg) => { if (!el) return; setError(el, cond ? "" : msg); if (!cond) ok = false; };
 
     check(form.fullName, form.fullName.value.trim().length >= 3, T("Please enter your full name."));
-    check(form.phone, /^[67]\d{8}$/.test(normalizePhone(form.phone.value)), T("Enter a valid Tanzanian number, e.g. 712 345 678."));
+    check(form.phone, new RegExp(`^[${COUNTRY.phoneStart}]\\d{8}$`).test(normalizePhone(form.phone.value)), T("Enter a valid Tanzanian number, e.g. 712 345 678."));
     check(form.region, !!form.region?.value, T("Please choose your region."));
     check(form.city, form.city?.value.trim().length >= 2, T("Please enter your district or town."));
     check(form.address, form.address?.value.trim().length >= 5, T("Please enter your city and delivery address."));
@@ -77,13 +77,15 @@ const Shop = (() => {
     const o = {
       number: "DB" + Date.now().toString().slice(-7),
       date: new Date().toISOString(),
+      country: COUNTRY.name,
+      currency: COUNTRY.currency,
       product: { id: p.id, name: p.name, price: p.price, qty },
       total,
       shipping: 0,
       payment: "Cash on Delivery",
       customer: {
         fullName: form.fullName.value.trim(),
-        phone: "+255 " + normalizePhone(form.phone.value),
+        phone: `+${COUNTRY.dial} ` + normalizePhone(form.phone.value),
         region: form.region?.value || "",
         // The product page sends one "City & delivery address" field; it goes in the same sheet column.
         city: (form.address || form.city).value.trim(),
@@ -136,6 +138,25 @@ const Shop = (() => {
   return { MAX_QTY, $, fmt, esc, findProduct, productMedia, fillRegions, setError, validate, createOrder, sendOrder, findOrder, initReveal };
 })();
 
+/* Country buttons at the bottom of every page (<div class="lang" data-country-switch></div>) */
+(() => {
+  document.querySelectorAll("[data-country-switch]").forEach((box) => {
+    box.setAttribute("role", "group");
+    box.setAttribute("aria-label", T("Country"));
+    box.innerHTML = Object.values(COUNTRIES).map((c) =>
+      `<button type="button" data-set-country="${c.id}" aria-pressed="${c === COUNTRY}"${c === COUNTRY ? ' class="is-active"' : ""}>${T(c.name)}</button>`).join("");
+  });
+  document.addEventListener("click", (e) => {
+    const c = e.target.closest("[data-set-country]")?.dataset.setCountry;
+    if (!c || c === COUNTRY.id) return;
+    const url = new URL(location.href);
+    url.hash = "";
+    url.searchParams.delete("country");
+    try { localStorage.setItem("dukabora_country", c); } catch { url.searchParams.set("country", c); }
+    if (url.href === location.href) location.reload(); else location.assign(url.href);
+  });
+})();
+
 /* Meta (Facebook) Pixel — ID in STORE.metaPixel. Pixel.track() does nothing without an ID. */
 const Pixel = (() => {
   const id = String(STORE.metaPixel || "").replace(/\D/g, "");
@@ -153,7 +174,7 @@ const Pixel = (() => {
   // Product data in the format Meta expects
   const product = (p, qty = 1, value = p.price * qty) => ({
     content_ids: [p.id], content_name: p.name, content_type: "product",
-    contents: [{ id: p.id, quantity: qty }], num_items: qty, value, currency: "TZS",
+    contents: [{ id: p.id, quantity: qty }], num_items: qty, value, currency: COUNTRY.currencyCode,
   });
   return { track, product };
 })();

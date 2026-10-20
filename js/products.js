@@ -19,15 +19,54 @@ const STORE = {
   // Empty = no icon.
   instagram: "https://www.instagram.com/dukaabora/",
   facebook: "https://www.facebook.com/profile.php?id=100070066074275",
-  currency: "TSh",
   // Google Sheet that receives every order — paste your Apps Script web app URL here
   // (setup steps: google-sheet/orders.gs). Empty = orders are NOT sent to you.
   ordersUrl: "https://script.google.com/macros/s/AKfycbxrx2C83Ns29ULrZWcvHh2EgiJTBEjTDvsinnvz81WAV8ODzpkwsm_Z6V1An7w54lEiRQ/exec",
 };
 
 /* ==========================================================
+   COUNTRIES — the same site sells in Tanzania and Zambia.
+   - The visitor's country: ?country=zm in the link (use it in Zambian ads,
+     e.g. product.html?id=reward-watch&country=zm), else the one chosen before
+     with the buttons at the bottom of the page, else Zambia for a phone set to
+     Zambian time, else Tanzania.
+   - Zambian prices: the "zm" part of each product. A product without it is not
+     shown in Zambia.
+   - Texts that change in Zambia: ZM in js/i18n.js. HTML shown in one country
+     only: data-country="tz" or data-country="zm".
+   ========================================================== */
+const COUNTRIES = {
+  tz: {
+    id: "tz", name: "Tanzania", currency: "TSh", currencyCode: "TZS",
+    dial: "255", phoneStart: "67", // mobile numbers: 6XX / 7XX XXX XXX
+    languages: ["sw", "en"],
+    fastCity: "dar", // same / next day delivery
+  },
+  zm: {
+    id: "zm", name: "Zambia", currency: "K", currencyCode: "ZMW",
+    dial: "260", phoneStart: "79", // mobile numbers: 9XX / 7XX XXX XXX
+    languages: ["en"],
+    fastCity: "lusaka",
+  },
+};
+
+const COUNTRY = (() => {
+  const KEY = "dukabora_country";
+  const asked = new URLSearchParams(location.search).get("country");
+  let saved = null;
+  try {
+    if (COUNTRIES[asked]) localStorage.setItem(KEY, asked);
+    saved = localStorage.getItem(KEY);
+  } catch { /* storage unavailable */ }
+  let zone = "";
+  try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch { /* old browser */ }
+  return COUNTRIES[asked] || COUNTRIES[saved] || (zone === "Africa/Lusaka" ? COUNTRIES.zm : COUNTRIES.tz);
+})();
+
+/* ==========================================================
    PRODUCTS — add, remove or edit products here.
-   - price / oldPrice are in Tanzanian Shillings (TZS)
+   - price / oldPrice / offers are in Tanzanian Shillings (TZS);
+     zm: { price, oldPrice, offers } gives the same in Zambian Kwacha (ZMW)
    - image: put photos in the /images folder (square, ~800x800).
      If an image is missing, a styled placeholder is shown instead.
    - Every product gets its own landing page: product.html?id=<id>
@@ -94,6 +133,14 @@ const PRODUCTS = [
       { qty: 2, price: 355000, tag: "Best value" },
       { qty: 3, price: 555000 },
     ],
+    zm: {
+      price: 1399,
+      offers: [
+        { qty: 1, price: 1399 },
+        { qty: 2, price: 2499, tag: "Best value" },
+        { qty: 3, price: 3899 },
+      ],
+    },
     description: "Elegant, durable watch with a premium finish. Perfect for everyday wear or as a gift.",
     // specs: {
     //   "Case": "Stainless steel, 42 mm",
@@ -179,6 +226,14 @@ const PRODUCTS = [
       { qty: 2, price: 150000, tag: "Best value" },
       { qty: 3, price: 210000 },
     ],
+    zm: {
+      price: 579,
+      offers: [
+        { qty: 1, price: 579 },
+        { qty: 2, price: 1059, tag: "Best value" },
+        { qty: 3, price: 1479 },
+      ],
+    },
     description: "Spray, wipe, and your car shines like new. This nano coating cleans without water, hides fine scratches and leaves a water-repellent layer that keeps rain, mud and dust off the paint.",
     landing: {
       showcaseTitle: ["Showroom shine,", "in minutes"],
@@ -186,3 +241,12 @@ const PRODUCTS = [
     },
   },
 ];
+
+// Outside Tanzania each product takes its local prices; a product without them is not sold there.
+if (COUNTRY.id !== "tz") {
+  for (let i = PRODUCTS.length - 1; i >= 0; i--) {
+    const local = PRODUCTS[i][COUNTRY.id];
+    if (local) Object.assign(PRODUCTS[i], local);
+    else PRODUCTS.splice(i, 1);
+  }
+}

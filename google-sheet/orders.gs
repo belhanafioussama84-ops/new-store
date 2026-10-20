@@ -31,9 +31,11 @@
 const SHEET_NAME = "Orders";
 // Column order of the sheet = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
+// PAYS (Tanzania / Zambia, last column) is not in the Simon Express table: PRIX is in TSh
+// for Tanzania and in Kwacha for Zambia. Delete that column before importing if Simon Express refuses it.
 const HEADERS = [
   "CODE SUIVI", "DESTINATAIRE", "TELEPHONE", "ADRESSE", "PRIX", "VILLE",
-  "PRODUIT", "REF", "QTY", "OUVRIR", "REMPLACER",
+  "PRODUIT", "REF", "QTY", "OUVRIR", "REMPLACER", "PAYS",
 ];
 // First CODE SUIVI when the sheet has none yet; after that each order gets the last code + 1.
 const FIRST_CODE = 1;
@@ -60,6 +62,7 @@ function doPost(e) {
       Number(o.product.qty) || 1,
       "OUI",
       "NON",
+      text_(o.country || "Tanzania"), // orders sent before the Zambia version have no country
     ]);
     notifyTelegram_(code, o);
     return json_({ ok: true });
@@ -96,10 +99,10 @@ function nextCode_(sheet) {
   return codes.length ? Math.max.apply(null, codes) + 1 : FIRST_CODE;
 }
 
-// "+255 767967779" → "0767967779" (the local format Simon Express uses).
+// "+255 767967779" → "0767967779" (the local format Simon Express uses), same for Zambia (+260).
 // The leading ' keeps it as text so Sheets does not drop the 0.
 function localPhone_(v) {
-  const digits = String(v == null ? "" : v).replace(/\D/g, "").replace(/^255/, "").replace(/^0/, "");
+  const digits = String(v == null ? "" : v).replace(/\D/g, "").replace(/^(255|260)/, "").replace(/^0/, "");
   return digits ? "'0" + digits : "";
 }
 
@@ -108,9 +111,9 @@ function notifyTelegram_(code, o) {
   if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return;
   try {
     sendTelegram_([
-      "🛒 New order #" + code,
+      "🛒 New order #" + code + (o.country === "Zambia" ? " 🇿🇲 Zambia" : " 🇹🇿 Tanzania"),
       o.product.name + " × " + (Number(o.product.qty) || 1),
-      "💰 TSh " + (Number(o.total) || 0).toLocaleString("en-US"),
+      "💰 " + (o.currency || "TSh") + " " + (Number(o.total) || 0).toLocaleString("en-US"),
       "👤 " + o.customer.fullName,
       "📞 " + localPhone_(o.customer.phone).replace(/^'/, ""),
       "📍 " + o.customer.city,
@@ -153,7 +156,7 @@ function fixOldRows() {
   rows.forEach((r) => { if (Number(r[0]) >= code) code = Number(r[0]) + 1; });
   const fixed = rows.map((r) => {
     if (!/^DB/.test(String(r[0]))) return r; // already in the new layout
-    return [code++, r[1], localPhone_(r[2]), r[3], r[4], r[5], "", r[6], Number(r[7]) || 1, "OUI", "NON"];
+    return [code++, r[1], localPhone_(r[2]), r[3], r[4], r[5], "", r[6], Number(r[7]) || 1, "OUI", "NON", "Tanzania"];
   });
   range.setValues(fixed);
 }

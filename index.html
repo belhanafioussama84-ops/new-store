@@ -53,7 +53,7 @@
       <div class="wrap h-hero__inner">
         <div class="h-hero__copy">
           <p class="h-kicker">
-            <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg>
+            <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg>
             Karibu · Delivering all over Tanzania
           </p>
           <h1>Your order first.<br /><span>Pay later.</span></h1>
@@ -72,9 +72,9 @@
         <!-- Delivery map: Tanzania drawn from real coordinates (x = (lon − 29) × 32, y = (−lat − 0.8) × 32),
              gold routes go out from Dar es Salaam with a dot travelling along each one -->
         <div class="h-hero__visual">
-          <div class="tzm">
+          <div class="tzm" data-country="tz">
             <div class="tzm__head">
-              <strong>Karibu! <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg></strong>
+              <strong>Karibu! <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg></strong>
               <span>We deliver across Tanzania</span>
             </div>
             <svg class="tzm__map" viewBox="-6 -4 420 362" role="img" aria-label="Delivery map of Tanzania: Dar es Salaam same or next day; Arusha, Dodoma, Mwanza and Mbeya 1–3 days; Zanzibar 2–3 days; Kigoma and Mtwara 3–7 days">
@@ -128,6 +128,61 @@
               <li><i class="is-hub"></i>Dar: same / next day</li>
               <li><i></i>Big cities: 1–3 days</li>
               <li><i class="is-far"></i>Other regions: 3–7 days</li>
+            </ul>
+          </div>
+
+          <!-- Same map for Zambia (x = (lon − 21.6) × 32, y = (−lat − 7.9) × 32), routes from Lusaka -->
+          <div class="tzm tzm--zm" data-country="zm">
+            <div class="tzm__head">
+              <strong>Welcome! <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg></strong>
+              <span>We deliver across Zambia</span>
+            </div>
+            <svg class="tzm__map" viewBox="-6 -4 420 362" role="img" aria-label="Delivery map of Zambia: Lusaka same or next day; Copperbelt, Kabwe and Livingstone 1–3 days; Chipata, Kasama, Solwezi and Mongu 3–7 days">
+              <path class="tzm__land" d="M76.8 102.4 L118.4 105.6 L140.8 128 L179.2 118.4 L192 140.8 L204.8 150.4 L224 163.2 L243.2 176 L262.4 176 L262.4 137.6 L236.8 99.2 L220.8 73.6 L224 44.8 L233.6 19.2 L288 12.8 L300.8 22.4 L332.8 38.4 L361.6 48 L384 86.4 L374.4 99.2 L374.4 144 L371.2 195.2 L281.6 227.2 L281.6 246.4 L232 260 L229 276 L172.8 320 L136 321 L116.8 316.8 L76.8 307.2 L57.6 310.4 L12.8 265.6 L12.8 163.2 L76.8 163.2 Z" />
+              <!-- Lakes Mweru, Bangweulu and Kariba -->
+              <ellipse class="tzm__lake" cx="228" cy="36" rx="5" ry="11" />
+              <ellipse class="tzm__lake" cx="266" cy="102" rx="9" ry="6" />
+              <path class="tzm__lake" d="M229 276 L176 318 L182 318 L232 280 Z" />
+
+              <path id="z1" class="tzm__route" d="M214 241 Q240 200 225 162" />
+              <path id="z2" class="tzm__route" d="M214 241 Q300 150 307 74" />
+              <path id="z3" class="tzm__route" d="M214 241 Q300 230 354 184" />
+              <path id="z4" class="tzm__route" d="M214 241 Q170 300 136 318" />
+              <path id="z5" class="tzm__route" d="M214 241 Q160 190 153 137" />
+              <path id="z6" class="tzm__route" d="M214 241 Q120 270 49 235" />
+
+              <g class="tzm__dots">
+                <circle r="3.2"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#z1" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3.6s" begin="-.8s" repeatCount="indefinite"><mpath href="#z2" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3s" begin="-1.4s" repeatCount="indefinite"><mpath href="#z3" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.6s" begin="-.4s" repeatCount="indefinite"><mpath href="#z4" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.8s" begin="-2s" repeatCount="indefinite"><mpath href="#z5" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3.4s" begin="-1s" repeatCount="indefinite"><mpath href="#z6" /></animateMotion></circle>
+              </g>
+
+              <circle class="tzm__pulse" cx="214" cy="241" r="8" />
+              <circle class="tzm__pin tzm__pin--hub" cx="214" cy="241" r="7" />
+              <circle class="tzm__pin" cx="225" cy="162" r="4.5" />
+              <circle class="tzm__pin" cx="219" cy="209" r="3.5" />
+              <circle class="tzm__pin" cx="307" cy="74" r="4.5" />
+              <circle class="tzm__pin" cx="354" cy="184" r="4.5" />
+              <circle class="tzm__pin" cx="136" cy="318" r="4.5" />
+              <circle class="tzm__pin" cx="153" cy="137" r="4.5" />
+              <circle class="tzm__pin" cx="49" cy="235" r="4.5" />
+
+              <text x="204" y="262" text-anchor="end"><tspan class="tzm__city">Lusaka</tspan><tspan x="204" dy="14">Same / next day</tspan></text>
+              <text x="234" y="158"><tspan class="tzm__city">Copperbelt</tspan><tspan x="234" dy="14">1–3 days</tspan></text>
+              <text x="228" y="213"><tspan class="tzm__city">Kabwe</tspan><tspan x="228" dy="14">1–3 days</tspan></text>
+              <text x="128" y="296" text-anchor="end"><tspan class="tzm__city">Livingstone</tspan><tspan x="128" dy="14">1–3 days</tspan></text>
+              <text x="307" y="95" text-anchor="middle"><tspan class="tzm__city">Kasama</tspan><tspan x="307" dy="14">3–7 days</tspan></text>
+              <text x="354" y="205" text-anchor="middle"><tspan class="tzm__city">Chipata</tspan><tspan x="354" dy="14">3–7 days</tspan></text>
+              <text x="153" y="158" text-anchor="middle"><tspan class="tzm__city">Solwezi</tspan><tspan x="153" dy="14">3–7 days</tspan></text>
+              <text x="52" y="256" text-anchor="middle"><tspan class="tzm__city">Mongu</tspan><tspan x="52" dy="14">3–7 days</tspan></text>
+            </svg>
+            <ul class="tzm__legend">
+              <li><i class="is-hub"></i>Lusaka: same / next day</li>
+              <li><i></i>Big towns: 1–3 days</li>
+              <li><i class="is-far"></i>Other areas: 3–7 days</li>
             </ul>
           </div>
           <span class="h-pill h-pill--1">💵 Lipa ukipokea</span>
@@ -218,7 +273,10 @@
         <div class="h-delivery__text">
           <p class="label">Delivery</p>
           <h2>We come to you.<br /><span>Everywhere in Tanzania.</span></h2>
-          <ul class="h-cities">
+          <ul class="h-cities" data-country="zm">
+            <li>Lusaka</li><li>Ndola</li><li>Kitwe</li><li>Kabwe</li><li>Livingstone</li><li>Chingola</li><li>Mufulira</li><li>Chipata</li><li>Kasama</li><li>Solwezi</li><li>Mongu</li><li>+ all other areas</li>
+          </ul>
+          <ul class="h-cities" data-country="tz">
             <li>Dar es Salaam</li><li>Arusha</li><li>Dodoma</li><li>Mwanza</li><li>Mbeya</li><li>Zanzibar</li><li>Morogoro</li><li>Tanga</li><li>Moshi</li><li>Kigoma</li><li>Mtwara</li><li>+ all other regions</li>
           </ul>
         </div>
@@ -318,6 +376,7 @@
     </div>
     <div class="wrap h-foot__bottom">
       <span>© <span id="year"></span> Duka Bora · Tanzania</span>
+      <div class="lang" data-country-switch></div>
       <span>💵 Pay on delivery · 🚚 Free shipping</span>
     </div>
   </footer>
