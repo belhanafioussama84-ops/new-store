@@ -16,6 +16,29 @@
 <!-- Home page. Products, prices and photos come from js/products.js (filled by js/app.js). -->
 <body class="home">
 
+  <!-- Welcome screen: the first time, the visitor picks a country before seeing the shop (js/common.js) -->
+  <div class="gate" data-country-gate hidden role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <div class="gate__box">
+      <img class="gate__logo" src="images/logo/logo.png" alt="" onerror="this.remove()" />
+      <p class="gate__brand">Duka<em>Bora</em></p>
+      <h1 class="gate__title" id="gateTitle">Where should we deliver?</h1>
+      <p class="gate__text">Choose your country to see prices in your currency.</p>
+      <div class="gate__choices">
+        <button type="button" class="gate__choice" data-set-country="tz">
+          <svg class="gate__flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg>
+          <strong>Tanzania</strong>
+          <small>Prices in TSh · Kiswahili &amp; English</small>
+        </button>
+        <button type="button" class="gate__choice" data-set-country="zm">
+          <svg class="gate__flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg>
+          <strong>Zambia</strong>
+          <small>Prices in Kwacha (K) · English</small>
+        </button>
+      </div>
+      <p class="gate__note">🚚 Free delivery · 💵 Pay on delivery</p>
+    </div>
+  </div>
+
   <!-- Country choice (Tanzania / Zambia), filled by js/common.js -->
   <div class="country-bar">
     <div class="wrap country-bar__inner"><span>Choose your country:</span><div class="lang" data-country-switch></div></div>

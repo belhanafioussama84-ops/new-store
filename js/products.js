@@ -28,8 +28,8 @@ const STORE = {
    COUNTRIES — the same site sells in Tanzania and Zambia.
    - The visitor's country: ?country=zm in the link (use it in Zambian ads,
      e.g. product.html?id=reward-watch&country=zm), else the one chosen before
-     with the buttons at the top of the page, else Zambia for a phone set to
-     Zambian time, else Tanzania.
+     with the buttons at the top of the page or on the welcome screen of the
+     home page, else Zambia for a phone set to Zambian time, else Tanzania.
    - Zambian prices: the "zm" part of each product. A product without it is not
      shown in Zambia.
    - Texts that change in Zambia: ZM in js/i18n.js. HTML shown in one country
@@ -50,7 +50,8 @@ const COUNTRIES = {
   },
 };
 
-const COUNTRY = (() => {
+// COUNTRY_CHOSEN: false when the visitor has not picked a country yet (the home page then asks).
+const { COUNTRY, COUNTRY_CHOSEN } = (() => {
   const KEY = "dukabora_country";
   const asked = new URLSearchParams(location.search).get("country");
   let saved = null;
@@ -60,7 +61,11 @@ const COUNTRY = (() => {
   } catch { /* storage unavailable */ }
   let zone = "";
   try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch { /* old browser */ }
-  return COUNTRIES[asked] || COUNTRIES[saved] || (zone === "Africa/Lusaka" ? COUNTRIES.zm : COUNTRIES.tz);
+  const chosen = COUNTRIES[asked] || COUNTRIES[saved];
+  return {
+    COUNTRY: chosen || (zone === "Africa/Lusaka" ? COUNTRIES.zm : COUNTRIES.tz),
+    COUNTRY_CHOSEN: !!chosen,
+  };
 })();
 
 /* ==========================================================

@@ -150,9 +150,23 @@ const Shop = (() => {
     box.innerHTML = Object.values(COUNTRIES).map((c) =>
       `<button type="button" data-set-country="${c.id}" aria-pressed="${c === COUNTRY}"${c === COUNTRY ? ' class="is-active"' : ""}>${flags[c.id] || ""} ${T(c.name)}</button>`).join("");
   });
+  // Home page welcome screen: shown until the visitor picks a country.
+  const gate = document.querySelector("[data-country-gate]");
+  if (gate && !COUNTRY_CHOSEN) {
+    gate.hidden = false;
+    document.documentElement.classList.add("has-gate");
+  }
+
   document.addEventListener("click", (e) => {
     const c = e.target.closest("[data-set-country]")?.dataset.setCountry;
-    if (!c || c === COUNTRY.id) return;
+    if (!c) return;
+    if (c === COUNTRY.id) {
+      // Already showing that country: just remember the choice and close the welcome screen.
+      try { localStorage.setItem("dukabora_country", c); } catch { /* storage unavailable */ }
+      if (gate) gate.hidden = true;
+      document.documentElement.classList.remove("has-gate");
+      return;
+    }
     const url = new URL(location.href);
     url.hash = "";
     url.searchParams.delete("country");
