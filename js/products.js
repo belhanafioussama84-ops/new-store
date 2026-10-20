@@ -1,4 +1,4 @@
-/* Live site: https://dukabora-tz.belhanafioussama84.workers.dev/ (Cloudflare publishes every push to GitHub main; copy on GitHub Pages) */
+/* Live site: https://dukaabora.store/ (also https://dukabora-tz.belhanafioussama84.workers.dev/; Cloudflare publishes every push to GitHub main; copy on GitHub Pages) */
 /* ==========================================================
    STORE SETTINGS — edit these to match your business
    ========================================================== */
