@@ -370,10 +370,10 @@ const ZM = {
   "Karibu · Delivering all over Tanzania": "Welcome · Delivering all over Zambia",
   "✓ Lipa ukipokea": "✓ Pay on delivery",
   "💵 Lipa ukipokea": "💵 Pay on delivery",
-  "TSh 0": "K 0",
+  "TSh 0": "KW 0",
   "The agent brings the parcel to your door, anywhere in Tanzania.": "The agent brings the parcel to your door, anywhere in Zambia.",
-  "🚚 TSh 0 delivery": "🚚 K 0 delivery",
-  "💵 TSh 0 upfront": "💵 K 0 upfront",
+  "🚚 TSh 0 delivery": "🚚 KW 0 delivery",
+  "💵 TSh 0 upfront": "💵 KW 0 upfront",
   "· Uaminifu": "",
   "· Ubora": "",
   "· Huduma": "",
@@ -387,7 +387,7 @@ const ZM = {
   "e.g. Juma Hassan": "e.g. Mwila Banda",
   "+255 7XX XXX XXX": "+260 9XX XXX XXX",
   "e.g. Dar es Salaam, Kinondoni, Mikocheni B": "e.g. Lusaka, Kabulonga, Leopards Hill Road",
-  "TSh 0 now": "K 0 now",
+  "TSh 0 now": "KW 0 now",
   "Enter a valid Tanzanian number, e.g. 712 345 678.": "Enter a valid Zambian number, e.g. 971 234 567.",
 
   /* ---------- Thank-you page ---------- */

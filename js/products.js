@@ -43,7 +43,7 @@ const COUNTRIES = {
     fastCity: "dar", // same / next day delivery
   },
   zm: {
-    id: "zm", name: "Zambia", currency: "K", currencyCode: "ZMW",
+    id: "zm", name: "Zambia", currency: "KW", currencyCode: "ZMW",
     dial: "260", phoneStart: "79", // mobile numbers: 9XX / 7XX XXX XXX
     languages: ["en"],
     fastCity: "lusaka",
