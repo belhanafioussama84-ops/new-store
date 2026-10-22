@@ -439,3 +439,24 @@ p { margin: 0 0 1em; }
   .top .brand small { display: none; } /* room for the SW / EN buttons */
   .h-top__btn { white-space: nowrap; }
 }
+
+/* ---------- Product page polish ---------- */
+/* Story sections numbered 01, 02… in gold italic above each title */
+#story { counter-reset: story; }
+#story .about { counter-increment: story; }
+#story .about__text::before { content: counter(story, decimal-leading-zero); display: block; margin-bottom: .35rem; font-family: var(--display); font-style: italic; font-size: 1.6rem; font-weight: 600; line-height: 1; color: var(--gold); }
+.real h2 span { font-style: italic; }
+
+/* FAQ: + / − on the right instead of the small triangle */
+.faq summary { position: relative; padding-right: 3rem; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; top: 50%; right: 1rem; display: grid; place-items: center; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 1.1rem; font-weight: 700; line-height: 1; transition: transform .2s; }
+.faq details[open] { border-color: var(--accent); box-shadow: 0 12px 28px -22px rgba(31, 77, 58, .6); }
+.faq details[open] summary::after { content: "−"; background: var(--accent); color: #fff; }
+
+/* Real photos: bigger and swipeable on phones */
+@media (max-width: 600px) {
+  .real__grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: .6rem; margin: 0 -16px; padding: 0 16px .5rem; scrollbar-width: none; }
+  .real__grid::-webkit-scrollbar { display: none; }
+  .real__grid img { flex: none; width: 72%; scroll-snap-align: center; }
+}
