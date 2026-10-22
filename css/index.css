@@ -52,7 +52,7 @@
 .h-hero::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px); background-size: 22px 22px; mask-image: linear-gradient(180deg, #000, transparent 85%); pointer-events: none; }
 .h-hero__inner { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; padding-top: 4.5rem; padding-bottom: 6.5rem; }
 .h-kicker { display: inline-flex; align-items: center; gap: .55rem; margin: 0 0 1.4rem; padding: .45rem 1rem; border: 1px solid rgba(243, 195, 107, .4); border-radius: 999px; background: rgba(255, 255, 255, .06); color: var(--gold-2); font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-.h-hero h1 { margin-bottom: 1.25rem; font-size: clamp(2.6rem, 5.4vw, 4.2rem); font-weight: 900; line-height: 1.02; letter-spacing: -.03em; }
+.h-hero h1 { margin-bottom: 1.25rem; font-size: clamp(2.6rem, 5.4vw, 4.2rem); font-weight: 700; line-height: 1.05; letter-spacing: -.015em; }
 .h-hero h1 span { color: var(--gold-2); background: linear-gradient(90deg, var(--gold-2), var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .h-hero__text { max-width: 500px; margin-bottom: 2rem; color: #cfe2d8; font-size: 1.15rem; }
 .h-hero__btns { display: flex; flex-wrap: wrap; gap: .75rem; }
@@ -105,7 +105,7 @@
 /* ---------- Sections ---------- */
 .h-section { padding-top: 5rem; padding-bottom: 5rem; }
 .h-band { background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.h-title { margin-bottom: 2.75rem; text-align: center; font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 900; letter-spacing: -.025em; line-height: 1.08; }
+.h-title { margin-bottom: 2.75rem; text-align: center; font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 700; letter-spacing: -.01em; line-height: 1.08; }
 .h-title span { color: var(--accent); }
 .h-title span::after { content: ""; display: block; width: 70px; height: 4px; margin: .7rem auto 0; border-radius: 4px; background: var(--gold); }
 
@@ -174,7 +174,7 @@
 
 /* ---------- Delivery ---------- */
 .h-delivery { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end; }
-.h-delivery__text h2 { margin-bottom: 1.4rem; font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 900; letter-spacing: -.025em; line-height: 1.08; }
+.h-delivery__text h2 { margin-bottom: 1.4rem; font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 700; letter-spacing: -.01em; line-height: 1.08; }
 .h-delivery__text h2 span { color: var(--accent); }
 .h-cities { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.75rem; padding: 0; list-style: none; }
 .h-cities li { padding: .4rem .85rem; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: .88rem; font-weight: 600; }
@@ -188,7 +188,7 @@
 .h-guarantee { display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center; padding: 2.25rem 2.5rem; border: 2px solid var(--gold); border-radius: 28px; background: radial-gradient(500px 220px at 0% 0%, rgba(230, 163, 61, .16), transparent 70%), #fffaf0; }
 .h-guarantee__seal { display: grid; place-items: center; align-content: center; width: 112px; height: 112px; border-radius: 50%; background: var(--accent); color: var(--gold-2); font-size: 1.7rem; font-weight: 900; line-height: 1; box-shadow: 0 0 0 6px #fffaf0, 0 0 0 8px var(--gold); }
 .h-guarantee__seal small { margin-top: .3rem; color: #fff; font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-.h-guarantee h2 { margin-bottom: .4rem; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; letter-spacing: -.03em; }
+.h-guarantee h2 { margin-bottom: .4rem; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; letter-spacing: -.01em; }
 .h-guarantee h2 span { color: var(--accent); }
 .h-guarantee p { margin: 0; color: var(--muted); }
 
@@ -196,7 +196,7 @@
 .home .faq .label { margin-bottom: .9rem; }
 
 .h-final { margin-bottom: 4.5rem; padding: 3.5rem 1.5rem; border-radius: 30px; text-align: center; color: #fff; background: radial-gradient(600px 260px at 50% 0%, rgba(230, 163, 61, .3), transparent 70%), linear-gradient(160deg, var(--accent), var(--deep)); }
-.h-final h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -.025em; }
+.h-final h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -.01em; }
 .h-final p { margin-bottom: 1.75rem; color: #cfe2d8; }
 .h-final .btn { padding: 1rem 2.25rem; font-size: 1.05rem; }
 
@@ -244,7 +244,11 @@
   .h-stats li:nth-child(n + 3) { border-top: 1px solid var(--line); }
   .h-section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
   .h-title { margin-bottom: 2rem; }
-  .h-steps { grid-template-columns: 1fr; }
+  /* Steps on phones: number on the left, text on the right (shorter page) */
+  .h-steps { grid-template-columns: 1fr; gap: .75rem; }
+  .h-steps li { display: grid; grid-template-columns: 40px 1fr; column-gap: 1rem; padding: 1.1rem 1.1rem; }
+  .h-steps__n { grid-row: span 3; margin-bottom: 0; }
+  .h-steps p { margin-bottom: .45rem; }
   .h-promises { grid-template-columns: 1fr; }
   .h-compare th, .h-compare td { padding: .8rem .65rem; font-size: .84rem; }
   .h-guarantee { padding: 2rem 1.25rem; }
@@ -252,3 +256,8 @@
   .h-final { padding: 2.75rem 1.25rem; }
   .h-foot__grid { padding-top: 2.75rem; }
 }
+
+/* ---------- Title details in Fraunces: gold / green words in italic, big numbers ---------- */
+.h-hero h1 span, .h-title span, .h-delivery__text h2 span, .h-guarantee h2 span, .t-hero h1 span { font-style: italic; }
+.h-promises__n, .h-guarantee__seal, .h-steps__n { font-family: var(--display); }
+.gate__brand { font-family: var(--display); }
