@@ -71,7 +71,8 @@ const { COUNTRY, COUNTRY_CHOSEN } = (() => {
 /* ==========================================================
    PRODUCTS — add, remove or edit products here.
    - price / oldPrice / offers are in Tanzanian Shillings (TZS);
-     zm: { price, oldPrice, offers } gives the same in Zambian Kwacha (ZMW)
+     zm: { price, oldPrice, offers } gives the same in Zambian Kwacha (ZMW);
+     zm.sectionImages: other photos for the "sections" in Zambia (same order)
    - image: put photos in the /images folder (square, ~800x800).
      If an image is missing, a styled placeholder is shown instead.
    - Every product gets its own landing page: product.html?id=<id>
@@ -145,6 +146,8 @@ const PRODUCTS = [
         { qty: 2, price: 2499, tag: "Best value" },
         { qty: 3, price: 3899 },
       ],
+      // Photos made for Zambia (the -tz ones show a Tanzanian newspaper and flag), same order as "sections"
+      sectionImages: ["images/rw2.webp", "images/rw3.webp", "images/rw4.webp", "images/rw5.webp"],
     },
     description: "Elegant, durable watch with a premium finish. Perfect for everyday wear or as a gift.",
     // specs: {
@@ -251,7 +254,11 @@ const PRODUCTS = [
 if (COUNTRY.id !== "tz") {
   for (let i = PRODUCTS.length - 1; i >= 0; i--) {
     const local = PRODUCTS[i][COUNTRY.id];
-    if (local) Object.assign(PRODUCTS[i], local);
-    else PRODUCTS.splice(i, 1);
+    if (!local) { PRODUCTS.splice(i, 1); continue; }
+    const { sectionImages, ...rest } = local;
+    Object.assign(PRODUCTS[i], rest);
+    if (sectionImages) {
+      PRODUCTS[i].sections = PRODUCTS[i].sections.map((s, n) => ({ ...s, image: sectionImages[n] || s.image }));
+    }
   }
 }
