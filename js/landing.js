@@ -93,6 +93,13 @@
       </div>
     </section>`).join("");
 
+  /* ---------- Real photos of the product (taken in stock) ---------- */
+  if (p.realPhotos?.length) {
+    $("#realGrid").innerHTML = p.realPhotos.map((src) =>
+      `<img src="${esc(src)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()" />`).join("");
+    $("#real").hidden = false;
+  }
+
   /* ---------- Offers ---------- */
   // Small product photos, one per piece (max 3), shown in each offer
   const thumbs = (qty) => `<span class="offer__pics">${

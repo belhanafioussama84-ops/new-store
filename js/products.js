@@ -108,6 +108,8 @@ const PRODUCTS = [
     image: "images/rw1.webp",
     // Photos at the top of the product page (‹ › arrows to go from one to the next)
     images: ["images/rw1.webp", "images/rw-front.webp"],
+    // Real photos of the product in stock (section "What you receive" under the photos)
+    realPhotos: ["images/rw-real-1.webp", "images/rw-real-2.webp", "images/rw-real-3.webp"],
     // Photos shown under the order form, each with its explanation
     sections: [
       {

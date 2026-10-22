@@ -204,6 +204,11 @@ const SW = {
   "to confirm": "kuthibitisha",
   "💬 Order on WhatsApp": "💬 Agiza kwa WhatsApp",
   "Back to shop": "Rudi dukani",
+  "Real photos": "Picha halisi",
+  "What you": "Unachokipokea",
+  "receive": "hasa",
+  "Photos of the real product, taken in our stock before delivery. What you see is what you receive.":
+    "Picha za bidhaa halisi, zimepigwa kwenye stoo yetu kabla ya kusafirishwa. Unachokiona ndicho utakachopokea.",
   "Save {amount}": "Okoa {amount}",
   "{price} each": "{price} kila moja",
   "Perfect for you": "Inakufaa wewe",
