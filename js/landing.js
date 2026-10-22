@@ -17,7 +17,8 @@
     return;
   }
 
-  const images = p.images?.length ? p.images : [p.image];
+  // The real photos (taken in stock) also go in the top gallery, after the product photos
+  const images = [...(p.images?.length ? p.images : [p.image]), ...(p.realPhotos || [])];
   const unitFull = p.oldPrice || p.price; // price per item before any discount
   // Bundle offers: [{ qty, price, tag? }]. Without them there is a single "1 piece" offer.
   const offers = p.offers?.length ? p.offers : [{ qty: 1, price: p.price }];
@@ -35,6 +36,10 @@
     $("#pDesc").textContent = T(p.description);
     $("#pDesc").hidden = false;
   }
+  // Extra badges for this product only, e.g. "🎁 Gift box included"
+  (p.perks || []).forEach((text) => {
+    $(".buy__perks").insertAdjacentHTML("beforeend", `<li>${esc(T(text))}</li>`);
+  });
 
   /* ---------- Gallery ---------- */
   let current = 0;

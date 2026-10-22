@@ -130,6 +130,8 @@ p { margin: 0 0 1em; }
 .recap .recap__total { margin-top: .4rem; padding-top: .6rem; border-top: 1px dashed rgba(31, 77, 58, .3); font-weight: 700; }
 .recap__total strong { font-size: 1.1rem; color: var(--accent); }
 .order__note { margin: .7rem 0 0; text-align: center; font-size: .85rem; color: var(--muted); }
+.order__trust { display: flex; justify-content: center; flex-wrap: wrap; gap: .3rem 1rem; margin: .6rem 0 0; padding: 0; list-style: none; font-size: .8rem; font-weight: 600; color: var(--accent); }
+.buy__check { margin: -.25rem 0 1rem; font-size: .95rem; font-weight: 700; color: var(--accent); }
 
 /* "Still thinking?" block at the bottom */
 .closing { max-width: 760px; margin-bottom: 3rem; padding: 2.25rem 1.5rem; border: 2px solid var(--gold); border-radius: var(--radius); background: #fff; text-align: center; }

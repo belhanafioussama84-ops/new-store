@@ -205,6 +205,9 @@ const SW = {
   "💬 Order on WhatsApp": "💬 Agiza kwa WhatsApp",
   "Back to shop": "Rudi dukani",
   "Real photos": "Picha halisi",
+  "✅ Open and check your order before you pay": "✅ Fungua na ukague oda yako kabla ya kulipa",
+  "🔒 No payment now": "🔒 Hakuna malipo sasa",
+  "🎁 Gift box included": "🎁 Inakuja na boksi la zawadi",
   "What you": "Unachokipokea",
   "receive": "hasa",
   "Photos of the real product, taken in our stock before delivery. What you see is what you receive.":

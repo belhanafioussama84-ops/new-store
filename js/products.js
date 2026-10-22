@@ -110,6 +110,8 @@ const PRODUCTS = [
     images: ["images/rw1.webp", "images/rw-front.webp"],
     // Real photos of the product in stock (section "What you receive" under the photos)
     realPhotos: ["images/rw-real-1.webp", "images/rw-real-2.webp", "images/rw-real-3.webp"],
+    // Extra badges next to "Free delivery" etc. on this product's page
+    perks: ["🎁 Gift box included"],
     // Photos shown under the order form, each with its explanation
     sections: [
       {
