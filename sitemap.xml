@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Pages Google should know about. Add a line for every new product (product?id=<id> from js/products.js). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://dukaabora.store/</loc></url>
+  <url><loc>https://dukaabora.store/product?id=reward-watch</loc></url>
+  <url><loc>https://dukaabora.store/product?id=car-nano-spray</loc></url>
+</urlset>
