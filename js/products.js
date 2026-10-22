@@ -189,7 +189,7 @@ const PRODUCTS = [
     // Photos shown under the order form, each with its explanation
     sections: [
       {
-        image: "images/cns-before-after.gif",
+        image: "images/cns-before-after.mp4",
         title: "See the difference in seconds",
         text: "Dull paint full of swirl marks? Spray, wipe, and the shine comes back. Fine scratches and marks become much less visible.",
         list: ["Hides swirl marks and fine scratches", "Brings back the deep colour of the paint", "Results you see straight away"],

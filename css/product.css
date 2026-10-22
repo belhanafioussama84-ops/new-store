@@ -219,7 +219,7 @@ p { margin: 0 0 1em; }
 .about { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; padding-top: 3rem; padding-bottom: 3rem; border-top: 1px solid var(--line); }
 .about__media { max-width: 460px; border-radius: var(--radius); overflow: hidden; background: #fff; }
 
-.about__media img { width: 100%; }
+.about__media img, .about__media video { display: block; width: 100%; height: auto; }
 /* Photo on the left, then on the right, and so on */
 #story .about:nth-child(even) .about__media { order: 2; justify-self: end; }
 .about--text { grid-template-columns: minmax(0, 720px); justify-content: center; }

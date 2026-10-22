@@ -77,9 +77,14 @@
     list: L.showcaseList,
   }];
   // A section without "image" is shown as text only. Swahili texts: js/i18n.js
+  // An .mp4 "image" plays as a silent looping video (much lighter than a GIF);
+  // the .jpg with the same name is shown while it loads.
+  const media = (s) => /\.mp4$/i.test(s.image)
+    ? `<video src="${esc(s.image)}" poster="${esc(s.image.replace(/\.mp4$/i, ".jpg"))}" autoplay muted loop playsinline preload="metadata" aria-label="${esc(T(s.title))}"></video>`
+    : `<img src="${esc(s.image)}" alt="${esc(T(s.title))}" loading="lazy" onerror="this.remove()" />`;
   $("#story").innerHTML = sections.map((s) => `
     <section class="wrap about${s.image ? "" : " about--text"}">
-      ${s.image ? `<div class="about__media"><img src="${esc(s.image)}" alt="${esc(T(s.title))}" loading="lazy" onerror="this.remove()" /></div>` : ""}
+      ${s.image ? `<div class="about__media">${media(s)}</div>` : ""}
       <div class="about__text">
         <h2>${esc(T(s.title))}</h2>
         <p>${esc(T(s.text))}</p>
