@@ -1,4 +1,9 @@
-/* Live site: https://dukaabora.store/ (also https://dukabora-tz.belhanafioussama84.workers.dev/; Cloudflare publishes every push to GitHub main; copy on GitHub Pages) */
+/* Live site: https://dukaabora.store/ (Cloudflare publishes every push to GitHub main; copies on
+   dukabora-tz.belhanafioussama84.workers.dev and GitHub Pages send visitors to dukaabora.store) */
+// dukaabora.store is the official address: old links to the copies open the same page there.
+if (/\.workers\.dev$|\.github\.io$/.test(location.hostname)) {
+  location.replace("https://dukaabora.store" + location.pathname.replace(/^\/new-store/, "") + location.search + location.hash);
+}
 /* ==========================================================
    STORE SETTINGS — edit these to match your business
    ========================================================== */
