@@ -12,7 +12,7 @@
  *     Click Deploy, allow the permissions, and copy the "Web app URL" (ends with /exec).
  *  4. Paste that URL in js/products.js → STORE.ordersUrl.
  *
- * Every order then appears as a new row in the "Orders" tab.
+ * Every order then appears as a new row in the "Orders" tab (Lebanon: the "Orders Lebanon" tab).
  * If you change this code later: Deploy → Manage deployments → edit → Version: New version → Deploy
  * (the URL stays the same).
  *
@@ -29,6 +29,9 @@
  */
 
 const SHEET_NAME = "Orders";
+// Countries whose orders go to their own tab (created automatically at the first order).
+// Everything else (Tanzania, Zambia) goes to SHEET_NAME.
+const COUNTRY_SHEETS = { Lebanon: "Orders Lebanon" };
 // Column order of the sheet = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
 // PAYS (Tanzania / Zambia / Lebanon, last column) is not in the Simon Express table: PRIX is in TSh
@@ -48,7 +51,7 @@ function doPost(e) {
   lock.waitLock(10000); // two orders at the same moment must not get the same code
   try {
     const o = JSON.parse(e.postData.contents);
-    const sheet = getOrdersSheet_();
+    const sheet = getOrdersSheet_(COUNTRY_SHEETS[o.country]);
     const code = nextCode_(sheet);
     sheet.appendRow([
       code,
@@ -78,9 +81,11 @@ function doGet() {
   return json_({ ok: true, message: "Duka Bora orders endpoint is running." });
 }
 
-function getOrdersSheet_() {
+// The tab named `name` (default: the main "Orders" tab), created with its headers if missing.
+// Each tab numbers its own CODE SUIVI.
+function getOrdersSheet_(name = SHEET_NAME) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+  const sheet = ss.getSheetByName(name) || ss.insertSheet(name);
   const header = sheet.getRange(1, 1, 1, HEADERS.length);
   // Also replaces the headers of a sheet made with the old column names.
   if (header.getValues()[0].join("|") !== HEADERS.join("|")) {
