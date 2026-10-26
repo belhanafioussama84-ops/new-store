@@ -5,3 +5,4 @@ google-sheet
 README.md
 wrangler.jsonc
 .assetsignore
+.wrangler
