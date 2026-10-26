@@ -31,8 +31,8 @@
 const SHEET_NAME = "Orders";
 // Column order of the sheet = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
-// PAYS (Tanzania / Zambia, last column) is not in the Simon Express table: PRIX is in TSh
-// for Tanzania and in Kwacha for Zambia. Delete that column before importing if Simon Express refuses it.
+// PAYS (Tanzania / Zambia / Lebanon, last column) is not in the Simon Express table: PRIX is in TSh
+// for Tanzania, in Kwacha for Zambia and in US dollars for Lebanon. Delete that column before importing if Simon Express refuses it.
 const HEADERS = [
   "CODE SUIVI", "DESTINATAIRE", "TELEPHONE", "ADRESSE", "PRIX", "VILLE",
   "PRODUIT", "REF", "QTY", "OUVRIR", "REMPLACER", "PAYS",
@@ -100,18 +100,23 @@ function nextCode_(sheet) {
 }
 
 // "+255 767967779" → "0767967779" (the local format Simon Express uses), same for Zambia (+260).
-// The leading ' keeps it as text so Sheets does not drop the 0.
+// Lebanon stays "+961 71234567" (Lebanese mobile numbers are not written with a 0).
+// The leading ' keeps it as text so Sheets does not drop the 0 or the +.
 function localPhone_(v) {
-  const digits = String(v == null ? "" : v).replace(/\D/g, "").replace(/^(255|260)/, "").replace(/^0/, "");
+  const s = String(v == null ? "" : v);
+  if (/^\+?961/.test(s.trim())) return "'" + s.trim();
+  const digits = s.replace(/\D/g, "").replace(/^(255|260)/, "").replace(/^0/, "");
   return digits ? "'0" + digits : "";
 }
+
+const FLAGS_ = { Tanzania: "🇹🇿", Zambia: "🇿🇲", Lebanon: "🇱🇧" };
 
 // Sends the new order to your Telegram. A failure here never loses the order (the row is already saved).
 function notifyTelegram_(code, o) {
   if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return;
   try {
     sendTelegram_([
-      "🛒 New order #" + code + (o.country === "Zambia" ? " 🇿🇲 Zambia" : " 🇹🇿 Tanzania"),
+      "🛒 New order #" + code + " " + (FLAGS_[o.country || "Tanzania"] || "") + " " + (o.country || "Tanzania"),
       o.product.name + " × " + (Number(o.product.qty) || 1),
       "💰 " + (o.currency || "TSh") + " " + (Number(o.total) || 0).toLocaleString("en-US"),
       "👤 " + o.customer.fullName,

@@ -30,30 +30,41 @@ const STORE = {
 };
 
 /* ==========================================================
-   COUNTRIES — the same site sells in Tanzania and Zambia.
-   - The visitor's country: ?country=zm in the link (use it in Zambian ads,
-     e.g. product.html?id=reward-watch&country=zm), else the one chosen before
-     with the buttons at the top of the page or on the welcome screen of the
-     home page, else Zambia for a phone set to Zambian time, else Tanzania.
-   - Zambian prices: the "zm" part of each product. A product without it is not
-     shown in Zambia.
-   - Texts that change in Zambia: ZM in js/i18n.js. HTML shown in one country
-     only: data-country="tz" or data-country="zm".
+   COUNTRIES — the same site sells in Tanzania, Zambia and Lebanon.
+   - The visitor's country: ?country=zm or ?country=lb in the link (use it in
+     Zambian / Lebanese ads, e.g. product.html?id=reward-watch&country=lb), else
+     the one chosen before with the buttons at the top of the page or on the
+     welcome screen of the home page, else the country of the phone's time
+     zone (Zambia, Lebanon), else Tanzania.
+   - Local prices: the "zm" / "lb" part of each product. A product without it is
+     not shown in that country.
+   - Texts that change: ZM and LB in js/i18n.js. HTML shown in one country
+     only: data-country="tz", "zm" or "lb".
+   - Lebanon has its own colours (red, white and cedar green): see
+     :root[data-country="lb"] at the end of css/product.css.
    ========================================================== */
 const COUNTRIES = {
   tz: {
     id: "tz", name: "Tanzania", currency: "TSh", currencyCode: "TZS",
-    dial: "255", phoneStart: "67", // mobile numbers: 6XX / 7XX XXX XXX
+    dial: "255", phone: /^[67]\d{8}$/, // mobile numbers: 6XX / 7XX XXX XXX
     languages: ["sw", "en"],
     fastCity: "dar", // same / next day delivery
   },
   zm: {
     id: "zm", name: "Zambia", currency: "KW", currencyCode: "ZMW",
-    dial: "260", phoneStart: "79", // mobile numbers: 9XX / 7XX XXX XXX
+    dial: "260", phone: /^[79]\d{8}$/, // mobile numbers: 9XX / 7XX XXX XXX
     languages: ["en"],
     fastCity: "lusaka",
   },
+  lb: {
+    id: "lb", name: "Lebanon", currency: "$", currencyCode: "USD",
+    dial: "961", phone: /^(3\d{6}|(7\d|8[16])\d{6})$/, // mobile numbers: 3 XXX XXX / 7X XXX XXX / 81 XXX XXX
+    languages: ["en"],
+    fastCity: "beirut",
+  },
 };
+// Phones set to these time zones get that country until the visitor picks one.
+const ZONES = { "Africa/Lusaka": "zm", "Asia/Beirut": "lb" };
 
 // COUNTRY_CHOSEN: false when the visitor has not picked a country yet (the home page then asks).
 const { COUNTRY, COUNTRY_CHOSEN } = (() => {
@@ -68,16 +79,20 @@ const { COUNTRY, COUNTRY_CHOSEN } = (() => {
   try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch { /* old browser */ }
   const chosen = COUNTRIES[asked] || COUNTRIES[saved];
   return {
-    COUNTRY: chosen || (zone === "Africa/Lusaka" ? COUNTRIES.zm : COUNTRIES.tz),
+    COUNTRY: chosen || COUNTRIES[ZONES[zone]] || COUNTRIES.tz,
     COUNTRY_CHOSEN: !!chosen,
   };
 })();
+// Country colours (css/product.css). The <head> of each page sets it early too, so Lebanon doesn't flash green.
+document.documentElement.dataset.country = COUNTRY.id;
+if (COUNTRY.id === "lb") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#c8102e");
 
 /* ==========================================================
    PRODUCTS — add, remove or edit products here.
    - price / oldPrice / offers are in Tanzanian Shillings (TZS);
-     zm: { price, oldPrice, offers } gives the same in Zambian Kwacha (ZMW);
-     zm.sectionImages: other photos for the "sections" in Zambia (same order)
+     zm: { price, oldPrice, offers } gives the same in Zambian Kwacha (ZMW),
+     lb: { ... } in US dollars (USD) for Lebanon;
+     zm.sectionImages / lb.sectionImages: other photos for the "sections" there (same order)
    - image: put photos in the /images folder (square, ~800x800).
      If an image is missing, a styled placeholder is shown instead.
    - Every product gets its own landing page: product.html?id=<id>
@@ -156,6 +171,15 @@ const PRODUCTS = [
         { qty: 3, price: 3899 },
       ],
       // Photos made for Zambia (the -tz ones show a Tanzanian newspaper and flag), same order as "sections"
+      sectionImages: ["images/rw2.webp", "images/rw3.webp", "images/rw4.webp", "images/rw5.webp"],
+    },
+    lb: {
+      price: 39,
+      offers: [
+        { qty: 1, price: 39 },
+        { qty: 2, price: 69, tag: "Best value" },
+        { qty: 3, price: 95 },
+      ],
       sectionImages: ["images/rw2.webp", "images/rw3.webp", "images/rw4.webp", "images/rw5.webp"],
     },
     description: "Elegant, durable watch with a premium finish. Perfect for everyday wear or as a gift.",
@@ -249,6 +273,14 @@ const PRODUCTS = [
         { qty: 1, price: 579 },
         { qty: 2, price: 1059, tag: "Best value" },
         { qty: 3, price: 1479 },
+      ],
+    },
+    lb: {
+      price: 19,
+      offers: [
+        { qty: 1, price: 19 },
+        { qty: 2, price: 35, tag: "Best value" },
+        { qty: 3, price: 49 },
       ],
     },
     description: "Spray, wipe, and your car shines like new. This nano coating cleans without water, hides fine scratches and leaves a water-repellent layer that keeps rain, mud and dust off the paint.",

@@ -414,11 +414,65 @@ const ZM = {
   "Cars, motorcycles and bajaji": "Cars, motorcycles and minibuses",
 };
 
+/* ==========================================================
+   Lebanon (English only, prices in $): same idea as Zambia.
+   ========================================================== */
+const LB = {
+  /* ---------- Shared ---------- */
+  "🚚 Free delivery across Tanzania · Usafirishaji bure": "🚚 Free delivery across Lebanon",
+  "💵 Pay on delivery · Lipa ukipokea": "💵 Pay cash on delivery",
+  "Duka Bora · Tanzania": "Duka Bora · Lebanon",
+  "Quality products delivered to your door across Tanzania. You pay only when your order arrives.":
+    "Quality products delivered to your door across Lebanon. You pay only when your order arrives.",
+
+  /* ---------- Home page ---------- */
+  "Duka Bora · Fast Delivery Across Tanzania · Pay on Delivery": "Duka Bora · Fast Delivery Across Lebanon · Pay on Delivery",
+  "Karibu · Delivering all over Tanzania": "Welcome · Delivering all over Lebanon",
+  "✓ Lipa ukipokea": "✓ Pay on delivery",
+  "💵 Lipa ukipokea": "💵 Pay on delivery",
+  "TSh 0": "$0",
+  "The agent brings the parcel to your door, anywhere in Tanzania.": "The agent brings the parcel to your door, anywhere in Lebanon.",
+  "🚚 TSh 0 delivery": "🚚 $0 delivery",
+  "💵 TSh 0 upfront": "💵 $0 upfront",
+  "· Uaminifu": "",
+  "· Ubora": "",
+  "· Huduma": "",
+  "Habari Juma! 👋 We received your order. Our agent will call you today to confirm your address.":
+    "Hello Rami! 👋 We received your order. Our agent will call you today to confirm your address.",
+  "Asante! Can I check it before I pay?": "Thank you! Can I check it before I pay?",
+  "Everywhere in Tanzania.": "Everywhere in Lebanon.",
+  "Free delivery · Lipa ukipokea · We call to confirm": "Free delivery · Pay on delivery · We call to confirm",
+  "Major cities: 1–3 business days. Other areas: 3–7 days. We call or message you before delivery.":
+    "Beirut: same or next day. Other areas: 1–3 days. We call or message you before delivery.",
+
+  /* ---------- Product page ---------- */
+  "e.g. Juma Hassan": "e.g. Rami Haddad",
+  "+255 7XX XXX XXX": "+961 7X XXX XXX",
+  "e.g. Dar es Salaam, Kinondoni, Mikocheni B": "e.g. Beirut, Achrafieh, Sassine Street",
+  "TSh 0 now": "$0 now",
+  "Enter a valid Tanzanian number, e.g. 712 345 678.": "Enter a valid Lebanese number, e.g. 71 234 567.",
+
+  /* ---------- Thank-you page ---------- */
+  "Asante sana · Order confirmed": "Thank you · Order confirmed",
+  "Asante, {name}!": "Thank you, {name}!",
+  "I just ordered from Duka Bora 🇹🇿 Free delivery and you pay only when it arrives: {url}":
+    "I just ordered from Duka Bora 🇱🇧 Free delivery and you pay only when it arrives: {url}",
+
+  /* ---------- Products (js/products.js) ---------- */
+  "From the café to the market, from Dar es Salaam to Dodoma: a watch that matches your jeans as well as your suit.":
+    "From the café to the souk, from Beirut to Tripoli: a watch that matches your jeans as well as your suit.",
+  "Premium design, water-resistant and a great gift for men. Order now: free delivery across Tanzania and you pay only when it arrives.":
+    "Premium design, water-resistant and a great gift for men. Order now: free delivery across Lebanon and you pay only when it arrives.",
+  "Use it on the body, glass, mirrors, headlights, chrome and tyres. Cars, motorcycles, bajaji and more: the shine comes back like new.":
+    "Use it on the body, glass, mirrors, headlights, chrome and tyres. Cars, motorcycles, vans and more: the shine comes back like new.",
+  "Cars, motorcycles and bajaji": "Cars, motorcycles and vans",
+};
+
 const { LANG, T } = (() => {
   "use strict";
 
   const KEY = "dukabora_lang";
-  const LANGS = COUNTRY.languages; // Zambia: English only
+  const LANGS = COUNTRY.languages; // Zambia, Lebanon: English only
   const asked = new URLSearchParams(location.search).get("lang");
   let saved = null;
   try {
@@ -426,8 +480,8 @@ const { LANG, T } = (() => {
     saved = localStorage.getItem(KEY);
   } catch { /* storage unavailable */ }
   const LANG = [asked, saved].find((l) => LANGS.includes(l)) || LANGS[0];
-  // Swahili texts, or in Zambia the English texts adapted to Zambia
-  const DICT = LANG === "sw" ? SW : COUNTRY.id === "zm" ? ZM : null;
+  // Swahili texts, or in Zambia / Lebanon the English texts adapted to that country
+  const DICT = LANG === "sw" ? SW : { zm: ZM, lb: LB }[COUNTRY.id] || null;
 
   const T = (en, vars) => {
     let s = DICT && DICT[en] != null ? DICT[en] : en;
@@ -435,8 +489,8 @@ const { LANG, T } = (() => {
     return s;
   };
 
-  /* ---------- Parts of the page for one country only (data-country="tz" / "zm") ---------- */
-  document.querySelectorAll("[data-country]").forEach((el) => { if (el.dataset.country !== COUNTRY.id) el.remove(); });
+  /* ---------- Parts of the page for one country only (data-country="tz" / "zm" / "lb") ---------- */
+  document.querySelectorAll("body [data-country]").forEach((el) => { if (el.dataset.country !== COUNTRY.id) el.remove(); });
 
   /* ---------- Translate the page's own HTML (text written by JavaScript uses T) ---------- */
   if (DICT) {

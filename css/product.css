@@ -460,3 +460,37 @@ p { margin: 0 0 1em; }
   .real__grid::-webkit-scrollbar { display: none; }
   .real__grid img { flex: none; width: 72%; scroll-snap-align: center; }
 }
+
+/* ==========================================================
+   Lebanon colours: red and white like the flag, cedar green
+   instead of gold. <html data-country="lb"> is set by js/products.js.
+   ========================================================== */
+:root[data-country="lb"] {
+  --accent: #c8102e;
+  --accent-2: #e0343f;
+  --accent-soft: #fdecee;
+  --gold: #00a651;
+  --deep: #6e0a16;
+  --gold-2: #9fe5bd;
+}
+[data-country="lb"] .btn--gold,
+[data-country="lb"] .social a:hover { color: #fff; }
+[data-country="lb"] .btn--gold { box-shadow: 0 14px 30px -14px rgba(0, 166, 81, .9); }
+[data-country="lb"] .faq details[open] { box-shadow: 0 12px 28px -22px rgba(200, 16, 46, .6); }
+/* light text on the dark red parts (it is light green on the other countries' dark green) */
+[data-country="lb"] .gate__text, [data-country="lb"] .gate__choice small,
+[data-country="lb"] .h-hero__text, [data-country="lb"] .h-chips,
+[data-country="lb"] .tzm__head span, [data-country="lb"] .tzm__legend,
+[data-country="lb"] .h-promises p, [data-country="lb"] .h-final p,
+[data-country="lb"] .t-hero__text, [data-country="lb"] .t-meta small, [data-country="lb"] .t-share p,
+[data-country="lb"] .help p, [data-country="lb"] .foot { color: #f8dadd; }
+[data-country="lb"] .h-foot { color: #ecc3c7; }
+[data-country="lb"] .h-foot .brand small { color: #d99aa1; }
+[data-country="lb"] .gate { background: radial-gradient(circle at 50% 0%, #b3122a, var(--deep) 70%); }
+[data-country="lb"] .h-hero {
+  background:
+    radial-gradient(700px 420px at 82% 45%, rgba(0, 166, 81, .22), transparent 65%),
+    radial-gradient(600px 400px at 0% 100%, rgba(224, 52, 63, .45), transparent 70%),
+    linear-gradient(160deg, var(--accent) 0%, var(--deep) 75%);
+}
+[data-country="lb"] .tz-cats a:hover { background: #fadadd; }

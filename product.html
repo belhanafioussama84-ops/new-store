@@ -6,6 +6,8 @@
   <title>Duka Bora · Pay on Delivery</title>
   <meta name="description" content="Order online in Tanzania. Fast delivery and pay cash when your order arrives." />
   <meta name="theme-color" content="#1f4d3a" />
+  <!-- Lebanon has its own colours: set them before the page shows (same choice as js/products.js) -->
+  <script>try{var c=new URLSearchParams(location.search).get("country")||localStorage.getItem("dukabora_country");if(c==="lb"||(!c&&Intl.DateTimeFormat().resolvedOptions().timeZone==="Asia/Beirut"))document.documentElement.dataset.country="lb"}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600..800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -17,7 +19,7 @@
      Name, price, photos, offers and description come from js/products.js. -->
 <body>
 
-  <!-- Country choice (Tanzania / Zambia), filled by js/common.js -->
+  <!-- Country choice (Tanzania / Zambia / Lebanon), filled by js/common.js -->
   <div class="country-bar">
     <div class="wrap country-bar__inner"><span>Choose your country:</span><div class="lang" data-country-switch></div></div>
   </div>
@@ -45,7 +47,7 @@
       </a>
       <div class="top__end">
         <div class="lang" data-lang></div>
-        <span class="top__cod"><svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg> COD</span>
+        <span class="top__cod"><svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg><svg class="tz-flag" data-country="lb" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg> COD</span>
       </div>
     </div>
   </header>

@@ -17,7 +17,8 @@ const Shop = (() => {
   const MAX_QTY = 10;
 
   const $ = (sel) => document.querySelector(sel);
-  const fmt = (n) => `${COUNTRY.currency} ${Number(n).toLocaleString("en-US")}`;
+  // "TSh 1,000" and "KW 1,000", but "$39": a symbol sticks to the number
+  const fmt = (n) => `${COUNTRY.currency}${COUNTRY.currency.length > 1 ? " " : ""}${Number(n).toLocaleString("en-US")}`;
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
 
@@ -62,7 +63,7 @@ const Shop = (() => {
     const check = (el, cond, msg) => { if (!el) return; setError(el, cond ? "" : msg); if (!cond) ok = false; };
 
     check(form.fullName, form.fullName.value.trim().length >= 3, T("Please enter your full name."));
-    check(form.phone, new RegExp(`^[${COUNTRY.phoneStart}]\\d{8}$`).test(normalizePhone(form.phone.value)), T("Enter a valid Tanzanian number, e.g. 712 345 678."));
+    check(form.phone, COUNTRY.phone.test(normalizePhone(form.phone.value)), T("Enter a valid Tanzanian number, e.g. 712 345 678."));
     check(form.region, !!form.region?.value, T("Please choose your region."));
     check(form.city, form.city?.value.trim().length >= 2, T("Please enter your district or town."));
     check(form.address, form.address?.value.trim().length >= 5, T("Please enter your city and delivery address."));
@@ -143,6 +144,7 @@ const Shop = (() => {
   const flags = {
     tz: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg>`,
     zm: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg>`,
+    lb: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg>`,
   };
   document.querySelectorAll("[data-country-switch]").forEach((box) => {
     box.setAttribute("role", "group");

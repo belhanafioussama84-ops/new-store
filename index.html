@@ -4,10 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Duka Bora · Fast Delivery Across Tanzania · Pay on Delivery</title>
-  <meta name="description" content="Duka Bora (dukaabora): shop quality products online in Tanzania and Zambia. Free delivery to your door and pay cash when your order arrives." />
+  <meta name="description" content="Duka Bora (dukaabora): shop quality products online in Tanzania, Zambia and Lebanon. Free delivery to your door and pay cash when your order arrives." />
   <link rel="canonical" href="https://dukaabora.store/" />
   <meta name="facebook-domain-verification" content="qilscr32sx6clvu4s4x3e5hyfcysfq" />
   <meta name="theme-color" content="#1f4d3a" />
+  <!-- Lebanon has its own colours: set them before the page shows (same choice as js/products.js) -->
+  <script>try{var c=new URLSearchParams(location.search).get("country")||localStorage.getItem("dukabora_country");if(c==="lb"||(!c&&Intl.DateTimeFormat().resolvedOptions().timeZone==="Asia/Beirut"))document.documentElement.dataset.country="lb"}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600..800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -36,12 +38,17 @@
           <strong>Zambia</strong>
           <small>Prices in Kwacha (KW) · English</small>
         </button>
+        <button type="button" class="gate__choice" data-set-country="lb">
+          <svg class="gate__flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg>
+          <strong>Lebanon</strong>
+          <small>Prices in US dollars ($) · English</small>
+        </button>
       </div>
       <p class="gate__note">🚚 Free delivery · 💵 Pay on delivery</p>
     </div>
   </div>
 
-  <!-- Country choice (Tanzania / Zambia), filled by js/common.js -->
+  <!-- Country choice (Tanzania / Zambia / Lebanon), filled by js/common.js -->
   <div class="country-bar">
     <div class="wrap country-bar__inner"><span>Choose your country:</span><div class="lang" data-country-switch></div></div>
   </div>
@@ -83,7 +90,7 @@
       <div class="wrap h-hero__inner">
         <div class="h-hero__copy">
           <p class="h-kicker">
-            <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg>
+            <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg><svg class="tz-flag" data-country="lb" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg>
             Karibu · Delivering all over Tanzania
           </p>
           <h1>Your order first.<br /><span>Pay later.</span></h1>
@@ -104,7 +111,7 @@
         <div class="h-hero__visual">
           <div class="tzm" data-country="tz">
             <div class="tzm__head">
-              <strong>Karibu! <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg></strong>
+              <strong>Karibu! <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg><svg class="tz-flag" data-country="lb" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg></strong>
               <span>We deliver across Tanzania</span>
             </div>
             <svg class="tzm__map" viewBox="-6 -4 420 362" role="img" aria-label="Delivery map of Tanzania: Dar es Salaam same or next day; Arusha, Dodoma, Mwanza and Mbeya 1–3 days; Zanzibar 2–3 days; Kigoma and Mtwara 3–7 days">
@@ -215,6 +222,59 @@
               <li><i class="is-far"></i>Other areas: 3–7 days</li>
             </ul>
           </div>
+
+          <!-- Same map for Lebanon (x = (lon − 35.05) × 210 + 20, y = (34.72 − lat) × 210), routes from Beirut -->
+          <div class="tzm tzm--lb" data-country="lb">
+            <div class="tzm__head">
+              <strong>Welcome! <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg></strong>
+              <span>We deliver across Lebanon</span>
+            </div>
+            <svg class="tzm__map" viewBox="-6 -4 420 362" role="img" aria-label="Delivery map of Lebanon: Beirut same or next day; Tripoli, Sidon, Tyre and Zahle 1–2 days; Baalbek, Nabatieh and Hermel 2–3 days">
+              <text class="tzm__sea" x="4" y="122">MEDITERRANEAN<tspan x="4" dy="13">SEA</tspan></text>
+              <path class="tzm__land" d="M30.5 342.3 L49.4 304.5 L87.2 243.6 L104 207.9 L110.3 174.3 L139.7 155.4 L145 126 L148.1 98.7 L160.7 84 L181.7 58.8 L213.2 16.8 L288.8 6.3 L349.7 31.5 L335 67.2 L309.8 119.7 L299.3 161.7 L234.2 220.5 L190.1 273 L177.5 298.2 L131.3 302.4 L118.7 338.1 Z" />
+
+              <path id="l1" class="tzm__route" d="M110 174 Q150 110 182 59" />
+              <path id="l2" class="tzm__route" d="M110 174 Q220 80 301 69" />
+              <path id="l3" class="tzm__route" d="M110 174 Q190 130 264 151" />
+              <path id="l4" class="tzm__route" d="M110 174 Q155 165 198 183" />
+              <path id="l5" class="tzm__route" d="M110 174 Q85 205 87 244" />
+              <path id="l6" class="tzm__route" d="M110 174 Q80 250 49 305" />
+              <path id="l7" class="tzm__route" d="M110 174 Q125 230 110 281" />
+
+              <g class="tzm__dots">
+                <circle r="3.2"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#l1" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3.6s" begin="-.8s" repeatCount="indefinite"><mpath href="#l2" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3s" begin="-1.4s" repeatCount="indefinite"><mpath href="#l3" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.2s" begin="-.4s" repeatCount="indefinite"><mpath href="#l4" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.4s" begin="-2s" repeatCount="indefinite"><mpath href="#l5" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3.2s" begin="-1s" repeatCount="indefinite"><mpath href="#l6" /></animateMotion></circle>
+              </g>
+
+              <circle class="tzm__pulse" cx="110" cy="174" r="8" />
+              <circle class="tzm__pin tzm__pin--hub" cx="110" cy="174" r="7" />
+              <circle class="tzm__pin" cx="182" cy="59" r="4.5" />
+              <circle class="tzm__pin" cx="301" cy="69" r="4.5" />
+              <circle class="tzm__pin" cx="264" cy="151" r="4.5" />
+              <circle class="tzm__pin" cx="198" cy="183" r="4.5" />
+              <circle class="tzm__pin" cx="87" cy="244" r="4.5" />
+              <circle class="tzm__pin" cx="49" cy="305" r="4.5" />
+              <circle class="tzm__pin" cx="110" cy="281" r="3.5" />
+
+              <text x="100" y="182" text-anchor="end"><tspan class="tzm__city">Beirut</tspan><tspan x="100" dy="14">Same / next day</tspan></text>
+              <text x="176" y="40" text-anchor="end"><tspan class="tzm__city">Tripoli</tspan><tspan x="176" dy="14">1–2 days</tspan></text>
+              <text x="301" y="90" text-anchor="middle"><tspan class="tzm__city">Hermel</tspan><tspan x="301" dy="14">2–3 days</tspan></text>
+              <text x="272" y="148"><tspan class="tzm__city">Baalbek</tspan><tspan x="272" dy="14">2–3 days</tspan></text>
+              <text x="200" y="203" text-anchor="middle"><tspan class="tzm__city">Zahle</tspan><tspan x="200" dy="14">1–2 days</tspan></text>
+              <text x="78" y="244" text-anchor="end"><tspan class="tzm__city">Sidon</tspan><tspan x="78" dy="14">1–2 days</tspan></text>
+              <text x="42" y="312" text-anchor="end"><tspan class="tzm__city">Tyre</tspan><tspan x="42" dy="14">1–2 days</tspan></text>
+              <text x="120" y="286"><tspan class="tzm__city">Nabatieh</tspan><tspan x="120" dy="14">2–3 days</tspan></text>
+            </svg>
+            <ul class="tzm__legend">
+              <li><i class="is-hub"></i>Beirut: same / next day</li>
+              <li><i></i>Big cities: 1–2 days</li>
+              <li><i class="is-far"></i>Other areas: 2–3 days</li>
+            </ul>
+          </div>
           <span class="h-pill h-pill--1">💵 Lipa ukipokea</span>
           <span class="h-pill h-pill--2">🚚 Free delivery</span>
         </div>
@@ -305,6 +365,9 @@
           <h2>We come to you.<br /><span>Everywhere in Tanzania.</span></h2>
           <ul class="h-cities" data-country="zm">
             <li>Lusaka</li><li>Ndola</li><li>Kitwe</li><li>Kabwe</li><li>Livingstone</li><li>Chingola</li><li>Mufulira</li><li>Chipata</li><li>Kasama</li><li>Solwezi</li><li>Mongu</li><li>+ all other areas</li>
+          </ul>
+          <ul class="h-cities" data-country="lb">
+            <li>Beirut</li><li>Jounieh</li><li>Byblos</li><li>Tripoli</li><li>Batroun</li><li>Sidon</li><li>Tyre</li><li>Nabatieh</li><li>Zahle</li><li>Baalbek</li><li>Aley</li><li>+ all other areas</li>
           </ul>
           <ul class="h-cities" data-country="tz">
             <li>Dar es Salaam</li><li>Arusha</li><li>Dodoma</li><li>Mwanza</li><li>Mbeya</li><li>Zanzibar</li><li>Morogoro</li><li>Tanga</li><li>Moshi</li><li>Kigoma</li><li>Mtwara</li><li>+ all other regions</li>
