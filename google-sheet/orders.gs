@@ -23,6 +23,9 @@
  *     (allow the permissions). Copy the number shown in the log into TELEGRAM_CHAT_ID.
  *  4. Choose "testTelegram" → Run: your phone should ring. Then Deploy → Manage deployments →
  *     edit → Version: New version → Deploy.
+ *  The token and chat ID are then kept in the script's settings (Project Settings → Script
+ *  Properties): when you paste a new version of this file later, leave the two lines empty and
+ *  Telegram keeps working.
  *
  * Rows received before this format: in the Apps Script editor choose "fixOldRows" in the
  * function list at the top and click Run (once).
@@ -42,9 +45,18 @@ const HEADERS = [
 ];
 // First CODE SUIVI when the sheet has none yet; after that each order gets the last code + 1.
 const FIRST_CODE = 1;
-// Telegram message on every new order (setup above). Empty = no message.
+// Telegram message on every new order (setup above). Empty = the ones saved before are used
+// (none saved = no message). Never put them in the GitHub copy of this file: it is public.
 const TELEGRAM_TOKEN = "";
 const TELEGRAM_CHAT_ID = "";
+
+// The token and chat ID: the ones written above (saved for next time), else the saved ones.
+function telegram_() {
+  const props = PropertiesService.getScriptProperties();
+  if (TELEGRAM_TOKEN) props.setProperty("TELEGRAM_TOKEN", TELEGRAM_TOKEN);
+  if (TELEGRAM_CHAT_ID) props.setProperty("TELEGRAM_CHAT_ID", String(TELEGRAM_CHAT_ID));
+  return { token: props.getProperty("TELEGRAM_TOKEN") || "", chatId: props.getProperty("TELEGRAM_CHAT_ID") || "" };
+}
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -118,7 +130,8 @@ const FLAGS_ = { Tanzania: "🇹🇿", Zambia: "🇿🇲", Lebanon: "🇱🇧" }
 
 // Sends the new order to your Telegram. A failure here never loses the order (the row is already saved).
 function notifyTelegram_(code, o) {
-  if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return;
+  const tg = telegram_();
+  if (!tg.token || !tg.chatId) return;
   try {
     sendTelegram_([
       "🛒 New order #" + code + " " + (FLAGS_[o.country || "Tanzania"] || "") + " " + (o.country || "Tanzania"),
@@ -134,15 +147,16 @@ function notifyTelegram_(code, o) {
 }
 
 function sendTelegram_(text) {
-  UrlFetchApp.fetch("https://api.telegram.org/bot" + TELEGRAM_TOKEN + "/sendMessage", {
+  const tg = telegram_();
+  UrlFetchApp.fetch("https://api.telegram.org/bot" + tg.token + "/sendMessage", {
     method: "post",
-    payload: { chat_id: TELEGRAM_CHAT_ID, text: text },
+    payload: { chat_id: tg.chatId, text: text },
   });
 }
 
 // Run by hand once (setup step 3): shows your chat ID after you pressed Start in your bot.
 function getTelegramChatId() {
-  const res = JSON.parse(UrlFetchApp.fetch("https://api.telegram.org/bot" + TELEGRAM_TOKEN + "/getUpdates").getContentText());
+  const res = JSON.parse(UrlFetchApp.fetch("https://api.telegram.org/bot" + telegram_().token + "/getUpdates").getContentText());
   const chats = (res.result || []).map((u) => (u.message || {}).chat).filter(Boolean);
   if (!chats.length) return console.log("No message yet: open your bot in Telegram, press Start, then run this again.");
   console.log("TELEGRAM_CHAT_ID = " + chats[chats.length - 1].id);
