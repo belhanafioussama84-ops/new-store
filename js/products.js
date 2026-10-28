@@ -1,7 +1,8 @@
 /* Live site: https://dukaabora.store/ (Cloudflare publishes every push to GitHub main; copies on
    dukabora-tz.belhanafioussama84.workers.dev and GitHub Pages send visitors to dukaabora.store) */
-// dukaabora.store is the official address: old links to the copies open the same page there.
-if (/\.workers\.dev$|\.github\.io$/.test(location.hostname)) {
+// dukaabora.store is the official address (the only one the Meta Pixel accepts):
+// links to the copies and to www.dukaabora.store open the same page there.
+if (/\.workers\.dev$|\.github\.io$|^www\.dukaabora\.store$/.test(location.hostname)) {
   location.replace("https://dukaabora.store" + location.pathname.replace(/^\/new-store/, "") + location.search + location.hash);
 }
 /* ==========================================================
