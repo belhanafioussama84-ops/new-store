@@ -34,7 +34,7 @@
     $("#tPhoto").innerHTML = p.image
       ? `<img src="${esc(p.image)}" alt="" onerror="this.parentElement.textContent = '${esc(p.icon || "")}';" />`
       : esc(p.icon || "");
-    $("#tName").textContent = o.product.name;
+    $("#tName").textContent = p.name || o.product.name; // without the SKU
     $("#tQty").textContent = T(qty > 1 ? "{n} pieces · {price} each" : "{n} piece · {price} each", { n: qty, price: fmt(unitFull) });
     $("#tLine").textContent = fmt(full);
     $("#tTotals").innerHTML = `

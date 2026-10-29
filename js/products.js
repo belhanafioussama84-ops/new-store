@@ -297,6 +297,8 @@ const PRODUCTS = [
   {
     id: "sauna-leggings",
     name: "Sauna Sculpt Leggings",
+    // Supplier's reference: shown in the sheet next to the name (REF column), not on the site
+    sku: "os4-39",
     // Sold in Lebanon only: its prices below are in US dollars (no "lb" part needed)
     countries: ["lb"],
     category: "Fitness",

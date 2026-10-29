@@ -80,7 +80,8 @@ const Shop = (() => {
       date: new Date().toISOString(),
       country: COUNTRY.name,
       currency: COUNTRY.currency,
-      product: { id: p.id, name: p.name, price: p.price, qty },
+      // The name goes in the REF column of the sheet, with the product's SKU when it has one
+      product: { id: p.id, name: p.sku ? `${p.name} (${p.sku})` : p.name, sku: p.sku || "", price: p.price, qty },
       total,
       shipping: 0,
       payment: "Cash on Delivery",
