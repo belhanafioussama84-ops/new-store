@@ -309,19 +309,6 @@ const PRODUCTS = [
     image: "images/sauna-1.jpg",
     images: ["images/sauna-1.jpg", "images/sauna-shape.jpg", "images/sauna-features.jpg", "images/sauna-sweat.jpg"],
     perks: ["📏 Sizes M to 2XL"],
-    // The customer picks a size for each piece; the sizes go in the sheet with the product name
-    sizes: ["M", "L", "XL", "2XL"],
-    // Supplier's size chart, in cm, measured flat (shown under the size buttons)
-    sizeChart: {
-      columns: ["Size", "Length", "Upper waist", "Lower waist", "Hip"],
-      rows: [
-        ["M", 94.5, 29.7, 27.7, 33.7],
-        ["L", 95.5, 31.4, 29.4, 35.4],
-        ["XL", 96.5, 33.1, 33.1, 37.1],
-        ["2XL", 97.5, 34.8, 32.8, 38.8],
-      ],
-      image: "images/sauna-sizes.jpg",
-    },
     sections: [
       {
         image: "images/sauna-sweat.jpg",
