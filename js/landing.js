@@ -162,17 +162,63 @@
     offerIndex = Number(e.target.value);
     document.querySelectorAll(".offer").forEach((el, i) => el.classList.toggle("is-active", i === offerIndex));
     renderButton();
+    renderSizes();
   });
+
+  /* ---------- Sizes (products with "sizes"): one choice per piece ---------- */
+  const chosenSizes = [];
+  function renderSizes() {
+    if (!p.sizes?.length) return;
+    const qty = offer().qty;
+    $("#sizeRows").innerHTML = Array.from({ length: qty }, (_, n) => `
+      <div class="sizes__row" role="radiogroup" aria-label="${esc(T("Size of piece {n}", { n: n + 1 }))}">
+        ${qty > 1 ? `<span class="sizes__label">${T("Piece {n}", { n: n + 1 })}</span>` : ""}
+        ${p.sizes.map((s) => `
+          <label class="sizes__chip${chosenSizes[n] === s ? " is-active" : ""}">
+            <input type="radio" name="size${n}" value="${esc(s)}"${chosenSizes[n] === s ? " checked" : ""} />${esc(s)}
+          </label>`).join("")}
+      </div>`).join("");
+  }
+  if (p.sizes?.length) {
+    $("#sizePick").hidden = false;
+    $("#sizeRows").addEventListener("change", (e) => {
+      const n = Number(e.target.name.slice(4));
+      chosenSizes[n] = e.target.value;
+      e.target.closest(".sizes__row").querySelectorAll(".sizes__chip").forEach((c) => c.classList.toggle("is-active", c.contains(e.target)));
+      if (chosenSizes.slice(0, offer().qty).every(Boolean)) $("#sizeError").textContent = "";
+    });
+    const chart = p.sizeChart;
+    if (chart) {
+      $("#sizeGuide .size-guide__body").innerHTML = `
+        ${chart.rows ? `<table>
+          <thead><tr>${chart.columns.map((c) => `<th>${esc(T(c))}</th>`).join("")}</tr></thead>
+          <tbody>${chart.rows.map((r) => `<tr>${r.map((v) => `<td>${esc(v)}</td>`).join("")}</tr>`).join("")}</tbody>
+        </table>
+        <p>${T("In cm, measured flat. Between two sizes? Choose the bigger one.")}</p>` : ""}
+        ${chart.image ? `<img src="${esc(chart.image)}" alt="${esc(T("Size guide"))}" loading="lazy" onerror="this.remove()" />` : ""}`;
+      $("#sizeGuide").hidden = false;
+    }
+  }
+  // True when every piece of the chosen offer has a size; otherwise shows the error.
+  function sizesOk() {
+    if (!p.sizes?.length) return true;
+    const ok = chosenSizes.slice(0, offer().qty).filter(Boolean).length === offer().qty;
+    $("#sizeError").textContent = ok ? "" : T("Please choose a size for each piece.");
+    if (!ok) $("#sizePick").scrollIntoView({ behavior: "smooth", block: "center" });
+    return ok;
+  }
 
   /* ---------- Order ---------- */
   $("#orderForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target;
     const btn = $("#submitBtn");
-    if (btn.disabled || !validate(form)) return;
+    if (btn.disabled || !sizesOk() || !validate(form)) return;
 
     Pixel.track("InitiateCheckout", Pixel.product(p, offer().qty, offer().price));
-    const o = createOrder(form, p, offer().qty, offer().price);
+    // The sizes travel in the product name, so they show in the sheet (REF) and on Telegram
+    const name = p.sizes?.length ? `${p.name} (Size: ${chosenSizes.slice(0, offer().qty).join(", ")})` : p.name;
+    const o = createOrder(form, { ...p, name }, offer().qty, offer().price);
     btn.disabled = true;
     btn.textContent = T("Sending your order…");
     $("#formError").hidden = true;
@@ -209,6 +255,7 @@
   Pixel.track("ViewContent", Pixel.product(p));
   renderOffers();
   renderButton();
+  renderSizes();
   const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
   if (wa) {
     $("#closingWa").href = `https://wa.me/${wa}?text=${encodeURIComponent(`${STORE.whatsappText || ""} ${p.name}`.trim())}`;

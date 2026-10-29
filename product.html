@@ -88,6 +88,17 @@
           <div class="order__step"><h2>1. Choose your offer</h2><span>✓ Delivery FREE</span></div>
           <div class="offers" id="offers" role="radiogroup" aria-label="Choose your offer"></div>
 
+          <!-- Size of each piece, for products with "sizes" (js/landing.js) -->
+          <div class="sizes" id="sizePick" hidden>
+            <div class="order__step order__step--line"><h2>Choose your size</h2></div>
+            <div id="sizeRows"></div>
+            <small class="error" id="sizeError"></small>
+            <details class="size-guide" id="sizeGuide" hidden>
+              <summary>📏 Size guide</summary>
+              <div class="size-guide__body"></div>
+            </details>
+          </div>
+
           <div class="order__step order__step--line"><h2>2. Your delivery details</h2><span>💵 Pay on delivery</span></div>
           <form id="orderForm" novalidate>
             <div class="field">

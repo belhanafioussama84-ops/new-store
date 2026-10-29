@@ -99,6 +99,10 @@ if (COUNTRY.id === "lb") document.querySelector('meta[name="theme-color"]')?.set
    - Every product gets its own landing page: product.html?id=<id>
      (use that link in your Facebook / TikTok / Instagram ads).
    - home: false  hides a product from the home page (its own page still works)
+   - countries: ["lb"]  sells it in those countries only, with price / offers in their money
+     (see "sauna-leggings")
+   - sizes: ["M", "L", ...]  the customer picks a size for each piece;
+     sizeChart: { columns, rows, image } is shown under the size buttons
    Optional fields for the landing page (see "reward-watch" below):
    - images:  extra photos for the gallery
    - sections: photos shown under the order form, each with its text:
@@ -290,11 +294,81 @@ const PRODUCTS = [
       showcaseText: "Spray, wipe and drive: your car looks clean and shiny again.",
     },
   },
+  {
+    id: "sauna-leggings",
+    name: "Sauna Sculpt Leggings",
+    // Sold in Lebanon only: its prices below are in US dollars (no "lb" part needed)
+    countries: ["lb"],
+    category: "Fitness",
+    price: 38,
+    oldPrice: null,
+    rating: 4.7,
+    reviews: 0,
+    badge: "New",
+    icon: "🔥",
+    image: "images/sauna-1.jpg",
+    images: ["images/sauna-1.jpg", "images/sauna-shape.jpg", "images/sauna-features.jpg", "images/sauna-sweat.jpg"],
+    perks: ["📏 Sizes M to 2XL"],
+    // The customer picks a size for each piece; the sizes go in the sheet with the product name
+    sizes: ["M", "L", "XL", "2XL"],
+    // Supplier's size chart, in cm, measured flat (shown under the size buttons)
+    sizeChart: {
+      columns: ["Size", "Length", "Upper waist", "Lower waist", "Hip"],
+      rows: [
+        ["M", 94.5, 29.7, 27.7, 33.7],
+        ["L", 95.5, 31.4, 29.4, 35.4],
+        ["XL", 96.5, 33.1, 33.1, 37.1],
+        ["2XL", 97.5, 34.8, 32.8, 38.8],
+      ],
+      image: "images/sauna-sizes.jpg",
+    },
+    sections: [
+      {
+        image: "images/sauna-sweat.jpg",
+        title: "Sweat more in every workout",
+        text: "The silver inner layer keeps the heat in. You warm up faster and sweat more, whether you walk, train or clean the house.",
+        list: ["Heat-trapping silver coating inside", "You feel the warmth in minutes", "Black outside: nobody sees the silver"],
+      },
+      {
+        image: "images/sauna-features.jpg",
+        title: "Adjustable hooks, high waist",
+        text: "Close the hooks at the level that is comfortable for you. The high waist holds your belly and stays in place when you move.",
+        list: ["Adjustable hooks", "Ultra-stretch fabric", "High waist that doesn't roll down"],
+      },
+      {
+        image: "images/sauna-shape.jpg",
+        title: "A smoother shape, right away",
+        text: "The firm fabric hugs your waist, thighs and hips. Your silhouette looks smoother the moment you put them on, under a dress or a long top.",
+        list: ["Holds the tummy", "Smooths the thighs", "Lifts the hips"],
+      },
+      {
+        image: "images/sauna-sports.jpg",
+        title: "For every kind of sport",
+        text: "Yoga, running, the gym, cycling or a long walk: they move with you and stay comfortable.",
+      },
+    ],
+    offers: [
+      { qty: 1, price: 38 },
+      { qty: 2, price: 69, tag: "Best value" },
+      { qty: 3, price: 95 },
+    ],
+    description: "High-waist leggings with a heat-trapping silver layer inside: you sweat more when you move, and the firm fabric shapes your waist, thighs and hips.",
+    landing: {
+      showcaseTitle: ["Warm up,", "sweat more"],
+      showcaseText: "Put them on for your workout or your walk and feel the heat straight away.",
+    },
+  },
 ];
+
+// A product with "countries" is only sold there, at its own prices.
+for (let i = PRODUCTS.length - 1; i >= 0; i--) {
+  if (PRODUCTS[i].countries && !PRODUCTS[i].countries.includes(COUNTRY.id)) PRODUCTS.splice(i, 1);
+}
 
 // Outside Tanzania each product takes its local prices; a product without them is not sold there.
 if (COUNTRY.id !== "tz") {
   for (let i = PRODUCTS.length - 1; i >= 0; i--) {
+    if (PRODUCTS[i].countries) continue; // already in that country's prices
     const local = PRODUCTS[i][COUNTRY.id];
     if (!local) { PRODUCTS.splice(i, 1); continue; }
     const { sectionImages, ...rest } = local;
