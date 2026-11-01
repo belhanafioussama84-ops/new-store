@@ -165,10 +165,10 @@ const PRODUCTS = [
         list: ["Premium luxury design", "Water-resistant", "Great gift for men"],
       },
     ],
-    // 2 and 3 pieces are off until their new prices are set (the old 355,000 / 555,000
-    // were below the new price of one piece)
     offers: [
       { qty: 1, price: 230000 },
+      { qty: 2, price: 430000, tag: "Best value" },
+      { qty: 3, price: 615000 },
     ],
     zm: {
       price: 1399,
