@@ -114,7 +114,7 @@
     $("#offers").innerHTML = offers.map((o, i) => {
       const save = unitFull * o.qty - o.price;
       const note = o.qty > 1
-        ? `${save > 0 ? `${T("Save {amount}", { amount: fmt(save) })}<br>` : ""}${T("{price} each", { price: fmt(Math.round(o.price / o.qty)) })}`
+        ? `${save > 0 ? `<span>${T("Save {amount}", { amount: fmt(save) })}</span><br>` : ""}<span>${T("{price} each", { price: fmt(Math.round(o.price / o.qty)) })}</span>`
         : T("Perfect for you");
       return `
       <label class="offer ${i === offerIndex ? "is-active" : ""}">
