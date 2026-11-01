@@ -126,8 +126,8 @@ const PRODUCTS = [
     category: "Accessories",
     price: 199000,
     // Usual price; 199,000 is the promotion price (shown crossed out next to it).
-    // When the promotion ends, put price back to 249000 and oldPrice to null.
-    oldPrice: 249000,
+    // When the promotion ends, put price back to 230000 and oldPrice to null.
+    oldPrice: 230000,
     rating: 4.8,
     reviews: 0,
     badge: "New",
@@ -172,7 +172,7 @@ const PRODUCTS = [
     ],
     zm: {
       price: 1399,
-      oldPrice: null, // the 249,000 above is in TSh: no crossed-out price here
+      oldPrice: null, // the 230,000 above is in TSh: no crossed-out price here
       offers: [
         { qty: 1, price: 1399 },
         { qty: 2, price: 2499, tag: "Best value" },
