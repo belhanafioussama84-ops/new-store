@@ -37,6 +37,7 @@ const SHEET_NAME = "Orders";
 const COUNTRY_SHEETS = { Lebanon: "Orders Lebanon" };
 // Column order of the sheet = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
+// Exception: in the country tabs (Lebanon), VILLE gets the city and ADRESSE the address alone.
 // PAYS (Tanzania / Zambia / Lebanon, last column) is not in the Simon Express table: PRIX is in TSh
 // for Tanzania, in Kwacha for Zambia and in US dollars for Lebanon. Delete that column before importing if Simon Express refuses it.
 const HEADERS = [
@@ -63,15 +64,18 @@ function doPost(e) {
   lock.waitLock(10000); // two orders at the same moment must not get the same code
   try {
     const o = JSON.parse(e.postData.contents);
-    const sheet = getOrdersSheet_(COUNTRY_SHEETS[o.country]);
+    const ownTab = COUNTRY_SHEETS[o.country];
+    const sheet = getOrdersSheet_(ownTab);
     const code = nextCode_(sheet);
+    // Orders from before the City / Address split only have customer.city ("City, address")
+    const split = ownTab && o.customer.town;
     sheet.appendRow([
       code,
       text_(o.customer.fullName),
       localPhone_(o.customer.phone),
-      text_(o.customer.city), // the "City & delivery address" field
+      text_(split ? o.customer.street : o.customer.city), // ADRESSE
       Number(o.total) || 0,
-      "", // VILLE: empty
+      split ? text_(o.customer.town) : "", // VILLE
       "", // PRODUIT: empty
       text_(o.product.name), // REF
       Number(o.product.qty) || 1,

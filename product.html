@@ -112,9 +112,16 @@
               <small class="hint">Use a number you can answer. We'll call to confirm.</small>
               <small class="error"></small>
             </div>
+            <!-- City on its own: only in countries with splitAddress (Lebanon); elsewhere js/landing.js
+                 removes it and the next field asks for "City & delivery address" -->
+            <div class="field" id="cityField">
+              <label for="city">City <b>*</b></label>
+              <div class="input"><span>🏙️</span><input id="city" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Dar es Salaam" required /></div>
+              <small class="error"></small>
+            </div>
             <div class="field">
-              <label for="address">City &amp; delivery address <b>*</b></label>
-              <div class="input"><span>📍</span><input id="address" name="address" type="text" autocomplete="street-address" placeholder="e.g. Dar es Salaam, Kinondoni, Mikocheni B" required /></div>
+              <label for="address"><span id="addressLabel">Delivery address</span> <b>*</b></label>
+              <div class="input"><span>📍</span><input id="address" name="address" type="text" autocomplete="street-address" placeholder="e.g. Kinondoni, Mikocheni B, near the market" required /></div>
               <small class="error"></small>
             </div>
 

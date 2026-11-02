@@ -208,6 +208,13 @@
     return ok;
   }
 
+  // One "City & delivery address" field, except in countries with splitAddress (Lebanon)
+  if (!COUNTRY.splitAddress) {
+    $("#cityField").remove();
+    $("#addressLabel").textContent = T("City & delivery address");
+    $("#address").placeholder = T("e.g. Dar es Salaam, Kinondoni, Mikocheni B");
+  }
+
   /* ---------- Order ---------- */
   $("#orderForm").addEventListener("submit", async (e) => {
     e.preventDefault();

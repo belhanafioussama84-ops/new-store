@@ -57,7 +57,7 @@ const Shop = (() => {
     field.querySelector(".error").textContent = msg || "";
   }
 
-  // Checks the fields this form has (the product page asks for an address instead of region + town).
+  // Checks the fields this form has (the product page asks for a city and an address, no region).
   function validate(form) {
     let ok = true;
     const check = (el, cond, msg) => { if (!el) return; setError(el, cond ? "" : msg); if (!cond) ok = false; };
@@ -65,8 +65,9 @@ const Shop = (() => {
     check(form.fullName, form.fullName.value.trim().length >= 3, T("Please enter your full name."));
     check(form.phone, COUNTRY.phone.test(normalizePhone(form.phone.value)), T("Enter a valid Tanzanian number, e.g. 712 345 678."));
     check(form.region, !!form.region?.value, T("Please choose your region."));
-    check(form.city, form.city?.value.trim().length >= 2, T("Please enter your district or town."));
-    check(form.address, form.address?.value.trim().length >= 5, T("Please enter your city and delivery address."));
+    check(form.city, form.city?.value.trim().length >= 2, T("Please enter your city."));
+    check(form.address, form.address?.value.trim().length >= (form.city ? 3 : 5),
+      T(form.city ? "Please enter your delivery address." : "Please enter your city and delivery address."));
 
     if (!ok) form.querySelector(".has-error input, .has-error select")?.focus();
     return ok;
@@ -89,8 +90,11 @@ const Shop = (() => {
         fullName: form.fullName.value.trim(),
         phone: `+${COUNTRY.dial} ` + normalizePhone(form.phone.value),
         region: form.region?.value || "",
-        // The product page sends one "City & delivery address" field; it goes in the same sheet column.
-        city: (form.address || form.city).value.trim(),
+        // city = "City, address" all in one (the sheet's ADRESSE column for Simon Express);
+        // town and street are the two fields on their own (VILLE / ADRESSE in the Lebanon tab).
+        city: [form.city?.value.trim(), form.address?.value.trim()].filter(Boolean).join(", "),
+        town: form.city?.value.trim() || "",
+        street: form.address?.value.trim() || "",
       },
     };
 

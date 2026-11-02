@@ -62,6 +62,7 @@ const COUNTRIES = {
     dial: "961", phone: /^(3\d{6}|(7\d|8[16])\d{6})$/, // mobile numbers: 3 XXX XXX / 7X XXX XXX / 81 XXX XXX
     languages: ["en"],
     fastCity: "beirut",
+    splitAddress: true, // the order form asks for the city and the address in two fields
   },
 };
 // Phones set to these time zones get that country until the visitor picks one.

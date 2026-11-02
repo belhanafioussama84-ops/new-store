@@ -226,7 +226,6 @@ const SW = {
   "Please enter your full name.": "Tafadhali andika jina lako kamili.",
   "Enter a valid Tanzanian number, e.g. 712 345 678.": "Andika namba sahihi ya Tanzania, mf. 712 345 678.",
   "Please choose your region.": "Tafadhali chagua mkoa wako.",
-  "Please enter your district or town.": "Tafadhali andika wilaya au mji wako.",
   "Please enter your city and delivery address.": "Tafadhali andika mji na anwani ya kukuletea.",
 
   /* ---------- Thank-you page ---------- */
@@ -448,7 +447,8 @@ const LB = {
   /* ---------- Product page ---------- */
   "e.g. Juma Hassan": "e.g. Rami Haddad",
   "+255 7XX XXX XXX": "+961 7X XXX XXX",
-  "e.g. Dar es Salaam, Kinondoni, Mikocheni B": "e.g. Beirut, Achrafieh, Sassine Street",
+  "e.g. Dar es Salaam": "e.g. Beirut",
+  "e.g. Kinondoni, Mikocheni B, near the market": "e.g. Achrafieh, Sassine Street, near the pharmacy",
   "TSh 0 now": "$0 now",
   "Enter a valid Tanzanian number, e.g. 712 345 678.": "Enter a valid Lebanese number, e.g. 71 234 567.",
 
