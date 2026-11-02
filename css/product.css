@@ -472,6 +472,17 @@ p { margin: 0 0 1em; }
   .real__grid img { flex: none; width: 72%; scroll-snap-align: center; }
 }
 
+/* ---------- layout: "simple" (js/landing.js): plainer page, big photos one under the other ---------- */
+.trust3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin: .5rem 0 .75rem; padding: 0; list-style: none; text-align: center; font-size: .8rem; font-weight: 600; color: var(--ink); }
+.trust3 span { display: block; margin-bottom: .2rem; font-size: 1.5rem; }
+.layout-simple .buy__hot, .layout-simple .buy__perks, .layout-simple .secure { display: none; }
+.simple-story { max-width: 620px; padding-bottom: 2rem; text-align: center; }
+.simple-story__intro { margin: 0 0 1.5rem; font-weight: 700; line-height: 1.7; }
+.simple-story figure { margin: 0 0 2rem; }
+.simple-story img, .simple-story video { display: block; width: 100%; height: auto; border-radius: 14px; background: #fff; }
+.simple-story figcaption { margin-top: .9rem; color: var(--muted); font-size: .98rem; line-height: 1.6; }
+.simple-story figcaption strong { color: var(--ink); }
+
 /* Size buttons (products with "sizes"), one row per piece, and the size guide */
 .sizes__row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .6rem; }
 .sizes__label { flex-basis: 100%; color: var(--muted); font-size: .82rem; font-weight: 600; }

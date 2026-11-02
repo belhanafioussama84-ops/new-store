@@ -366,25 +366,43 @@ const PRODUCTS = [
     icon: "🧍",
     image: "images/posture-1.jpg",
     images: ["images/posture-1.jpg", "images/posture-side.jpg", "images/posture-straps.jpg", "images/posture-adjust.jpg"],
-    perks: ["👫 For men and women", "📏 Sizes S to XXL"],
+    // Plain page like the big COD shops: big photos one under the other (see js/landing.js)
+    layout: "simple",
     sections: [
       {
-        image: "images/posture-straps.jpg",
-        title: "Shoulders back, without thinking about it",
-        text: "The crossed straps gently pull your shoulders back and keep your upper back straight. You feel the difference as soon as you close it.",
-        list: ["Crossed straps on the shoulders", "Firm support for the upper back", "Soft, breathable fabric"],
+        image: "images/posture-anim1.mp4",
+        title: "Posture corrector",
+        text: "The crossed straps hold your shoulders back and keep your upper back straight. Made for people who work long hours at a desk or spend a lot of time looking down at their phone.",
       },
       {
-        image: "images/posture-adjust.jpg",
-        title: "Adjust it to your body",
-        text: "Pull the side straps to the level that feels right for you and close them with the velcro. It fits men and women, from size S to XXL.",
-        list: ["Fully adjustable straps", "For men and women", "Sizes S to XXL (24 to 46 inch waist)"],
+        image: "images/posture-howto.jpg",
+        title: "Easy to put on",
+        text: "Put it on like a backpack, cross the straps, close the belt with the velcro and adjust. It takes less than a minute.",
       },
       {
-        image: "images/posture-side.jpg",
-        title: "Discreet under your clothes",
-        text: "Thin and light, it hides under a shirt or a sweater. Wear it at the office, at your desk, at home or when you drive.",
-        list: ["For long hours at the desk or on the phone", "Light enough to wear every day", "Start with 20 minutes a day, then wear it longer"],
+        image: "images/posture-anim2.mp4",
+        title: "Fully adjustable",
+        text: "Made for men and women. Pull the side straps until it feels right: it fits sizes S to XXL (24 to 46 inch waist).",
+      },
+      {
+        image: "images/posture-features.jpg",
+        title: "Smart design",
+        text: "The woven elastic tape on the back follows your movements, and the breathable fabric keeps you comfortable all day.",
+      },
+      {
+        image: "images/posture-anim3.mp4",
+        title: "Discreet and light",
+        text: "Thin enough to wear under a shirt at the office, at home or in the car. Start with 20 minutes a day, then wear it a little longer each day.",
+      },
+      {
+        image: "images/posture-fabric.jpg",
+        title: "Soft and strong",
+        text: "Soft perforated fabric, a back support plate and a strong velcro closure that you tighten as you like.",
+      },
+      {
+        image: "images/posture-size.jpg",
+        title: "Product size",
+        text: "46 cm high and 41 cm wide, adjustable from size S to XXL.",
       },
     ],
     offers: [

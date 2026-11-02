@@ -87,16 +87,38 @@
   const media = (s) => /\.mp4$/i.test(s.image)
     ? `<video src="${esc(s.image)}" poster="${esc(s.image.replace(/\.mp4$/i, ".jpg"))}" autoplay muted loop playsinline preload="metadata" aria-label="${esc(T(s.title))}"></video>`
     : `<img src="${esc(s.image)}" alt="${esc(T(s.title))}" loading="lazy" onerror="this.remove()" />`;
-  $("#story").innerHTML = sections.map((s) => `
-    <section class="wrap about${s.image ? "" : " about--text"}">
-      ${s.image ? `<div class="about__media">${media(s)}</div>` : ""}
-      <div class="about__text">
-        <h2>${esc(T(s.title))}</h2>
-        <p>${esc(T(s.text))}</p>
-        ${s.list?.length ? `<ul class="checks">${s.list.map((li) => `<li>${esc(T(li))}</li>`).join("")}</ul>` : ""}
-        <a href="#order" class="btn">${T("Order now · Pay on delivery")}</a>
-      </div>
-    </section>`).join("");
+  if (p.layout === "simple") {
+    // layout: "simple" — like the big COD shops: 3 trust icons under the title, the order form
+    // straight after, then big photos one under the other, each with a short "Title: text" line.
+    document.body.classList.add("layout-simple");
+    $("#pDesc").insertAdjacentHTML("afterend", `
+      <ul class="trust3">
+        <li><span>⭐</span>${T("Quality checked")}</li>
+        <li><span>🔄</span>${T("30-day replacement")}</li>
+        <li><span>🚚</span>${T("Free delivery")}</li>
+      </ul>`);
+    $("#story").innerHTML = `
+      <section class="wrap simple-story">
+        <p class="simple-story__intro">${T("100% free delivery")}<br>${T("Pay on delivery and quality guarantee")}</p>
+        ${sections.map((s) => `
+          <figure>
+            ${s.image ? media(s) : ""}
+            <figcaption>${s.title ? `<strong>${esc(T(s.title))}:</strong> ` : ""}${esc(T(s.text || ""))}</figcaption>
+          </figure>`).join("")}
+        <a href="#order" class="btn btn--big">${T("Order now · Pay on delivery")}</a>
+      </section>`;
+  } else {
+    $("#story").innerHTML = sections.map((s) => `
+      <section class="wrap about${s.image ? "" : " about--text"}">
+        ${s.image ? `<div class="about__media">${media(s)}</div>` : ""}
+        <div class="about__text">
+          <h2>${esc(T(s.title))}</h2>
+          <p>${esc(T(s.text))}</p>
+          ${s.list?.length ? `<ul class="checks">${s.list.map((li) => `<li>${esc(T(li))}</li>`).join("")}</ul>` : ""}
+          <a href="#order" class="btn">${T("Order now · Pay on delivery")}</a>
+        </div>
+      </section>`).join("");
+  }
 
   /* ---------- Real photos of the product (taken in stock) ---------- */
   if (p.realPhotos?.length) {
