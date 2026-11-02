@@ -351,6 +351,52 @@ const PRODUCTS = [
       showcaseText: "Put them on for your workout or your walk and feel the heat straight away.",
     },
   },
+  {
+    id: "posture-corrector",
+    name: "Posture Corrector Back Brace",
+    // Sold in Lebanon only: its prices below are in US dollars
+    countries: ["lb"],
+    category: "Health & comfort",
+    price: 39,
+    oldPrice: null,
+    rating: 4.7,
+    reviews: 0,
+    badge: "New",
+    icon: "🧍",
+    image: "images/posture-1.jpg",
+    images: ["images/posture-1.jpg", "images/posture-side.jpg", "images/posture-straps.jpg", "images/posture-adjust.jpg"],
+    perks: ["👫 For men and women", "📏 Sizes S to XXL"],
+    sections: [
+      {
+        image: "images/posture-straps.jpg",
+        title: "Shoulders back, without thinking about it",
+        text: "The crossed straps gently pull your shoulders back and keep your upper back straight. You feel the difference as soon as you close it.",
+        list: ["Crossed straps on the shoulders", "Firm support for the upper back", "Soft, breathable fabric"],
+      },
+      {
+        image: "images/posture-adjust.jpg",
+        title: "Adjust it to your body",
+        text: "Pull the side straps to the level that feels right for you and close them with the velcro. It fits men and women, from size S to XXL.",
+        list: ["Fully adjustable straps", "For men and women", "Sizes S to XXL (24 to 46 inch waist)"],
+      },
+      {
+        image: "images/posture-side.jpg",
+        title: "Discreet under your clothes",
+        text: "Thin and light, it hides under a shirt or a sweater. Wear it at the office, at your desk, at home or when you drive.",
+        list: ["For long hours at the desk or on the phone", "Light enough to wear every day", "Start with 20 minutes a day, then wear it longer"],
+      },
+    ],
+    offers: [
+      { qty: 1, price: 39 },
+      { qty: 2, price: 69, tag: "Best value" },
+      { qty: 3, price: 95 },
+    ],
+    description: "An adjustable back brace with crossed straps that holds your shoulders back and helps you sit and stand straight, at work, at home or on the move.",
+    landing: {
+      showcaseTitle: ["Stand tall,", "every day"],
+      showcaseText: "Close it, adjust it, and feel your shoulders go back straight away.",
+    },
+  },
 ];
 
 // A product with "countries" is only sold there, at its own prices.
