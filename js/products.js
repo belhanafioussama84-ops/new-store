@@ -104,7 +104,7 @@ if (COUNTRY.id === "lb") document.querySelector('meta[name="theme-color"]')?.set
      (see "sauna-leggings")
    - sizes: ["M", "L", ...]  the customer picks a size for each piece;
      sizeChart: { columns, rows, image } is shown under the size buttons;
-     sizeWord: "color" makes the same buttons a color choice (see "arm-chain")
+     sizeWord: "color" makes the same buttons a color choice (e.g. sizes: ["Gold", "Silver"])
    Optional fields for the landing page (see "reward-watch" below):
    - images:  extra photos for the gallery
    - sections: photos shown under the order form, each with its text:
@@ -430,44 +430,33 @@ const PRODUCTS = [
     badge: "New",
     icon: "✨",
     image: "images/armchain-gold-arm.jpg",
-    images: ["images/armchain-gold-arm.jpg", "images/armchain-silver-arm.jpg", "images/armchain-gold.jpg", "images/armchain-silver.jpg", "images/armchain-silver-close.jpg"],
-    // The customer picks the color of each piece; it goes in the sheet with the product name
-    sizes: ["Gold", "Silver"],
-    sizeWord: "color",
+    // Gold only
+    images: ["images/armchain-gold-arm.jpg", "images/armchain-gold.jpg"],
     layout: "simple",
     sections: [
       {
         image: "images/armchain-gold-arm.jpg",
         title: "An instant chic look",
-        text: "A thin open band on the upper arm with layers of fine chains falling like a cascade, finished with small bar pendants. It turns a simple outfit into an elegant look.",
+        text: "A thin gold band on the upper arm with layers of fine chains falling like a cascade, finished with small bar pendants. It turns a simple outfit into an elegant look.",
       },
       {
-        image: "images/armchain-silver-close.jpg",
-        title: "Perfect with summer outfits",
-        text: "With a strapless top, a dress or a sleeveless blouse: at the beach, at a wedding, at a party or for an evening out.",
-      },
-      {
-        image: "images/armchain-silver-light.jpg",
-        title: "Delicate layered chains",
-        text: "Several fine chains of different lengths move with you and catch the light. A shiny polished finish.",
-      },
-      {
-        image: "images/armchain-detail.jpg",
         title: "Easy to put on",
         text: "The band is open: slide it up your arm and press it gently to fit your arm. No clasp to close.",
       },
       {
         image: "images/armchain-gold.jpg",
-        title: "Gold or silver",
-        text: "Choose the color that goes with your other jewelry. Zinc alloy with a shiny polished finish.",
+        title: "Shiny gold finish",
+        text: "Several fine chains of different lengths move with you and catch the light. Zinc alloy with a shiny polished gold finish.",
       },
       {
-        image: "images/armchain-size.jpg",
+        title: "Perfect with summer outfits",
+        text: "With a strapless top, a dress or a sleeveless blouse: at the beach, at a wedding, at a party or for an evening out.",
+      },
+      {
         title: "Size",
         text: "Band of 22.5 cm, chains from 4.5 to 12.5 cm long.",
       },
       {
-        image: "images/armchain-silver-stand.jpg",
         title: "A gift she will love",
         text: "For a birthday, an anniversary or just to say thank you.",
       },
@@ -477,7 +466,7 @@ const PRODUCTS = [
       { qty: 2, price: 39, tag: "Best value" },
       { qty: 3, price: 55 },
     ],
-    description: "A thin open arm band with layered chains and small bar pendants. Elegant, light and easy to wear, in gold or silver.",
+    description: "A thin gold arm band with layered chains and small bar pendants. Elegant, light and easy to wear.",
   },
 ];
 
