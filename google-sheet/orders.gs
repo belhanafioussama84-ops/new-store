@@ -32,11 +32,12 @@
  */
 
 const SHEET_NAME = "Orders";
-// Lebanese orders go to their own tab, with the columns of the Lebanese delivery import
-// (created automatically at the first order). Everything else (Tanzania, Zambia) goes to SHEET_NAME.
+// Lebanese orders go to their own tab, with exactly the 9 columns of the COD Services import
+// template (created automatically at the first order). Everything else (Tanzania, Zambia) goes
+// to SHEET_NAME. To import them: menu Duka Bora → Download Lebanon orders (.xlsx).
 const LEBANON_SHEET = "Orders Lebanon";
 const LEBANON_HEADERS = [
-  "date_order", "full_name", "phone", "address", "city", "sku", "qte", "price", "note", "delivery_note",
+  "date_order", "full_name", "phone", "address", "city", "sku", "qte", "price", "note",
 ];
 // Column order of the "Orders" tab = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
@@ -80,7 +81,6 @@ function doPost(e) {
         Number(o.total) || 0,
         // note: the product name next to its SKU (the site sends "Name (sku)")
         text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : ""),
-        "", // delivery_note: for you to fill in
       ]);
       notifyTelegram_(sheet.getLastRow() - 1, o);
       return json_({ ok: true });
@@ -113,6 +113,32 @@ function doPost(e) {
 // Lets you check the URL works by opening it in a browser.
 function doGet() {
   return json_({ ok: true, message: "Duka Bora orders endpoint is running." });
+}
+
+// "Duka Bora" menu at the top of the sheet (appears when the sheet is opened).
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu("Duka Bora")
+    .addItem("Download Lebanon orders (.xlsx)", "downloadLebanonOrders")
+    .addToUi();
+}
+
+// A download link for the Lebanon tab ALONE, ready to import in COD Services
+// (File → Download would put every tab in the file, with "Orders" first).
+function downloadLebanonOrders() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = getOrdersSheet_(LEBANON_SHEET, LEBANON_HEADERS);
+  // Columns after "note" (e.g. an old delivery_note header) would make the import refuse the file
+  const extra = sheet.getMaxColumns() - LEBANON_HEADERS.length;
+  if (extra > 0) sheet.deleteColumns(LEBANON_HEADERS.length + 1, extra);
+  SpreadsheetApp.flush();
+  const url = "https://docs.google.com/spreadsheets/d/" + ss.getId() + "/export?format=xlsx&gid=" + sheet.getSheetId();
+  SpreadsheetApp.getUi().showModalDialog(
+    HtmlService.createHtmlOutput(
+      '<p style="font-family:sans-serif">The file has only the Lebanon orders.</p>' +
+      '<p><a href="' + url + '" target="_blank" style="font-family:sans-serif;font-size:16px">⬇️ Download the .xlsx file</a></p>'
+    ).setWidth(360).setHeight(140),
+    "Lebanon orders"
+  );
 }
 
 // The tab named `name` (default: the main "Orders" tab), created with its headers if missing.
