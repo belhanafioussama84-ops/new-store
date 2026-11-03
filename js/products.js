@@ -21,6 +21,9 @@ const STORE = {
   // Events sent: PageView (every page), ViewContent (product page),
   // InitiateCheckout (order button), Purchase (thank-you page, once per order).
   metaPixel: "2505097906522683",
+  // Extra pixels for one country only (e.g. a partner's pixel): they get the same events,
+  // only when the visitor is in that country. tz: Yasse's pixel.
+  countryPixels: { tz: ["1652578138950300"] },
   // Instagram / Facebook page links (full https:// address). Shown as icons at the bottom of every page.
   // Empty = no icon.
   instagram: "https://www.instagram.com/dukaabora/",

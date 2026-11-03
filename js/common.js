@@ -182,9 +182,12 @@ const Shop = (() => {
   });
 })();
 
-/* Meta (Facebook) Pixel — ID in STORE.metaPixel. Pixel.track() does nothing without an ID. */
+/* Meta (Facebook) Pixel — ID in STORE.metaPixel, plus STORE.countryPixels for the visitor's country.
+   Every event goes to all of them. Pixel.track() does nothing without an ID. */
 const Pixel = (() => {
-  const id = String(STORE.metaPixel || "").replace(/\D/g, "");
+  const ids = [STORE.metaPixel, ...((STORE.countryPixels || {})[COUNTRY.id] || [])]
+    .map((x) => String(x || "").replace(/\D/g, "")).filter(Boolean);
+  const id = ids[0];
   if (id) {
     /* Official Meta Pixel loader */
     !function (f, b, e, v, n, t, s) {
@@ -192,7 +195,7 @@ const Pixel = (() => {
       if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = [];
       t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
     }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-    fbq("init", id);
+    [...new Set(ids)].forEach((x) => fbq("init", x));
     fbq("track", "PageView");
   }
   const track = (event, data, options) => { if (id && window.fbq) fbq("track", event, data || {}, options); };
