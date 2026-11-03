@@ -118,25 +118,56 @@ function doGet() {
 // "Duka Bora" menu at the top of the sheet (appears when the sheet is opened).
 function onOpen() {
   SpreadsheetApp.getUi().createMenu("Duka Bora")
-    .addItem("Download Lebanon orders (.xlsx)", "downloadLebanonOrders")
+    .addItem("Download NEW Lebanon orders (.xlsx)", "downloadNewLebanonOrders")
+    .addItem("Download ALL Lebanon orders (.xlsx)", "downloadAllLebanonOrders")
     .addToUi();
 }
 
-// A download link for the Lebanon tab ALONE, ready to import in COD Services
-// (File → Download would put every tab in the file, with "Orders" first).
-function downloadLebanonOrders() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+// Rows already sent to COD Services are greyed out in the Lebanon tab (their data stays there).
+const SENT_COLOR = "#d9d9d9";
+
+function downloadNewLebanonOrders() { downloadLebanonOrders_(true); }
+function downloadAllLebanonOrders() { downloadLebanonOrders_(false); }
+
+// Puts the Lebanon orders (only the ones not sent yet, or all) in a separate file with the
+// 9 columns of the COD Services template, shows its download link, then greys those rows out.
+// (File → Download would put every tab in the file, with "Orders" first.)
+function downloadLebanonOrders_(onlyNew) {
+  const ui = SpreadsheetApp.getUi();
   const sheet = getOrdersSheet_(LEBANON_SHEET, LEBANON_HEADERS);
-  // Columns after "note" (e.g. an old delivery_note header) would make the import refuse the file
-  const extra = sheet.getMaxColumns() - LEBANON_HEADERS.length;
-  if (extra > 0) sheet.deleteColumns(LEBANON_HEADERS.length + 1, extra);
+  const n = sheet.getLastRow() - 1;
+  const cols = LEBANON_HEADERS.length;
+  const range = n > 0 ? sheet.getRange(2, 1, n, cols) : null;
+  const values = range ? range.getValues() : [];
+  const colors = range ? range.getBackgrounds() : [];
+  const rows = [];
+  values.forEach((r, i) => {
+    if (!r.join("")) return; // empty row
+    if (onlyNew && colors[i][0] === SENT_COLOR) return;
+    rows.push({ r, i });
+  });
+  if (!rows.length) return ui.alert("No new Lebanon orders: every order was already downloaded.");
+
+  // The file to import, made fresh each time; the one from last time goes to the trash
+  const props = PropertiesService.getScriptProperties();
+  const old = props.getProperty("LB_EXPORT_FILE");
+  if (old) { try { DriveApp.getFileById(old).setTrashed(true); } catch (err) { /* already gone */ } }
+  const out = SpreadsheetApp.create("COD Services import " + Utilities.formatDate(new Date(), "Asia/Beirut", "yyyy-MM-dd HH-mm"));
+  props.setProperty("LB_EXPORT_FILE", out.getId());
+  const tab = out.getSheets()[0].setName("Orders");
+  tab.getRange(1, 1, 1, cols).setValues([LEBANON_HEADERS]).setFontWeight("bold");
+  // Text columns stay text (a phone "+961 …" must not turn into a number)
+  ["B", "C", "D", "E", "F", "I"].forEach((c) => tab.getRange(c + ":" + c).setNumberFormat("@"));
+  tab.getRange(2, 1, rows.length, cols).setValues(rows.map((x) => x.r));
   SpreadsheetApp.flush();
-  const url = "https://docs.google.com/spreadsheets/d/" + ss.getId() + "/export?format=xlsx&gid=" + sheet.getSheetId();
-  SpreadsheetApp.getUi().showModalDialog(
+
+  rows.forEach((x) => sheet.getRange(x.i + 2, 1, 1, cols).setBackground(SENT_COLOR));
+  const url = "https://docs.google.com/spreadsheets/d/" + out.getId() + "/export?format=xlsx";
+  ui.showModalDialog(
     HtmlService.createHtmlOutput(
-      '<p style="font-family:sans-serif">The file has only the Lebanon orders.</p>' +
+      '<p style="font-family:sans-serif">' + rows.length + " order(s) in the file. They are now grey in the tab.</p>" +
       '<p><a href="' + url + '" target="_blank" style="font-family:sans-serif;font-size:16px">⬇️ Download the .xlsx file</a></p>'
-    ).setWidth(360).setHeight(140),
+    ).setWidth(380).setHeight(150),
     "Lebanon orders"
   );
 }
