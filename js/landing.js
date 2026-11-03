@@ -188,12 +188,14 @@
   });
 
   /* ---------- Sizes (products with "sizes"): one choice per piece ---------- */
+  // sizeWord: what is chosen, "size" by default (e.g. "color" for ["Gold", "Silver"])
+  const sizeWord = p.sizeWord || "size";
   const chosenSizes = [];
   function renderSizes() {
     if (!p.sizes?.length) return;
     const qty = offer().qty;
     $("#sizeRows").innerHTML = Array.from({ length: qty }, (_, n) => `
-      <div class="sizes__row" role="radiogroup" aria-label="${esc(T("Size of piece {n}", { n: n + 1 }))}">
+      <div class="sizes__row" role="radiogroup" aria-label="${esc(`${T(`Choose your ${sizeWord}`)} · ${T("Piece {n}", { n: n + 1 })}`)}">
         ${qty > 1 ? `<span class="sizes__label">${T("Piece {n}", { n: n + 1 })}</span>` : ""}
         ${p.sizes.map((s) => `
           <label class="sizes__chip${chosenSizes[n] === s ? " is-active" : ""}">
@@ -203,6 +205,7 @@
   }
   if (p.sizes?.length) {
     $("#sizePick").hidden = false;
+    $("#sizePick h2").textContent = T(`Choose your ${sizeWord}`);
     $("#sizeRows").addEventListener("change", (e) => {
       const n = Number(e.target.name.slice(4));
       chosenSizes[n] = e.target.value;
@@ -225,7 +228,7 @@
   function sizesOk() {
     if (!p.sizes?.length) return true;
     const ok = chosenSizes.slice(0, offer().qty).filter(Boolean).length === offer().qty;
-    $("#sizeError").textContent = ok ? "" : T("Please choose a size for each piece.");
+    $("#sizeError").textContent = ok ? "" : T(`Please choose a ${sizeWord} for each piece.`);
     if (!ok) $("#sizePick").scrollIntoView({ behavior: "smooth", block: "center" });
     return ok;
   }
@@ -246,7 +249,8 @@
 
     Pixel.track("InitiateCheckout", Pixel.product(p, offer().qty, offer().price));
     // The sizes travel in the product name, so they show in the sheet (REF) and on Telegram
-    const name = p.sizes?.length ? `${p.name} (Size: ${chosenSizes.slice(0, offer().qty).join(", ")})` : p.name;
+    const word = sizeWord[0].toUpperCase() + sizeWord.slice(1);
+    const name = p.sizes?.length ? `${p.name} (${word}: ${chosenSizes.slice(0, offer().qty).join(", ")})` : p.name;
     const o = createOrder(form, { ...p, name }, offer().qty, offer().price);
     btn.disabled = true;
     btn.textContent = T("Sending your order…");
