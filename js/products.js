@@ -420,6 +420,7 @@ const PRODUCTS = [
   {
     id: "arm-chain",
     name: "Layered Arm Chain Bracelet",
+    sku: "ln3-89", // supplier's reference, shown in the sheet (sku column)
     // Sold in Lebanon only: its prices below are in US dollars
     countries: ["lb"],
     category: "Jewelry",
