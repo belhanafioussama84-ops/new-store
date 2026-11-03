@@ -94,6 +94,7 @@ function doPost(e) {
       text_(o.customer.city), // ADRESSE: the "City & delivery address" field
       Number(o.total) || 0,
       "", // VILLE: empty
+      "", // PRODUIT: empty
       text_(o.product.name), // REF
       Number(o.product.qty) || 1,
       "OUI",
