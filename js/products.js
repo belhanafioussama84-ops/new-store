@@ -356,6 +356,7 @@ const PRODUCTS = [
   {
     id: "posture-corrector",
     name: "Posture Corrector Back Brace",
+    sku: "sfy20", // supplier's reference, shown in the sheet (sku column)
     // Sold in Lebanon only: its prices below are in US dollars
     countries: ["lb"],
     category: "Health & comfort",
