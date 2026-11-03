@@ -140,8 +140,9 @@ const PRODUCTS = [
     image: "images/rw1.webp",
     // Photos at the top of the product page (‹ › arrows to go from one to the next)
     images: ["images/rw1.webp", "images/rw-front.webp"],
-    // Real photos of the product in stock (section "What you receive" under the photos)
-    realPhotos: ["images/rw-real-1.webp", "images/rw-real-2.webp", "images/rw-real-3.webp"],
+    // Real photos of the product in stock (section "What you receive" under the photos).
+    // Removed 2026-11-03 at the owner's request; files stay in images/ (rw-real-1/2/3.webp) to put back.
+    // realPhotos: ["images/rw-real-1.webp", "images/rw-real-2.webp", "images/rw-real-3.webp"],
     // Extra badges next to "Free delivery" etc. on this product's page
     perks: ["🎁 Gift box included"],
     // Photos shown under the order form, each with its explanation
