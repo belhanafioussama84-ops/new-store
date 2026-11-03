@@ -360,7 +360,7 @@ const PRODUCTS = [
     // Sold in Lebanon only: its prices below are in US dollars
     countries: ["lb"],
     category: "Health & comfort",
-    price: 39,
+    price: 29,
     oldPrice: null,
     rating: 4.7,
     reviews: 0,
@@ -408,9 +408,9 @@ const PRODUCTS = [
       },
     ],
     offers: [
-      { qty: 1, price: 39 },
-      { qty: 2, price: 69, tag: "Best value" },
-      { qty: 3, price: 95 },
+      { qty: 1, price: 29 },
+      { qty: 2, price: 49, tag: "Best value" },
+      { qty: 3, price: 69 },
     ],
     description: "An adjustable back brace with crossed straps that holds your shoulders back and helps you sit and stand straight, at work, at home or on the move.",
     landing: {
