@@ -32,14 +32,16 @@
  */
 
 const SHEET_NAME = "Orders";
-// Countries whose orders go to their own tab (created automatically at the first order).
-// Everything else (Tanzania, Zambia) goes to SHEET_NAME.
-const COUNTRY_SHEETS = { Lebanon: "Orders Lebanon" };
-// Column order of the sheet = Simon Express import table.
+// Lebanese orders go to their own tab, with the columns of the Lebanese delivery import
+// (created automatically at the first order). Everything else (Tanzania, Zambia) goes to SHEET_NAME.
+const LEBANON_SHEET = "Orders Lebanon";
+const LEBANON_HEADERS = [
+  "date_order", "full_name", "phone", "address", "city", "sku", "qte", "price", "note", "delivery_note",
+];
+// Column order of the "Orders" tab = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
-// Exception: in the country tabs (Lebanon), VILLE gets the city and ADRESSE the address alone.
-// PAYS (Tanzania / Zambia / Lebanon, last column) is not in the Simon Express table: PRIX is in TSh
-// for Tanzania, in Kwacha for Zambia and in US dollars for Lebanon. Delete that column before importing if Simon Express refuses it.
+// PAYS (Tanzania / Zambia, last column) is not in the Simon Express table: PRIX is in TSh
+// for Tanzania and in Kwacha for Zambia. Delete that column before importing if Simon Express refuses it.
 const HEADERS = [
   "CODE SUIVI", "DESTINATAIRE", "TELEPHONE", "ADRESSE", "PRIX", "VILLE",
   "PRODUIT", "REF", "QTY", "OUVRIR", "REMPLACER", "PAYS",
@@ -64,19 +66,34 @@ function doPost(e) {
   lock.waitLock(10000); // two orders at the same moment must not get the same code
   try {
     const o = JSON.parse(e.postData.contents);
-    const ownTab = COUNTRY_SHEETS[o.country];
-    const sheet = getOrdersSheet_(ownTab);
+    if (o.country === "Lebanon") {
+      const sheet = getOrdersSheet_(LEBANON_SHEET, LEBANON_HEADERS);
+      sheet.appendRow([
+        Utilities.formatDate(new Date(o.date || Date.now()), "Asia/Beirut", "yyyy-MM-dd HH:mm"),
+        text_(o.customer.fullName),
+        localPhone_(o.customer.phone),
+        // Orders from before the City / Address split only have customer.city ("City, address")
+        text_(o.customer.town ? o.customer.street : o.customer.city),
+        text_(o.customer.town || ""),
+        text_(o.product.sku || o.product.name), // products without a SKU: their name
+        Number(o.product.qty) || 1,
+        Number(o.total) || 0,
+        // note: the product name next to its SKU (the site sends "Name (sku)")
+        text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : ""),
+        "", // delivery_note: for you to fill in
+      ]);
+      notifyTelegram_(sheet.getLastRow() - 1, o);
+      return json_({ ok: true });
+    }
+    const sheet = getOrdersSheet_();
     const code = nextCode_(sheet);
-    // Orders from before the City / Address split only have customer.city ("City, address")
-    const split = ownTab && o.customer.town;
     sheet.appendRow([
       code,
       text_(o.customer.fullName),
       localPhone_(o.customer.phone),
-      text_(split ? o.customer.street : o.customer.city), // ADRESSE
+      text_(o.customer.city), // ADRESSE: the "City & delivery address" field
       Number(o.total) || 0,
-      split ? text_(o.customer.town) : "", // VILLE
-      "", // PRODUIT: empty
+      "", // VILLE: empty
       text_(o.product.name), // REF
       Number(o.product.qty) || 1,
       "OUI",
@@ -98,16 +115,22 @@ function doGet() {
 }
 
 // The tab named `name` (default: the main "Orders" tab), created with its headers if missing.
-// Each tab numbers its own CODE SUIVI.
-function getOrdersSheet_(name = SHEET_NAME) {
+// The main tab gets its headers replaced if they are the old ones (see fixOldRows). Another tab
+// whose rows are in other columns is renamed "<name> (old <date>)" and a new one is started.
+function getOrdersSheet_(name = SHEET_NAME, headers = HEADERS) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(name) || ss.insertSheet(name);
-  const header = sheet.getRange(1, 1, 1, HEADERS.length);
-  // Also replaces the headers of a sheet made with the old column names.
-  if (header.getValues()[0].join("|") !== HEADERS.join("|")) {
-    header.setValues([HEADERS]).setFontWeight("bold").setBackground("#0d1f17").setFontColor("#f3c36b");
+  let sheet = ss.getSheetByName(name);
+  const same = (s) => s.getRange(1, 1, 1, headers.length).getValues()[0].join("|") === headers.join("|");
+  if (sheet && name !== SHEET_NAME && !same(sheet) && sheet.getLastRow() > 1) {
+    sheet.setName(name + " (old " + Utilities.formatDate(new Date(), "GMT", "yyyy-MM-dd HH-mm") + ")");
+    sheet = null;
+  }
+  sheet = sheet || ss.insertSheet(name);
+  if (!same(sheet)) {
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers])
+      .setFontWeight("bold").setBackground("#0d1f17").setFontColor("#f3c36b");
     sheet.setFrozenRows(1);
-    sheet.getRange("E:E").setNumberFormat("#,##0"); // PRIX
+    sheet.getRange(headers === HEADERS ? "E:E" : "H:H").setNumberFormat("#,##0"); // PRIX / price
   }
   return sheet;
 }
