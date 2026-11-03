@@ -481,6 +481,17 @@ const PRODUCTS = [
   },
 ];
 
+// A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened
+// on a phone that chose Zambia before) reopens the same page in the product's country.
+{
+  const p = PRODUCTS.find((x) => x.id === new URLSearchParams(location.search).get("id"));
+  if (p?.countries && !p.countries.includes(COUNTRY.id)) {
+    const url = new URL(location.href);
+    url.searchParams.set("country", p.countries[0]);
+    location.replace(url.href);
+  }
+}
+
 // A product with "countries" is only sold there, at its own prices.
 for (let i = PRODUCTS.length - 1; i >= 0; i--) {
   if (PRODUCTS[i].countries && !PRODUCTS[i].countries.includes(COUNTRY.id)) PRODUCTS.splice(i, 1);
