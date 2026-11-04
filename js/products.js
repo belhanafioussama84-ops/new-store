@@ -512,7 +512,6 @@ const PRODUCTS = [
     name: "Masajeador de Pies EMS",
     sku: "LD-P-19524", // LatinDrop SKU (El Salvador tab of the sheet)
     countries: ["sv"],
-    home: false, // not on the home page until it has its photos (its own page works)
     category: "Health & comfort",
     price: 40, // 2 and 3 pieces: TO CONFIRM
     oldPrice: null,
@@ -521,7 +520,8 @@ const PRODUCTS = [
     badge: "New",
     icon: "🦶",
     image: "images/foot-massager-1.jpg",
-    images: ["images/foot-massager-1.jpg"],
+    // Supplier photos (cropped from screenshots the user sent: low resolution, replace with LatinDrop's)
+    images: ["images/foot-massager-1.jpg", "images/foot-massager-screen.jpg", "images/foot-massager-size.jpg", "images/foot-massager-sleep.jpg"],
     description: "Una alfombrilla de masaje con estimulación eléctrica (EMS) para relajar tus pies en casa. Te sientas, pones los pies encima y eliges la intensidad que te gusta.",
     offers: [
       { qty: 1, price: 40 },
@@ -539,19 +539,32 @@ const PRODUCTS = [
     },
     benefits: [
       { icon: "⚡", title: "Masaje EMS", text: "Pequeños impulsos eléctricos que se sienten como un hormigueo relajante." },
-      { icon: "🎚️", title: "Tú eliges", text: "Varios modos e intensidades: de suave a más fuerte." },
+      { icon: "🎚️", title: "8 modos, 19 niveles", text: "De suave a más fuerte: tú eliges en la pantalla LED." },
       { icon: "🏠", title: "Cuando quieras", text: "En casa, en la oficina o viendo la tele, sin citas ni filas." },
-      { icon: "🧳", title: "Delgada y ligera", text: "Se guarda en un cajón o en la maleta." },
+      { icon: "🔋", title: "Recargable por USB", text: "Cárgala en la computadora, un power bank, la pared o el carro." },
     ],
     sections: [
       {
+        image: "images/foot-massager-sleep.jpg",
         title: "Relájate después de un día largo",
         text: "Unos minutos sobre la alfombrilla y sientes cómo tus pies se relajan. Ideal después del trabajo o de una caminata larga.",
         list: ["Para pies cansados", "Úsala sentado, sin esfuerzo", "Sesiones cortas, cuando quieras"],
       },
       {
-        title: "Fácil de usar",
-        text: "Enciéndela, elige el modo y la intensidad, y listo. Sin aplicaciones ni instalaciones complicadas.",
+        image: "images/foot-massager-1.jpg",
+        title: "Con control remoto",
+        text: "Cambia el modo y la intensidad desde el control remoto, sin agacharte. La pantalla es desmontable y se fija con imanes.",
+      },
+      {
+        image: "images/foot-massager-screen.jpg",
+        title: "Pantalla LED: 8 modos y 19 niveles",
+        text: "Botón + para encender y subir la intensidad, botón M para cambiar de modo, botón − para bajarla o apagar.",
+        list: ["8 modos de masaje", "19 niveles de intensidad", "Pantalla LED fácil de leer"],
+      },
+      {
+        image: "images/foot-massager-size.jpg",
+        title: "Recargable por USB",
+        text: "Viene con su cable USB-C. Cárgala donde quieras: computadora, power bank, cargador de pared o carro. Mide 27.6 × 31.5 cm.",
       },
       {
         title: "Un regalo que se agradece",
@@ -563,15 +576,20 @@ const PRODUCTS = [
       { title: "Pon los pies encima", text: "Descalzo, con los pies bien apoyados sobre la alfombrilla." },
       { title: "Elige la intensidad", text: "Empieza suave y súbela poco a poco hasta sentirte cómodo." },
     ],
-    // Specs: only what is sure. Add the real ones (modes, levels, battery) from the supplier.
+    // Specs: from the supplier's photos
     specs: {
       "Tipo": "Alfombrilla de masaje con estimulación eléctrica (EMS)",
-      "Uso": "Pies, sentado",
-      "Para": "Hombres y mujeres",
+      "Modos": "8",
+      "Niveles de intensidad": "19",
+      "Pantalla": "LED, desmontable (fijación magnética)",
+      "Control": "Botones + control remoto RF",
+      "Carga": "USB (cable USB-C incluido)",
+      "Medidas": "27.6 × 31.5 cm",
     },
     faq: [
       { q: "¿Duele?", a: "No. Se siente como un hormigueo. Empieza con la intensidad más baja y súbela poco a poco hasta que te sientas cómodo." },
-      { q: "¿Cuánto tiempo la uso?", a: "Unos 15 a 20 minutos por sesión son suficientes. Puedes usarla todos los días." },
+      { q: "¿Cuánto tiempo la uso?", a: "De 10 a 20 minutos por sesión. Puedes usarla todos los días." },
+      { q: "¿Cómo se carga?", a: "Con el cable USB-C incluido, en una computadora, un power bank, un cargador de pared o el carro." },
       { q: "¿Quién no debe usarla?", a: "No la uses si tienes marcapasos u otro implante electrónico, si estás embarazada o si tienes heridas en los pies. Si tienes una enfermedad, consulta a tu médico antes de usarla." },
     ],
   },
