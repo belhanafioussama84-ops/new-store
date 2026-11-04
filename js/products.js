@@ -215,20 +215,6 @@ const PRODUCTS = [
       ],
       sectionImages: ["images/rw2.webp", "images/rw3.webp", "images/rw4.webp", "images/rw5.webp"],
     },
-    // El Salvador: US dollars (TO CONFIRM: same as Lebanon), Spanish name.
-    // sku: the LatinDrop SKU ("LD-P-…"), sent to the El Salvador tab of the sheet. Empty = none yet.
-    sv: {
-      name: "Reloj Reward",
-      sku: "",
-      price: 39,
-      oldPrice: null,
-      offers: [
-        { qty: 1, price: 39 },
-        { qty: 2, price: 69, tag: "Best value" },
-        { qty: 3, price: 95 },
-      ],
-      sectionImages: ["images/rw2.webp", "images/rw3.webp", "images/rw4.webp", "images/rw5.webp"],
-    },
     description: "Elegant, durable watch with a premium finish. Perfect for everyday wear or as a gift.",
     // specs: {
     //   "Case": "Stainless steel, 42 mm",
@@ -330,16 +316,6 @@ const PRODUCTS = [
         { qty: 3, price: 49 },
       ],
     },
-    sv: {
-      name: "Spray Nano Reparador para Auto",
-      sku: "", // LatinDrop SKU
-      price: 19,
-      offers: [
-        { qty: 1, price: 19 },
-        { qty: 2, price: 35, tag: "Best value" },
-        { qty: 3, price: 49 },
-      ],
-    },
     description: "Spray, wipe, and your car shines like new. This nano coating cleans without water, hides fine scratches and leaves a water-repellent layer that keeps rain, mud and dust off the paint.",
     landing: {
       showcaseTitle: ["Showroom shine,", "in minutes"],
@@ -351,9 +327,8 @@ const PRODUCTS = [
     name: "Sauna Sculpt Leggings",
     // Supplier's reference: shown in the sheet next to the name (REF column), not on the site
     sku: "os4-39",
-    // Sold in Lebanon and El Salvador only: its prices below are in US dollars
-    countries: ["lb", "sv"],
-    sv: { name: "Leggings Sauna Sculpt", sku: "" }, // sku: LatinDrop SKU ("LD-P-…")
+    // Sold in Lebanon only: its prices below are in US dollars (no "lb" part needed)
+    countries: ["lb"],
     category: "Fitness",
     price: 38,
     oldPrice: null,
@@ -470,9 +445,8 @@ const PRODUCTS = [
     id: "arm-chain",
     name: "Layered Arm Chain Bracelet",
     sku: "ln3-89", // supplier's reference, shown in the sheet (sku column)
-    // Sold in Lebanon and El Salvador only: its prices below are in US dollars
-    countries: ["lb", "sv"],
-    sv: { name: "Brazalete de Brazo con Cadenas", sku: "" }, // sku: LatinDrop SKU ("LD-P-…")
+    // Sold in Lebanon only: its prices below are in US dollars
+    countries: ["lb"],
     category: "Jewelry",
     price: 22,
     oldPrice: null,
