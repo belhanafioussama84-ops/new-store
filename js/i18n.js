@@ -743,6 +743,12 @@ const ES = {
   "Size guide": "Guía de tallas",
   "In cm, measured flat. Between two sizes? Choose the bigger one.": "En cm, medido en plano. ¿Entre dos tallas? Elige la más grande.",
 
+  "The problem": "El problema",
+  "The solution": "La solución",
+  "Why you'll love it": "Por qué te va a encantar",
+  "Easy to use, in 3 steps": "Fácil de usar, en 3 pasos",
+  "Specifications": "Especificaciones",
+
   /* ---------- Thank-you page ---------- */
   "Order confirmed · Duka Bora": "Pedido confirmado · Duka Bora",
   "Asante sana · Order confirmed": "Muchas gracias · Pedido confirmado",

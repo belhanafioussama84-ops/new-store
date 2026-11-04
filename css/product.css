@@ -504,6 +504,46 @@ p { margin: 0 0 1em; }
 .size-guide img { display: block; width: 100%; max-width: 420px; margin: 0 auto; border-radius: 10px; }
 
 /* ==========================================================
+   Extra landing blocks (js/landing.js): problem / solution, benefits,
+   3 steps, specifications. Shown only for products that have them.
+   ========================================================== */
+.ps { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; padding-top: 3rem; padding-bottom: 1rem; }
+.ps__card { padding: 2rem 1.75rem; border-radius: var(--radius); border: 1px solid var(--line); background: #fff; }
+.ps__card h2 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin-bottom: .6rem; }
+.ps__card p:not(.label) { color: var(--muted); font-size: 1.05rem; }
+.ps__card--problem .label { color: var(--danger); }
+.ps__card--solution { background: linear-gradient(160deg, var(--accent), var(--accent-2)); border-color: transparent; color: #fff; }
+.ps__card--solution .label { color: rgba(255, 255, 255, .75); }
+.ps__card--solution p:not(.label) { color: rgba(255, 255, 255, .88); }
+.ps__card--solution .btn { margin-top: .5rem; }
+.benefits { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.benefits__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.benefits article { padding: 1.5rem 1.25rem; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); text-align: center; transition: transform .2s, box-shadow .2s; }
+.benefits article:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -22px rgba(29, 36, 51, .5); }
+.benefits__icon { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto .9rem; border-radius: 50%; background: var(--accent-soft); font-size: 1.6rem; }
+.benefits h3 { font-size: 1.05rem; color: var(--accent); margin-bottom: .35rem; }
+.benefits p { margin: 0; color: var(--muted); font-size: .92rem; }
+.steps3 { padding-top: 3rem; padding-bottom: 2rem; border-top: 1px solid var(--line); text-align: center; }
+.steps3 h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--accent); }
+.steps3 ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+.steps3 li { padding: 1.75rem 1.25rem; border-radius: var(--radius); background: var(--accent-soft); }
+.steps3 li span { display: grid; place-items: center; width: 44px; height: 44px; margin: 0 auto .8rem; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.1rem; }
+.steps3 h3 { font-size: 1.05rem; margin-bottom: .3rem; }
+.steps3 p { margin: 0; color: var(--muted); font-size: .95rem; }
+.specs { max-width: 760px; padding-top: 2.5rem; padding-bottom: 2rem; }
+.specs dl { margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #fff; }
+.specs dl div { display: grid; grid-template-columns: 40% 1fr; gap: 1rem; padding: .85rem 1.25rem; border-bottom: 1px solid var(--line); }
+.specs dl div:last-child { border-bottom: 0; }
+.specs dl div:nth-child(odd) { background: var(--bg); }
+.specs dt { font-weight: 700; }
+.specs dd { margin: 0; color: var(--muted); }
+@media (max-width: 760px) {
+  .ps, .steps3 ol { grid-template-columns: 1fr; }
+  .benefits__grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
+  .benefits article { padding: 1.25rem .9rem; }
+}
+
+/* ==========================================================
    Lebanon colours: red and white like the flag, cedar green
    instead of gold. <html data-country="lb"> is set by js/products.js.
    ========================================================== */

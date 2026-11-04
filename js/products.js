@@ -502,6 +502,75 @@ const PRODUCTS = [
     ],
     description: "A thin open arm band with layered chains and small bar pendants. Elegant, light and easy to wear, in gold or silver.",
   },
+  {
+    id: "foot-massager",
+    // El Salvador only: texts written in Spanish here, prices in US dollars
+    name: "Masajeador de Pies EMS",
+    sku: "LD-P-19524", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    home: false, // not on the home page until it has its photos (its own page works)
+    category: "Health & comfort",
+    price: 40, // 2 and 3 pieces: TO CONFIRM
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "🦶",
+    image: "images/foot-massager-1.jpg",
+    images: ["images/foot-massager-1.jpg"],
+    description: "Una alfombrilla de masaje con estimulación eléctrica (EMS) para relajar tus pies en casa. Te sientas, pones los pies encima y eliges la intensidad que te gusta.",
+    offers: [
+      { qty: 1, price: 40 },
+      { qty: 2, price: 70, tag: "Best value" },
+      { qty: 3, price: 95 },
+    ],
+    // Extra blocks of the product page (js/landing.js)
+    problem: {
+      title: "Pies cansados al final del día",
+      text: "Horas de pie en el trabajo, caminar mucho o estar sentado todo el día: al llegar a casa, tus pies solo piden descanso.",
+    },
+    solution: {
+      title: "Un momento de masaje, sin salir de casa",
+      text: "Pon los pies sobre la alfombrilla, enciéndela y relájate mientras ves la tele, lees o trabajas. Tú eliges la intensidad.",
+    },
+    benefits: [
+      { icon: "⚡", title: "Masaje EMS", text: "Pequeños impulsos eléctricos que se sienten como un hormigueo relajante." },
+      { icon: "🎚️", title: "Tú eliges", text: "Varios modos e intensidades: de suave a más fuerte." },
+      { icon: "🏠", title: "Cuando quieras", text: "En casa, en la oficina o viendo la tele, sin citas ni filas." },
+      { icon: "🧳", title: "Delgada y ligera", text: "Se guarda en un cajón o en la maleta." },
+    ],
+    sections: [
+      {
+        title: "Relájate después de un día largo",
+        text: "Unos minutos sobre la alfombrilla y sientes cómo tus pies se relajan. Ideal después del trabajo o de una caminata larga.",
+        list: ["Para pies cansados", "Úsala sentado, sin esfuerzo", "Sesiones cortas, cuando quieras"],
+      },
+      {
+        title: "Fácil de usar",
+        text: "Enciéndela, elige el modo y la intensidad, y listo. Sin aplicaciones ni instalaciones complicadas.",
+      },
+      {
+        title: "Un regalo que se agradece",
+        text: "Para tu mamá, tu papá o tus abuelos, o para ti: un momento de descanso cada día.",
+      },
+    ],
+    steps: [
+      { title: "Siéntate", text: "Coloca la alfombrilla en el piso, frente a tu silla o sofá." },
+      { title: "Pon los pies encima", text: "Descalzo, con los pies bien apoyados sobre la alfombrilla." },
+      { title: "Elige la intensidad", text: "Empieza suave y súbela poco a poco hasta sentirte cómodo." },
+    ],
+    // Specs: only what is sure. Add the real ones (modes, levels, battery) from the supplier.
+    specs: {
+      "Tipo": "Alfombrilla de masaje con estimulación eléctrica (EMS)",
+      "Uso": "Pies, sentado",
+      "Para": "Hombres y mujeres",
+    },
+    faq: [
+      { q: "¿Duele?", a: "No. Se siente como un hormigueo. Empieza con la intensidad más baja y súbela poco a poco hasta que te sientas cómodo." },
+      { q: "¿Cuánto tiempo la uso?", a: "Unos 15 a 20 minutos por sesión son suficientes. Puedes usarla todos los días." },
+      { q: "¿Quién no debe usarla?", a: "No la uses si tienes marcapasos u otro implante electrónico, si estás embarazada o si tienes heridas en los pies. Si tienes una enfermedad, consulta a tu médico antes de usarla." },
+    ],
+  },
 ];
 
 // A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened

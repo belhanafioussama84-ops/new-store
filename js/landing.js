@@ -127,6 +127,45 @@
     $("#real").hidden = false;
   }
 
+  /* ---------- Extra landing blocks (optional, from products.js) ----------
+     problem / solution: { title, text }   → two cards before the photos
+     benefits: [{ icon, title, text }]     → icon grid before the photos
+     steps: [{ title, text }]              → "How to use it" after the photos
+     specs: { "Label": "value" }           → table after the photos
+     faq: [{ q, a }]                       → added on top of the questions */
+  const before = [], after = [];
+  if (p.problem && p.solution) before.push(`
+    <section class="wrap ps">
+      <div class="ps__card ps__card--problem"><p class="label">${T("The problem")}</p><h2>${esc(T(p.problem.title))}</h2><p>${esc(T(p.problem.text))}</p></div>
+      <div class="ps__card ps__card--solution"><p class="label">${T("The solution")}</p><h2>${esc(T(p.solution.title))}</h2><p>${esc(T(p.solution.text))}</p>
+        <a href="#order" class="btn btn--line">${T("Order now · Pay on delivery")}</a></div>
+    </section>`);
+  if (p.benefits?.length) before.push(`
+    <section class="wrap benefits">
+      <p class="label label--center">${T("Why you'll love it")}</p>
+      <div class="benefits__grid">${p.benefits.map((b) => `
+        <article><span class="benefits__icon" aria-hidden="true">${esc(b.icon || "✓")}</span><h3>${esc(T(b.title))}</h3><p>${esc(T(b.text))}</p></article>`).join("")}
+      </div>
+    </section>`);
+  if (p.steps?.length) after.push(`
+    <section class="wrap steps3">
+      <p class="label label--center">${T("How it works")}</p>
+      <h2>${T("Easy to use, in 3 steps")}</h2>
+      <ol>${p.steps.map((s, i) => `<li><span>${i + 1}</span><h3>${esc(T(s.title))}</h3><p>${esc(T(s.text))}</p></li>`).join("")}</ol>
+    </section>`);
+  const specs = Object.entries(p.specs || {});
+  if (specs.length) after.push(`
+    <section class="wrap specs">
+      <p class="label label--center">${T("Specifications")}</p>
+      <dl>${specs.map(([k, v]) => `<div><dt>${esc(T(k))}</dt><dd>${esc(T(v))}</dd></div>`).join("")}</dl>
+    </section>`);
+  $("#story").insertAdjacentHTML("beforebegin", before.join(""));
+  $("#real").insertAdjacentHTML("afterend", after.join(""));
+  if (p.faq?.length) {
+    $("#faq h2").insertAdjacentHTML("afterend", p.faq.map((f) =>
+      `<details><summary>${esc(T(f.q))}</summary><p>${esc(T(f.a))}</p></details>`).join(""));
+  }
+
   /* ---------- Offers ---------- */
   // Small product photos, one per piece (max 3), shown in each offer
   const thumbs = (qty) => `<span class="offer__pics">${
