@@ -40,10 +40,14 @@ const LEBANON_SHEET = "Orders Lebanon";
 const LEBANON_HEADERS = [
   "date_order", "full_name", "phone", "address", "city", "sku", "qte", "price", "note",
 ];
-// El Salvador orders (?country=sv) go to their own tab, created at the first order.
+// El Salvador orders (?country=sv) go to their own tab, with the 13 columns of the LatinDrop
+// order file (created automatically at the first order). LatinDrop has no address column: the
+// city and the address both go in "area". status, profit, mode and profit_usd are left empty
+// (LatinDrop's own values). To import them: menu Duka Bora → Download El Salvador orders.
 const SALVADOR_SHEET = "Orders El Salvador";
 const SALVADOR_HEADERS = [
-  "FECHA", "PEDIDO", "NOMBRE", "TELEFONO", "CIUDAD", "DIRECCION", "PRODUCTO", "SKU", "CANTIDAD", "TOTAL USD",
+  "code", "created", "status", "customer", "phone", "country", "area", "products",
+  "cod_price", "profit", "mode", "source", "profit_usd",
 ];
 // Column order of the "Orders" tab = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
@@ -76,17 +80,20 @@ function doPost(e) {
     if (o.country === "El Salvador") {
       const sheet = getOrdersSheet_(SALVADOR_SHEET, SALVADOR_HEADERS);
       sheet.appendRow([
-        Utilities.formatDate(new Date(o.date || Date.now()), "America/El_Salvador", "yyyy-MM-dd HH:mm"),
-        text_(o.number),
-        text_(o.customer.fullName),
-        localPhone_(o.customer.phone),
-        text_(o.customer.town || ""),
-        text_(o.customer.street || o.customer.city),
-        // the site sends "Name (sku)": the name alone here, the SKU in its own column
-        text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : o.product.name),
-        text_(o.product.sku || ""),
-        Number(o.product.qty) || 1,
-        Number(o.total) || 0,
+        text_(o.number), // code
+        Utilities.formatDate(new Date(o.date || Date.now()), "America/El_Salvador", "yyyy-MM-dd HH:mm"), // created
+        "", // status
+        text_(o.customer.fullName), // customer
+        localPhone_(o.customer.phone), // phone: "+503 71234567"
+        "El Salvador", // country
+        text_(o.customer.city), // area: "City, address" (no address column in LatinDrop)
+        // products: "Name (sku) x 2" (the site already sends "Name (sku)")
+        text_(o.product.name + " x " + (Number(o.product.qty) || 1)),
+        Number(o.total) || 0, // cod_price
+        "", // profit
+        "", // mode
+        "dukaabora.store", // source
+        "", // profit_usd
       ]);
       notifyTelegram_(o.number, o);
       return json_({ ok: true });
@@ -144,23 +151,42 @@ function onOpen() {
   SpreadsheetApp.getUi().createMenu("Duka Bora")
     .addItem("Download NEW Lebanon orders (.xlsx)", "downloadNewLebanonOrders")
     .addItem("Download ALL Lebanon orders (.xlsx)", "downloadAllLebanonOrders")
+    .addSeparator()
+    .addItem("Download NEW El Salvador orders (.csv)", "downloadNewSalvadorOrders")
+    .addItem("Download ALL El Salvador orders (.csv)", "downloadAllSalvadorOrders")
     .addToUi();
 }
 
-// Rows already sent to COD Services are greyed out in the Lebanon tab (their data stays there).
+// Rows already downloaded are greyed out in their tab (their data stays there).
 const SENT_COLOR = "#d9d9d9";
 
-function downloadNewLebanonOrders() { downloadLebanonOrders_(true); }
-function downloadAllLebanonOrders() { downloadLebanonOrders_(false); }
+// Lebanon: COD Services import (.xlsx). El Salvador: LatinDrop file (.csv).
+const EXPORTS_ = {
+  lb: {
+    sheet: LEBANON_SHEET, headers: LEBANON_HEADERS, label: "Lebanon", format: "xlsx",
+    title: "COD Services import ", timeZone: "Asia/Beirut", prop: "LB_EXPORT_FILE",
+    textCols: ["B", "C", "D", "E", "F", "I"],
+  },
+  sv: {
+    sheet: SALVADOR_SHEET, headers: SALVADOR_HEADERS, label: "El Salvador", format: "csv",
+    title: "LatinDrop orders ", timeZone: "America/El_Salvador", prop: "SV_EXPORT_FILE",
+    textCols: ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M"],
+  },
+};
 
-// Puts the Lebanon orders (only the ones not sent yet, or all) in a separate file with the
-// 9 columns of the COD Services template, shows its download link, then greys those rows out.
+function downloadNewLebanonOrders() { downloadOrders_(EXPORTS_.lb, true); }
+function downloadAllLebanonOrders() { downloadOrders_(EXPORTS_.lb, false); }
+function downloadNewSalvadorOrders() { downloadOrders_(EXPORTS_.sv, true); }
+function downloadAllSalvadorOrders() { downloadOrders_(EXPORTS_.sv, false); }
+
+// Puts the orders of one tab (only the ones not downloaded yet, or all) in a separate file with
+// exactly that tab's columns, shows its download link, then greys those rows out.
 // (File → Download would put every tab in the file, with "Orders" first.)
-function downloadLebanonOrders_(onlyNew) {
+function downloadOrders_(cfg, onlyNew) {
   const ui = SpreadsheetApp.getUi();
-  const sheet = getOrdersSheet_(LEBANON_SHEET, LEBANON_HEADERS);
+  const sheet = getOrdersSheet_(cfg.sheet, cfg.headers);
   const n = sheet.getLastRow() - 1;
-  const cols = LEBANON_HEADERS.length;
+  const cols = cfg.headers.length;
   const range = n > 0 ? sheet.getRange(2, 1, n, cols) : null;
   const values = range ? range.getValues() : [];
   const colors = range ? range.getBackgrounds() : [];
@@ -170,29 +196,29 @@ function downloadLebanonOrders_(onlyNew) {
     if (onlyNew && colors[i][0] === SENT_COLOR) return;
     rows.push({ r, i });
   });
-  if (!rows.length) return ui.alert("No new Lebanon orders: every order was already downloaded.");
+  if (!rows.length) return ui.alert("No new " + cfg.label + " orders: every order was already downloaded.");
 
   // The file to import, made fresh each time; the one from last time goes to the trash
   const props = PropertiesService.getScriptProperties();
-  const old = props.getProperty("LB_EXPORT_FILE");
+  const old = props.getProperty(cfg.prop);
   if (old) { try { DriveApp.getFileById(old).setTrashed(true); } catch (err) { /* already gone */ } }
-  const out = SpreadsheetApp.create("COD Services import " + Utilities.formatDate(new Date(), "Asia/Beirut", "yyyy-MM-dd HH-mm"));
-  props.setProperty("LB_EXPORT_FILE", out.getId());
+  const out = SpreadsheetApp.create(cfg.title + Utilities.formatDate(new Date(), cfg.timeZone, "yyyy-MM-dd HH-mm"));
+  props.setProperty(cfg.prop, out.getId());
   const tab = out.getSheets()[0].setName("Orders");
-  tab.getRange(1, 1, 1, cols).setValues([LEBANON_HEADERS]).setFontWeight("bold");
-  // Text columns stay text (a phone "+961 …" must not turn into a number)
-  ["B", "C", "D", "E", "F", "I"].forEach((c) => tab.getRange(c + ":" + c).setNumberFormat("@"));
+  tab.getRange(1, 1, 1, cols).setValues([cfg.headers]).setFontWeight("bold");
+  // Text columns stay text (a phone "+961 …" / "+503 …" must not turn into a number)
+  cfg.textCols.forEach((c) => tab.getRange(c + ":" + c).setNumberFormat("@"));
   tab.getRange(2, 1, rows.length, cols).setValues(rows.map((x) => x.r));
   SpreadsheetApp.flush();
 
   rows.forEach((x) => sheet.getRange(x.i + 2, 1, 1, cols).setBackground(SENT_COLOR));
-  const url = "https://docs.google.com/spreadsheets/d/" + out.getId() + "/export?format=xlsx";
+  const url = "https://docs.google.com/spreadsheets/d/" + out.getId() + "/export?format=" + cfg.format;
   ui.showModalDialog(
     HtmlService.createHtmlOutput(
       '<p style="font-family:sans-serif">' + rows.length + " order(s) in the file. They are now grey in the tab.</p>" +
-      '<p><a href="' + url + '" target="_blank" style="font-family:sans-serif;font-size:16px">⬇️ Download the .xlsx file</a></p>'
+      '<p><a href="' + url + '" target="_blank" style="font-family:sans-serif;font-size:16px">⬇️ Download the .' + cfg.format + " file</a></p>"
     ).setWidth(380).setHeight(150),
-    "Lebanon orders"
+    cfg.label + " orders"
   );
 }
 
@@ -212,7 +238,7 @@ function getOrdersSheet_(name = SHEET_NAME, headers = HEADERS) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers])
       .setFontWeight("bold").setBackground("#0d1f17").setFontColor("#f3c36b");
     sheet.setFrozenRows(1);
-    if (headers === SALVADOR_HEADERS) sheet.getRange("J:J").setNumberFormat("#,##0.00"); // TOTAL USD
+    if (headers === SALVADOR_HEADERS) sheet.getRange("I:I").setNumberFormat("0.00"); // cod_price (USD)
     else sheet.getRange(headers === HEADERS ? "E:E" : "H:H").setNumberFormat("#,##0"); // PRIX / price
   }
   return sheet;
