@@ -533,9 +533,9 @@ const PRODUCTS = [
     reviews: 0,
     badge: "New",
     icon: "🦶",
-    image: "images/foot-massager-1.jpg",
-    // Supplier photos (cropped from screenshots the user sent: low resolution, replace with LatinDrop's)
-    images: ["images/foot-massager-1.jpg", "images/foot-massager-screen.jpg", "images/foot-massager-size.jpg", "images/foot-massager-sleep.jpg"],
+    image: "images/foot-massager-remote.jpg",
+    // Supplier photos (600 x 600)
+    images: ["images/foot-massager-remote.jpg", "images/foot-massager-led.jpg", "images/foot-massager-usb.jpg", "images/foot-massager-night.jpg"],
     description: "Una alfombrilla de masaje con estimulación eléctrica (EMS) para relajar tus pies en casa. Te sientas, pones los pies encima y eliges la intensidad que te gusta.",
     offers: [
       { qty: 1, price: 40 },
@@ -567,24 +567,24 @@ const PRODUCTS = [
     ],
     sections: [
       {
-        image: "images/foot-massager-sleep.jpg",
+        image: "images/foot-massager-night.jpg",
         title: "Relájate después de un día largo",
         text: "Unos minutos sobre la alfombrilla y sientes cómo tus pies se relajan. Ideal después del trabajo o de una caminata larga.",
         list: ["Para pies cansados", "Úsala sentado, sin esfuerzo", "Sesiones cortas, cuando quieras"],
       },
       {
-        image: "images/foot-massager-1.jpg",
+        image: "images/foot-massager-remote.jpg",
         title: "Con control remoto",
         text: "Cambia el modo y la intensidad desde el control remoto, sin agacharte. La pantalla es desmontable y se fija con imanes.",
       },
       {
-        image: "images/foot-massager-screen.jpg",
+        image: "images/foot-massager-led.jpg",
         title: "Pantalla LED: 8 modos y 19 niveles",
         text: "Botón + para encender y subir la intensidad, botón M para cambiar de modo, botón − para bajarla o apagar.",
         list: ["8 modos de masaje", "19 niveles de intensidad", "Pantalla LED fácil de leer"],
       },
       {
-        image: "images/foot-massager-size.jpg",
+        image: "images/foot-massager-usb.jpg",
         title: "Recargable por USB",
         text: "Viene con su cable USB-C. Cárgala donde quieras: computadora, power bank, cargador de pared o carro. Mide 27.6 × 31.5 cm.",
       },
