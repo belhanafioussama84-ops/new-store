@@ -527,7 +527,8 @@ const PRODUCTS = [
     sku: "LD-P-19524", // LatinDrop SKU (El Salvador tab of the sheet)
     countries: ["sv"],
     category: "Health & comfort",
-    price: 40, // 2 and 3 pieces: TO CONFIRM
+    price: 36.99, // user's price; 2 and 3 pieces are my suggestion
+    // Cost: $5.10 product + about $10 delivery (LatinDrop)
     oldPrice: null,
     rating: 4.8,
     reviews: 0,
@@ -538,9 +539,9 @@ const PRODUCTS = [
     images: ["images/foot-massager-remote.jpg", "images/foot-massager-led.jpg", "images/foot-massager-usb.jpg", "images/foot-massager-night.jpg"],
     description: "Una alfombrilla de masaje con estimulación eléctrica (EMS) para relajar tus pies en casa. Te sientas, pones los pies encima y eliges la intensidad que te gusta.",
     offers: [
-      { qty: 1, price: 40 },
-      { qty: 2, price: 70, tag: "Best value" },
-      { qty: 3, price: 95 },
+      { qty: 1, price: 36.99 },
+      { qty: 2, price: 62.99, tag: "Best value" },
+      { qty: 3, price: 84.99 },
     ],
     // One long centred column like the big COD landing pages (js/landing.js)
     layout: "story",

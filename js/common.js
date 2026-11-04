@@ -18,7 +18,12 @@ const Shop = (() => {
 
   const $ = (sel) => document.querySelector(sel);
   // "TSh 1,000" and "KW 1,000", but "$39": a symbol sticks to the number
-  const fmt = (n) => `${COUNTRY.currency}${COUNTRY.currency.length > 1 ? " " : ""}${Number(n).toLocaleString("en-US")}`;
+  // Prices with cents ($36.99) always show 2 decimals; round prices stay as they are
+  const fmt = (n) => {
+    const v = Math.round(Number(n) * 100) / 100;
+    const s = Number.isInteger(v) ? v.toLocaleString("en-US") : v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return `${COUNTRY.currency}${COUNTRY.currency.length > 1 ? " " : ""}${s}`;
+  };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
 
