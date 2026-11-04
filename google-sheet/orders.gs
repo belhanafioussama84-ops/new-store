@@ -12,7 +12,8 @@
  *     Click Deploy, allow the permissions, and copy the "Web app URL" (ends with /exec).
  *  4. Paste that URL in js/products.js → STORE.ordersUrl.
  *
- * Every order then appears as a new row in the "Orders" tab (Lebanon: the "Orders Lebanon" tab).
+ * Every order then appears as a new row in the "Orders" tab (Lebanon: the "Orders Lebanon" tab,
+ * El Salvador: the "Orders El Salvador" tab).
  * If you change this code later: Deploy → Manage deployments → edit → Version: New version → Deploy
  * (the URL stays the same).
  *
@@ -38,6 +39,12 @@ const SHEET_NAME = "Orders";
 const LEBANON_SHEET = "Orders Lebanon";
 const LEBANON_HEADERS = [
   "date_order", "full_name", "phone", "address", "city", "sku", "qte", "price", "note",
+];
+// El Salvador orders (dukaabora.store/sv/, several products per order possible) go to their own tab.
+const SALVADOR_SHEET = "Orders El Salvador";
+const SALVADOR_HEADERS = [
+  "FECHA", "PEDIDO", "NOMBRE", "TELEFONO", "DEPARTAMENTO", "MUNICIPIO", "DIRECCION",
+  "REFERENCIA", "PRODUCTOS", "CANTIDAD", "SKU", "TOTAL USD",
 ];
 // Column order of the "Orders" tab = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
@@ -67,6 +74,26 @@ function doPost(e) {
   lock.waitLock(10000); // two orders at the same moment must not get the same code
   try {
     const o = JSON.parse(e.postData.contents);
+    if (o.country === "El Salvador") {
+      const sheet = getOrdersSheet_(SALVADOR_SHEET, SALVADOR_HEADERS);
+      const c = o.customer;
+      sheet.appendRow([
+        Utilities.formatDate(new Date(o.date || Date.now()), "America/El_Salvador", "yyyy-MM-dd HH:mm"),
+        text_(o.number),
+        text_(c.fullName),
+        localPhone_(c.phone),
+        text_(c.departamento),
+        text_(c.municipio),
+        text_(c.street),
+        text_(c.reference),
+        text_(o.product.name), // "Product (option) × 2 + Other × 1"
+        Number(o.product.qty) || 1,
+        text_(o.product.sku || ""),
+        Number(o.total) || 0,
+      ]);
+      notifyTelegram_(o.number, o);
+      return json_({ ok: true }); // the site shows "thank you" only after this answer
+    }
     if (o.country === "Lebanon") {
       const sheet = getOrdersSheet_(LEBANON_SHEET, LEBANON_HEADERS);
       sheet.appendRow([
@@ -188,7 +215,8 @@ function getOrdersSheet_(name = SHEET_NAME, headers = HEADERS) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers])
       .setFontWeight("bold").setBackground("#0d1f17").setFontColor("#f3c36b");
     sheet.setFrozenRows(1);
-    sheet.getRange(headers === HEADERS ? "E:E" : "H:H").setNumberFormat("#,##0"); // PRIX / price
+    if (headers === SALVADOR_HEADERS) sheet.getRange("L:L").setNumberFormat("#,##0.00"); // TOTAL USD
+    else sheet.getRange(headers === HEADERS ? "E:E" : "H:H").setNumberFormat("#,##0"); // PRIX / price
   }
   return sheet;
 }
@@ -206,12 +234,12 @@ function nextCode_(sheet) {
 // The leading ' keeps it as text so Sheets does not drop the 0 or the +.
 function localPhone_(v) {
   const s = String(v == null ? "" : v);
-  if (/^\+?961/.test(s.trim())) return "'" + s.trim();
+  if (/^\+?(961|503)/.test(s.trim())) return "'" + s.trim(); // Lebanon, El Salvador: kept as "+503 7000 0000"
   const digits = s.replace(/\D/g, "").replace(/^(255|260)/, "").replace(/^0/, "");
   return digits ? "'0" + digits : "";
 }
 
-const FLAGS_ = { Tanzania: "🇹🇿", Zambia: "🇿🇲", Lebanon: "🇱🇧" };
+const FLAGS_ = { Tanzania: "🇹🇿", Zambia: "🇿🇲", Lebanon: "🇱🇧", "El Salvador": "🇸🇻" };
 
 // Sends the new order to your Telegram. A failure here never loses the order (the row is already saved).
 function notifyTelegram_(code, o) {

@@ -4,4 +4,12 @@
   <url><loc>https://dukaabora.store/</loc></url>
   <url><loc>https://dukaabora.store/product?id=reward-watch</loc></url>
   <url><loc>https://dukaabora.store/product?id=car-nano-spray</loc></url>
+  <!-- El Salvador store (sv/config.js) -->
+  <url><loc>https://dukaabora.store/sv/</loc></url>
+  <url><loc>https://dukaabora.store/sv/tienda</loc></url>
+  <url><loc>https://dukaabora.store/sv/producto?id=reloj-reward</loc></url>
+  <url><loc>https://dukaabora.store/sv/producto?id=brazalete-cadenas</loc></url>
+  <url><loc>https://dukaabora.store/sv/producto?id=corrector-postura</loc></url>
+  <url><loc>https://dukaabora.store/sv/producto?id=spray-nano-auto</loc></url>
+  <url><loc>https://dukaabora.store/sv/producto?id=leggings-sauna</loc></url>
 </urlset>

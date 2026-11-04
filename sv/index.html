@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es-SV">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Duka Bora El Salvador · Tienda en línea con pago contra entrega</title>
+  <meta name="description" content="Relojes, joyería, bienestar, deporte y cuidado del auto. Envíos a todo El Salvador y pagas en efectivo al recibir tu pedido." />
+  <meta name="theme-color" content="#0f1d33" />
+  <link rel="canonical" href="https://dukaabora.store/sv/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_SV" />
+  <meta property="og:title" content="Duka Bora El Salvador · Pago contra entrega" />
+  <meta property="og:description" content="Productos seleccionados con envío a todo El Salvador. Pagas al recibir." />
+  <meta property="og:image" content="https://dukaabora.store/images/rw1.webp" />
+  <meta property="og:url" content="https://dukaabora.store/sv/" />
+  <link rel="icon" href="../images/logo/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="css/sv.css" />
+  <link rel="preload" as="image" href="../images/rw1.webp" />
+</head>
+<body data-page="home">
+  <header id="site-header"></header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero__in">
+        <div class="hero__copy">
+          <span class="eyebrow hero-in">Colección El Salvador</span>
+          <h1 class="hero-in">Lo mejor,<br /><em>directo a tu puerta.</em></h1>
+          <p class="lead hero-in">Productos seleccionados con calidad que se nota. Haz tu pedido en un minuto y paga en efectivo solo cuando lo recibas.</p>
+          <div class="hero__ctas hero-in">
+            <a href="tienda.html" class="btn btn--gold btn--lg">Comprar ahora</a>
+            <a href="#envios" class="btn btn--outline-light btn--lg">Cómo funciona</a>
+          </div>
+          <div class="hero__points hero-in" id="heroPoints"></div>
+        </div>
+        <div class="hero__visual hero-in" id="heroVisual"></div>
+      </div>
+    </section>
+
+    <!-- Trust strip -->
+    <div class="trust-strip"><div class="container trust-row" id="trustRow"></div></div>
+
+    <!-- Categories -->
+    <section class="section" id="categorias">
+      <div class="container">
+        <div class="section__head reveal">
+          <div><span class="eyebrow">Categorías</span><h2 class="title">Compra por <em>categoría</em></h2></div>
+          <a href="tienda.html" class="link-arrow">Ver toda la tienda <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="cats" id="cats"></div>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    <section class="section section--beige" id="destacados">
+      <div class="container">
+        <div class="section__head reveal">
+          <div><span class="eyebrow">Destacados</span><h2 class="title">Elegidos <em>para ti</em></h2></div>
+          <a href="tienda.html" class="link-arrow">Ver todos <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="grid grid--4" id="featured"></div>
+      </div>
+    </section>
+
+    <!-- Best sellers -->
+    <section class="section" id="mas-vendidos">
+      <div class="container">
+        <div class="section__head reveal">
+          <div><span class="eyebrow">Los favoritos</span><h2 class="title">Más <em>vendidos</em></h2></div>
+        </div>
+        <div class="grid grid--4" id="best"></div>
+      </div>
+    </section>
+
+    <!-- Special offers -->
+    <section class="section section--navy" id="ofertas">
+      <div class="container">
+        <div class="section__head reveal">
+          <div><span class="eyebrow">Ofertas especiales</span><h2 class="title">Lleva más, <em>paga menos</em></h2></div>
+          <p class="lead">El descuento por paquete se aplica solo en tu carrito, también si combinas colores o tallas.</p>
+        </div>
+        <div class="offers" id="offers"></div>
+      </div>
+    </section>
+
+    <!-- Why us -->
+    <section class="section section--beige" id="nosotros">
+      <div class="container">
+        <div class="section__head reveal">
+          <div><span class="eyebrow">Por qué elegirnos</span><h2 class="title">Compra con <em>confianza</em></h2></div>
+          <p class="lead">Nada de pagos por adelantado ni sorpresas: así es como compramos nosotros y así es como vendemos.</p>
+        </div>
+        <div class="why" id="why"></div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section" id="opiniones">
+      <div class="container">
+        <div class="section__head reveal">
+          <div><span class="eyebrow">Opiniones</span><h2 class="title">Lo que dicen <em>nuestros clientes</em></h2></div>
+        </div>
+        <div id="reviews"></div>
+      </div>
+    </section>
+
+    <!-- Shipping & COD -->
+    <section class="section section--navy" id="envios">
+      <div class="container ship">
+        <div class="reveal">
+          <span class="eyebrow">Envíos y pago</span>
+          <h2 class="title" style="margin:14px 0 16px">Pagas <em>al recibir.</em><br />Así de simple.</h2>
+          <p class="lead" id="shipLead"></p>
+          <div class="ship__facts" id="shipFacts"></div>
+        </div>
+        <div class="steps reveal">
+          <div class="step"><div><strong>Haz tu pedido</strong><span>Agrega tus productos al carrito y completa tus datos de entrega. Sin tarjeta, sin crear cuenta.</span></div></div>
+          <div class="step"><div><strong>Te llamamos para confirmar</strong><span>Verificamos contigo el producto, la cantidad y la dirección antes de enviar.</span></div></div>
+          <div class="step"><div><strong>Recibe tu pedido</strong><span>El repartidor lo lleva a tu dirección en cualquier departamento del país.</span></div></div>
+          <div class="step"><div><strong>Paga en efectivo</strong><span>Pagas el total solo cuando tienes el producto en tus manos.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--beige" id="preguntas">
+      <div class="container faq-wrap">
+        <div class="reveal" style="display:grid;gap:16px;align-content:start">
+          <span class="eyebrow">Preguntas frecuentes</span>
+          <h2 class="title">¿Tienes <em>dudas?</em></h2>
+          <p class="lead">Si no encuentras tu respuesta, escríbenos por WhatsApp y te ayudamos.</p>
+          <div><a class="btn btn--dark" id="faqWa" target="_blank" rel="noopener">Escribir por WhatsApp</a></div>
+        </div>
+        <div class="faq reveal" id="faq"></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band reveal">
+          <span class="eyebrow">Pago contra entrega</span>
+          <h2>Tu próximo favorito <em>te espera.</em></h2>
+          <p>Elige, pide en un minuto y paga en efectivo al recibir. Envíos a todo El Salvador.</p>
+          <a href="tienda.html" class="btn btn--gold btn--lg">Ver la tienda</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="config.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
