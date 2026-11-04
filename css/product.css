@@ -217,7 +217,8 @@ p { margin: 0 0 1em; }
 .input { display: flex; align-items: center; gap: .6rem; padding: 0 1rem; border: 2px solid var(--blue-line); border-radius: 14px; background: var(--bg); transition: border-color .2s, background .2s; }
 .input:focus-within { border-color: var(--blue); background: #fff; }
 .input span { font-size: 1rem; opacity: .8; }
-.input input { flex: 1; min-width: 0; padding: .95rem 0; border: 0; background: none; font: inherit; font-size: 1rem; color: var(--ink); outline: none; }
+.input input, .input select { flex: 1; min-width: 0; padding: .95rem 0; border: 0; background: none; font: inherit; font-size: 1rem; color: var(--ink); outline: none; }
+.input select { cursor: pointer; }
 .hint { display: block; margin-top: .35rem; font-size: .8rem; color: var(--muted); }
 .error { display: block; font-size: .8rem; color: var(--danger); }
 .error:empty { display: none; }

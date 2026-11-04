@@ -76,6 +76,13 @@ const COUNTRIES = {
     languages: ["es"], // Spanish only: ES in js/i18n.js
     fastCity: "san salvador",
     splitAddress: true,
+    // The order form also asks for the departamento (list) and a landmark, the columns of the
+    // LatinDrop import file (google-sheet/orders.gs)
+    regions: [
+      "Ahuachapán", "Cabañas", "Chalatenango", "Cuscatlán", "La Libertad", "La Paz", "La Unión",
+      "Morazán", "San Miguel", "San Salvador", "San Vicente", "Santa Ana", "Sonsonate", "Usulután",
+    ],
+    landmark: true,
   },
 };
 // Phones set to these time zones get that country until the visitor picks one.

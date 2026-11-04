@@ -40,14 +40,14 @@ const LEBANON_SHEET = "Orders Lebanon";
 const LEBANON_HEADERS = [
   "date_order", "full_name", "phone", "address", "city", "sku", "qte", "price", "note",
 ];
-// El Salvador orders (?country=sv) go to their own tab, with the 13 columns of the LatinDrop
-// order file (created automatically at the first order). LatinDrop has no address column: the
-// city and the address both go in "area". status, profit, mode and profit_usd are left empty
-// (LatinDrop's own values). To import them: menu Duka Bora → Download El Salvador orders.
+// El Salvador orders (?country=sv) go to their own tab, with exactly the 14 columns of the
+// LatinDrop import template (latinedrop-template-SV.xlsx, sheet "Commandes"), created
+// automatically at the first order. Code produit, Variante and Qui confirme are left empty.
+// To import them: menu Duka Bora → Download El Salvador orders (.xlsx).
 const SALVADOR_SHEET = "Orders El Salvador";
 const SALVADOR_HEADERS = [
-  "code", "created", "status", "customer", "phone", "country", "area", "products",
-  "cod_price", "profit", "mode", "source", "profit_usd",
+  "Réf. commande", "Nom du client", "Téléphone", "Département", "Municipalité", "Adresse",
+  "Point de repère", "SKU", "Code produit", "Variante", "Quantité", "Prix COD", "Qui confirme", "Note",
 ];
 // Column order of the "Orders" tab = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
@@ -80,20 +80,22 @@ function doPost(e) {
     if (o.country === "El Salvador") {
       const sheet = getOrdersSheet_(SALVADOR_SHEET, SALVADOR_HEADERS);
       sheet.appendRow([
-        text_(o.number), // code
-        Utilities.formatDate(new Date(o.date || Date.now()), "America/El_Salvador", "yyyy-MM-dd HH:mm"), // created
-        "", // status
-        text_(o.customer.fullName), // customer
-        localPhone_(o.customer.phone), // phone: "+503 71234567"
-        "El Salvador", // country
-        text_(o.customer.city), // area: "City, address" (no address column in LatinDrop)
-        // products: "Name (sku) x 2" (the site already sends "Name (sku)")
-        text_(o.product.name + " x " + (Number(o.product.qty) || 1)),
-        Number(o.total) || 0, // cod_price
-        "", // profit
-        "", // mode
-        "dukaabora.store", // source
-        "", // profit_usd
+        text_(o.number), // Réf. commande
+        text_(o.customer.fullName), // Nom du client
+        // Téléphone: the 8 local digits, e.g. "71234567" (the ' keeps it as text)
+        "'" + String(o.customer.phone || "").replace(/\D/g, "").replace(/^503(?=\d{8}$)/, ""),
+        text_(o.customer.region || ""), // Département
+        text_(o.customer.town || ""), // Municipalité
+        text_(o.customer.street || o.customer.city), // Adresse
+        text_(o.customer.landmark || ""), // Point de repère
+        text_(o.product.sku || ""), // SKU
+        "", // Code produit
+        "", // Variante
+        Number(o.product.qty) || 1, // Quantité
+        Number(o.total) || 0, // Prix COD
+        "", // Qui confirme
+        // Note: the product name (the site sends "Name (sku)")
+        text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : o.product.name),
       ]);
       notifyTelegram_(o.number, o);
       return json_({ ok: true });
@@ -152,15 +154,15 @@ function onOpen() {
     .addItem("Download NEW Lebanon orders (.xlsx)", "downloadNewLebanonOrders")
     .addItem("Download ALL Lebanon orders (.xlsx)", "downloadAllLebanonOrders")
     .addSeparator()
-    .addItem("Download NEW El Salvador orders (.csv)", "downloadNewSalvadorOrders")
-    .addItem("Download ALL El Salvador orders (.csv)", "downloadAllSalvadorOrders")
+    .addItem("Download NEW El Salvador orders (.xlsx)", "downloadNewSalvadorOrders")
+    .addItem("Download ALL El Salvador orders (.xlsx)", "downloadAllSalvadorOrders")
     .addToUi();
 }
 
 // Rows already downloaded are greyed out in their tab (their data stays there).
 const SENT_COLOR = "#d9d9d9";
 
-// Lebanon: COD Services import (.xlsx). El Salvador: LatinDrop file (.csv).
+// Lebanon: COD Services import (.xlsx). El Salvador: LatinDrop import (.xlsx, sheet "Commandes").
 const EXPORTS_ = {
   lb: {
     sheet: LEBANON_SHEET, headers: LEBANON_HEADERS, label: "Lebanon", format: "xlsx",
@@ -168,9 +170,9 @@ const EXPORTS_ = {
     textCols: ["B", "C", "D", "E", "F", "I"],
   },
   sv: {
-    sheet: SALVADOR_SHEET, headers: SALVADOR_HEADERS, label: "El Salvador", format: "csv",
-    title: "LatinDrop orders ", timeZone: "America/El_Salvador", prop: "SV_EXPORT_FILE",
-    textCols: ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M"],
+    sheet: SALVADOR_SHEET, headers: SALVADOR_HEADERS, label: "El Salvador", format: "xlsx", tab: "Commandes",
+    title: "LatinDrop import ", timeZone: "America/El_Salvador", prop: "SV_EXPORT_FILE",
+    textCols: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "M", "N"],
   },
 };
 
@@ -204,7 +206,7 @@ function downloadOrders_(cfg, onlyNew) {
   if (old) { try { DriveApp.getFileById(old).setTrashed(true); } catch (err) { /* already gone */ } }
   const out = SpreadsheetApp.create(cfg.title + Utilities.formatDate(new Date(), cfg.timeZone, "yyyy-MM-dd HH-mm"));
   props.setProperty(cfg.prop, out.getId());
-  const tab = out.getSheets()[0].setName("Orders");
+  const tab = out.getSheets()[0].setName(cfg.tab || "Orders");
   tab.getRange(1, 1, 1, cols).setValues([cfg.headers]).setFontWeight("bold");
   // Text columns stay text (a phone "+961 …" / "+503 …" must not turn into a number)
   cfg.textCols.forEach((c) => tab.getRange(c + ":" + c).setNumberFormat("@"));
@@ -238,7 +240,7 @@ function getOrdersSheet_(name = SHEET_NAME, headers = HEADERS) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers])
       .setFontWeight("bold").setBackground("#0d1f17").setFontColor("#f3c36b");
     sheet.setFrozenRows(1);
-    if (headers === SALVADOR_HEADERS) sheet.getRange("I:I").setNumberFormat("0.00"); // cod_price (USD)
+    if (headers === SALVADOR_HEADERS) sheet.getRange("L:L").setNumberFormat("0.00"); // Prix COD (USD)
     else sheet.getRange(headers === HEADERS ? "E:E" : "H:H").setNumberFormat("#,##0"); // PRIX / price
   }
   return sheet;

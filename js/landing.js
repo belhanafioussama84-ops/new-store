@@ -233,7 +233,12 @@
     return ok;
   }
 
-  // One "City & delivery address" field, except in countries with splitAddress (Lebanon)
+  // Region list and landmark field: only in the countries that have them (El Salvador)
+  if (COUNTRY.regions) Shop.fillRegions($("#region"));
+  else $("#regionField").remove();
+  if (!COUNTRY.landmark) $("#landmarkField").remove();
+
+  // One "City & delivery address" field, except in countries with splitAddress (Lebanon, El Salvador)
   if (!COUNTRY.splitAddress) {
     $("#cityField").remove();
     $("#addressLabel").textContent = T("City & delivery address");
