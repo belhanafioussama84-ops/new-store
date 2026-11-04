@@ -755,6 +755,9 @@ const ES = {
   "Delivered": "Entregado",
   "What's in the box": "Qué incluye",
   "Important": "Importante",
+  "⚠️ Important ⚠️": "⚠️ Importante ⚠️",
+  "Benefits": "Beneficios",
+  "How does it work?": "¿Cómo funciona?",
 
   /* ---------- Thank-you page ---------- */
   "Order confirmed · Duka Bora": "Pedido confirmado · Duka Bora",

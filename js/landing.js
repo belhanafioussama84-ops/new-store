@@ -150,43 +150,75 @@
      headline: "Big title"                  → banner before everything else
      inBox: ["…"]                           → "What's in the box" after the photos
      warning: "…"                           → ⚠️ "Important" box after the photos */
-  const before = [], after = [];
-  if (p.headline) before.push(`
-    <section class="wrap headline"><h2>${esc(T(p.headline))}</h2>${p.subheadline ? `<p>${esc(T(p.subheadline))}</p>` : ""}</section>`);
-  if (p.problem && p.solution) before.push(`
-    <section class="wrap ps">
-      <div class="ps__card ps__card--problem"><p class="label">${T("The problem")}</p><h2>${esc(T(p.problem.title))}</h2><p>${esc(T(p.problem.text))}</p></div>
-      <div class="ps__card ps__card--solution"><p class="label">${T("The solution")}</p><h2>${esc(T(p.solution.title))}</h2><p>${esc(T(p.solution.text))}</p>
-        <a href="#order" class="btn btn--line">${T("Order now · Pay on delivery")}</a></div>
-    </section>`);
-  if (p.benefits?.length) before.push(`
-    <section class="wrap benefits">
-      <p class="label label--center">${T("Why you'll love it")}</p>
-      <div class="benefits__grid">${p.benefits.map((b) => `
-        <article><span class="benefits__icon" aria-hidden="true">${esc(b.icon || "✓")}</span><h3>${esc(T(b.title))}</h3><p>${esc(T(b.text))}</p></article>`).join("")}
-      </div>
-    </section>`);
-  if (p.steps?.length) after.push(`
-    <section class="wrap steps3">
-      <p class="label label--center">${T("How it works")}</p>
-      <h2>${T("Easy to use, in 3 steps")}</h2>
-      <ol>${p.steps.map((s, i) => `<li><span>${i + 1}</span><h3>${esc(T(s.title))}</h3><p>${esc(T(s.text))}</p></li>`).join("")}</ol>
-    </section>`);
-  if (p.inBox?.length) after.push(`
-    <section class="wrap inbox">
-      <p class="label label--center">${T("What's in the box")}</p>
-      <ul>${p.inBox.map((x) => `<li>✅ ${esc(T(x))}</li>`).join("")}</ul>
-    </section>`);
-  if (p.warning) after.push(`
-    <section class="wrap warn"><strong>⚠️ ${T("Important")}</strong><p>${esc(T(p.warning))}</p></section>`);
-  const specs = Object.entries(p.specs || {});
-  if (specs.length) after.push(`
-    <section class="wrap specs">
-      <p class="label label--center">${T("Specifications")}</p>
-      <dl>${specs.map(([k, v]) => `<div><dt>${esc(T(k))}</dt><dd>${esc(T(v))}</dd></div>`).join("")}</dl>
-    </section>`);
-  $("#story").insertAdjacentHTML("beforebegin", before.join(""));
-  $("#real").insertAdjacentHTML("afterend", after.join(""));
+  if (p.layout === "story") {
+    // layout: "story" — one long centred column like the big COD landing pages: big uppercase
+    // titles, text, full-width photos, ✓ lists, ⚠️ box, what's in the box. Same product fields.
+    document.body.classList.add("layout-story");
+    const H = (s, cls = "") => `<h2 class="st-h${cls}">${esc(T(s))}</h2>`;
+    const P = (s) => `<p>${esc(T(s))}</p>`;
+    const list = (items) => `<ul class="st-list">${items.join("")}</ul>`;
+    const parts = [];
+    if (p.headline) parts.push(H(p.headline, " st-h--big"), p.subheadline ? `<p class="st-lead">${esc(T(p.subheadline))}</p>` : "");
+    if (p.problem) parts.push(H(p.problem.title), P(p.problem.text));
+    if (p.solution) parts.push(`<p><strong>${esc(T(p.solution.title))}.</strong> ${esc(T(p.solution.text))}</p>`);
+    // Extra blocks slotted in after the 1st, 2nd, 3rd and 4th photo
+    const extras = [
+      p.benefits?.length ? H("Benefits") + list(p.benefits.map((x) => `<li><strong>${esc(T(x.title))}:</strong> ${esc(T(x.text))}</li>`)) : "",
+      p.steps?.length ? H("How does it work?") + `<ol class="st-steps">${p.steps.map((x) => `<li><strong>${esc(T(x.title))}</strong> ${esc(T(x.text))}</li>`).join("")}</ol>` : "",
+      p.warning ? `<div class="st-warn">${H("⚠️ Important ⚠️")}${P(p.warning)}</div>` : "",
+      Object.keys(p.specs || {}).length ? H("Specifications") + `<dl class="st-specs">${Object.entries(p.specs).map(([k, v]) => `<div><dt>${esc(T(k))}</dt><dd>${esc(T(v))}</dd></div>`).join("")}</dl>` : "",
+    ];
+    sections.forEach((s, i) => {
+      parts.push(s.image ? `<figure class="st-img">${media(s)}</figure>` : "", H(s.title), P(s.text || ""));
+      if (s.list?.length) parts.push(list(s.list.map((x) => `<li>${esc(T(x))}</li>`)));
+      if (extras[i]) { parts.push(extras[i]); extras[i] = ""; }
+    });
+    parts.push(...extras);
+    if (p.inBox?.length) parts.push(H("What's in the box"), list(p.inBox.map((x) => `<li>${esc(T(x))}</li>`)));
+    $("#story").innerHTML = `
+      <section class="wrap story">
+        ${parts.join("")}
+        <a href="#order" class="btn btn--big">${T("Order now · Pay on delivery")}</a>
+      </section>`;
+  } else {
+    const before = [], after = [];
+    if (p.headline) before.push(`
+      <section class="wrap headline"><h2>${esc(T(p.headline))}</h2>${p.subheadline ? `<p>${esc(T(p.subheadline))}</p>` : ""}</section>`);
+    if (p.problem && p.solution) before.push(`
+      <section class="wrap ps">
+        <div class="ps__card ps__card--problem"><p class="label">${T("The problem")}</p><h2>${esc(T(p.problem.title))}</h2><p>${esc(T(p.problem.text))}</p></div>
+        <div class="ps__card ps__card--solution"><p class="label">${T("The solution")}</p><h2>${esc(T(p.solution.title))}</h2><p>${esc(T(p.solution.text))}</p>
+          <a href="#order" class="btn btn--line">${T("Order now · Pay on delivery")}</a></div>
+      </section>`);
+    if (p.benefits?.length) before.push(`
+      <section class="wrap benefits">
+        <p class="label label--center">${T("Why you'll love it")}</p>
+        <div class="benefits__grid">${p.benefits.map((b) => `
+          <article><span class="benefits__icon" aria-hidden="true">${esc(b.icon || "✓")}</span><h3>${esc(T(b.title))}</h3><p>${esc(T(b.text))}</p></article>`).join("")}
+        </div>
+      </section>`);
+    if (p.steps?.length) after.push(`
+      <section class="wrap steps3">
+        <p class="label label--center">${T("How it works")}</p>
+        <h2>${T("Easy to use, in 3 steps")}</h2>
+        <ol>${p.steps.map((s, i) => `<li><span>${i + 1}</span><h3>${esc(T(s.title))}</h3><p>${esc(T(s.text))}</p></li>`).join("")}</ol>
+      </section>`);
+    if (p.inBox?.length) after.push(`
+      <section class="wrap inbox">
+        <p class="label label--center">${T("What's in the box")}</p>
+        <ul>${p.inBox.map((x) => `<li>✅ ${esc(T(x))}</li>`).join("")}</ul>
+      </section>`);
+    if (p.warning) after.push(`
+      <section class="wrap warn"><strong>⚠️ ${T("Important")}</strong><p>${esc(T(p.warning))}</p></section>`);
+    const specs = Object.entries(p.specs || {});
+    if (specs.length) after.push(`
+      <section class="wrap specs">
+        <p class="label label--center">${T("Specifications")}</p>
+        <dl>${specs.map(([k, v]) => `<div><dt>${esc(T(k))}</dt><dd>${esc(T(v))}</dd></div>`).join("")}</dl>
+      </section>`);
+    $("#story").insertAdjacentHTML("beforebegin", before.join(""));
+    $("#real").insertAdjacentHTML("afterend", after.join(""));
+  }
   if (p.faq?.length) {
     $("#faq h2").insertAdjacentHTML("afterend", p.faq.map((f) =>
       `<details><summary>${esc(T(f.q))}</summary><p>${esc(T(f.a))}</p></details>`).join(""));

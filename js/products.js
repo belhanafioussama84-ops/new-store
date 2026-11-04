@@ -542,6 +542,8 @@ const PRODUCTS = [
       { qty: 2, price: 70, tag: "Best value" },
       { qty: 3, price: 95 },
     ],
+    // One long centred column like the big COD landing pages (js/landing.js)
+    layout: "story",
     // Extra blocks of the product page (js/landing.js)
     timeline: [1, 1, 3], // on its way tomorrow, delivered in 1 to 3 days
     headline: "¡Dale a tus pies el descanso que se merecen!",
