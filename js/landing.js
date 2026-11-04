@@ -277,6 +277,22 @@
   else $("#regionField").remove();
   if (!COUNTRY.landmark) $("#landmarkField").remove();
 
+  // Countries with "municipios" (El Salvador): the city is a list that follows the region
+  if (COUNTRY.municipios) {
+    const old = $("#city");
+    const sel = document.createElement("select");
+    sel.id = "city"; sel.name = "city"; sel.required = true;
+    old.replaceWith(sel);
+    const fill = () => {
+      const list = COUNTRY.municipios[$("#region").value] || [];
+      sel.innerHTML = `<option value="">${T(list.length ? "Select your city" : "Choose your region first")}</option>` +
+        list.map((m) => `<option value="${esc(m)}">${esc(m)}</option>`).join("");
+      sel.disabled = !list.length;
+    };
+    $("#region").addEventListener("change", () => { fill(); if (sel.closest(".has-error")) setError(sel, ""); });
+    fill();
+  }
+
   // One "City & delivery address" field, except in countries with splitAddress (Lebanon, El Salvador)
   if (!COUNTRY.splitAddress) {
     $("#cityField").remove();
