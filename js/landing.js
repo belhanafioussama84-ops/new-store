@@ -41,6 +41,20 @@
     $(".buy__perks").insertAdjacentHTML("beforeend", `<li>${esc(T(text))}</li>`);
   });
 
+  // Delivery timeline with real dates, for products with "timeline": [ship days, delivery from, delivery to]
+  // e.g. [1, 1, 3]: ordered today → on its way tomorrow → delivered between day +1 and +3
+  if (p.timeline) {
+    const [ship, from, to] = p.timeline;
+    const loc = { sw: "sw-TZ", es: "es-SV" }[LANG] || "en-GB";
+    const d = (n) => new Date(Date.now() + n * 864e5).toLocaleDateString(loc, { day: "numeric", month: "short" });
+    $(".buy__perks").insertAdjacentHTML("afterend", `
+      <ol class="eta">
+        <li><span>🛒</span><strong>${T("Ordered")}</strong><small>${d(0)}</small></li>
+        <li><span>🚚</span><strong>${T("On its way")}</strong><small>${d(ship)}</small></li>
+        <li><span>📦</span><strong>${T("Delivered")}</strong><small>${d(from)} – ${d(to)}</small></li>
+      </ol>`);
+  }
+
   /* ---------- Gallery ---------- */
   let current = 0;
   function showImage(i) {
@@ -132,8 +146,13 @@
      benefits: [{ icon, title, text }]     → icon grid before the photos
      steps: [{ title, text }]              → "How to use it" after the photos
      specs: { "Label": "value" }           → table after the photos
-     faq: [{ q, a }]                       → added on top of the questions */
+     faq: [{ q, a }]                       → added on top of the questions
+     headline: "Big title"                  → banner before everything else
+     inBox: ["…"]                           → "What's in the box" after the photos
+     warning: "…"                           → ⚠️ "Important" box after the photos */
   const before = [], after = [];
+  if (p.headline) before.push(`
+    <section class="wrap headline"><h2>${esc(T(p.headline))}</h2>${p.subheadline ? `<p>${esc(T(p.subheadline))}</p>` : ""}</section>`);
   if (p.problem && p.solution) before.push(`
     <section class="wrap ps">
       <div class="ps__card ps__card--problem"><p class="label">${T("The problem")}</p><h2>${esc(T(p.problem.title))}</h2><p>${esc(T(p.problem.text))}</p></div>
@@ -153,6 +172,13 @@
       <h2>${T("Easy to use, in 3 steps")}</h2>
       <ol>${p.steps.map((s, i) => `<li><span>${i + 1}</span><h3>${esc(T(s.title))}</h3><p>${esc(T(s.text))}</p></li>`).join("")}</ol>
     </section>`);
+  if (p.inBox?.length) after.push(`
+    <section class="wrap inbox">
+      <p class="label label--center">${T("What's in the box")}</p>
+      <ul>${p.inBox.map((x) => `<li>✅ ${esc(T(x))}</li>`).join("")}</ul>
+    </section>`);
+  if (p.warning) after.push(`
+    <section class="wrap warn"><strong>⚠️ ${T("Important")}</strong><p>${esc(T(p.warning))}</p></section>`);
   const specs = Object.entries(p.specs || {});
   if (specs.length) after.push(`
     <section class="wrap specs">

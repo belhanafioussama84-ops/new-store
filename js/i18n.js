@@ -750,6 +750,11 @@ const ES = {
   "Why you'll love it": "Por qué te va a encantar",
   "Easy to use, in 3 steps": "Fácil de usar, en 3 pasos",
   "Specifications": "Especificaciones",
+  "Ordered": "Pedido",
+  "On its way": "En camino",
+  "Delivered": "Entregado",
+  "What's in the box": "Qué incluye",
+  "Important": "Importante",
 
   /* ---------- Thank-you page ---------- */
   "Order confirmed · Duka Bora": "Pedido confirmado · Duka Bora",

@@ -543,6 +543,12 @@ const PRODUCTS = [
       { qty: 3, price: 95 },
     ],
     // Extra blocks of the product page (js/landing.js)
+    timeline: [1, 1, 3], // on its way tomorrow, delivered in 1 to 3 days
+    headline: "¡Dale a tus pies el descanso que se merecen!",
+    subheadline: "Un masaje relajante en casa, en solo 10 a 20 minutos al día.",
+    // TO CONFIRM with LatinDrop: what exactly comes in their box
+    inBox: ["Alfombrilla de masaje EMS", "Pantalla de control LED desmontable", "Control remoto", "Cable de carga USB-C"],
+    warning: "No la uses si tienes marcapasos u otro implante electrónico, si estás embarazada, si tienes trombosis, presión alta o una enfermedad del corazón, o heridas en los pies. Si tienes diabetes u otra enfermedad, consulta a tu médico antes de usarla.",
     problem: {
       title: "Pies cansados al final del día",
       text: "Horas de pie en el trabajo, caminar mucho o estar sentado todo el día: al llegar a casa, tus pies solo piden descanso.",
