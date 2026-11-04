@@ -215,9 +215,11 @@ const PRODUCTS = [
       ],
       sectionImages: ["images/rw2.webp", "images/rw3.webp", "images/rw4.webp", "images/rw5.webp"],
     },
-    // El Salvador: US dollars (TO CONFIRM: same as Lebanon), Spanish name
+    // El Salvador: US dollars (TO CONFIRM: same as Lebanon), Spanish name.
+    // sku: the LatinDrop SKU ("LD-P-…"), sent to the El Salvador tab of the sheet. Empty = none yet.
     sv: {
       name: "Reloj Reward",
+      sku: "",
       price: 39,
       oldPrice: null,
       offers: [
@@ -330,6 +332,7 @@ const PRODUCTS = [
     },
     sv: {
       name: "Spray Nano Reparador para Auto",
+      sku: "", // LatinDrop SKU
       price: 19,
       offers: [
         { qty: 1, price: 19 },
@@ -350,7 +353,7 @@ const PRODUCTS = [
     sku: "os4-39",
     // Sold in Lebanon and El Salvador only: its prices below are in US dollars
     countries: ["lb", "sv"],
-    sv: { name: "Leggings Sauna Sculpt" },
+    sv: { name: "Leggings Sauna Sculpt", sku: "" }, // sku: LatinDrop SKU ("LD-P-…")
     category: "Fitness",
     price: 38,
     oldPrice: null,
@@ -403,7 +406,7 @@ const PRODUCTS = [
     sku: "sfy20", // supplier's reference, shown in the sheet (sku column)
     // Sold in Lebanon and El Salvador only: its prices below are in US dollars
     countries: ["lb", "sv"],
-    sv: { name: "Corrector de Postura" },
+    sv: { name: "Corrector de Postura", sku: "" }, // sku: LatinDrop SKU ("LD-P-…")
     category: "Health & comfort",
     price: 29,
     oldPrice: null,
@@ -469,7 +472,7 @@ const PRODUCTS = [
     sku: "ln3-89", // supplier's reference, shown in the sheet (sku column)
     // Sold in Lebanon and El Salvador only: its prices below are in US dollars
     countries: ["lb", "sv"],
-    sv: { name: "Brazalete de Brazo con Cadenas" },
+    sv: { name: "Brazalete de Brazo con Cadenas", sku: "" }, // sku: LatinDrop SKU ("LD-P-…")
     category: "Jewelry",
     price: 22,
     oldPrice: null,

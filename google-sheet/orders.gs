@@ -42,8 +42,11 @@ const LEBANON_HEADERS = [
 ];
 // El Salvador orders (?country=sv) go to their own tab, with exactly the 14 columns of the
 // LatinDrop import template (latinedrop-template-SV.xlsx, sheet "Commandes"), created
-// automatically at the first order. Code produit, Variante and Qui confirme are left empty.
+// automatically at the first order. Code produit and Variante are left empty; SKU = the
+// LatinDrop SKU ("LD-P-…", the "sku" of each product's "sv" part in js/products.js).
 // To import them: menu Duka Bora → Download El Salvador orders (.xlsx).
+// "Qui confirme" column: who calls the customer to confirm, "Latine Drop" or "Moi".
+const SALVADOR_CONFIRM = "Latine Drop";
 const SALVADOR_SHEET = "Orders El Salvador";
 const SALVADOR_HEADERS = [
   "Réf. commande", "Nom du client", "Téléphone", "Département", "Municipalité", "Adresse",
@@ -82,8 +85,7 @@ function doPost(e) {
       sheet.appendRow([
         text_(o.number), // Réf. commande
         text_(o.customer.fullName), // Nom du client
-        // Téléphone: the 8 local digits, e.g. "71234567" (the ' keeps it as text)
-        "'" + String(o.customer.phone || "").replace(/\D/g, "").replace(/^503(?=\d{8}$)/, ""),
+        salvadorPhone_(o.customer.phone), // Téléphone: "7123 4567", like the LatinDrop example
         text_(o.customer.region || ""), // Département
         text_(o.customer.town || ""), // Municipalité
         text_(o.customer.street || o.customer.city), // Adresse
@@ -93,7 +95,7 @@ function doPost(e) {
         "", // Variante
         Number(o.product.qty) || 1, // Quantité
         Number(o.total) || 0, // Prix COD
-        "", // Qui confirme
+        SALVADOR_CONFIRM, // Qui confirme
         // Note: the product name (the site sends "Name (sku)")
         text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : o.product.name),
       ]);
@@ -262,6 +264,12 @@ function localPhone_(v) {
   if (/^\+?(961|503)/.test(s.trim())) return "'" + s.trim(); // Lebanon, El Salvador: kept as "+503 7000 0000"
   const digits = s.replace(/\D/g, "").replace(/^(255|260)/, "").replace(/^0/, "");
   return digits ? "'0" + digits : "";
+}
+
+// "+503 71234567" → "7123 4567" (the format of the LatinDrop example; the ' keeps it as text).
+function salvadorPhone_(v) {
+  const d = String(v == null ? "" : v).replace(/\D/g, "").replace(/^503(?=\d{8}$)/, "");
+  return d.length === 8 ? "'" + d.slice(0, 4) + " " + d.slice(4) : "'" + d;
 }
 
 const FLAGS_ = { Tanzania: "🇹🇿", Zambia: "🇿🇲", Lebanon: "🇱🇧", "El Salvador": "🇸🇻" };
