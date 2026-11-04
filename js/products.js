@@ -34,7 +34,10 @@ const STORE = {
 };
 
 /* ==========================================================
-   COUNTRIES — the same site sells in Tanzania, Zambia and Lebanon.
+   COUNTRIES — the same site sells in Tanzania, Zambia, Lebanon and El Salvador.
+   - El Salvador (?country=sv): Spanish (ES in js/i18n.js), US dollars, blue and white
+     colours (:root[data-country="sv"] in css/product.css). Product names in Spanish: "name"
+     in each product's "sv" part.
    - The visitor's country: ?country=zm or ?country=lb in the link (use it in
      Zambian / Lebanese ads, e.g. product.html?id=reward-watch&country=lb), else
      the one chosen before with the buttons at the top of the page or on the
@@ -67,9 +70,16 @@ const COUNTRIES = {
     fastCity: "beirut",
     splitAddress: true, // the order form asks for the city and the address in two fields
   },
+  sv: {
+    id: "sv", name: "El Salvador", currency: "$", currencyCode: "USD",
+    dial: "503", phone: /^[267]\d{7}$/, // 8 digits: mobile 6XXX / 7XXX XXXX, landline 2XXX XXXX
+    languages: ["es"], // Spanish only: ES in js/i18n.js
+    fastCity: "san salvador",
+    splitAddress: true,
+  },
 };
 // Phones set to these time zones get that country until the visitor picks one.
-const ZONES = { "Africa/Lusaka": "zm", "Asia/Beirut": "lb" };
+const ZONES = { "Africa/Lusaka": "zm", "Asia/Beirut": "lb", "America/El_Salvador": "sv" };
 
 // COUNTRY_CHOSEN: false when the visitor has not picked a country yet (the home page then asks).
 const { COUNTRY, COUNTRY_CHOSEN } = (() => {
@@ -91,6 +101,7 @@ const { COUNTRY, COUNTRY_CHOSEN } = (() => {
 // Country colours (css/product.css). The <head> of each page sets it early too, so Lebanon doesn't flash green.
 document.documentElement.dataset.country = COUNTRY.id;
 if (COUNTRY.id === "lb") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#c8102e");
+if (COUNTRY.id === "sv") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#0b3a82");
 
 /* ==========================================================
    PRODUCTS — add, remove or edit products here.
@@ -188,6 +199,18 @@ const PRODUCTS = [
       sectionImages: ["images/rw2.webp", "images/rw3.webp", "images/rw4.webp", "images/rw5.webp"],
     },
     lb: {
+      price: 39,
+      oldPrice: null,
+      offers: [
+        { qty: 1, price: 39 },
+        { qty: 2, price: 69, tag: "Best value" },
+        { qty: 3, price: 95 },
+      ],
+      sectionImages: ["images/rw2.webp", "images/rw3.webp", "images/rw4.webp", "images/rw5.webp"],
+    },
+    // El Salvador: US dollars (TO CONFIRM: same as Lebanon), Spanish name
+    sv: {
+      name: "Reloj Reward",
       price: 39,
       oldPrice: null,
       offers: [
@@ -298,6 +321,15 @@ const PRODUCTS = [
         { qty: 3, price: 49 },
       ],
     },
+    sv: {
+      name: "Spray Nano Reparador para Auto",
+      price: 19,
+      offers: [
+        { qty: 1, price: 19 },
+        { qty: 2, price: 35, tag: "Best value" },
+        { qty: 3, price: 49 },
+      ],
+    },
     description: "Spray, wipe, and your car shines like new. This nano coating cleans without water, hides fine scratches and leaves a water-repellent layer that keeps rain, mud and dust off the paint.",
     landing: {
       showcaseTitle: ["Showroom shine,", "in minutes"],
@@ -309,8 +341,9 @@ const PRODUCTS = [
     name: "Sauna Sculpt Leggings",
     // Supplier's reference: shown in the sheet next to the name (REF column), not on the site
     sku: "os4-39",
-    // Sold in Lebanon only: its prices below are in US dollars (no "lb" part needed)
-    countries: ["lb"],
+    // Sold in Lebanon and El Salvador only: its prices below are in US dollars
+    countries: ["lb", "sv"],
+    sv: { name: "Leggings Sauna Sculpt" },
     category: "Fitness",
     price: 38,
     oldPrice: null,
@@ -361,8 +394,9 @@ const PRODUCTS = [
     id: "posture-corrector",
     name: "Posture Corrector Back Brace",
     sku: "sfy20", // supplier's reference, shown in the sheet (sku column)
-    // Sold in Lebanon only: its prices below are in US dollars
-    countries: ["lb"],
+    // Sold in Lebanon and El Salvador only: its prices below are in US dollars
+    countries: ["lb", "sv"],
+    sv: { name: "Corrector de Postura" },
     category: "Health & comfort",
     price: 29,
     oldPrice: null,
@@ -426,8 +460,9 @@ const PRODUCTS = [
     id: "arm-chain",
     name: "Layered Arm Chain Bracelet",
     sku: "ln3-89", // supplier's reference, shown in the sheet (sku column)
-    // Sold in Lebanon only: its prices below are in US dollars
-    countries: ["lb"],
+    // Sold in Lebanon and El Salvador only: its prices below are in US dollars
+    countries: ["lb", "sv"],
+    sv: { name: "Brazalete de Brazo con Cadenas" },
     category: "Jewelry",
     price: 22,
     oldPrice: null,
@@ -504,7 +539,8 @@ for (let i = PRODUCTS.length - 1; i >= 0; i--) {
 // Outside Tanzania each product takes its local prices; a product without them is not sold there.
 if (COUNTRY.id !== "tz") {
   for (let i = PRODUCTS.length - 1; i >= 0; i--) {
-    if (PRODUCTS[i].countries) continue; // already in that country's prices
+    // "countries" products are already in that country's prices; their local part only changes the name etc.
+    if (PRODUCTS[i].countries) { Object.assign(PRODUCTS[i], PRODUCTS[i][COUNTRY.id] || {}); continue; }
     const local = PRODUCTS[i][COUNTRY.id];
     if (!local) { PRODUCTS.splice(i, 1); continue; }
     const { sectionImages, ...rest } = local;

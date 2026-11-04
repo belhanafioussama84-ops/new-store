@@ -535,3 +535,35 @@ p { margin: 0 0 1em; }
     linear-gradient(160deg, var(--accent) 0%, var(--deep) 75%);
 }
 [data-country="lb"] .tz-cats a:hover { background: #fadadd; }
+
+/* ==========================================================
+   El Salvador colours: cobalt blue and white like the flag, sky blue
+   instead of gold. <html data-country="sv"> is set by js/products.js.
+   ========================================================== */
+:root[data-country="sv"] {
+  --accent: #0b3a82;
+  --accent-2: #1f5fbf;
+  --accent-soft: #e8f0fb;
+  --gold: #4da3ff;
+  --deep: #061f4a;
+  --gold-2: #a9d4ff;
+}
+[data-country="sv"] .btn--gold { box-shadow: 0 14px 30px -14px rgba(77, 163, 255, .9); }
+[data-country="sv"] .faq details[open] { box-shadow: 0 12px 28px -22px rgba(11, 58, 130, .6); }
+/* light text on the dark blue parts (it is light green on the other countries' dark green) */
+[data-country="sv"] .gate__text, [data-country="sv"] .gate__choice small,
+[data-country="sv"] .h-hero__text, [data-country="sv"] .h-chips,
+[data-country="sv"] .tzm__head span, [data-country="sv"] .tzm__legend,
+[data-country="sv"] .h-promises p, [data-country="sv"] .h-final p,
+[data-country="sv"] .t-hero__text, [data-country="sv"] .t-meta small, [data-country="sv"] .t-share p,
+[data-country="sv"] .help p, [data-country="sv"] .foot { color: #d6e6ff; }
+[data-country="sv"] .h-foot { color: #bcd2f2; }
+[data-country="sv"] .h-foot .brand small { color: #8fb1e0; }
+[data-country="sv"] .gate { background: radial-gradient(circle at 50% 0%, #1f5fbf, var(--deep) 70%); }
+[data-country="sv"] .h-hero {
+  background:
+    radial-gradient(700px 420px at 82% 45%, rgba(77, 163, 255, .28), transparent 65%),
+    radial-gradient(600px 400px at 0% 100%, rgba(31, 95, 191, .5), transparent 70%),
+    linear-gradient(160deg, var(--accent) 0%, var(--deep) 75%);
+}
+[data-country="sv"] .tz-cats a:hover { background: #dbe8fb; }

@@ -40,11 +40,10 @@ const LEBANON_SHEET = "Orders Lebanon";
 const LEBANON_HEADERS = [
   "date_order", "full_name", "phone", "address", "city", "sku", "qte", "price", "note",
 ];
-// El Salvador orders (dukaabora.store/sv/, several products per order possible) go to their own tab.
+// El Salvador orders (?country=sv) go to their own tab, created at the first order.
 const SALVADOR_SHEET = "Orders El Salvador";
 const SALVADOR_HEADERS = [
-  "FECHA", "PEDIDO", "NOMBRE", "TELEFONO", "DEPARTAMENTO", "MUNICIPIO", "DIRECCION",
-  "REFERENCIA", "PRODUCTOS", "CANTIDAD", "SKU", "TOTAL USD",
+  "FECHA", "PEDIDO", "NOMBRE", "TELEFONO", "CIUDAD", "DIRECCION", "PRODUCTO", "SKU", "CANTIDAD", "TOTAL USD",
 ];
 // Column order of the "Orders" tab = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
@@ -76,23 +75,21 @@ function doPost(e) {
     const o = JSON.parse(e.postData.contents);
     if (o.country === "El Salvador") {
       const sheet = getOrdersSheet_(SALVADOR_SHEET, SALVADOR_HEADERS);
-      const c = o.customer;
       sheet.appendRow([
         Utilities.formatDate(new Date(o.date || Date.now()), "America/El_Salvador", "yyyy-MM-dd HH:mm"),
         text_(o.number),
-        text_(c.fullName),
-        localPhone_(c.phone),
-        text_(c.departamento),
-        text_(c.municipio),
-        text_(c.street),
-        text_(c.reference),
-        text_(o.product.name), // "Product (option) × 2 + Other × 1"
-        Number(o.product.qty) || 1,
+        text_(o.customer.fullName),
+        localPhone_(o.customer.phone),
+        text_(o.customer.town || ""),
+        text_(o.customer.street || o.customer.city),
+        // the site sends "Name (sku)": the name alone here, the SKU in its own column
+        text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : o.product.name),
         text_(o.product.sku || ""),
+        Number(o.product.qty) || 1,
         Number(o.total) || 0,
       ]);
       notifyTelegram_(o.number, o);
-      return json_({ ok: true }); // the site shows "thank you" only after this answer
+      return json_({ ok: true });
     }
     if (o.country === "Lebanon") {
       const sheet = getOrdersSheet_(LEBANON_SHEET, LEBANON_HEADERS);
@@ -215,7 +212,7 @@ function getOrdersSheet_(name = SHEET_NAME, headers = HEADERS) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers])
       .setFontWeight("bold").setBackground("#0d1f17").setFontColor("#f3c36b");
     sheet.setFrozenRows(1);
-    if (headers === SALVADOR_HEADERS) sheet.getRange("L:L").setNumberFormat("#,##0.00"); // TOTAL USD
+    if (headers === SALVADOR_HEADERS) sheet.getRange("J:J").setNumberFormat("#,##0.00"); // TOTAL USD
     else sheet.getRange(headers === HEADERS ? "E:E" : "H:H").setNumberFormat("#,##0"); // PRIX / price
   }
   return sheet;

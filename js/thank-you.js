@@ -8,7 +8,7 @@
   const o = findOrder(number);
   const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
   const waLink = (text) => `https://wa.me/${wa}?text=${encodeURIComponent(text)}`;
-  const day = (d) => d.toLocaleDateString(LANG === "sw" ? "sw-TZ" : "en-GB", { weekday: "short", day: "numeric", month: "short" });
+  const day = (d) => d.toLocaleDateString({ sw: "sw-TZ", es: "es-SV" }[LANG] || "en-GB", { weekday: "short", day: "numeric", month: "short" });
   const addDays = (d, n) => new Date(d.getTime() + n * 864e5);
 
   // Order details (read from this browser's saved copy). Without it the page stays generic.

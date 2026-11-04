@@ -291,7 +291,7 @@
   renderSizes();
   const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
   if (wa) {
-    $("#closingWa").href = `https://wa.me/${wa}?text=${encodeURIComponent(`${STORE.whatsappText || ""} ${p.name}`.trim())}`;
+    $("#closingWa").href = `https://wa.me/${wa}?text=${encodeURIComponent(`${T(STORE.whatsappText || "")} ${p.name}`.trim())}`;
     $("#closingWa").hidden = false;
   }
   $("#footerPhone").href = `tel:+${STORE.phone}`;

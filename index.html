@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Duka Bora · Fast Delivery Across Tanzania · Pay on Delivery</title>
-  <meta name="description" content="Duka Bora (dukaabora): shop quality products online in Tanzania, Zambia and Lebanon. Free delivery to your door and pay cash when your order arrives." />
+  <meta name="description" content="Duka Bora (dukaabora): shop quality products online in Tanzania, Zambia, Lebanon and El Salvador. Free delivery to your door and pay cash when your order arrives." />
   <link rel="canonical" href="https://dukaabora.store/" />
   <meta name="facebook-domain-verification" content="qilscr32sx6clvu4s4x3e5hyfcysfq" />
   <meta name="theme-color" content="#1f4d3a" />
-  <!-- Lebanon has its own colours: set them before the page shows (same choice as js/products.js) -->
-  <script>try{var c=new URLSearchParams(location.search).get("country")||localStorage.getItem("dukabora_country");if(c==="lb"||(!c&&Intl.DateTimeFormat().resolvedOptions().timeZone==="Asia/Beirut"))document.documentElement.dataset.country="lb"}catch(e){}</script>
+  <!-- Lebanon and El Salvador have their own colours: set them before the page shows (same choice as js/products.js) -->
+  <script>try{var c=new URLSearchParams(location.search).get("country")||localStorage.getItem("dukabora_country");if(!c)c={"Asia/Beirut":"lb","America/El_Salvador":"sv"}[Intl.DateTimeFormat().resolvedOptions().timeZone];if(c==="lb"||c==="sv")document.documentElement.dataset.country=c}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600..800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -43,12 +43,17 @@
           <strong>Lebanon</strong>
           <small>Prices in US dollars ($) · English</small>
         </button>
+        <button type="button" class="gate__choice" data-set-country="sv">
+          <svg class="gate__flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#0047ab" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 16h72v16H0z"/><circle cx="36" cy="24" r="5.5" fill="none" stroke="#c9a227" stroke-width="1.8"/><path fill="#2e7d32" d="M33 27l3-6 3 6z"/></svg>
+          <strong>El Salvador</strong>
+          <small>Prices in US dollars ($) · Spanish</small>
+        </button>
       </div>
       <p class="gate__note">🚚 Free delivery · 💵 Pay on delivery</p>
     </div>
   </div>
 
-  <!-- Country choice (Tanzania / Zambia / Lebanon), filled by js/common.js -->
+  <!-- Country choice (Tanzania / Zambia / Lebanon / El Salvador), filled by js/common.js -->
   <div class="country-bar">
     <div class="wrap country-bar__inner"><span>Choose your country:</span><div class="lang" data-country-switch></div></div>
   </div>
@@ -90,7 +95,7 @@
       <div class="wrap h-hero__inner">
         <div class="h-hero__copy">
           <p class="h-kicker">
-            <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg><svg class="tz-flag" data-country="lb" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg>
+            <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg><svg class="tz-flag" data-country="lb" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg><svg class="tz-flag" data-country="sv" viewBox="0 0 72 48" aria-hidden="true"><path fill="#0047ab" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 16h72v16H0z"/><circle cx="36" cy="24" r="5.5" fill="none" stroke="#c9a227" stroke-width="1.8"/><path fill="#2e7d32" d="M33 27l3-6 3 6z"/></svg>
             Karibu · Delivering all over Tanzania
           </p>
           <h1>Your order first.<br /><span>Pay later.</span></h1>
@@ -111,7 +116,7 @@
         <div class="h-hero__visual">
           <div class="tzm" data-country="tz">
             <div class="tzm__head">
-              <strong>Karibu! <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg><svg class="tz-flag" data-country="lb" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg></strong>
+              <strong>Karibu! <svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg><svg class="tz-flag" data-country="lb" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg><svg class="tz-flag" data-country="sv" viewBox="0 0 72 48" aria-hidden="true"><path fill="#0047ab" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 16h72v16H0z"/><circle cx="36" cy="24" r="5.5" fill="none" stroke="#c9a227" stroke-width="1.8"/><path fill="#2e7d32" d="M33 27l3-6 3 6z"/></svg></strong>
               <span>We deliver across Tanzania</span>
             </div>
             <svg class="tzm__map" viewBox="-6 -4 420 362" role="img" aria-label="Delivery map of Tanzania: Dar es Salaam same or next day; Arusha, Dodoma, Mwanza and Mbeya 1–3 days; Zanzibar 2–3 days; Kigoma and Mtwara 3–7 days">
@@ -275,6 +280,59 @@
               <li><i class="is-far"></i>Other areas: 2–3 days</li>
             </ul>
           </div>
+
+          <!-- Same map for El Salvador (x = (lon + 90.15) × 165 + 10, y = (14.5 − lat) × 165 + 60), routes from San Salvador -->
+          <div class="tzm tzm--sv" data-country="sv">
+            <div class="tzm__head">
+              <strong>Welcome! <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#0047ab" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 16h72v16H0z"/><circle cx="36" cy="24" r="5.5" fill="none" stroke="#c9a227" stroke-width="1.8"/><path fill="#2e7d32" d="M33 27l3-6 3 6z"/></svg></strong>
+              <span>We deliver across El Salvador</span>
+            </div>
+            <svg class="tzm__map" viewBox="-6 -4 420 362" role="img" aria-label="Mapa de entregas en El Salvador: San Salvador hoy o mañana; Santa Ana, San Miguel, Sonsonate y La Libertad 1–2 días; Chalatenango, Usulután y La Unión 2–3 días">
+              <text class="tzm__sea" x="120" y="318">PACIFIC OCEAN</text>
+              <path class="tzm__land" d="M18 187 L43 159 L68 134 L92 110 L109 93 L117 73 L142 72 L167 80 L191 88 L224 110 L249 126 L282 134 L315 151 L348 146 L381 159 L406 167 L398 233 L389 266 L365 279 L315 279 L266 271 L224 261 L183 241 L150 228 L109 225 L68 220 Z" />
+
+              <path id="s1" class="tzm__route" d="M168 194 Q130 160 107 144" />
+              <path id="s2" class="tzm__route" d="M168 194 Q120 200 81 189" />
+              <path id="s3" class="tzm__route" d="M168 194 Q195 165 210 136" />
+              <path id="s4" class="tzm__route" d="M168 194 Q260 190 335 228" />
+              <path id="s5" class="tzm__route" d="M168 194 Q235 230 292 250" />
+              <path id="s6" class="tzm__route" d="M168 194 Q290 170 391 251" />
+              <path id="s7" class="tzm__route" d="M168 194 Q160 215 147 227" />
+
+              <g class="tzm__dots">
+                <circle r="3.2"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#s1" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.6s" begin="-.8s" repeatCount="indefinite"><mpath href="#s2" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.2s" begin="-1.4s" repeatCount="indefinite"><mpath href="#s3" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3.2s" begin="-.4s" repeatCount="indefinite"><mpath href="#s4" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="2.8s" begin="-2s" repeatCount="indefinite"><mpath href="#s5" /></animateMotion></circle>
+                <circle r="3.2"><animateMotion dur="3.6s" begin="-1s" repeatCount="indefinite"><mpath href="#s6" /></animateMotion></circle>
+              </g>
+
+              <circle class="tzm__pulse" cx="168" cy="194" r="8" />
+              <circle class="tzm__pin tzm__pin--hub" cx="168" cy="194" r="7" />
+              <circle class="tzm__pin" cx="107" cy="144" r="4.5" />
+              <circle class="tzm__pin" cx="81" cy="189" r="4.5" />
+              <circle class="tzm__pin" cx="210" cy="136" r="4.5" />
+              <circle class="tzm__pin" cx="335" cy="228" r="4.5" />
+              <circle class="tzm__pin" cx="292" cy="250" r="4.5" />
+              <circle class="tzm__pin" cx="391" cy="251" r="4.5" />
+              <circle class="tzm__pin" cx="147" cy="227" r="3.5" />
+
+              <text x="176" y="186"><tspan class="tzm__city">San Salvador</tspan><tspan x="176" dy="14">Same / next day</tspan></text>
+              <text x="107" y="126" text-anchor="middle"><tspan class="tzm__city">Santa Ana</tspan><tspan x="107" dy="14">1–2 days</tspan></text>
+              <text x="70" y="210" text-anchor="middle"><tspan class="tzm__city">Sonsonate</tspan><tspan x="70" dy="14">1–2 days</tspan></text>
+              <text x="210" y="118" text-anchor="middle"><tspan class="tzm__city">Chalatenango</tspan><tspan x="210" dy="14">2–3 days</tspan></text>
+              <text x="335" y="210" text-anchor="middle"><tspan class="tzm__city">San Miguel</tspan><tspan x="335" dy="14">1–2 days</tspan></text>
+              <text x="282" y="272" text-anchor="middle"><tspan class="tzm__city">Usulután</tspan><tspan x="282" dy="14">2–3 days</tspan></text>
+              <text x="398" y="292" text-anchor="end"><tspan class="tzm__city">La Unión</tspan><tspan x="398" dy="14">2–3 days</tspan></text>
+              <text x="138" y="250" text-anchor="middle"><tspan class="tzm__city">La Libertad</tspan><tspan x="138" dy="14">1–2 days</tspan></text>
+            </svg>
+            <ul class="tzm__legend">
+              <li><i class="is-hub"></i>San Salvador: same / next day</li>
+              <li><i></i>Big cities: 1–2 days</li>
+              <li><i class="is-far"></i>Other areas: 2–3 days</li>
+            </ul>
+          </div>
           <span class="h-pill h-pill--1">💵 Lipa ukipokea</span>
           <span class="h-pill h-pill--2">🚚 Free delivery</span>
         </div>
@@ -368,6 +426,9 @@
           </ul>
           <ul class="h-cities" data-country="lb">
             <li>Beirut</li><li>Jounieh</li><li>Byblos</li><li>Tripoli</li><li>Batroun</li><li>Sidon</li><li>Tyre</li><li>Nabatieh</li><li>Zahle</li><li>Baalbek</li><li>Aley</li><li>+ all other areas</li>
+          </ul>
+          <ul class="h-cities" data-country="sv">
+            <li>San Salvador</li><li>Santa Ana</li><li>San Miguel</li><li>Soyapango</li><li>Santa Tecla</li><li>Sonsonate</li><li>La Libertad</li><li>Usulután</li><li>Ahuachapán</li><li>Chalatenango</li><li>La Unión</li><li>+ all other areas</li>
           </ul>
           <ul class="h-cities" data-country="tz">
             <li>Dar es Salaam</li><li>Arusha</li><li>Dodoma</li><li>Mwanza</li><li>Mbeya</li><li>Zanzibar</li><li>Morogoro</li><li>Tanga</li><li>Moshi</li><li>Kigoma</li><li>Mtwara</li><li>+ all other regions</li>

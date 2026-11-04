@@ -150,6 +150,7 @@ const Shop = (() => {
     tz: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg>`,
     zm: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg>`,
     lb: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg>`,
+    sv: `<svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#0047ab" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 16h72v16H0z"/><circle cx="36" cy="24" r="5.5" fill="none" stroke="#c9a227" stroke-width="1.8"/><path fill="#2e7d32" d="M33 27l3-6 3 6z"/></svg>`,
   };
   document.querySelectorAll("[data-country-switch]").forEach((box) => {
     box.setAttribute("role", "group");
@@ -212,7 +213,7 @@ const Pixel = (() => {
   const number = String(STORE.whatsapp || "").replace(/\D/g, "");
   if (!number) return;
   const product = Shop.findProduct(new URLSearchParams(location.search).get("id") || "");
-  const text = `${STORE.whatsappText || ""}${product ? ` ${product.name}` : ""}`.trim();
+  const text = `${T(STORE.whatsappText || "")}${product ? ` ${product.name}` : ""}`.trim();
   const a = document.createElement("a");
   a.className = "wa-float";
   a.href = `https://wa.me/${number}${text ? `?text=${encodeURIComponent(text)}` : ""}`;

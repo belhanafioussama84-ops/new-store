@@ -51,7 +51,7 @@
   $("#footerPhone").textContent = `📞 ${STORE.phoneDisplay}`;
   const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
   if (wa) {
-    const href = `https://wa.me/${wa}${STORE.whatsappText ? `?text=${encodeURIComponent(STORE.whatsappText)}` : ""}`;
+    const href = `https://wa.me/${wa}${STORE.whatsappText ? `?text=${encodeURIComponent(T(STORE.whatsappText))}` : ""}`;
     ["#chatWa", "#footerWa"].forEach((s) => { $(s).href = href; $(s).hidden = false; });
   }
   $("#year").textContent = new Date().getFullYear();
