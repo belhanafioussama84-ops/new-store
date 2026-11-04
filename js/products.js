@@ -2,8 +2,12 @@
    dukabora-tz.belhanafioussama84.workers.dev and GitHub Pages send visitors to dukaabora.store) */
 // dukaabora.store is the official address (the only one the Meta Pixel accepts):
 // links to the copies and to www.dukaabora.store open the same page there.
+// Only when dukaabora.store answers: if the domain is down (e.g. suspended by Namecheap),
+// the copy stays open so visitors can still order.
 if (/\.workers\.dev$|\.github\.io$|^www\.dukaabora\.store$/.test(location.hostname)) {
-  location.replace("https://dukaabora.store" + location.pathname.replace(/^\/new-store/, "") + location.search + location.hash);
+  const target = "https://dukaabora.store" + location.pathname.replace(/^\/new-store/, "") + location.search + location.hash;
+  fetch("https://dukaabora.store/robots.txt", { mode: "no-cors", cache: "no-store" })
+    .then(() => location.replace(target), () => { /* domain down: stay on this copy */ });
 }
 /* ==========================================================
    STORE SETTINGS — edit these to match your business
