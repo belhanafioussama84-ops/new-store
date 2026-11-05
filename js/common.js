@@ -79,6 +79,17 @@ const Shop = (() => {
     return ok;
   }
 
+  const cookie = (name) => (document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`)) || [])[1] || "";
+  // Facebook ad click id: in the link of the ad (?fbclid=…); kept for this visit in case the
+  // _fbc cookie is missing (the visitor may have moved to another page since).
+  const fbclid = (() => {
+    const fromUrl = new URLSearchParams(location.search).get("fbclid");
+    try {
+      if (fromUrl) sessionStorage.setItem("dukabora_fbclid", fromUrl);
+      return fromUrl || sessionStorage.getItem("dukabora_fbclid") || "";
+    } catch { return fromUrl || ""; }
+  })();
+
   // Builds the order from a validated form and keeps a local copy.
   // total defaults to price × qty; pass it for bundle offers (e.g. buy 2 for a lower price).
   function createOrder(form, p, qty, total = p.price * qty) {
@@ -102,6 +113,15 @@ const Shop = (() => {
         town: form.city?.value.trim() || "",
         street: form.address?.value.trim() || "",
         landmark: form.landmark?.value.trim() || "", // El Salvador only
+      },
+      // For the Meta Conversions API (google-sheet/orders.gs sends the Purchase from the sheet too):
+      // the Facebook cookies of this visitor, so Meta can match the order to the ad click.
+      currencyCode: COUNTRY.currencyCode,
+      meta: {
+        fbp: cookie("_fbp"),
+        fbc: cookie("_fbc") || (fbclid ? `fb.1.${Date.now()}.${fbclid}` : ""),
+        ua: navigator.userAgent,
+        url: location.href.split("#")[0],
       },
     };
 

@@ -28,6 +28,16 @@
  *  Properties): when you paste a new version of this file later, leave the two lines empty and
  *  Telegram keeps working.
  *
+ * SEND EVERY ORDER TO META TOO (Conversions API: Facebook counts orders even when the
+ * customer's phone blocks the pixel; same order number as the pixel, so never counted twice):
+ *  1. Meta Events Manager → the pixel (wqw, 2505097906522683) → Settings → Conversions API →
+ *     Generate access token. Copy it.
+ *  2. Paste it below in META_CAPI_TOKEN (only in Apps Script, never in the GitHub copy).
+ *  3. Choose "testMetaCapi" in the function list at the top → Run → allow the permissions.
+ *     The log must say "Token OK". Then Deploy → Manage deployments → edit → New version → Deploy.
+ *  Like Telegram, the token is then kept in the script's settings: later versions of this file
+ *  can be pasted with the line left empty.
+ *
  * Rows received before this format: in the Apps Script editor choose "fixOldRows" in the
  * function list at the top and click Run (once).
  */
@@ -66,6 +76,9 @@ const FIRST_CODE = 1;
 // (none saved = no message). Never put them in the GitHub copy of this file: it is public.
 const TELEGRAM_TOKEN = "";
 const TELEGRAM_CHAT_ID = "";
+// Meta Conversions API (setup above). Never put the token in the GitHub copy of this file.
+const META_PIXEL_ID = "2505097906522683";
+const META_CAPI_TOKEN = "";
 
 // The token and chat ID: the ones written above (saved for next time), else the saved ones.
 function telegram_() {
@@ -99,6 +112,7 @@ function doPost(e) {
         // Note: the product name (the site sends "Name (sku)")
         text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : o.product.name),
       ]);
+      sendMetaPurchase_(o);
       notifyTelegram_(o.number, o);
       return json_({ ok: true });
     }
@@ -117,6 +131,7 @@ function doPost(e) {
         // note: the product name next to its SKU (the site sends "Name (sku)")
         text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : ""),
       ]);
+      sendMetaPurchase_(o);
       notifyTelegram_(sheet.getLastRow() - 1, o);
       return json_({ ok: true });
     }
@@ -136,6 +151,7 @@ function doPost(e) {
       "NON",
       text_(o.country || "Tanzania"), // orders sent before the Zambia version have no country
     ]);
+    sendMetaPurchase_(o);
     notifyTelegram_(code, o);
     return json_({ ok: true });
   } catch (err) {
@@ -306,6 +322,85 @@ function getTelegramChatId() {
   const chats = (res.result || []).map((u) => (u.message || {}).chat).filter(Boolean);
   if (!chats.length) return console.log("No message yet: open your bot in Telegram, press Start, then run this again.");
   console.log("TELEGRAM_CHAT_ID = " + chats[chats.length - 1].id);
+}
+
+/* ---------- Meta Conversions API ---------- */
+
+// The token written above (saved for next time), else the saved one.
+function metaToken_() {
+  const props = PropertiesService.getScriptProperties();
+  if (META_CAPI_TOKEN) props.setProperty("META_CAPI_TOKEN", META_CAPI_TOKEN);
+  return props.getProperty("META_CAPI_TOKEN") || "";
+}
+
+function sha256_(s) {
+  return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(s), Utilities.Charset.UTF_8)
+    .map((b) => ((b + 256) % 256).toString(16).padStart(2, "0")).join("");
+}
+
+// "Santa Tecla" → "santatecla" (Meta's format for cities: lowercase a-z, no accents or spaces)
+const plain_ = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z]/g, "");
+
+const META_COUNTRY_ = { Tanzania: ["tz", "TZS"], Zambia: ["zm", "ZMW"], Lebanon: ["lb", "USD"], "El Salvador": ["sv", "USD"] };
+
+// The Purchase event of one order, with the same event_id (order number) as the pixel on the
+// thank-you page: Meta keeps only one of the two. Customer details are hashed (SHA-256).
+// testCode: only for testMetaCapi (the event then shows in "Test events" and is not counted).
+function metaPurchaseBody_(o, testCode) {
+  const [cc, cur] = META_COUNTRY_[o.country || "Tanzania"] || ["", "USD"];
+  const m = o.meta || {};
+  const names = String(o.customer.fullName || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const qty = Number(o.product.qty) || 1;
+  const now = Math.floor(Date.now() / 1000);
+  const time = Math.floor(Date.parse(o.date || "") / 1000);
+  const ud = { ph: [sha256_(String(o.customer.phone || "").replace(/\D/g, ""))] };
+  if (cc) ud.country = [sha256_(cc)];
+  if (names[0]) ud.fn = [sha256_(names[0])];
+  if (names.length > 1) ud.ln = [sha256_(names[names.length - 1])];
+  if (plain_(o.customer.town)) ud.ct = [sha256_(plain_(o.customer.town))];
+  if (m.fbp) ud.fbp = m.fbp;
+  if (m.fbc) ud.fbc = m.fbc;
+  if (m.ua) ud.client_user_agent = m.ua;
+  const body = { data: [{
+    event_name: "Purchase",
+    event_time: time > 0 && time <= now ? time : now,
+    event_id: String(o.number),
+    action_source: "website",
+    event_source_url: m.url || "https://dukaabora.store/",
+    user_data: ud,
+    custom_data: {
+      currency: o.currencyCode || cur, value: Number(o.total) || 0, content_type: "product",
+      content_ids: [String(o.product.id || "")], contents: [{ id: String(o.product.id || ""), quantity: qty }], num_items: qty,
+    },
+  }] };
+  if (testCode) body.test_event_code = testCode;
+  return body;
+}
+
+function postToMeta_(body) {
+  return UrlFetchApp.fetch("https://graph.facebook.com/v21.0/" + META_PIXEL_ID + "/events?access_token=" + encodeURIComponent(metaToken_()), {
+    method: "post", contentType: "application/json", payload: JSON.stringify(body), muteHttpExceptions: true,
+  });
+}
+
+// Sends the order to Meta. A failure here never loses the order (the row is already saved).
+function sendMetaPurchase_(o) {
+  if (!metaToken_() || !o.number) return;
+  try {
+    const res = postToMeta_(metaPurchaseBody_(o));
+    if (res.getResponseCode() !== 200) console.error("Meta CAPI: " + res.getContentText());
+  } catch (err) {
+    console.error("Meta CAPI: " + err);
+  }
+}
+
+// Run by hand (setup step 3): checks the token with a test event (shown only in "Test events",
+// not counted as a purchase).
+function testMetaCapi() {
+  if (!metaToken_()) return console.log("Paste the token in META_CAPI_TOKEN first, then run this again.");
+  const o = { number: "TEST", country: "El Salvador", total: 1, product: { id: "test", qty: 1 }, customer: { fullName: "Test", phone: "+503 70000000" } };
+  const res = postToMeta_(metaPurchaseBody_(o, "TEST12345"));
+  console.log(res.getResponseCode() === 200 ? "✅ Token OK: " + res.getContentText() : "❌ " + res.getContentText());
 }
 
 // Run by hand (setup step 4) to check your phone rings.
