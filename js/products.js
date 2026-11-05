@@ -534,9 +534,9 @@ const PRODUCTS = [
     reviews: 0,
     badge: "New",
     icon: "🦶",
-    image: "images/foot-massager-remote.jpg",
+    image: "images/foot-massager-feet.jpg",
     // Supplier photos (600 x 600)
-    images: ["images/foot-massager-remote.jpg", "images/foot-massager-led.jpg", "images/foot-massager-usb.jpg", "images/foot-massager-night.jpg"],
+    images: ["images/foot-massager-feet.jpg", "images/foot-massager-remote.jpg", "images/foot-massager-led.jpg", "images/foot-massager-usb.jpg", "images/foot-massager-night.jpg"],
     description: "Una alfombrilla de masaje con estimulación eléctrica (EMS) para relajar tus pies en casa. Te sientas, pones los pies encima y eliges la intensidad que te gusta.",
     offers: [
       { qty: 1, price: 36.99 },
