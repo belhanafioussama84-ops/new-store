@@ -91,6 +91,17 @@
       Pixel.track("Purchase", Pixel.product(item, o.product.qty, o.total), { eventID: o.number });
       try { localStorage.setItem(KEY, JSON.stringify([...sent, o.number].slice(-50))); } catch { /* storage unavailable */ }
     }
+  } else {
+    // The browser kept no copy of the order (private mode, some in-app browsers): send the
+    // Purchase from the link (thank-you.html?order=…&p=<product id>&q=<qty>&v=<total>).
+    // Once per page view only; eventID lets Meta drop a duplicate if the page is reloaded.
+    const q = new URLSearchParams(location.search);
+    const p = findProduct(q.get("p") || "");
+    const qty = Math.max(1, Number(q.get("q")) || 1);
+    const value = Number(q.get("v")) || 0;
+    if (number && p && value > 0) {
+      Pixel.track("Purchase", Pixel.product({ id: p.id, name: p.name, price: value / qty }, qty, value), { eventID: number });
+    }
   }
 
   /* ---------- Share, help, footer ---------- */

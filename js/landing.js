@@ -382,7 +382,9 @@
       renderButton();
       return;
     }
-    location.href = `thank-you.html?order=${encodeURIComponent(o.number)}`;
+    // The product, quantity and total travel in the link too: the thank-you page can then send the
+    // Purchase event even when this browser refuses to save the order (private mode, some in-app browsers)
+    location.href = `thank-you.html?order=${encodeURIComponent(o.number)}&p=${encodeURIComponent(p.id)}&q=${o.product.qty}&v=${o.total}&country=${COUNTRY.id}`;
   });
 
   $("#orderForm").addEventListener("input", (e) => {
