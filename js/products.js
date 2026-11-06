@@ -80,6 +80,8 @@ const COUNTRIES = {
     languages: ["es"], // Spanish only: ES in js/i18n.js
     fastCity: "san salvador",
     splitAddress: true,
+    // No WhatsApp buttons: customers must order with the form, not by message (user's choice)
+    noWhatsApp: true,
     // Order form as LatinDrop asked: Departamento (list), then Ciudad/Municipio (list of the
     // departamento's municipios), then the full address. Columns of the LatinDrop import file
     // (google-sheet/orders.gs). The 262 municipios, by departamento:
@@ -125,6 +127,8 @@ const { COUNTRY, COUNTRY_CHOSEN } = (() => {
 })();
 // Country colours (css/product.css). The <head> of each page sets it early too, so Lebanon doesn't flash green.
 document.documentElement.dataset.country = COUNTRY.id;
+// Countries with noWhatsApp: no WhatsApp number = every WhatsApp button and link is hidden
+if (COUNTRY.noWhatsApp) STORE.whatsapp = "";
 if (COUNTRY.id === "lb") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#c8102e");
 if (COUNTRY.id === "sv") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#0b3a82");
 
