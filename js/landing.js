@@ -156,6 +156,12 @@
     // layout: "story" — one long centred column like the big COD landing pages: big uppercase
     // titles, text, full-width photos, ✓ lists, ⚠️ box, what's in the box. Same product fields.
     document.body.classList.add("layout-story");
+    // The order form comes right after the price: description, "selling fast", perks and the
+    // delivery timeline move under the form.
+    const below = document.createElement("div");
+    below.className = "buy__after";
+    ["#pDesc", ".buy__hot", ".buy__check", ".buy__perks", ".eta"].forEach((s) => { const el = $(s); if (el) below.appendChild(el); });
+    $("#order").after(below);
     const H = (s, cls = "") => `<h2 class="st-h${cls}">${esc(T(s))}</h2>`;
     const P = (s) => `<p>${esc(T(s))}</p>`;
     const list = (items) => `<ul class="st-list">${items.join("")}</ul>`;

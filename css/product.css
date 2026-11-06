@@ -539,6 +539,19 @@ p { margin: 0 0 1em; }
 .specs dd { margin: 0; color: var(--muted); }
 /* layout: "story" — one long centred column (js/landing.js) */
 body.layout-story { background: #fff; }
+.buy__after { margin-top: 1.25rem; }
+.buy__after .buy__desc { margin-bottom: 1rem; }
+/* Big "order" button that follows the visitor (hidden while the form is on screen) */
+body.layout-story .sticky { min-height: 58px; font-size: 1.12rem; font-weight: 800; border-radius: 16px; animation: sticky-pulse 2.2s ease-in-out infinite; }
+@keyframes sticky-pulse {
+  0%, 100% { box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .35), 0 0 0 0 rgba(77, 163, 255, .6); }
+  50% { box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .35), 0 0 0 12px rgba(77, 163, 255, 0); }
+}
+@media (min-width: 601px) {
+  body.layout-story .sticky { display: flex; justify-content: center; align-items: center; position: fixed; left: auto; right: 24px; bottom: 24px; width: 380px; z-index: 20; transform: translateY(160%); transition: transform .3s; }
+  body.layout-story .sticky.is-visible { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { body.layout-story .sticky { animation: none; } }
 .story { max-width: 680px; padding-top: 2rem; padding-bottom: 2.5rem; text-align: center; }
 .story > p, .story .st-warn p { color: #3d4555; font-size: 1.05rem; line-height: 1.65; margin: 0 auto 1.25rem; }
 .story strong { color: var(--ink); }
