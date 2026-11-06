@@ -232,7 +232,9 @@ const Pixel = (() => {
     content_ids: [p.id], content_name: p.name, content_type: "product",
     contents: [{ id: p.id, quantity: qty }], num_items: qty, value, currency: COUNTRY.currencyCode,
   });
-  return { track, product };
+  // Custom events (not used by the campaigns, only to read in Events Manager)
+  const custom = (event, data) => { if (id && window.fbq) fbq("trackCustom", event, data || {}); };
+  return { track, custom, product };
 })();
 
 /* Floating WhatsApp button on every page (number in STORE.whatsapp) */

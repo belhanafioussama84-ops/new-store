@@ -359,11 +359,25 @@
   }
 
   /* ---------- Order ---------- */
+  // FormStart: the visitor clicked into the order form for the first time (once per page view).
+  // Compared with ViewContent and InitiateCheckout in Events Manager, it shows whether people
+  // stop before the form (price, page) or inside it (form).
+  $("#orderForm").addEventListener("focusin", () => {
+    Pixel.custom("FormStart", { content_ids: [p.id], country: COUNTRY.id });
+  }, { once: true });
+
   $("#orderForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target;
     const btn = $("#submitBtn");
-    if (btn.disabled || !sizesOk() || !validate(form)) return;
+    if (btn.disabled) return;
+    if (!sizesOk() || !validate(form)) {
+      // FormError: which fields were refused (e.g. "phone,city"), to see where people get stuck
+      const fields = [...form.querySelectorAll(".has-error input, .has-error select")].map((el) => el.name);
+      if ($("#sizeError")?.textContent) fields.push("size");
+      Pixel.custom("FormError", { fields: fields.join(",") || "unknown", content_ids: [p.id], country: COUNTRY.id });
+      return;
+    }
 
     Pixel.track("InitiateCheckout", Pixel.product(p, offer().qty, offer().price));
     // The sizes travel in the product name, so they show in the sheet (REF) and on Telegram
