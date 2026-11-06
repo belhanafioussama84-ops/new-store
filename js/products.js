@@ -541,6 +541,9 @@ const PRODUCTS = [
     image: "images/foot-massager-feet.jpg",
     // Supplier photos (600 x 600)
     images: ["images/foot-massager-feet.jpg", "images/foot-massager-remote.jpg", "images/foot-massager-led.jpg", "images/foot-massager-usb.jpg", "images/foot-massager-night.jpg"],
+    // The user's own photos of the product (section "Fotos reales", also at the end of the top gallery)
+    realPhotos: ["images/foot-massager-real-1.jpg", "images/foot-massager-real-2.jpg", "images/foot-massager-real-3.jpg"],
+    realText: "Fotos reales del producto: así es el masajeador que recibes en tu casa.",
     description: "Una alfombrilla de masaje con estimulación eléctrica (EMS) para relajar tus pies en casa. Te sientas, pones los pies encima y eliges la intensidad que te gusta.",
     offers: [
       { qty: 1, price: 36.99 },

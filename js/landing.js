@@ -138,6 +138,8 @@
   if (p.realPhotos?.length) {
     $("#realGrid").innerHTML = p.realPhotos.map((src) =>
       `<img src="${esc(src)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()" />`).join("");
+    // realText: another sentence under the title (the default one says "taken in our stock")
+    if (p.realText) $("#real .muted").textContent = T(p.realText);
     $("#real").hidden = false;
   }
 
