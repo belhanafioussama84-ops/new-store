@@ -427,6 +427,8 @@
   }
 
   /* ---------- Init ---------- */
+  // The order button is disabled in the HTML until this script runs (slow connections)
+  $("#submitBtn").disabled = false;
   Pixel.track("ViewContent", Pixel.product(p));
   renderOffers();
   renderButton();

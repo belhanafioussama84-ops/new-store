@@ -100,7 +100,7 @@
           </div>
 
           <div class="order__step order__step--line"><h2>2. Your delivery details</h2><span>💵 Pay on delivery</span></div>
-          <form id="orderForm" novalidate>
+          <form id="orderForm" novalidate onsubmit="return false">
             <div class="field">
               <label for="fullName">Full name <b>*</b></label>
               <div class="input"><span>👤</span><input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="e.g. Juma Hassan" required /></div>
@@ -142,7 +142,7 @@
             <div class="recap" id="recap"></div>
 
             <p class="form-error" id="formError" role="alert" hidden></p>
-            <button type="submit" class="btn btn--big" id="submitBtn">Order now</button>
+            <button type="submit" class="btn btn--big" id="submitBtn" disabled>Order now</button>
             <p class="order__note">💵 Pay cash when you receive it · <strong>TSh 0 now</strong></p>
             <ul class="order__trust">
               <li>🔒 No payment now</li>
