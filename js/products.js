@@ -623,6 +623,76 @@ const PRODUCTS = [
       { q: "¿Quién no debe usarla?", a: "No la uses si tienes marcapasos u otro implante electrónico, si estás embarazada o si tienes heridas en los pies. Si tienes una enfermedad, consulta a tu médico antes de usarla." },
     ],
   },
+  {
+    id: "multi-collagen",
+    // El Salvador only: texts in Spanish (from the user's own page), prices in US dollars
+    name: "Multi Collagen Complex, 90 caps",
+    sku: "LD-P-19492", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    category: "Health & comfort",
+    price: 40.99, // user's price; 2 and 3 bottles are my suggestion
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "💊",
+    image: "images/collagen-main.jpg",
+    images: ["images/collagen-main.jpg", "images/collagen-ingredients.jpg", "images/collagen-types.jpg"],
+    description: "Multi Collagen Complex para mujeres: una fórmula con 5 tipos de colágeno, biotina, vitamina C y ácido hialurónico. 90 cápsulas.",
+    offers: [
+      { qty: 1, price: 40.99 },
+      { qty: 2, price: 69.99, tag: "Best value" },
+      { qty: 3, price: 94.99 },
+    ],
+    layout: "story",
+    theme: "plum", // plum colours and elegant titles, like the bottle (css/product.css)
+    timeline: [1, 1, 3], // on its way tomorrow, delivered in 1 to 3 days
+    headline: "Cuida de ti. Brilla a tu manera.",
+    subheadline: "Un pequeño hábito. Un momento para ti.",
+    inBox: ["1 frasco de Multi Collagen Complex", "90 cápsulas"],
+    // Sources are on the supplier's photo: allergy warning. Dose: the label, we don't have it.
+    warning: "Complemento alimenticio. No sustituye una alimentación equilibrada ni un estilo de vida saludable. Contiene colágeno de origen bovino, marino y de pollo, y membrana de huevo: no lo tomes si eres alérgica a alguno de estos ingredientes. Si estás embarazada, amamantando, tomas medicamentos o tienes una enfermedad, consulta a tu médico antes de usarlo.",
+    solution: {
+      title: "Dedica un momento de tu día a tu bienestar",
+      text: "Incorpora una fórmula con ingredientes seleccionados como parte de una rutina equilibrada.",
+    },
+    benefits: [
+      { title: "5 tipos de colágeno", text: "Tipos I, II, III, V y X en una sola fórmula." },
+      { title: "Biotina", text: "Vitamina B7, incluida en la fórmula." },
+      { title: "Vitamina C", text: "Un nutriente esencial incluido en la mezcla." },
+      { title: "Ácido hialurónico", text: "Otro ingrediente de esta combinación." },
+    ],
+    sections: [
+      {
+        image: "images/collagen-ingredients.jpg",
+        title: "Lo que contiene",
+        text: "Una combinación de cinco tipos de colágeno junto con biotina, vitamina C y ácido hialurónico. Una opción práctica para complementar tu día.",
+      },
+      {
+        image: "images/collagen-types.jpg",
+        title: "Cinco tipos de colágeno en un solo frasco",
+        text: "Colágeno de origen bovino, marino, de pollo y de membrana de huevo.",
+        list: ["5 tipos de colágeno", "Con biotina y vitamina C", "Con ácido hialurónico", "Presentación de 90 cápsulas"],
+      },
+      {
+        title: "Tu rutina merece un nuevo comienzo",
+        text: "Empieza por ti, un día a la vez. Pide tu frasco hoy y paga cuando lo recibas en tu casa.",
+      },
+    ],
+    specs: {
+      "Marca": "Microingredients",
+      "Tipo": "Complemento alimenticio",
+      "Presentación": "90 cápsulas",
+      "Colágeno": "Tipos I, II, III, V y X",
+      "Además": "Biotina, vitamina C y ácido hialurónico",
+    },
+    faq: [
+      { q: "¿Qué contiene el producto?", a: "Contiene cinco tipos de colágeno (I, II, III, V y X), biotina, vitamina C y ácido hialurónico." },
+      { q: "¿Cuántas cápsulas contiene?", a: "El frasco contiene 90 cápsulas." },
+      { q: "¿Cómo debo consumirlo?", a: "Sigue las indicaciones de la etiqueta del producto. Consulta a un profesional de salud si tienes dudas sobre su uso." },
+      { q: "¿Quién no debe tomarlo?", a: "No lo tomes si eres alérgica al pescado, al huevo o a otro de sus ingredientes. Si estás embarazada, amamantando, tomas medicamentos o tienes una enfermedad, consulta a tu médico antes de usarlo." },
+    ],
+  },
 ];
 
 // A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened

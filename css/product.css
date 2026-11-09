@@ -577,6 +577,16 @@ body.layout-story .sticky { min-height: 58px; font-size: 1.12rem; font-weight: 8
 .st-specs dd { margin: 0; color: var(--muted); }
 .story .btn--big { margin-top: 2rem; }
 
+/* theme: "plum" — colours of the collagen bottle, elegant titles */
+body.theme-plum { --accent: #5e1a4f; --accent-2: #8a3a78; --accent-soft: #f7ecf4; --gold: #b0559a; --gold-2: #e6c3dc; }
+body.theme-plum .st-h { font-family: var(--display); font-weight: 600; text-transform: none; letter-spacing: 0; }
+body.theme-plum .sticky, body.theme-plum .btn { background: var(--accent); border-color: var(--accent); color: #fff; }
+body.theme-plum .sticky { animation-name: sticky-pulse-plum; }
+@keyframes sticky-pulse-plum {
+  0%, 100% { box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .35), 0 0 0 0 rgba(176, 85, 154, .6); }
+  50% { box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .35), 0 0 0 12px rgba(176, 85, 154, 0); }
+}
+
 /* Delivery timeline under the perks (products with "timeline") */
 .eta { display: grid; grid-template-columns: repeat(3, 1fr); margin: 1rem 0 0; padding: 0; list-style: none; position: relative; }
 .eta::before { content: ""; position: absolute; top: 19px; left: 16%; right: 16%; height: 2px; background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 11px); }

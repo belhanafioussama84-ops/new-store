@@ -156,6 +156,7 @@
     // layout: "story" — one long centred column like the big COD landing pages: big uppercase
     // titles, text, full-width photos, ✓ lists, ⚠️ box, what's in the box. Same product fields.
     document.body.classList.add("layout-story");
+    if (p.theme) document.body.classList.add(`theme-${p.theme}`);
     // The order form comes right after the price: description, "selling fast", perks and the
     // delivery timeline move under the form.
     const below = document.createElement("div");
