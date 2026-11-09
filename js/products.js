@@ -645,53 +645,63 @@ const PRODUCTS = [
       { qty: 2, price: 69.99, tag: "Best value" },
       { qty: 3, price: 94.99 },
     ],
-    layout: "story",
-    theme: "plum", // plum colours and elegant titles, like the bottle (css/product.css)
+    layout: "ritual", // same order of blocks as the reference page the user chose (js/landing.js)
     timeline: [1, 1, 3], // on its way tomorrow, delivered in 1 to 3 days
-    headline: "Cabello, piel, uñas y articulaciones: cuídalos cada día",
-    subheadline: "5 tipos de colágeno con biotina, vitamina C y ácido hialurónico, en un solo frasco.",
-    // General facts about collagen and the vitamins only: no promised result (Meta refuses those)
-    problem: {
-      title: "Con los años, tu cuerpo produce menos colágeno",
-      text: "Es algo natural y nos pasa a todas. El colágeno es una de las proteínas principales de tu piel, tus huesos y tus articulaciones.",
+    eyebrow: "Belleza y bienestar",
+    // Facts about the ingredients only, no promised result. Dose: the label, we don't have it for 90 caps.
+    features: [
+      { mark: "5", title: "Cinco tipos de colágeno", text: "Tipos I, II, III, V y X en una sola fórmula." },
+      { mark: "✦", title: "Tu rutina de belleza", text: "Pensado para acompañar el cuidado de tu piel, cabello y uñas." },
+      { mark: "◐", title: "Ácido hialurónico", text: "Presente de forma natural en la piel." },
+      { mark: "✓", title: "Articulaciones", text: "Incluye colágeno tipo II, el que se encuentra en el cartílago." },
+      { mark: "C", title: "Vitamina C y biotina", text: "Nutrientes añadidos a la fórmula." },
+      { mark: "90", title: "Cápsulas prácticas", text: "90 cápsulas, sin mezclar y sin sabor." },
+    ],
+    about: {
+      title: "Sobre este colágeno",
+      lead: "Colágeno en cápsulas, fácil de incluir en tu día a día.",
+      text: "Multi Collagen Complex reúne colágeno hidrolizado tipos I, II, III, V y X de origen bovino, marino, de pollo y de membrana de huevo, junto con biotina, vitamina C y ácido hialurónico.",
     },
-    inBox: ["1 frasco de Multi Collagen Complex", "90 cápsulas"],
-    // Sources are on the supplier's photo: allergy warning. Dose: the label, we don't have it.
-    warning: "Complemento alimenticio. No sustituye una alimentación equilibrada ni un estilo de vida saludable. Contiene colágeno de origen bovino, marino y de pollo, y membrana de huevo: no lo tomes si eres alérgica a alguno de estos ingredientes. Si estás embarazada, amamantando, tomas medicamentos o tienes una enfermedad, consulta a tu médico antes de usarlo.",
-    solution: {
-      title: "Un pequeño hábito, un momento para ti",
-      text: "Multi Collagen Complex es un complemento pensado para acompañar tu rutina diaria de belleza y bienestar, junto con una alimentación equilibrada.",
-    },
-    benefits: [
+    why: [
       { title: "Para tu piel", text: "El colágeno es una de las principales proteínas de la piel, y el ácido hialurónico también está presente en ella de forma natural." },
       { title: "Para tu cabello y uñas", text: "Con biotina (vitamina B7), la vitamina que muchas mujeres buscan para su rutina de cabello y uñas." },
       { title: "Para tus articulaciones", text: "Incluye colágeno tipo II, el tipo que se encuentra en el cartílago de las articulaciones." },
       { title: "Con vitamina C", text: "Contribuye a la formación normal de colágeno en el cuerpo." },
+      { title: "Cápsulas", text: "Sin mezclar y sin sabor." },
     ],
-    sections: [
-      {
-        image: "images/collagen-8en1.jpg",
-        title: "Todo en un solo producto",
-        text: "En lugar de comprar varios productos, aquí tienes cinco tipos de colágeno junto con biotina, vitamina C y ácido hialurónico. Práctico para tu día a día.",
-      },
-      {
-        image: "images/collagen-guia.jpg",
-        title: "Cinco tipos de colágeno en un solo frasco",
-        text: "Cada tipo de colágeno se encuentra en partes distintas del cuerpo. Por eso esta fórmula reúne los tipos I, II, III, V y X, de origen bovino, marino, de pollo y de membrana de huevo.",
-        list: ["5 tipos de colágeno", "Con biotina y vitamina C", "Con ácido hialurónico", "Presentación de 90 cápsulas"],
-      },
-      {
-        image: "images/collagen-capsulas.jpg",
-        title: "Tu rutina merece un nuevo comienzo",
-        text: "Empieza por ti, un día a la vez. Pide tu frasco hoy y paga cuando lo recibas en tu casa.",
-      },
+    // Sources are on the supplier's photo: allergy warning
+    warning: "Contiene pescado y huevo. Complemento alimenticio: no sustituye una alimentación equilibrada ni un estilo de vida saludable. Si estás embarazada, amamantando, tomas medicamentos, tienes una enfermedad o alguna alergia alimentaria, consulta a tu médico antes de usarlo. Mantener fuera del alcance de los niños.",
+    accordions: [
+      { title: "Cómo tomarlo", text: "Sigue las indicaciones de la etiqueta del producto. Consulta a un profesional de salud si tienes dudas sobre su uso." },
+      { title: "Envío y entrega", text: "Envío gratis en El Salvador. Tu pedido llega en 1 a 3 días." },
+      { title: "Pago contra entrega", text: "No pagas nada ahora. Te llamamos para confirmar y pagas en efectivo cuando recibes tu pedido." },
     ],
-    specs: {
-      "Marca": "Microingredients",
-      "Tipo": "Complemento alimenticio",
-      "Presentación": "90 cápsulas",
-      "Colágeno": "Tipos I, II, III, V y X",
-      "Además": "Biotina, vitamina C y ácido hialurónico",
+    band: {
+      eyebrow: "Un hábito para ti",
+      title: "Cabello, piel, uñas y articulaciones: cuídalos cada día.",
+      text: "Con los años, tu cuerpo produce menos colágeno de forma natural. Aquí tienes cinco tipos de colágeno con vitamina C, biotina y ácido hialurónico, en un solo frasco.",
+      images: ["images/collagen-8en1.jpg", "images/collagen-guia.jpg", "images/collagen-capsulas.jpg"],
+    },
+    compare: {
+      eyebrow: "Por qué este producto",
+      title: "Más en una sola fórmula.",
+      head: ["Contenido", "Incluido", "Detalle"],
+      rows: [
+        ["Colágeno tipos I, II, III, V y X", "5 tipos"],
+        ["Vitamina C, biotina y ácido hialurónico", "Añadidos"],
+        ["Sin mezclar y sin sabor", "Cápsulas"],
+        ["Presentación", "90 cápsulas"],
+      ],
+    },
+    cards: {
+      eyebrow: "Cada día",
+      title: "Constancia, sin complicaciones.",
+      text: "Un formato en cápsulas, sin sabor, fácil de añadir a tu rutina diaria.",
+      items: [
+        { title: "Cinco tipos de colágeno", text: "Tipos I, II, III, V y X." },
+        { title: "Nutrientes añadidos", text: "Vitamina C, biotina y ácido hialurónico." },
+        { title: "Pagas al recibir", text: "Pides hoy y pagas en efectivo cuando llega a tu casa." },
+      ],
     },
     faq: [
       { q: "¿Qué contiene el producto?", a: "Contiene cinco tipos de colágeno (I, II, III, V y X), biotina, vitamina C y ácido hialurónico." },

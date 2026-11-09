@@ -152,11 +152,50 @@
      headline: "Big title"                  → banner before everything else
      inBox: ["…"]                           → "What's in the box" after the photos
      warning: "…"                           → ⚠️ "Important" box after the photos */
-  if (p.layout === "story") {
+  if (p.layout === "ritual") {
+    // layout: "ritual" — feature cards before the offers, timeline in a card, open "about" panel and
+    // accordions, lavender band with big graphics, comparison table, FAQ, numbered cards.
+    document.body.classList.add("layout-ritual");
+    const E = (s) => esc(T(s));
+    if (p.eyebrow) $("#pCat").textContent = T(p.eyebrow);
+    $("#pDesc").hidden = true;
+    $("#order").insertAdjacentHTML("beforebegin", `
+      <ul class="rt-features">${(p.features || []).map((f) => `
+        <li><span>${E(f.mark)}</span><strong>${E(f.title)}</strong><small>${E(f.text)}</small></li>`).join("")}
+      </ul>`);
+    const below = document.createElement("div");
+    below.className = "buy__after";
+    [".buy__check", ".buy__perks", ".eta"].forEach((s) => { const el = $(s); if (el) below.appendChild(el); });
+    $("#order").after(below);
+    const panel = (title, body, open) => `<details class="rt-acc"${open ? " open" : ""}><summary>${E(title)}</summary>${body}</details>`;
+    const a = p.about || {}, b = p.band, c = p.compare;
+    $("#story").innerHTML = `
+      <section class="wrap rt-info">
+        ${panel(a.title, `
+          <p><strong>${E(a.lead)}</strong></p><p>${E(a.text)}</p>
+          <h3>${E("Por qué te va a gustar")}</h3>
+          <ul>${(p.why || []).map((w) => `<li><strong>${E(w.title)}:</strong> ${E(w.text)}</li>`).join("")}</ul>
+          <h3>${E("Información importante")}</h3><p>${E(p.warning)}</p>`, true)}
+        ${(p.accordions || []).map((x) => panel(x.title, `<p>${E(x.text)}</p>`)).join("")}
+      </section>
+      ${b ? `<section class="rt-band"><div class="wrap">
+        <p class="rt-eye">${E(b.eyebrow)}</p><h2>${E(b.title)}</h2><p class="rt-sub">${E(b.text)}</p>
+        ${b.images.map((src) => `<img src="${esc(src)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()" />`).join("")}
+      </div></section>` : ""}
+      ${c ? `<section class="wrap rt-compare">
+        <p class="rt-eye">${E(c.eyebrow)}</p><h2>${E(c.title)}</h2>
+        <table><thead><tr>${c.head.map((h) => `<th>${E(h)}</th>`).join("")}</tr></thead>
+        <tbody>${c.rows.map(([k, v]) => `<tr><td>${E(k)}</td><td class="rt-yes">✓</td><td>${E(v)}</td></tr>`).join("")}</tbody></table>
+      </section>` : ""}`;
+    if (p.cards) $("#faq").insertAdjacentHTML("afterend", `
+      <section class="rt-band rt-cards"><div class="wrap">
+        <p class="rt-eye">${E(p.cards.eyebrow)}</p><h2>${E(p.cards.title)}</h2><p class="rt-sub">${E(p.cards.text)}</p>
+        ${p.cards.items.map((x, i) => `<article><small>0${i + 1}</small><h3>${E(x.title)}</h3><p>${E(x.text)}</p></article>`).join("")}
+      </div></section>`);
+  } else if (p.layout === "story") {
     // layout: "story" — one long centred column like the big COD landing pages: big uppercase
     // titles, text, full-width photos, ✓ lists, ⚠️ box, what's in the box. Same product fields.
     document.body.classList.add("layout-story");
-    if (p.theme) document.body.classList.add(`theme-${p.theme}`);
     // The order form comes right after the price: description, "selling fast", perks and the
     // delivery timeline move under the form.
     const below = document.createElement("div");
