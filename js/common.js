@@ -132,24 +132,29 @@ const Shop = (() => {
     return o;
   }
 
-  // Sends the order to the Google Sheet (STORE.ordersUrl, see google-sheet/orders.gs).
+  // Sends the order through our Cloudflare Worker (worker.js), which answers at once and passes it
+  // on to the Google Sheet with the visitor's IP. If the Worker can't take it, the order goes
+  // straight to Google (STORE.ordersUrl, see google-sheet/orders.gs).
   // Throws if the customer is offline or the request fails quickly, so they can try again.
-  // Google takes 2–4 s to answer, so after 1.5 s we stop waiting: "keepalive" lets the
-  // request finish even after the browser moves on to the thank-you page.
+  // After 1.5 s we stop waiting: "keepalive" lets the request finish even after the browser
+  // moves on to the thank-you page.
   async function sendOrder(o) {
     if (!STORE.ordersUrl) {
       console.warn("STORE.ordersUrl is empty — this order was NOT sent to your Google Sheet.");
       return;
     }
     if (navigator.onLine === false) throw new Error("offline");
-    // "no-cors" + text/plain: the simplest request Google Apps Script accepts from any website.
-    const request = fetch(STORE.ordersUrl, {
+    const options = {
       method: "POST",
-      mode: "no-cors",
       keepalive: true,
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(o),
-    });
+    };
+    // "no-cors" + text/plain: the simplest request Google Apps Script accepts from any website.
+    const direct = () => fetch(STORE.ordersUrl, { ...options, mode: "no-cors" });
+    const request = fetch("/api/order", options)
+      .then((res) => { if (!res.ok) throw new Error(`worker ${res.status}`); })
+      .catch(direct);
     await Promise.race([request, new Promise((resolve) => setTimeout(resolve, 1500))]);
   }
 

@@ -361,6 +361,7 @@ function metaPurchaseBody_(o, testCode) {
   if (m.fbp) ud.fbp = m.fbp;
   if (m.fbc) ud.fbc = m.fbc;
   if (m.ua) ud.client_user_agent = m.ua;
+  if (m.ip) ud.client_ip_address = m.ip;
   const body = { data: [{
     event_name: "Purchase",
     event_time: time > 0 && time <= now ? time : now,
