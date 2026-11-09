@@ -682,8 +682,6 @@ const PRODUCTS = [
       text: "Con los años, tu cuerpo produce menos colágeno de forma natural. Aquí tienes cinco tipos de colágeno con vitamina C, biotina y ácido hialurónico, en un solo frasco.",
       images: ["images/collagen-8en1.jpg", "images/collagen-guia.jpg", "images/collagen-capsulas.jpg"],
     },
-    // Made for this page from the 90-capsule photos (mp4 + .jpg poster)
-    video: { title: "Míralo en detalle", src: "images/collagen-video.mp4" },
     compare: {
       eyebrow: "Por qué este producto",
       title: "Más en una sola fórmula.",
