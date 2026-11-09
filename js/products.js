@@ -637,7 +637,8 @@ const PRODUCTS = [
     badge: "New",
     icon: "💊",
     image: "images/collagen-main.jpg",
-    images: ["images/collagen-main.jpg", "images/collagen-ingredients.jpg", "images/collagen-types.jpg"],
+    // Graphics made for this page with the 90-capsule bottle (Spanish text, style of the user's reference page)
+    images: ["images/collagen-main.jpg", "images/collagen-8en1.jpg", "images/collagen-guia.jpg", "images/collagen-capsulas.jpg"],
     description: "Pensado para tu rutina de belleza: cabello, piel, uñas y articulaciones. 5 tipos de colágeno con biotina, vitamina C y ácido hialurónico. 90 cápsulas.",
     offers: [
       { qty: 1, price: 40.99 },
@@ -669,17 +670,18 @@ const PRODUCTS = [
     ],
     sections: [
       {
-        image: "images/collagen-ingredients.jpg",
+        image: "images/collagen-8en1.jpg",
         title: "Todo en un solo producto",
         text: "En lugar de comprar varios productos, aquí tienes cinco tipos de colágeno junto con biotina, vitamina C y ácido hialurónico. Práctico para tu día a día.",
       },
       {
-        image: "images/collagen-types.jpg",
+        image: "images/collagen-guia.jpg",
         title: "Cinco tipos de colágeno en un solo frasco",
         text: "Cada tipo de colágeno se encuentra en partes distintas del cuerpo. Por eso esta fórmula reúne los tipos I, II, III, V y X, de origen bovino, marino, de pollo y de membrana de huevo.",
         list: ["5 tipos de colágeno", "Con biotina y vitamina C", "Con ácido hialurónico", "Presentación de 90 cápsulas"],
       },
       {
+        image: "images/collagen-capsulas.jpg",
         title: "Tu rutina merece un nuevo comienzo",
         text: "Empieza por ti, un día a la vez. Pide tu frasco hoy y paga cuando lo recibas en tu casa.",
       },
