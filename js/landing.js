@@ -182,6 +182,9 @@
         <p class="rt-eye">${E(b.eyebrow)}</p><h2>${E(b.title)}</h2><p class="rt-sub">${E(b.text)}</p>
         ${b.images.map((src) => `<img src="${esc(src)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()" />`).join("")}
       </div></section>` : ""}
+      ${p.video ? `<section class="wrap rt-video"><h2>${E(p.video.title)}</h2>
+        <video src="${esc(p.video.src)}" poster="${esc(p.video.src.replace(/\.mp4$/i, ".jpg"))}" autoplay muted loop playsinline preload="metadata" aria-label="${E(p.video.title)}"></video>
+      </section>` : ""}
       ${c ? `<section class="wrap rt-compare">
         <p class="rt-eye">${E(c.eyebrow)}</p><h2>${E(c.title)}</h2>
         <table><thead><tr>${c.head.map((h) => `<th>${E(h)}</th>`).join("")}</tr></thead>

@@ -607,6 +607,9 @@ body.layout-ritual h1, .rt-band h2, .rt-compare h2, body.layout-ritual .faq h2 {
 .rt-band h2, .rt-compare h2 { margin: 0 0 .75rem; font-size: clamp(1.6rem, 6vw, 2.2rem); line-height: 1.1; color: #18181b; }
 .rt-sub { margin: 0 auto 1.5rem; color: #52525b; font-size: 1.05rem; line-height: 1.55; }
 .rt-band img { display: block; width: 100%; margin-top: 1rem; border-radius: 20px; }
+.rt-video { max-width: 720px; padding-top: 3rem; text-align: center; }
+.rt-video h2 { margin: 0 0 1rem; font-family: "Inter", system-ui, sans-serif; font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 800; letter-spacing: -.03em; color: #2a1147; }
+.rt-video video { display: block; width: 100%; border-radius: 20px; background: #f8f1ec; box-shadow: 0 24px 40px -26px rgba(42, 17, 71, .55); }
 .rt-compare { max-width: 720px; padding-top: 3rem; padding-bottom: 3rem; text-align: center; }
 .rt-compare table { width: 100%; margin-top: 1.25rem; border-collapse: separate; border-spacing: 0; border: 1px solid #e4e4e7; border-radius: 18px; overflow: hidden; font-size: .85rem; }
 .rt-compare th { padding: 1rem .5rem; background: #111; color: #fff; font-weight: 700; }
