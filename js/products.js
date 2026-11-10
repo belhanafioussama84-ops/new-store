@@ -106,7 +106,9 @@ const COUNTRIES = {
 // Phones set to these time zones get that country until the visitor picks one.
 // A country with "municipios" gets its departamento list from them
 for (const c of Object.values(COUNTRIES)) if (c.municipios) c.regions = Object.keys(c.municipios);
-const ZONES = { "Africa/Lusaka": "zm", "Asia/Beirut": "lb", "America/El_Salvador": "sv" };
+// Lebanon store closed (user, 10 Nov 2026): its settings stay above, delete this line to reopen it.
+delete COUNTRIES.lb;
+const ZONES = { "Africa/Lusaka": "zm", "America/El_Salvador": "sv" };
 
 // COUNTRY_CHOSEN: false when the visitor has not picked a country yet (the home page then asks).
 const { COUNTRY, COUNTRY_CHOSEN } = (() => {
@@ -717,9 +719,10 @@ const PRODUCTS = [
 // on a phone that chose Zambia before) reopens the same page in the product's country.
 {
   const p = PRODUCTS.find((x) => x.id === new URLSearchParams(location.search).get("id"));
-  if (p?.countries && !p.countries.includes(COUNTRY.id)) {
+  const open = p?.countries?.filter((c) => COUNTRIES[c]) || [];
+  if (open.length && !open.includes(COUNTRY.id)) {
     const url = new URL(location.href);
-    url.searchParams.set("country", p.countries[0]);
+    url.searchParams.set("country", open[0]);
     location.replace(url.href);
   }
 }
