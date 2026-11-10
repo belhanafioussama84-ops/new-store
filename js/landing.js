@@ -11,7 +11,7 @@
       <section class="wrap faq">
         <h2>Product not found</h2>
         <p class="muted" style="text-align:center">No product in js/products.js has the id "${esc(id)}".</p>
-        <p style="text-align:center"><a href="index.html" class="btn">${T("Back to shop")}</a></p>
+        <p style="text-align:center"><a href="./" class="btn">${T("Back to shop")}</a></p>
       </section>`;
     $("#sticky").remove();
     return;
@@ -449,7 +449,7 @@
     }
     // The product, quantity and total travel in the link too: the thank-you page can then send the
     // Purchase event even when this browser refuses to save the order (private mode, some in-app browsers)
-    location.href = `thank-you.html?order=${encodeURIComponent(o.number)}&p=${encodeURIComponent(p.id)}&q=${o.product.qty}&v=${o.total}&country=${COUNTRY.id}`;
+    location.href = `thank-you?order=${encodeURIComponent(o.number)}&p=${encodeURIComponent(p.id)}&q=${o.product.qty}&v=${o.total}&country=${COUNTRY.id}`;
   });
 
   $("#orderForm").addEventListener("input", (e) => {

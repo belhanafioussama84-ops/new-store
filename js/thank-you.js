@@ -105,7 +105,7 @@
   }
 
   /* ---------- Share, help, footer ---------- */
-  const home = `${location.origin}${location.pathname.replace(/thank-you\.html$/, "")}`;
+  const home = `${location.origin}${location.pathname.replace(/thank-you(\.html)?$/, "")}`;
   $("#tShare").href = `https://wa.me/?text=${encodeURIComponent(T("I just ordered from Duka Bora 🇹🇿 Free delivery and you pay only when it arrives: {url}", { url: home }))}`;
   if (wa) {
     $("#tWa").href = waLink(`Hello Duka Bora${o ? `, about my order ${o.number}` : ""}:`);

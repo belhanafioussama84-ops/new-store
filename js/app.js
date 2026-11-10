@@ -5,7 +5,7 @@
   const { $, fmt, esc } = Shop;
 
   // Every product has its own page with the order form.
-  const productUrl = (p) => `product.html?id=${encodeURIComponent(p.id)}`;
+  const productUrl = (p) => `product?id=${encodeURIComponent(p.id)}`;
   const photo = (p) => `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"
     onerror="this.parentElement.classList.add('is-empty'); this.parentElement.dataset.icon = '${esc(p.icon || "")}'; this.remove();" />`;
 
