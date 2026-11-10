@@ -1,4 +1,4 @@
-/* Thank-you page — thank-you.html?order=<order number> */
+/* Thank-you page — thank-you?order=<order number> */
 (() => {
   "use strict";
 
@@ -93,7 +93,7 @@
     }
   } else {
     // The browser kept no copy of the order (private mode, some in-app browsers): send the
-    // Purchase from the link (thank-you.html?order=…&p=<product id>&q=<qty>&v=<total>).
+    // Purchase from the link (thank-you?order=…&p=<product id>&q=<qty>&v=<total>).
     // Once per page view only; eventID lets Meta drop a duplicate if the page is reloaded.
     const q = new URLSearchParams(location.search);
     const p = findProduct(q.get("p") || "");

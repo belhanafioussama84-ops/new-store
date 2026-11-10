@@ -1,4 +1,4 @@
-/* Product page — product.html?id=<product id>, filled from PRODUCTS (js/products.js) */
+/* Product page — product?id=<product id>, filled from PRODUCTS (js/products.js) */
 (() => {
   "use strict";
 

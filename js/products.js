@@ -43,7 +43,7 @@ const STORE = {
      colours (:root[data-country="sv"] in css/product.css). Product names in Spanish: "name"
      in each product's "sv" part.
    - The visitor's country: ?country=zm or ?country=lb in the link (use it in
-     Zambian / Lebanese ads, e.g. product.html?id=reward-watch&country=lb), else
+     Zambian / Lebanese ads, e.g. product?id=reward-watch&country=lb), else
      the one chosen before with the buttons at the top of the page or on the
      welcome screen of the home page, else the country of the phone's time
      zone (Zambia, Lebanon), else Tanzania.
@@ -140,7 +140,7 @@ if (COUNTRY.id === "sv") document.querySelector('meta[name="theme-color"]')?.set
      zm.sectionImages / lb.sectionImages: other photos for the "sections" there (same order)
    - image: put photos in the /images folder (square, ~800x800).
      If an image is missing, a styled placeholder is shown instead.
-   - Every product gets its own landing page: product.html?id=<id>
+   - Every product gets its own landing page: product?id=<id>
      (use that link in your Facebook / TikTok / Instagram ads).
    - home: false  hides a product from the home page (its own page still works)
    - countries: ["lb"]  sells it in those countries only, with price / offers in their money

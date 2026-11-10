@@ -3,7 +3,7 @@
    - The site is written in English; SW below gives the Swahili for each text.
      A text missing from SW simply stays in English.
    - The visitor switches with the SW / EN buttons in the header (choice remembered).
-   - Ad links can force a language: product.html?id=reward-watch&lang=en
+   - Ad links can force a language: product?id=reward-watch&lang=en
    - In the HTML, an element with data-sw="..." gets that Swahili HTML instead
      (for sentences whose word order changes around <strong> etc.).
    - In JavaScript, T("English text") returns the text in the current language;
