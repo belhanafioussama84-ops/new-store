@@ -258,6 +258,21 @@
   .h-guarantee .btn, .h-final .btn { width: 100%; }
   .h-final { padding: 2.75rem 1.25rem; }
   .h-foot__grid { padding-top: 2.75rem; }
+  /* Product cards side by side on phones: two per row, smaller texts (user's choice) */
+  .h-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+  .h-card { border-radius: 16px; }
+  .h-card__badge, .h-card__duo { top: 8px; padding: .2rem .55rem; font-size: .64rem; }
+  .h-card__badge { left: 8px; }
+  .h-card__duo { right: 8px; }
+  .h-card__body { padding: .8rem .75rem .9rem; }
+  .h-card__cat { font-size: .6rem; letter-spacing: .08em; }
+  .h-card h3 { font-size: .98rem; }
+  .h-card__desc { display: none; }
+  .h-card__price { flex-wrap: wrap; gap: .1rem .4rem; }
+  .h-card__price strong { font-size: 1.15rem; }
+  .h-card__price s { font-size: .78rem; }
+  .h-card__save { font-size: .74rem; }
+  .h-card__btn { margin-top: .75rem; padding: .65rem .4rem; font-size: .85rem; }
 }
 
 /* ---------- Title details in Fraunces: gold / green words in italic, big numbers ---------- */
