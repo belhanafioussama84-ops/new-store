@@ -638,10 +638,10 @@ const PRODUCTS = [
     reviews: 0,
     badge: "New",
     icon: "🦯",
-    image: "images/baston-main.jpg",
+    image: "images/baston-main.webp",
     // Supplier photos (713 px, Spanish text)
     squarePhotos: true, // top photos shown whole (they have text up to the edges)
-    images: ["images/baston-main.jpg", "images/baston-led.jpg", "images/baston-base.jpg", "images/baston-mango.jpg", "images/baston-plegable.jpg"],
+    images: ["images/baston-main.webp", "images/baston-led.webp", "images/baston-base.webp", "images/baston-mango.webp", "images/baston-plegable.webp"],
     description: "Un bastón de aluminio plegable con linterna LED y alarma. Se ajusta a tu altura, se mantiene de pie solo gracias a su base pivotante y cabe en una bolsa.",
     // The user wants 2 choices only: 1 or 2 bastones
     offers: [
@@ -680,13 +680,13 @@ const PRODUCTS = [
         text: "Sal a caminar, ve a la tienda o a visitar a tu familia con un apoyo firme en cada paso.",
       },
       {
-        image: "images/baston-led.jpg",
+        image: "images/baston-led.webp",
         title: "Ilumina tu camino en la oscuridad",
         text: "La linterna del mango tiene 6 luces LED y se inclina 45° para alumbrar el suelo delante de ti: en la noche, en pasillos oscuros o en la calle.",
         list: ["6 luces LED", "Ángulo ajustable de 45°", "Fácil de instalar: se enrosca en el mango"],
       },
       {
-        image: "images/baston-base.jpg",
+        image: "images/baston-base.webp",
         title: "Base pivotante y estable",
         text: "Su base ancha con 4 apoyos de goma gira 360° y se mantiene plana en el suelo: en la banqueta, en gradas, en la playa o con lluvia. Y el bastón se queda de pie solo, sin apoyarlo en la pared.",
       },
@@ -701,7 +701,7 @@ const PRODUCTS = [
         text: "Un bastón normal se apoya en una sola punta. Esta base ancha se queda firme en piedras, adoquines o suelo mojado.",
       },
       {
-        image: "images/baston-mango.jpg",
+        image: "images/baston-mango.webp",
         title: "Mango ergonómico de goma",
         text: "Un mango en forma de T, cómodo para la mano, con una correa para la muñeca para que no se te caiga.",
       },
@@ -711,7 +711,7 @@ const PRODUCTS = [
         text: "Ajusta el largo del bastón a tu altura en segundos: de 85 a 95 cm.",
       },
       {
-        image: "images/baston-plegable.jpg",
+        image: "images/baston-plegable.webp",
         title: "Plegable y ligero",
         text: "Se dobla en 4 partes y queda de 30 × 20 cm. Pesa solo 1 libra: llévalo en la cartera, la mochila o la maleta.",
         list: ["Aluminio ligero", "Altura ajustable", "Se arma en segundos"],
