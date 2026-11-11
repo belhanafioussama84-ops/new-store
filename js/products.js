@@ -747,7 +747,7 @@ const PRODUCTS = [
   {
     id: "mini-masajeador",
     // El Salvador only: texts in Spanish (from the user's reference page, without its medical claims), prices in US dollars
-    name: "Mini masajeador eléctrico 18 modos y 4 intensidades",
+    name: "Mini masajeador eléctrico 8 modos y 4 intensidades",
     sku: "LD-P-3680298", // LatinDrop SKU (El Salvador tab of the sheet)
     countries: ["sv"],
     category: "Health & comfort",
@@ -782,7 +782,7 @@ const PRODUCTS = [
       text: "Solo tienes que encenderlo, colocarlo en la zona tensa y dejar que sus impulsos relajantes trabajen mientras descansas, trabajas o ves la tele.",
     },
     benefits: [
-      { icon: "💆", title: "Varios modos", text: "Diferentes técnicas de masaje: golpeteo, amasado, presión y más." },
+      { icon: "💆", title: "8 modos de masaje", text: "8 técnicas diferentes: golpeteo, amasado, presión y más." },
       { icon: "🎚️", title: "Tú eliges la fuerza", text: "Sube o baja la intensidad con los botones, y la ves en la pantalla." },
       { icon: "🩹", title: "Parche adhesivo", text: "Se pega solo al cuerpo, sin cables: tienes las manos libres." },
       { icon: "🔋", title: "Recargable por USB", text: "Carga rápida y batería de larga duración." },
@@ -805,7 +805,7 @@ const PRODUCTS = [
       },
       {
         image: "images/mini-modos.png",
-        title: "Modos de masaje",
+        title: "8 modos de masaje",
         text: "Masaje, golpeteo, presión, amasado y más: cambia de modo con un botón hasta encontrar el que más te gusta.",
       },
       {
@@ -847,6 +847,7 @@ const PRODUCTS = [
     // Specs: from the reference page and its photos
     specs: {
       "Tipo": "Mini masajeador eléctrico con parche de gel adhesivo",
+      "Modos": "8",
       "Medidas": "7.4 cm de diámetro, 1.8 cm de grosor",
       "Pantalla": "Digital, muestra la intensidad",
       "Carga": "USB, unas 2.5 horas",
