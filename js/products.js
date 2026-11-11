@@ -626,6 +626,99 @@ const PRODUCTS = [
     ],
   },
   {
+    id: "baston-plegable",
+    // El Salvador only: texts in Spanish, prices in US dollars
+    name: "Bastón plegable con luz LED",
+    sku: "LD-P-3876535", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    category: "Health & comfort",
+    price: 43.99, // user's price; 2 pieces is my suggestion
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "🦯",
+    image: "images/baston-main.jpg",
+    // Supplier photos (713 px, Spanish text)
+    images: ["images/baston-main.jpg", "images/baston-led.jpg", "images/baston-base.jpg", "images/baston-mango.jpg", "images/baston-plegable.jpg"],
+    description: "Un bastón de aluminio plegable con linterna LED y alarma. Se ajusta a tu altura, se mantiene de pie solo gracias a su base pivotante y cabe en una bolsa.",
+    // The user wants 2 choices only: 1 or 2 bastones
+    offers: [
+      { qty: 1, price: 43.99 },
+      { qty: 2, price: 74.99, tag: "Best value" },
+    ],
+    layout: "story",
+    timeline: [1, 1, 3], // on its way tomorrow, delivered in 1 to 3 days
+    headline: "¡Camina con más seguridad, de día y de noche!",
+    subheadline: "Bastón plegable con luz LED, alarma y base estable que se mantiene de pie sola.",
+    inBox: ["Bastón plegable de 4 secciones", "Linterna LED (6 luces)", "Correa para la muñeca"],
+    warning: "Este bastón es una ayuda para caminar, no un dispositivo médico. Si tienes problemas de equilibrio o te estás recuperando de una operación o lesión, pregunta a tu médico o fisioterapeuta qué tipo de apoyo te conviene.",
+    problem: {
+      title: "¿Cada paso ya no es tan firme como antes?",
+      text: "Levantarte, subir una grada o caminar de noche por un pasillo oscuro: cuando el paso ya no es tan seguro, salir de casa da miedo.",
+    },
+    solution: {
+      title: "Un apoyo que te acompaña a todas partes",
+      text: "Un bastón ligero y ajustable, con una base amplia que se mantiene de pie sola y una linterna para ver dónde pisas.",
+    },
+    benefits: [
+      { icon: "💡", title: "Luz LED", text: "6 luces LED en el mango, orientables 45°, para caminar de noche." },
+      { icon: "🔔", title: "Alarma", text: "Un botón en el mango para llamar la atención si necesitas ayuda." },
+      { icon: "🦶", title: "Base pivotante", text: "Gira 360° y se queda plana en el suelo: el bastón se mantiene de pie solo." },
+      { icon: "🎒", title: "Plegable", text: "Se dobla en 4 partes y pesa solo 1 libra. Cabe en una mochila." },
+    ],
+    sections: [
+      {
+        image: "images/baston-led.jpg",
+        title: "Ilumina tu camino en la oscuridad",
+        text: "La linterna del mango tiene 6 luces LED y se inclina 45° para alumbrar el suelo delante de ti: en la noche, en pasillos oscuros o en la calle.",
+        list: ["6 luces LED", "Ángulo ajustable de 45°", "Fácil de instalar: se enrosca en el mango"],
+      },
+      {
+        image: "images/baston-base.jpg",
+        title: "Base pivotante y estable",
+        text: "Su base ancha con 4 apoyos de goma gira 360° y se mantiene plana en el suelo: en la banqueta, en gradas, en la playa o con lluvia. Y el bastón se queda de pie solo, sin apoyarlo en la pared.",
+      },
+      {
+        image: "images/baston-mango.jpg",
+        title: "Mango ergonómico de goma",
+        text: "Un mango en forma de T, cómodo para la mano, con una correa para la muñeca para que no se te caiga.",
+      },
+      {
+        image: "images/baston-plegable.jpg",
+        title: "Plegable y ligero",
+        text: "Se dobla en 4 partes y queda de 30 × 20 cm. Pesa solo 1 libra: llévalo en la cartera, la mochila o la maleta.",
+        list: ["Aluminio ligero", "Altura ajustable", "Se arma en segundos"],
+      },
+      {
+        title: "Un regalo para quien más quieres",
+        text: "Para tu papá, tu mamá o tus abuelos, o para ti: más confianza al salir de casa.",
+      },
+    ],
+    steps: [
+      { title: "Despliégalo", text: "Las 4 partes se unen solas: el bastón queda armado en segundos." },
+      { title: "Ajusta la altura", text: "Ponlo a la altura de tu muñeca, con el brazo relajado." },
+      { title: "Camina con confianza", text: "Enciende la luz en la noche y usa la alarma si necesitas ayuda." },
+    ],
+    // Specs: from the supplier's photos and text
+    specs: {
+      "Material": "Aleación de aluminio",
+      "Mango": "En forma de T, de goma, con correa",
+      "Secciones": "4 (plegable)",
+      "Altura": "Ajustable, de 85 a 95 cm",
+      "Base": "Pivotante 360°, 4 apoyos de goma",
+      "Luz": "6 LED, orientable 45°",
+      "Peso": "Aprox. 1 libra",
+      "Plegado": "30 × 20 cm",
+    },
+    faq: [
+      { q: "¿Se ajusta a mi altura?", a: "Sí, la altura se ajusta de 85 a 95 cm. Lo ideal es que el mango quede a la altura de tu muñeca con el brazo relajado." },
+      { q: "¿Se queda de pie solo?", a: "Sí. Su base ancha se mantiene plana en el suelo, así que puedes soltarlo sin apoyarlo en la pared." },
+      { q: "¿La luz necesita baterías?", a: "Sí, la linterna funciona con baterías. Antes del primer uso, retira la lámina aislante y vuelve a enroscar la linterna." },
+      { q: "¿Cuánto pesa?", a: "Aproximadamente 1 libra. Plegado mide unos 30 × 20 cm." },
+    ],
+  },
+  {
     id: "multi-collagen",
     // El Salvador only: texts in Spanish (from the user's own page), prices in US dollars
     name: "Multi Collagen Complex, 90 caps",
