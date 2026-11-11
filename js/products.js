@@ -669,6 +669,16 @@ const PRODUCTS = [
     ],
     sections: [
       {
+        image: "images/baston-levantarse.mp4",
+        title: "Levantarte ya no tiene que ser difícil",
+        text: "Levantarte del sofá o de la cama sin apoyo cuesta. Con un bastón firme a tu lado, tienes de dónde agarrarte y dependes menos de los demás.",
+      },
+      {
+        image: "images/baston-caminar.mp4",
+        title: "Recupera tu libertad al caminar",
+        text: "Sal a caminar, ve a la tienda o a visitar a tu familia con un apoyo firme en cada paso.",
+      },
+      {
         image: "images/baston-led.jpg",
         title: "Ilumina tu camino en la oscuridad",
         text: "La linterna del mango tiene 6 luces LED y se inclina 45° para alumbrar el suelo delante de ti: en la noche, en pasillos oscuros o en la calle.",
@@ -680,9 +690,24 @@ const PRODUCTS = [
         text: "Su base ancha con 4 apoyos de goma gira 360° y se mantiene plana en el suelo: en la banqueta, en gradas, en la playa o con lluvia. Y el bastón se queda de pie solo, sin apoyarlo en la pared.",
       },
       {
+        image: "images/baston-base-anim.mp4",
+        title: "Se adapta al suelo en cada paso",
+        text: "La base gira con tu movimiento y sus 4 apoyos de goma quedan siempre en contacto con el suelo.",
+      },
+      {
+        image: "images/baston-compara.mp4",
+        title: "Más estable que un bastón normal",
+        text: "Un bastón normal se apoya en una sola punta. Esta base ancha se queda firme en piedras, adoquines o suelo mojado.",
+      },
+      {
         image: "images/baston-mango.jpg",
         title: "Mango ergonómico de goma",
         text: "Un mango en forma de T, cómodo para la mano, con una correa para la muñeca para que no se te caiga.",
+      },
+      {
+        image: "images/baston-altura.mp4",
+        title: "Altura ajustable",
+        text: "Ajusta el largo del bastón a tu altura en segundos: de 85 a 95 cm.",
       },
       {
         image: "images/baston-plegable.jpg",
