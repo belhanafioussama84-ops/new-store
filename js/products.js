@@ -747,7 +747,7 @@ const PRODUCTS = [
   {
     id: "mini-masajeador",
     // El Salvador only: texts in Spanish (from the user's reference page, without its medical claims), prices in US dollars
-    name: "Mini masajeador eléctrico 8 modos y 4 intensidades",
+    name: "Mini masajeador eléctrico 8 modos y 18 intensidades",
     sku: "LD-P-3680298", // LatinDrop SKU (El Salvador tab of the sheet)
     countries: ["sv"],
     category: "Health & comfort",
@@ -783,7 +783,7 @@ const PRODUCTS = [
     },
     benefits: [
       { icon: "💆", title: "8 modos de masaje", text: "8 técnicas diferentes: golpeteo, amasado, presión y más." },
-      { icon: "🎚️", title: "Tú eliges la fuerza", text: "Sube o baja la intensidad con los botones, y la ves en la pantalla." },
+      { icon: "🎚️", title: "18 intensidades", text: "De suave a más fuerte: sube o baja la intensidad con los botones y la ves en la pantalla." },
       { icon: "🩹", title: "Parche adhesivo", text: "Se pega solo al cuerpo, sin cables: tienes las manos libres." },
       { icon: "🔋", title: "Recargable por USB", text: "Carga rápida y batería de larga duración." },
     ],
@@ -848,6 +848,7 @@ const PRODUCTS = [
     specs: {
       "Tipo": "Mini masajeador eléctrico con parche de gel adhesivo",
       "Modos": "8",
+      "Niveles de intensidad": "18",
       "Medidas": "7.4 cm de diámetro, 1.8 cm de grosor",
       "Pantalla": "Digital, muestra la intensidad",
       "Carga": "USB, unas 2.5 horas",
