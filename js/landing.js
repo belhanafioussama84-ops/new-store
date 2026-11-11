@@ -19,6 +19,8 @@
 
   // The real photos (taken in stock) also go in the top gallery, after the product photos
   const images = [...(p.images?.length ? p.images : [p.image]), ...(p.realPhotos || [])];
+  // squarePhotos: true shows the top photos whole (square box, nothing cut off)
+  if (p.squarePhotos) document.body.classList.add("gallery-square");
   const unitFull = p.oldPrice || p.price; // price per item before any discount
   // Bundle offers: [{ qty, price, tag? }]. Without them there is a single "1 piece" offer.
   const offers = p.offers?.length ? p.offers : [{ qty: 1, price: p.price }];

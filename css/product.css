@@ -116,6 +116,9 @@ p { margin: 0 0 1em; }
 .gallery { position: sticky; top: 16px; }
 .gallery__main { aspect-ratio: 3 / 4; border-radius: var(--radius); overflow: hidden; background: #fff; border: 1px solid var(--line); }
 .gallery__main img { width: 100%; height: 100%; object-fit: cover; }
+/* squarePhotos: true in products.js: whole photo, nothing cut off */
+body.gallery-square .gallery__main { aspect-ratio: 1 / 1; }
+body.gallery-square .gallery__main img { object-fit: contain; }
 .gallery__main.is-empty { display: grid; place-items: center; font-size: 6rem; }
 .gallery__stage { position: relative; }
 .gallery__arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; display: grid; place-items: center; padding: 0 0 4px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .9); color: #111; font-size: 1.9rem; line-height: 1; box-shadow: 0 4px 14px rgba(0, 0, 0, .25); cursor: pointer; }

@@ -640,6 +640,7 @@ const PRODUCTS = [
     icon: "🦯",
     image: "images/baston-main.jpg",
     // Supplier photos (713 px, Spanish text)
+    squarePhotos: true, // top photos shown whole (they have text up to the edges)
     images: ["images/baston-main.jpg", "images/baston-led.jpg", "images/baston-base.jpg", "images/baston-mango.jpg", "images/baston-plegable.jpg"],
     description: "Un bastón de aluminio plegable con linterna LED y alarma. Se ajusta a tu altura, se mantiene de pie solo gracias a su base pivotante y cabe en una bolsa.",
     // The user wants 2 choices only: 1 or 2 bastones
