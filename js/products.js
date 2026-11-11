@@ -651,7 +651,7 @@ const PRODUCTS = [
     timeline: [1, 1, 3], // on its way tomorrow, delivered in 1 to 3 days
     headline: "¡Camina con más seguridad, de día y de noche!",
     subheadline: "Bastón plegable con luz LED, alarma y base estable que se mantiene de pie sola.",
-    inBox: ["Bastón plegable de 4 secciones", "Linterna LED (6 luces)", "Correa para la muñeca"],
+    inBox: ["Bastón plegable de 4 secciones", "Linterna LED (6 luces) con alarma", "Baterías incluidas", "Correa para la muñeca"],
     warning: "Este bastón es una ayuda para caminar, no un dispositivo médico. Si tienes problemas de equilibrio o te estás recuperando de una operación o lesión, pregunta a tu médico o fisioterapeuta qué tipo de apoyo te conviene.",
     problem: {
       title: "¿Cada paso ya no es tan firme como antes?",
@@ -714,7 +714,7 @@ const PRODUCTS = [
     faq: [
       { q: "¿Se ajusta a mi altura?", a: "Sí, la altura se ajusta de 85 a 95 cm. Lo ideal es que el mango quede a la altura de tu muñeca con el brazo relajado." },
       { q: "¿Se queda de pie solo?", a: "Sí. Su base ancha se mantiene plana en el suelo, así que puedes soltarlo sin apoyarlo en la pared." },
-      { q: "¿La luz necesita baterías?", a: "Sí, la linterna funciona con baterías. Antes del primer uso, retira la lámina aislante y vuelve a enroscar la linterna." },
+      { q: "¿La luz necesita baterías?", a: "Sí, y ya vienen incluidas. Antes del primer uso, retira la lámina aislante y vuelve a enroscar la linterna." },
       { q: "¿Cuánto pesa?", a: "Aproximadamente 1 libra. Plegado mide unos 30 × 20 cm." },
     ],
   },
