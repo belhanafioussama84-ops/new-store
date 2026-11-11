@@ -745,6 +745,122 @@ const PRODUCTS = [
     ],
   },
   {
+    id: "mini-masajeador",
+    // El Salvador only: texts in Spanish (from the user's reference page, without its medical claims), prices in US dollars
+    name: "Mini masajeador eléctrico 18 modos y 4 intensidades",
+    sku: "LD-P-3680298", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    category: "Health & comfort",
+    price: 36.99, // user's price; 2 pieces is my suggestion
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "💆",
+    image: "images/mini-main.jpg",
+    squarePhotos: true, // top photos shown whole
+    // Photos of the reference page, original files (no re-compression)
+    images: ["images/mini-main.jpg", "images/mini-espalda.jpg", "images/mini-pantalla.jpg", "images/mini-parche.jpg", "images/mini-zonas.jpg", "images/mini-carga.jpg", "images/mini-modos.png", "images/mini-uso.jpg", "images/mini-regalo.jpg"],
+    description: "Un mini masajeador eléctrico con parche adhesivo: lo pegas en la espalda, el cuello, los hombros o las piernas y te da un masaje relajante en solo 15 minutos.",
+    // The user wants 2 choices only: 1 or 2 pieces
+    offers: [
+      { qty: 1, price: 36.99 },
+      { qty: 2, price: 62.99, tag: "Best value" },
+    ],
+    layout: "story",
+    timeline: [1, 1, 3], // on its way tomorrow, delivered in 1 to 3 days
+    headline: "¡Un masaje de 15 minutos al día, donde y cuando quieras!",
+    subheadline: "Ayuda a aliviar la tensión muscular y te relaja después de un día largo.",
+    inBox: ["1 Mini masajeador eléctrico", "Parche de gel adhesivo", "Cable de carga USB"],
+    warning: "No lo uses si tienes marcapasos u otro implante electrónico, si estás embarazada, si tienes una enfermedad del corazón o epilepsia, ni sobre heridas, la cabeza, la garganta o el pecho. Si tienes una enfermedad, consulta a tu médico antes de usarlo.",
+    problem: {
+      title: "¿Espalda, cuello u hombros tensos?",
+      text: "Horas sentado frente a la computadora, cargando cosas o de pie todo el día: al final del día los músculos se sienten cargados y no te dejan descansar.",
+    },
+    solution: {
+      title: "Un masaje real, sin salir de casa",
+      text: "Solo tienes que encenderlo, colocarlo en la zona tensa y dejar que sus impulsos relajantes trabajen mientras descansas, trabajas o ves la tele.",
+    },
+    benefits: [
+      { icon: "💆", title: "Varios modos", text: "Diferentes técnicas de masaje: golpeteo, amasado, presión y más." },
+      { icon: "🎚️", title: "Tú eliges la fuerza", text: "Sube o baja la intensidad con los botones, y la ves en la pantalla." },
+      { icon: "🩹", title: "Parche adhesivo", text: "Se pega solo al cuerpo, sin cables: tienes las manos libres." },
+      { icon: "🔋", title: "Recargable por USB", text: "Carga rápida y batería de larga duración." },
+    ],
+    sections: [
+      {
+        image: "images/mini-alivio.mp4",
+        title: "Ayuda a aliviar la tensión muscular",
+        text: "Este masajeador te da una sensación de masaje real en los músculos cargados: piernas, brazos, espalda o cuello.",
+      },
+      {
+        image: "images/mini-musculos.mp4",
+        title: "Úsalo en diferentes zonas del cuerpo",
+        text: "Pantorrillas, muslos, brazos, espalda baja, hombros o cuello: lo pegas donde lo necesitas.",
+      },
+      {
+        image: "images/mini-espalda.jpg",
+        title: "Relájate después de un día largo",
+        text: "Colócalo en la espalda, acuéstate y deja que el masaje te relaje. Úsalo 15 minutos al día.",
+      },
+      {
+        image: "images/mini-modos.png",
+        title: "Modos de masaje",
+        text: "Masaje, golpeteo, presión, amasado y más: cambia de modo con un botón hasta encontrar el que más te gusta.",
+      },
+      {
+        image: "images/mini-pantalla.jpg",
+        title: "Fácil de usar",
+        text: "Botones para subir y bajar la intensidad, un botón para cambiar de modo y una pantalla que te muestra la fuerza del masaje.",
+      },
+      {
+        image: "images/mini-real.mp4",
+        title: "Pequeño y fácil de llevar",
+        text: "Mide solo 7.4 cm de diámetro y 1.8 cm de grosor: cabe en tu cartera para relajarte en cualquier momento, en la casa, la oficina o de viaje.",
+      },
+      {
+        image: "images/mini-parche.jpg",
+        title: "Diseño de parche adhesivo",
+        text: "Después de usarlo, cubre el parche de gel con su protector para que siga pegando bien.",
+      },
+      {
+        image: "images/mini-uso.jpg",
+        title: "Para todos",
+        text: "Para quien trabaja sentado, para quien hace ejercicio, para quien carga peso o pasa el día de pie.",
+      },
+      {
+        image: "images/mini-mano.mp4",
+        title: "Recargable por USB",
+        text: "Se carga en unas 2.5 horas con su cable USB. Carga rápida y batería de larga duración.",
+      },
+      {
+        image: "images/mini-regalo.jpg",
+        title: "Perfecto para un regalo 🎁",
+        text: "Una forma fácil y cómoda de relajarse: un buen regalo para tu mamá, tu papá, tu pareja o tus amigos.",
+      },
+    ],
+    steps: [
+      { title: "Prepara el parche", text: "Gira el dispositivo con el parche de gel y retira la película transparente." },
+      { title: "Colócalo", text: "Pégalo en la zona que quieres relajar." },
+      { title: "Enciéndelo", text: "Pulsa ON/INC para encender y empezar, y el botón de programa para elegir el modo." },
+    ],
+    // Specs: from the reference page and its photos
+    specs: {
+      "Tipo": "Mini masajeador eléctrico con parche de gel adhesivo",
+      "Medidas": "7.4 cm de diámetro, 1.8 cm de grosor",
+      "Pantalla": "Digital, muestra la intensidad",
+      "Carga": "USB, unas 2.5 horas",
+      "Uso recomendado": "15 minutos al día",
+    },
+    faq: [
+      { q: "¿Duele?", a: "No. Se siente como un hormigueo o pequeños golpecitos. Empieza con la intensidad más baja y súbela poco a poco." },
+      { q: "¿Cuánto tiempo lo uso?", a: "Unos 15 minutos por sesión." },
+      { q: "¿Dónde lo puedo usar?", a: "En la espalda, el cuello, los hombros, los brazos o las piernas. No lo uses en la cabeza, la garganta, el pecho ni sobre heridas." },
+      { q: "¿Cómo se carga?", a: "Con su cable USB, en unas 2.5 horas." },
+      { q: "¿El parche se puede volver a usar?", a: "Sí. Después de usarlo, cúbrelo con su protector para que siga pegando bien." },
+    ],
+  },
+  {
     id: "multi-collagen",
     // El Salvador only: texts in Spanish (from the user's own page), prices in US dollars
     name: "Multi Collagen Complex, 90 caps",
