@@ -383,26 +383,16 @@
     return ok;
   }
 
-  // Region list and landmark field: only in the countries that have them (El Salvador)
-  if (COUNTRY.regions) Shop.fillRegions($("#region"));
-  else $("#regionField").remove();
+  // Region and landmark fields: only in the countries that have them (El Salvador).
+  // The customer types the departamento and the city/municipio (no lists to pick from: user's choice).
+  if (COUNTRY.regions) {
+    const inp = document.createElement("input");
+    inp.id = "region"; inp.name = "region"; inp.type = "text"; inp.required = true;
+    inp.autocomplete = "address-level1";
+    inp.placeholder = T("e.g. San Salvador");
+    $("#region").replaceWith(inp);
+  } else $("#regionField").remove();
   if (!COUNTRY.landmark) $("#landmarkField").remove();
-
-  // Countries with "municipios" (El Salvador): the city is a list that follows the region
-  if (COUNTRY.municipios) {
-    const old = $("#city");
-    const sel = document.createElement("select");
-    sel.id = "city"; sel.name = "city"; sel.required = true;
-    old.replaceWith(sel);
-    const fill = () => {
-      const list = COUNTRY.municipios[$("#region").value] || [];
-      sel.innerHTML = `<option value="">${T(list.length ? "Select your city" : "Choose your region first")}</option>` +
-        list.map((m) => `<option value="${esc(m)}">${esc(m)}</option>`).join("");
-      sel.disabled = !list.length;
-    };
-    $("#region").addEventListener("change", () => { fill(); if (sel.closest(".has-error")) setError(sel, ""); });
-    fill();
-  }
 
   // One "City & delivery address" field, except in countries with splitAddress (Lebanon, El Salvador)
   if (!COUNTRY.splitAddress) {

@@ -69,7 +69,7 @@ const Shop = (() => {
 
     check(form.fullName, form.fullName.value.trim().length >= 3, T("Please enter your full name."));
     check(form.phone, COUNTRY.phone.test(normalizePhone(form.phone.value)), T("Enter a valid Tanzanian number, e.g. 712 345 678."));
-    check(form.region, !!form.region?.value, T("Please choose your region."));
+    check(form.region, form.region?.value.trim().length >= 2, T("Please choose your region."));
     check(form.city, form.city?.value.trim().length >= 2, T("Please enter your city."));
     check(form.landmark, form.landmark?.value.trim().length >= 3, T("Please enter a landmark near your home."));
     check(form.address, form.address?.value.trim().length >= (form.city ? 3 : 5),
@@ -106,10 +106,10 @@ const Shop = (() => {
       customer: {
         fullName: form.fullName.value.trim(),
         phone: `+${COUNTRY.dial} ` + normalizePhone(form.phone.value),
-        region: form.region?.value || "",
+        region: form.region?.value.trim() || "",
         // city = "City, address" all in one (the sheet's ADRESSE column for Simon Express);
         // town and street are the two fields on their own (VILLE / ADRESSE in the Lebanon tab).
-        city: [form.city?.value.trim(), form.region?.value, form.address?.value.trim(), form.landmark?.value.trim()].filter(Boolean).join(", "),
+        city: [form.city?.value.trim(), form.region?.value.trim(), form.address?.value.trim(), form.landmark?.value.trim()].filter(Boolean).join(", "),
         town: form.city?.value.trim() || "",
         street: form.address?.value.trim() || "",
         landmark: form.landmark?.value.trim() || "", // El Salvador only
