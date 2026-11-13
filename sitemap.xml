@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Pages Google should know about. Add a line for every new product (product?id=<id> from js/products.js). -->
+<!-- Pages Google should know about. Add a line for every new product (<country>/<id>, e.g. sv/creatina-mujer). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://dukaabora.store/</loc></url>
-  <url><loc>https://dukaabora.store/product?id=reward-watch</loc></url>
-  <url><loc>https://dukaabora.store/product?id=car-nano-spray</loc></url>
-  <url><loc>https://dukaabora.store/product?id=foot-massager&amp;country=sv</loc></url>
-  <url><loc>https://dukaabora.store/product?id=baston-plegable&amp;country=sv</loc></url>
-  <url><loc>https://dukaabora.store/product?id=mini-masajeador&amp;country=sv</loc></url>
-  <url><loc>https://dukaabora.store/product?id=multi-collagen&amp;country=sv</loc></url>
-  <url><loc>https://dukaabora.store/product?id=posture-corrector&amp;country=sv</loc></url>
-  <url><loc>https://dukaabora.store/product?id=creatina-mujer&amp;country=sv</loc></url>
+  <url><loc>https://dukaabora.store/tz/reward-watch</loc></url>
+  <url><loc>https://dukaabora.store/tz/car-nano-spray</loc></url>
+  <url><loc>https://dukaabora.store/sv/foot-massager</loc></url>
+  <url><loc>https://dukaabora.store/sv/baston-plegable</loc></url>
+  <url><loc>https://dukaabora.store/sv/mini-masajeador</loc></url>
+  <url><loc>https://dukaabora.store/sv/multi-collagen</loc></url>
+  <url><loc>https://dukaabora.store/sv/posture-corrector</loc></url>
+  <url><loc>https://dukaabora.store/sv/creatina-mujer</loc></url>
   <url><loc>https://dukaabora.store/policies</loc></url>
 </urlset>

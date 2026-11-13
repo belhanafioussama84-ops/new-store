@@ -5,7 +5,9 @@
   const { $, fmt, esc } = Shop;
 
   // Every product has its own page with the order form.
-  const productUrl = (p) => `product?id=${encodeURIComponent(p.id)}`;
+  // Short form sv/<id> on the real site (worker.js serves it); the GitHub Pages copy has no worker.
+  const short = /(^|\.)dukaabora\.store$|\.workers\.dev$/.test(location.hostname);
+  const productUrl = (p) => short ? `${COUNTRY.id}/${encodeURIComponent(p.id)}` : `product?id=${encodeURIComponent(p.id)}`;
   const photo = (p) => `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"
     onerror="this.parentElement.classList.add('is-empty'); this.parentElement.dataset.icon = '${esc(p.icon || "")}'; this.remove();" />`;
 
