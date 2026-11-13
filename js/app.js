@@ -47,8 +47,10 @@
     `<li><a href="${esc(productUrl(p))}">${esc(p.name)}</a></li>`).join("");
 
   /* ---------- Init ---------- */
-  $("#footerPhone").href = `tel:+${STORE.phone}`;
-  $("#footerPhone").textContent = `📞 ${STORE.phoneDisplay}`;
+  if (STORE.phone) {
+    $("#footerPhone").href = `tel:+${STORE.phone}`;
+    $("#footerPhone").textContent = `📞 ${STORE.phoneDisplay}`;
+  } else $("#footerPhone").closest("li").remove();
   const wa = String(STORE.whatsapp || "").replace(/\D/g, "");
   if (wa) {
     const href = `https://wa.me/${wa}${STORE.whatsappText ? `?text=${encodeURIComponent(T(STORE.whatsappText))}` : ""}`;

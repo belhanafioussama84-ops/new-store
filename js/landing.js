@@ -473,7 +473,9 @@
     $("#closingWa").href = `https://wa.me/${wa}?text=${encodeURIComponent(`${T(STORE.whatsappText || "")} ${p.name}`.trim())}`;
     $("#closingWa").hidden = false;
   }
-  $("#footerPhone").href = `tel:+${STORE.phone}`;
-  $("#footerPhone").textContent = `📞 ${STORE.phoneDisplay}`;
+  if (STORE.phone) {
+    $("#footerPhone").href = `tel:+${STORE.phone}`;
+    $("#footerPhone").textContent = `📞 ${STORE.phoneDisplay}`;
+  } else $("#footerPhone").remove();
   $("#year").textContent = new Date().getFullYear();
 })();

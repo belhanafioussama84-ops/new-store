@@ -167,7 +167,13 @@
     $("#tWa").href = waLink(`Hello Duka Bora${o ? `, about my order ${o.number}` : ""}:`);
     $("#tWa").hidden = false;
   }
-  $("#tCallUs").href = `tel:+${STORE.phone}`;
-  $("#tCallUs").textContent = `📞 ${STORE.phoneDisplay}`;
+  if (STORE.phone) {
+    $("#tCallUs").href = `tel:+${STORE.phone}`;
+    $("#tCallUs").textContent = `📞 ${STORE.phoneDisplay}`;
+  } else {
+    // No phone (El Salvador): the contact page instead of the "Call" button
+    $("#tCallUs").href = "policies#contact";
+    $("#tCallUs").textContent = T("Contact us");
+  }
   $("#year").textContent = new Date().getFullYear();
 })();

@@ -268,6 +268,8 @@ body.gallery-square .gallery__main img { object-fit: contain; }
 /* ---------- Footer ---------- */
 .foot { background: var(--accent); color: #dfeee6; font-size: .9rem; }
 .foot__inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.foot__links { flex-basis: 100%; font-size: .82rem; opacity: .85; }
+.foot__links a:hover, .h-foot__bottom a:hover { text-decoration: underline; }
 
 /* ---------- Sticky order button (phones only) ---------- */
 .sticky { display: none; }

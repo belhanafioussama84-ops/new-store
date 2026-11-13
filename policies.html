@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Policies · Duka Bora</title>
+  <meta name="description" content="Duka Bora privacy policy, terms and conditions, and contact." />
+  <meta name="theme-color" content="#1f4d3a" />
+  <!-- Lebanon and El Salvador have their own colours: set them before the page shows (same choice as js/products.js) -->
+  <script>try{var c=new URLSearchParams(location.search).get("country")||localStorage.getItem("dukabora_country");if(!c)c={"America/El_Salvador":"sv"}[Intl.DateTimeFormat().resolvedOptions().timeZone];if(c==="sv")document.documentElement.dataset.country=c}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600..800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo/logo.png" />
+  <link rel="stylesheet" href="css/product.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/policies.css" />
+</head>
+<!-- Privacy policy, terms & conditions, contact: policies#privacy / #terms / #contact.
+     The texts are in js/policies.js (English, Swahili, Spanish). -->
+<body class="home">
+
+  <!-- Country choice (Tanzania / Zambia / Lebanon / El Salvador), filled by js/common.js -->
+
+  <header class="top h-top">
+    <div class="wrap h-top__inner">
+      <a href="./" class="brand" aria-label="Duka Bora home">
+        <img src="images/logo/logo.png" alt="" onerror="this.remove()" />
+        <span>
+          <strong>Duka<em>Bora</em></strong>
+          <small>Quality you can trust</small>
+        </span>
+      </a>
+      <div class="top__end">
+        <div class="lang" data-lang></div>
+        <span class="top__cod"><svg class="tz-flag" data-country="tz" viewBox="0 0 72 48" aria-hidden="true"><path fill="#1eb53a" d="M0 0h72L0 48z"/><path fill="#00a3dd" d="M72 0v48H0z"/><path stroke="#fcd116" stroke-width="19" d="M0 48L72 0"/><path stroke="#000" stroke-width="12" d="M0 48L72 0"/></svg><svg class="tz-flag" data-country="zm" viewBox="0 0 72 48" aria-hidden="true"><path fill="#198a00" d="M0 0h72v48H0z"/><path fill="#de2010" d="M45 20h9v28h-9z"/><path d="M54 20h9v28h-9z"/><path fill="#ef7d00" d="M63 20h9v28h-9zM50 9c3-3 7-3 9 0 2-3 6-3 9 0-3 0-5 1-6 3l-3 4-3-4c-1-2-3-3-6-3z"/></svg><svg class="tz-flag" data-country="lb" viewBox="0 0 72 48" aria-hidden="true"><path fill="#fff" d="M0 0h72v48H0z"/><path fill="#ed1c24" d="M0 0h72v12H0zM0 36h72v12H0z"/><path fill="#00a651" d="M36 13l-5 6h3l-6 6h3l-7 6h10v3h4v-3h10l-7-6h3l-6-6h3z"/></svg><svg class="tz-flag" data-country="sv" viewBox="0 0 72 48" aria-hidden="true"><path fill="#0047ab" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 16h72v16H0z"/><circle cx="36" cy="24" r="5.5" fill="none" stroke="#c9a227" stroke-width="1.8"/><path fill="#2e7d32" d="M33 27l3-6 3 6z"/></svg> Pay on delivery</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap p-wrap">
+    <h1 id="pTitle">Policies</h1>
+    <p class="p-updated" id="pUpdated"></p>
+    <nav class="p-nav" id="pNav"></nav>
+    <div id="pBody"></div>
+  </main>
+
+  <footer class="h-foot">
+    <div class="wrap h-foot__bottom">
+      <span>© <span id="year"></span> Duka Bora · Tanzania</span>
+      <div class="social" data-social hidden></div>
+      <a href="./">Continue shopping →</a>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/policies.js"></script>
+  <!-- Cloudflare Web Analytics (visitors, pages, countries: dash.cloudflare.com → Analytics & Logs → Web Analytics) -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "159949dd74a44a76854d0f393b0dffe4"}'></script>
+</body>
+</html>

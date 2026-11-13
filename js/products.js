@@ -82,6 +82,8 @@ const COUNTRIES = {
     splitAddress: true,
     // No WhatsApp buttons: customers must order with the form, not by message (user's choice)
     noWhatsApp: true,
+    // No phone number shown (footer, thank-you page): the Moroccan number is no use here
+    noPhone: true,
     // Thank-you page: "add one more" button (next offer price), added to the same order
     // in the sheet (upsell_ in google-sheet/orders.gs). Off for now (user, 13 Nov 2026): to turn it
     // on, deploy the new orders.gs in Apps Script first, then put true here.
@@ -135,6 +137,8 @@ const { COUNTRY, COUNTRY_CHOSEN } = (() => {
 document.documentElement.dataset.country = COUNTRY.id;
 // Countries with noWhatsApp: no WhatsApp number = every WhatsApp button and link is hidden
 if (COUNTRY.noWhatsApp) STORE.whatsapp = "";
+// Countries with noPhone: no "Call" links (each page removes them when STORE.phone is empty)
+if (COUNTRY.noPhone) STORE.phone = "";
 if (COUNTRY.id === "lb") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#c8102e");
 if (COUNTRY.id === "sv") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#0b3a82");
 

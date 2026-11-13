@@ -1,0 +1,18 @@
+/* Policies page (policies.html) — loaded after product.css + index.css */
+.p-wrap { max-width: 780px; padding-top: 2.5rem; padding-bottom: 4rem; }
+.p-wrap h1 { margin-bottom: .3rem; font-size: clamp(2rem, 5vw, 2.8rem); }
+.p-updated { margin: 0 0 1.5rem; color: var(--muted); font-size: .9rem; }
+.p-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+.p-nav a { padding: .45rem .9rem; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--accent); font-size: .9rem; font-weight: 600; }
+.p-nav a:hover { background: var(--accent-soft); }
+.p-sec { padding: 1.75rem 0; border-top: 1px solid var(--line); scroll-margin-top: 1rem; }
+.p-sec h2 { margin-bottom: .8rem; font-size: 1.5rem; }
+.p-sec h3 { margin: 1.3rem 0 .4rem; font-size: 1.05rem; }
+.p-sec p, .p-sec li { color: var(--ink-2, #3b4a43); line-height: 1.65; }
+.p-sec ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+.p-sec li + li { margin-top: .3rem; }
+.p-sec a { color: var(--accent); font-weight: 600; }
+.p-contact { display: grid; gap: .5rem; padding: 0 !important; list-style: none; }
+.p-contact li { margin: 0 !important; padding: .8rem 1rem; border-radius: 14px; background: var(--accent-soft); }
+.h-foot__bottom a { color: inherit; }
+.h-foot__bottom a:hover { color: #fff; }
