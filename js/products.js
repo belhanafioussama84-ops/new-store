@@ -83,8 +83,9 @@ const COUNTRIES = {
     // No WhatsApp buttons: customers must order with the form, not by message (user's choice)
     noWhatsApp: true,
     // Thank-you page: "add one more" button (next offer price), added to the same order
-    // in the sheet (upsell_ in google-sheet/orders.gs)
-    upsell: true,
+    // in the sheet (upsell_ in google-sheet/orders.gs). Off for now (user, 13 Nov 2026): to turn it
+    // on, deploy the new orders.gs in Apps Script first, then put true here.
+    upsell: false,
     // Order form as LatinDrop asked: Departamento (list), then Ciudad/Municipio (list of the
     // departamento's municipios), then the full address. Columns of the LatinDrop import file
     // (google-sheet/orders.gs). The 262 municipios, by departamento:
