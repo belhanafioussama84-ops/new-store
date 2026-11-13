@@ -197,6 +197,180 @@
         <p class="rt-eye">${E(p.cards.eyebrow)}</p><h2>${E(p.cards.title)}</h2><p class="rt-sub">${E(p.cards.text)}</p>
         ${p.cards.items.map((x, i) => `<article><small>0${i + 1}</small><h3>${E(x.title)}</h3><p>${E(x.text)}</p></article>`).join("")}
       </div></section>`);
+  } else if (p.layout === "glam") {
+    // layout: "glam" — pink and dark blocks like the user's creatine reference page: customer videos,
+    // big stat, "tap a card" watch, how it works, myths to flip, nutrition table, 60-day route with a
+    // 1 / 2 jar switch, feature cards around a round video, "is it for me?" cards, safe purchase.
+    document.body.classList.add("layout-glam");
+    const E = (s) => esc(T(s));
+    const two = (t) => `${E(t[0])} <em>${E(t[1])}</em>`; // title with its pink part
+    const eye = (s, dark) => `<p class="gl-eye${dark ? " gl-eye--dark" : ""}">${E(s)}</p>`;
+    const vid = (src, cls = "") => `<video class="${cls}" src="${esc(src)}" poster="${esc(src.replace(/\.mp4$/i, ".jpg"))}" muted loop playsinline preload="none"></video>`;
+    if (p.promo) $("#pName").insertAdjacentHTML("beforebegin", `<p class="gl-promo">🎉 ${E(p.promo)}</p>`);
+    const below = document.createElement("div");
+    below.className = "buy__after";
+    ["#pDesc", ".buy__hot", ".buy__check", ".buy__perks", ".eta"].forEach((s) => { const el = $(s); if (el) below.appendChild(el); });
+    $("#order").after(below);
+    $("#pDesc").hidden = true;
+    $("#pName").insertAdjacentHTML("afterend", `<p class="gl-sub">${E(p.description)}</p>`);
+
+    const s = p.stat, pa = p.pains, h = p.how, m = p.myths, n = p.nutrition, r = p.route, sp = p.special, ide = p.ideal, sf = p.safe;
+    const parts = [];
+    if (p.videos?.length) parts.push(`
+      <section class="gl-videos"><div class="gl-videos__row">${p.videos.map((v) => `
+        <figure>${vid(v)}<button type="button" class="gl-sound" aria-label="${E("Sonido")}">🔇</button></figure>`).join("")}
+      </div></section>`);
+    if (s) parts.push(`
+      <section class="gl-dark"><div class="wrap gl-stat">
+        ${eye(s.eyebrow, true)}
+        <p class="gl-stat__big"><small>${E(s.before)}</small><b>${E(s.value)}<sup>${E(s.unit)}</sup></b><small class="is-strong">${E(s.after)}</small></p>
+        <h2>${E(s.text).replace(E(s.highlight), `<u>${E(s.highlight)}</u>`)}</h2>
+        <div class="gl-vs">
+          ${[s.him, s.her].map((x) => `<figure${x.badge ? ' class="is-her"' : ""}><div><img src="${esc(x.image)}" alt="" loading="lazy" />${x.badge ? `<span>${E(x.badge)}<small>${E("de reservas")}</small></span>` : ""}</div>
+            <figcaption><strong>${E(x.label)}</strong><small>${E(x.note)}</small></figcaption></figure>`).join("")}
+        </div>
+        ${s.lines.map((l, i) => `<p class="gl-line${i ? " is-pink" : ""}">${E(l)}</p>`).join("")}
+        <p class="gl-source">${E(s.source)}</p>
+      </div></section>`);
+    if (pa) parts.push(`
+      <section class="gl-light"><div class="wrap gl-pains">
+        ${eye(pa.eyebrow)}<h2 class="gl-title">${two(pa.title)}</h2><p class="gl-text">${E(pa.text)}</p>
+        <div class="gl-watch" aria-live="polite"><div class="gl-watch__screen">
+          <span class="gl-watch__label" id="glWLabel"></span><span class="gl-watch__time">6:45</span>
+          <div class="gl-watch__ring"><b id="glWValue"></b><small id="glWSmall"></small></div>
+          <p id="glWCaption"></p>
+        </div></div>
+        <div class="gl-cards">${pa.items.map((x, i) => `
+          <button type="button" class="gl-card${i === 1 ? " is-on" : ""}" data-pain="${i}"><small>0${i + 1}</small><span>${esc(x.icon)}</span><strong>${E(x.title)}</strong></button>`).join("")}
+        </div>
+        <p class="gl-strike">✕ <s>${E(pa.strike)}</s></p>
+        <h2 class="gl-title gl-title--dark">${two(pa.answer)}</h2>
+        <div class="gl-battery" aria-hidden="true"><i></i></div>
+        <a href="#glHow" class="btn gl-btn">${E(pa.button)} ↓</a>
+      </div></section>`);
+    if (h) parts.push(`
+      <section class="gl-dark" id="glHow"><div class="wrap gl-how">
+        ${eye(h.eyebrow, true)}<h2 class="gl-title gl-title--white">${two(h.title)}</h2><p class="gl-text">${E(h.text)}</p>
+        <ol>${h.steps.map((x) => `<li><span class="gl-how__icon">${esc(x.icon)}</span><div><strong>${E(x.title)}</strong><p>${E(x.text)}</p><small>${E(x.tag)}</small></div></li>`).join("")}</ol>
+        <p class="gl-formula">${h.formula.map((x, i) => `<span${i === h.formula.length - 1 ? ' class="is-pink"' : ""}>${E(x)}</span>`).join(`<b>+</b>`).replace(/<b>\+<\/b>(?=<span class="is-pink")/, "<b>=</b>")}</p>
+        <p class="gl-note">${E(h.note)}</p>
+      </div></section>`);
+    if (m) parts.push(`
+      <section class="gl-light"><div class="wrap gl-myths">
+        ${eye(m.eyebrow)}<h2 class="gl-title gl-title--plain">${E(m.title[0])} <em class="gl-script">${E(m.title[1])}</em></h2><p class="gl-text">${E(m.text)}</p>
+        <p class="gl-count"><span id="glHearts">${"♡".repeat(m.items.length)}</span> <b id="glDone">0</b>/${m.items.length} ${E("mitos desmentidos")}</p>
+        ${m.items.map((x, i) => `
+          <button type="button" class="gl-myth" data-myth="${i}">
+            <span class="gl-myth__x">✕</span>
+            <span class="gl-myth__body"><small>${E("Mito")} 0${i + 1}</small><strong>${E(x.myth)}</strong>
+              <span class="gl-myth__truth"><b>${E("Realidad")}:</b> ${E(x.truth)}</span></span>
+          </button>`).join("")}
+        <button type="button" class="gl-ghost" id="glAllMyths">${E(m.button)}</button>
+      </div></section>`);
+    if (n) parts.push(`
+      <section class="wrap gl-nutri">
+        ${eye(n.eyebrow)}<h2 class="gl-title gl-title--plain">${E(n.title)}</h2>
+        <div class="gl-label"><h3>${E(n.head)}</h3><p>${E(n.serving)}</p>
+          <div class="gl-label__head"><span>${E("Contenido")}</span><span>${E("Por porción")}</span></div>
+          ${n.rows.map(([a, b]) => `<div class="gl-label__row"><i></i><strong>${E(a)}</strong><small>${E(b)}</small></div>`).join("")}
+          <div class="gl-label__foot"><span>${E(n.sugar[0])}</span><strong>${E(n.sugar[1])}</strong></div>
+        </div>
+        <div class="gl-chips">${n.chips.map(([i, t]) => `<span><b>${esc(i)}</b>${E(t)}</span>`).join("")}</div>
+        <p class="gl-gift">🎁 ${E(n.gift)}</p>
+      </section>`);
+    if (r) parts.push(`
+      <section class="gl-dark"><div class="wrap gl-route">
+        ${eye(r.eyebrow, true)}<h2 class="gl-title gl-title--white">${two(r.title)}</h2><p class="gl-text">${E(r.text)}</p>
+        <div class="gl-switch" role="group"><button type="button" data-jars="1">${E("Con 1 tarro")}</button><button type="button" data-jars="2" class="is-on">${E("Con 2 tarros")}</button></div>
+        <div class="gl-weeks" id="glWeeks">
+          <div class="gl-weeks__days"><span>${E("Día 1")}</span><span>${E("Día 30")}</span><span>${E("Día 60")}</span></div>
+          <div class="gl-weeks__row">${Array.from({ length: 8 }, (_, i) => `<span class="${i < 4 ? "is-1" : "is-2"}">S${i + 1}</span>`).join("")}</div>
+          <div class="gl-weeks__jars"><span class="is-1">🫙 ${E("Tarro 1")}</span><span class="is-2" data-on="🫙 ${E("Tarro 2")}" data-off="🔒 ${E("Sin tarro 2")}">🫙 ${E("Tarro 2")}</span></div>
+        </div>
+        <ol class="gl-phases">${r.phases.map((x, i) => `<li data-phase="${i}"><span>${esc(x.icon)}</span><div><small>📅 ${E(x.weeks)}</small><strong>${E(x.text)}</strong>${i ? `<i class="gl-cut">${i === 1 ? `⚠️ ${E("Se corta")}` : `🔒 ${E("No llegas")}`}</i>` : ""}</div></li>`).join("")}</ol>
+        <blockquote class="gl-quote">🫙🫙 <span>${E(r.quote)}<small>${E(r.quoteSmall)}</small></span></blockquote>
+        <p class="gl-note">${E(r.note)}</p>
+      </div></section>`);
+    if (sp) parts.push(`
+      <section class="wrap gl-special">
+        ${eye(sp.eyebrow)}<h2 class="gl-title gl-title--plain">${E(sp.title[0])} <em class="gl-script">${E(sp.title[1])}</em></h2>
+        <div class="gl-orbit">${vid(sp.video)}<span class="gl-orbit__badge"><small>${E(sp.badge[0])}</small>${E(sp.badge[1])}</span><span class="gl-orbit__tag">${E(sp.tag)}</span></div>
+        <div class="gl-feats">${sp.items.map(([i, t, x]) => `<article><span>${esc(i)}</span><strong>${E(t)}</strong><p>${E(x)}</p></article>`).join("")}</div>
+        <p class="gl-note gl-note--dark">${E(sp.note)}</p>
+      </section>`);
+    if (ide) parts.push(`
+      <section class="wrap gl-ideal">
+        ${eye(ide.eyebrow)}<h2 class="gl-title gl-title--plain">${E(ide.title[0])} <em class="gl-script">${E(ide.title[1])}</em></h2><p class="gl-text">${E(ide.text)}</p>
+        <div class="gl-ideal__grid">${ide.items.map(([i, t, x]) => `
+          <button type="button" class="gl-ideal__card"><span class="gl-ideal__icon">${esc(i)}</span><em>${E(ide.chosen)}</em><strong>${E(t)}</strong><small>${E(x)}</small></button>`).join("")}
+        </div>
+        <p class="gl-note gl-note--dark">${E(ide.note)}</p>
+      </section>`);
+    if (sf) parts.push(`
+      <section class="wrap gl-safe">
+        ${eye(sf.eyebrow)}<h2 class="gl-title gl-title--plain">${E(sf.title[0])} <em>${E(sf.title[1])}</em></h2>
+        <div class="gl-safe__grid">${sf.items.map(([i, t, x]) => `<div><span>${esc(i)}</span><strong>${E(t)}</strong><small>${E(x)}</small></div>`).join("")}</div>
+        <h3>${E(sf.stepsTitle)}</h3>
+        <ol>${sf.steps.map((x) => `<li>${E(x)}</li>`).join("")}</ol>
+      </section>`);
+    if (p.warning) parts.push(`<section class="wrap warn gl-warn"><strong>⚠️ ${T("Important")}</strong><p>${E(p.warning)}</p></section>`);
+    $("#story").innerHTML = parts.join("");
+    if (p.finalCta) $("#faq").insertAdjacentHTML("afterend", `
+      <section class="wrap gl-final"><a href="#order" class="gl-final__box">
+        <span>${E(p.finalCta[0])}</span><strong>${E(p.finalCta[1])}</strong><small>${E(p.finalCta[2])}</small>
+        <b class="btn btn--big">${T("Order now · {price}", { price: fmt(offers[offers.length - 1].price) })}</b>
+      </a></section>`);
+
+    // Videos: load and play only when on screen (they are heavy); 🔇 button = sound on / off
+    const vids = document.querySelectorAll("#story video");
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((ens) => ens.forEach((en) => {
+        if (en.isIntersecting) en.target.play().catch(() => {}); else en.target.pause();
+      }), { threshold: .35 });
+      vids.forEach((v) => io.observe(v));
+    } else vids.forEach((v) => { v.preload = "metadata"; v.autoplay = true; });
+    document.querySelectorAll(".gl-sound").forEach((b) => b.addEventListener("click", () => {
+      const v = b.previousElementSibling;
+      const on = v.muted;
+      vids.forEach((x) => { x.muted = true; });
+      document.querySelectorAll(".gl-sound").forEach((x) => { x.textContent = "🔇"; });
+      v.muted = !on;
+      b.textContent = on ? "🔊" : "🔇";
+      if (on) v.play().catch(() => {});
+    }));
+    // Watch: the card tapped shows its number
+    const showPain = (i) => {
+      const x = pa.items[i];
+      $("#glWLabel").textContent = T(x.label);
+      $("#glWValue").textContent = T(x.value);
+      $("#glWSmall").textContent = x.small ? T(x.small) : "";
+      $("#glWCaption").textContent = T(x.caption);
+      document.querySelectorAll(".gl-card").forEach((c) => c.classList.toggle("is-on", Number(c.dataset.pain) === i));
+    };
+    if (pa) {
+      showPain(1);
+      document.querySelectorAll(".gl-card").forEach((c) => c.addEventListener("click", () => showPain(Number(c.dataset.pain))));
+    }
+    // Myths: tap = the truth, the hearts fill up
+    const flip = (b) => {
+      b.classList.add("is-open");
+      const done = document.querySelectorAll(".gl-myth.is-open").length;
+      $("#glDone").textContent = done;
+      $("#glHearts").textContent = "♥".repeat(done) + "♡".repeat(m.items.length - done);
+    };
+    document.querySelectorAll(".gl-myth").forEach((b) => b.addEventListener("click", () => flip(b)));
+    $("#glAllMyths")?.addEventListener("click", () => document.querySelectorAll(".gl-myth").forEach(flip));
+    // Route: 1 jar = weeks 5-8 cut off
+    document.querySelectorAll("[data-jars]").forEach((b) => b.addEventListener("click", () => {
+      const one = b.dataset.jars === "1";
+      document.querySelectorAll("[data-jars]").forEach((x) => x.classList.toggle("is-on", x === b));
+      $("#glWeeks").classList.toggle("is-one", one);
+      document.querySelector(".gl-route").classList.toggle("is-one", one);
+      const jar2 = document.querySelector(".gl-weeks__jars .is-2");
+      jar2.textContent = one ? jar2.dataset.off : jar2.dataset.on;
+    }));
+    // "Is it for me?": tap to choose
+    document.querySelectorAll(".gl-ideal__card").forEach((c) => c.addEventListener("click", () => c.classList.toggle("is-on")));
   } else if (p.layout === "story") {
     // layout: "story" — one long centred column like the big COD landing pages: big uppercase
     // titles, text, full-width photos, ✓ lists, ⚠️ box, what's in the box. Same product fields.
