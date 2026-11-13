@@ -46,24 +46,36 @@ async function healthCheck() {
 }
 
 // Short ad link: /sv/creatina-mujer = /product?id=creatina-mujer&country=sv. Served at once (200,
-// never a redirect: a redirect broke Meta tracking), the page's first script puts the full address
-// back so its relative files (css/, images/) and its code work unchanged. fbclid etc. are kept.
+// never a redirect: a redirect broke Meta tracking). The page's first script switches to the full
+// address while the page's code reads it, then shows the short one again once the page is built.
+// fbclid etc. are kept. Files the page asks for from there (/sv/images/…, /sv/thank-you?…) are
+// served from the site root (shortFile).
 async function shortLink(request, env, url, cc, id) {
   const full = new URLSearchParams({ id, country: cc });
   url.searchParams.forEach((v, k) => { if (k !== "id" && k !== "country") full.append(k, v); });
-  const target = `/product?${full}`;
+  const long = JSON.stringify(`/product?${full}${url.hash}`);
+  const short = JSON.stringify(url.pathname + url.search);
   const page = await env.ASSETS.fetch(new Request(new URL("/product", url), request));
   return new HTMLRewriter().on("head", {
-    element(el) { el.prepend(`<script>history.replaceState(null,"",${JSON.stringify(target + url.hash)})</script>`, { html: true }); },
+    element(el) {
+      el.prepend(`<script>history.replaceState(null,"",${long});addEventListener("DOMContentLoaded",function(){history.replaceState(null,"",${short}+location.hash)})</script>`, { html: true });
+    },
   }).transform(page);
 }
+const shortFile = (request, env, url, rest) => env.ASSETS.fetch(new Request(new URL(`/${rest}${url.search}`, url), request));
+const PAGES = ["index", "product", "thank-you", "policies"];
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    const short = url.pathname.match(/^\/(tz|zm|lb|sv)\/([a-z0-9-]+)\/?$/);
-    if (short) return shortLink(request, env, url, short[1], short[2]);
-    if (url.pathname.match(/^\/(tz|zm|lb|sv)\/?$/)) return Response.redirect(`${url.origin}/?country=${url.pathname.split("/")[1]}`, 302);
+    const cc = url.pathname.match(/^\/(tz|zm|lb|sv)(?:\/(.*))?$/);
+    if (cc) {
+      const rest = cc[2] || "";
+      if (!rest) return Response.redirect(`${url.origin}/?country=${cc[1]}`, 302);
+      const id = rest.replace(/\/$/, "");
+      if (/^[a-z0-9-]+$/.test(id) && !PAGES.includes(id)) return shortLink(request, env, url, cc[1], id);
+      return shortFile(request, env, url, rest);
+    }
     if (url.pathname !== "/api/order") return json({ ok: false, error: "not found" }, 404);
     if (request.method === "GET") return healthCheck();
     if (request.method !== "POST") return json({ ok: false, error: "method not allowed" }, 405);
