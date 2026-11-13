@@ -1,4 +1,5 @@
-/* Cloudflare Worker: only /api/* comes here (see wrangler.jsonc), every other file is served as-is.
+/* Cloudflare Worker: only /api/* and the short links /sv/<id> etc. come here (see wrangler.jsonc),
+   every other file is served as-is.
 
    POST /api/order  The site sends the order here. The customer gets an answer at once, and the
                     order goes on to the Google Sheet in the background, with the visitor's IP
@@ -44,9 +45,26 @@ async function healthCheck() {
   return json({ google: res.status, reachedScript: text.includes('"ok":false') });
 }
 
+// Short ad link: /sv/creatina-mujer = /product?id=creatina-mujer&country=sv. Served at once (200,
+// never a redirect: a redirect broke Meta tracking), the page's first script puts the full address
+// back so its relative files (css/, images/) and its code work unchanged. fbclid etc. are kept.
+async function shortLink(request, env, url, cc, id) {
+  const full = new URLSearchParams({ id, country: cc });
+  url.searchParams.forEach((v, k) => { if (k !== "id" && k !== "country") full.append(k, v); });
+  const target = `/product?${full}`;
+  const page = await env.ASSETS.fetch(new Request(new URL("/product", url), request));
+  return new HTMLRewriter().on("head", {
+    element(el) { el.prepend(`<script>history.replaceState(null,"",${JSON.stringify(target + url.hash)})</script>`, { html: true }); },
+  }).transform(page);
+}
+
 export default {
   async fetch(request, env, ctx) {
-    if (new URL(request.url).pathname !== "/api/order") return json({ ok: false, error: "not found" }, 404);
+    const url = new URL(request.url);
+    const short = url.pathname.match(/^\/(tz|zm|lb|sv)\/([a-z0-9-]+)\/?$/);
+    if (short) return shortLink(request, env, url, short[1], short[2]);
+    if (url.pathname.match(/^\/(tz|zm|lb|sv)\/?$/)) return Response.redirect(`${url.origin}/?country=${url.pathname.split("/")[1]}`, 302);
+    if (url.pathname !== "/api/order") return json({ ok: false, error: "not found" }, 404);
     if (request.method === "GET") return healthCheck();
     if (request.method !== "POST") return json({ ok: false, error: "method not allowed" }, 405);
 

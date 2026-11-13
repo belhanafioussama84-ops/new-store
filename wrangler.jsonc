@@ -4,5 +4,6 @@
   "name": "dukabora-tz",
   "main": "worker.js",
   "compatibility_date": "2025-09-01",
-  "assets": { "directory": "./", "run_worker_first": ["/api/*"] }
+  // /sv/<product id> etc. = short ad links (see worker.js)
+  "assets": { "directory": "./", "binding": "ASSETS", "run_worker_first": ["/api/*", "/tz/*", "/zm/*", "/lb/*", "/sv/*"] }
 }

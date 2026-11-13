@@ -768,7 +768,7 @@ const PRODUCTS = [
     image: "images/mini-main.jpg",
     squarePhotos: true, // top photos shown whole
     // Photos of the reference page, original files (no re-compression)
-    images: ["images/mini-main.jpg", "images/mini-espalda.jpg", "images/mini-pantalla.jpg", "images/mini-parche.jpg", "images/mini-zonas.jpg", "images/mini-carga.jpg", "images/mini-modos.png", "images/mini-uso.jpg", "images/mini-regalo.jpg"],
+    images: ["images/mini-main.jpg", "images/mini-espalda.jpg", "images/mini-pantalla.jpg", "images/mini-parche.jpg", "images/mini-zonas.jpg", "images/mini-carga.jpg", "images/mini-modos.webp", "images/mini-uso.jpg", "images/mini-regalo.jpg"],
     description: "Un mini masajeador eléctrico con parche adhesivo: lo pegas en la espalda, el cuello, los hombros o las piernas y te da un masaje relajante en solo 15 minutos.",
     // The user wants 2 choices only: 1 or 2 pieces
     offers: [
@@ -812,7 +812,7 @@ const PRODUCTS = [
         text: "Colócalo en la espalda, acuéstate y deja que el masaje te relaje. Úsalo 15 minutos al día.",
       },
       {
-        image: "images/mini-modos.png",
+        image: "images/mini-modos.webp",
         title: "8 modos de masaje",
         text: "Masaje, golpeteo, presión, amasado y más: cambia de modo con un botón hasta encontrar el que más te gusta.",
       },
@@ -974,8 +974,8 @@ const PRODUCTS = [
     badge: "New",
     icon: "💪",
     // Photos of the reference page, original files (the 1st one cut above its Guatemala prices)
-    image: "images/crea-main.png",
-    images: ["images/crea-main.png", "images/crea-casa.png", "images/crea-medida.png", "images/crea-batido.png", "images/crea-cocina.png"],
+    image: "images/crea-main.webp",
+    images: ["images/crea-main.webp", "images/crea-casa.webp", "images/crea-medida.webp", "images/crea-batido.webp", "images/crea-cocina.webp"],
     description: "El suplemento más estudiado del mundo, ahora pensado para ti. Creatina + colágeno + BCAAs en una medida. Sin sabor y sin azúcar.",
     // The user wants 2 choices: 1 or 2 tarros
     offers: [
