@@ -976,7 +976,6 @@ const PRODUCTS = [
     // Photos of the reference page, original files (the 1st one cut above its Guatemala prices)
     image: "images/crea-main.png",
     images: ["images/crea-main.png", "images/crea-casa.png", "images/crea-medida.png", "images/crea-batido.png", "images/crea-cocina.png"],
-    squarePhotos: true,
     description: "El suplemento más estudiado del mundo, ahora pensado para ti. Creatina + colágeno + BCAAs en una medida. Sin sabor y sin azúcar.",
     // The user wants 2 choices: 1 or 2 tarros
     offers: [
