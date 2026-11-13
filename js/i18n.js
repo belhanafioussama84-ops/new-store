@@ -808,6 +808,15 @@ const ES = {
   "Prepare {price} in cash": "Ten listo {price} en efectivo",
   "Make it {n} pieces for {price} in total: only <b>{extra}</b> more.": "Llévate {n} unidades por {price} en total: solo <b>{extra}</b> más.",
   "💬 Add it on WhatsApp": "💬 Agregar por WhatsApp",
+  "Only on this page": "Solo en esta página",
+  "Add one more {name}?": "¿Agregas otro {name}?",
+  "Get {n} for {price} in total instead of {full}: only <b>{extra}</b> more. It arrives in the same delivery and you pay everything in cash.":
+    "Llévate {n} por {price} en total en vez de {full}: solo <b>{extra}</b> más. Llega en el mismo envío y pagas todo en efectivo.",
+  "Yes, add it to my order (+{extra})": "Sí, agregar a mi pedido (+{extra})",
+  "Adding…": "Agregando…",
+  "We couldn't add it. Check your connection and try again.": "No pudimos agregarlo. Revisa tu conexión e inténtalo de nuevo.",
+  "No thanks, keep my order as it is": "No, gracias, dejar mi pedido así",
+  "Added! Your order is now {n} pieces: {price} to pay on delivery.": "¡Agregado! Tu pedido ahora es de {n} unidades: {price} a pagar al recibir.",
   "{price} · delivered together with your order.": "{price} · llega junto con tu pedido.",
   "I just ordered from Duka Bora 🇹🇿 Free delivery and you pay only when it arrives: {url}":
     "Acabo de pedir en Duka Bora 🇸🇻 Envío gratis y pagas solo cuando llega: {url}",

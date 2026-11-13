@@ -160,6 +160,8 @@ const Shop = (() => {
 
   // The order saved in this browser by createOrder, or undefined.
   const findOrder = (number) => storage.get(ORDERS_KEY, []).find((o) => o.number === number);
+  // Saves a changed order (e.g. after an upsell on the thank-you page) over its saved copy.
+  const saveOrder = (o) => storage.set(ORDERS_KEY, storage.get(ORDERS_KEY, []).map((x) => (x.number === o.number ? o : x)));
 
   // Fade ".reveal" elements in as they scroll into view.
   function initReveal() {
@@ -173,7 +175,7 @@ const Shop = (() => {
     document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
   }
 
-  return { MAX_QTY, $, fmt, esc, findProduct, productMedia, fillRegions, setError, validate, createOrder, sendOrder, findOrder, initReveal };
+  return { MAX_QTY, $, fmt, esc, findProduct, productMedia, fillRegions, setError, validate, createOrder, sendOrder, findOrder, saveOrder, initReveal };
 })();
 
 /* Country buttons at the top of every page (<div class="lang" data-country-switch></div>) */

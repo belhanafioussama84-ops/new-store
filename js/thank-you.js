@@ -14,12 +14,12 @@
   // Order details (read from this browser's saved copy). Without it the page stays generic.
   if (o) {
     const p = findProduct(o.product.id) || {};
-    const qty = o.product.qty;
     const unitFull = p.oldPrice || p.price || o.product.price;
-    const full = unitFull * qty;
-    const save = full - o.total;
     const firstName = o.customer.fullName.split(/\s+/)[0];
     const placed = new Date(o.date);
+    // Pixel Purchase below: the order as it was placed (the upsell can change o later)
+    const placedQty = o.upsell?.fromQty || o.product.qty;
+    const placedTotal = o.upsell?.fromTotal || o.total;
 
     $("#tTitle").innerHTML = `${T("Asante, {name}!", { name: esc(firstName) })} <span>${T("Your order is confirmed.")}</span>`;
     $("#tNumber").textContent = o.number;
@@ -31,24 +31,80 @@
     $("#tMeta").hidden = false;
     $("#tPhone").textContent = o.customer.phone;
 
-    $("#tPhoto").innerHTML = p.image
-      ? `<img src="${esc(p.image)}" alt="" onerror="this.parentElement.textContent = '${esc(p.icon || "")}';" />`
-      : esc(p.icon || "");
-    $("#tName").textContent = p.name || o.product.name; // without the SKU
-    $("#tQty").textContent = T(qty > 1 ? "{n} pieces · {price} each" : "{n} piece · {price} each", { n: qty, price: fmt(unitFull) });
-    $("#tLine").textContent = fmt(full);
-    $("#tTotals").innerHTML = `
-      <div><dt>${T("Subtotal")}</dt><dd>${fmt(full)}</dd></div>
-      ${save > 0 ? `<div class="is-save"><dt>${T("Bundle discount")}</dt><dd>− ${fmt(save)}</dd></div>` : ""}
-      <div><dt>${T("Delivery")}</dt><dd class="is-free">${T("FREE")}</dd></div>
-      <div class="is-total"><dt>${T("Total to pay on delivery")}</dt><dd>${fmt(o.total)}</dd></div>`;
-    $("#tCustomer").textContent = o.customer.fullName;
-    $("#tAddress").textContent = `${o.customer.city}\n${o.customer.phone}`;
-    $("#tCash").textContent = T("Prepare {price} in cash", { price: fmt(o.total) });
-    $("#tSummary").hidden = false;
+    // Order summary (drawn again after an upsell)
+    const renderSummary = () => {
+      const qty = o.product.qty;
+      const full = unitFull * qty;
+      const save = full - o.total;
+      $("#tPhoto").innerHTML = p.image
+        ? `<img src="${esc(p.image)}" alt="" onerror="this.parentElement.textContent = '${esc(p.icon || "")}';" />`
+        : esc(p.icon || "");
+      $("#tName").textContent = p.name || o.product.name; // without the SKU
+      $("#tQty").textContent = T(qty > 1 ? "{n} pieces · {price} each" : "{n} piece · {price} each", { n: qty, price: fmt(unitFull) });
+      $("#tLine").textContent = fmt(full);
+      $("#tTotals").innerHTML = `
+        <div><dt>${T("Subtotal")}</dt><dd>${fmt(full)}</dd></div>
+        ${save > 0.004 ? `<div class="is-save"><dt>${T("Bundle discount")}</dt><dd>− ${fmt(save)}</dd></div>` : ""}
+        <div><dt>${T("Delivery")}</dt><dd class="is-free">${T("FREE")}</dd></div>
+        <div class="is-total"><dt>${T("Total to pay on delivery")}</dt><dd>${fmt(o.total)}</dd></div>`;
+      $("#tCustomer").textContent = o.customer.fullName;
+      $("#tAddress").textContent = `${o.customer.city}\n${o.customer.phone}`;
+      $("#tCash").textContent = T("Prepare {price} in cash", { price: fmt(o.total) });
+      $("#tSummary").hidden = false;
+    };
+    renderSummary();
+
+    /* ---------- One-click upsell (countries with COUNTRY.upsell): one more piece at the next
+       offer price, added to the same order (same row of the sheet, see upsell_ in orders.gs).
+       Shown once per order: after "yes" or "no thanks" it does not come back. ---------- */
+    const up = (p.offers || []).find((x) => x.qty === o.product.qty + 1);
+    if (COUNTRY.upsell && up && p.image && !o.upsell) {
+      const extra = Math.round((up.price - o.total) * 100) / 100;
+      const box = $("#tUp");
+      box.innerHTML = `
+        <span class="t-up__tag">${T("Only on this page")}</span>
+        <div class="t-up__photo"><img src="${esc(p.image)}" alt="" /><span>×${up.qty}</span></div>
+        <div class="t-up__body">
+          <h2>${T("Add one more {name}?", { name: esc(p.name) })}</h2>
+          <p>${T("Get {n} for {price} in total instead of {full}: only <b>{extra}</b> more. It arrives in the same delivery and you pay everything in cash.", { n: up.qty, price: fmt(up.price), full: fmt(unitFull * up.qty), extra: fmt(extra) })}</p>
+          <button type="button" class="btn btn--big" id="tUpYes">${T("Yes, add it to my order (+{extra})", { extra: fmt(extra) })}</button>
+          <p class="t-up__error" id="tUpError" hidden>${T("We couldn't add it. Check your connection and try again.")}</p>
+          <button type="button" class="t-up__no" id="tUpNo">${T("No thanks, keep my order as it is")}</button>
+        </div>`;
+      box.hidden = false;
+
+      $("#tUpYes").addEventListener("click", async (e) => {
+        const btn = e.currentTarget;
+        btn.disabled = true;
+        btn.textContent = T("Adding…");
+        $("#tUpError").hidden = true;
+        const before = { qty: o.product.qty, total: o.total };
+        const updated = { ...o, product: { ...o.product, qty: up.qty }, total: up.price, upsell: { fromQty: before.qty, fromTotal: before.total, extra } };
+        try {
+          await Shop.sendOrder({ upsell: updated });
+        } catch {
+          btn.disabled = false;
+          btn.textContent = T("Yes, add it to my order (+{extra})", { extra: fmt(extra) });
+          $("#tUpError").hidden = false;
+          return;
+        }
+        Object.assign(o, updated);
+        Shop.saveOrder(o);
+        Pixel.custom("Upsell", { value: extra, currency: COUNTRY.currencyCode, content_ids: [p.id], num_items: 1 });
+        renderSummary();
+        box.classList.add("is-done");
+        box.innerHTML = `<p class="t-up__ok">✓ ${T("Added! Your order is now {n} pieces: {price} to pay on delivery.", { n: o.product.qty, price: fmt(o.total) })}</p>`;
+      });
+      $("#tUpNo").addEventListener("click", () => {
+        o.upsell = { declined: true };
+        Shop.saveOrder(o);
+        box.hidden = true;
+      });
+    }
 
     /* ---------- Bigger order: one more piece of the same product, then the other products ---------- */
     if (wa) {
+      const qty = o.product.qty;
       const cards = [];
       const next = (p.offers || []).find((x) => x.qty === qty + 1);
       if (next && p.image) {
@@ -87,8 +143,8 @@
     let sent = [];
     try { sent = JSON.parse(localStorage.getItem(KEY)) || []; } catch { /* storage unavailable */ }
     if (!sent.includes(o.number)) {
-      const item = { id: o.product.id, name: o.product.name, price: o.total / o.product.qty };
-      Pixel.track("Purchase", Pixel.product(item, o.product.qty, o.total), { eventID: o.number });
+      const item = { id: o.product.id, name: o.product.name, price: placedTotal / placedQty };
+      Pixel.track("Purchase", Pixel.product(item, placedQty, placedTotal), { eventID: o.number });
       try { localStorage.setItem(KEY, JSON.stringify([...sent, o.number].slice(-50))); } catch { /* storage unavailable */ }
     }
   } else {

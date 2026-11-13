@@ -54,10 +54,12 @@ export default {
     if (text.length > MAX_ORDER_SIZE) return json({ ok: false, error: "too large" }, 413);
     let order;
     try { order = JSON.parse(text); } catch { return json({ ok: false, error: "invalid" }, 400); }
-    if (!order?.number || !order.customer || !order.product) return json({ ok: false, error: "invalid" }, 400);
+    // { upsell: order } = an order changed on the thank-you page (upsell_ in orders.gs)
+    const o = order?.upsell || order;
+    if (!o?.number || !o.customer || !o.product) return json({ ok: false, error: "invalid" }, 400);
 
     // Always Cloudflare's value, never one sent by the browser.
-    order.meta = { ...order.meta, ip: request.headers.get("CF-Connecting-IP") || undefined };
+    o.meta = { ...o.meta, ip: request.headers.get("CF-Connecting-IP") || undefined };
     ctx.waitUntil(forward(JSON.stringify(order)));
     return json({ ok: true });
   },

@@ -107,6 +107,24 @@
 .t-steps em { color: #b45309; font-style: normal; font-size: .85rem; }
 .t-steps p { margin: .15rem 0 0; color: var(--muted); font-size: .9rem; }
 
+/* One-click upsell (under the call box) */
+.t-up { position: relative; display: flex; align-items: center; gap: 1.5rem; margin-top: 1.5rem; padding: 1.75rem; border: 2px dashed var(--accent); border-radius: 22px; background: #fff; box-shadow: 0 24px 50px -36px rgba(16, 40, 30, .6); }
+.t-up[hidden] { display: none; }
+.t-up__tag { position: absolute; top: -12px; left: 1.5rem; padding: .15rem .7rem; border-radius: 999px; background: var(--gold); color: var(--deep); font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.t-up__photo { position: relative; flex: none; width: 150px; height: 150px; overflow: hidden; border-radius: 16px; background: var(--bg); }
+.t-up__photo img { width: 100%; height: 100%; object-fit: cover; }
+.t-up__photo span { position: absolute; right: .5rem; bottom: .5rem; padding: .1rem .55rem; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; }
+.t-up__body { flex: 1; min-width: 0; }
+.t-up h2 { margin-bottom: .35rem; font-size: 1.35rem; }
+.t-up__body > p { margin: 0 0 1rem; color: var(--muted); }
+.t-up__body b { color: var(--accent); }
+.t-up .btn:disabled { opacity: .7; cursor: wait; }
+.t-up__error { margin: .6rem 0 0 !important; color: #b42318 !important; font-size: .9rem; }
+.t-up__error[hidden] { display: none; }
+.t-up__no { display: block; margin: .7rem auto 0; padding: .3rem; border: 0; background: none; color: var(--muted); font: inherit; font-size: .88rem; text-decoration: underline; cursor: pointer; }
+.t-up.is-done { justify-content: center; border-style: solid; background: var(--accent-soft); }
+.t-up__ok { margin: 0; color: var(--accent); font-size: 1.1rem; font-weight: 800; text-align: center; }
+
 /* Bigger order */
 .t-more { padding-top: 4rem; }
 .t-more[hidden] { display: none; }
@@ -148,5 +166,7 @@
   .t-share { padding: 1.75rem 1.25rem; }
   .t-share .btn, .t-help__btns .btn { width: 100%; }
   .t-offer { flex-direction: column; }
+  .t-up { flex-direction: column; padding: 1.6rem 1.1rem 1.25rem; text-align: center; }
+  .t-up__photo { width: 100%; height: 200px; }
   .t-offer__photo { width: 100%; height: 180px; }
 }

@@ -93,25 +93,13 @@ function doPost(e) {
   lock.waitLock(10000); // two orders at the same moment must not get the same code
   try {
     const o = JSON.parse(e.postData.contents);
+    // "Add one more" on the thank-you page (El Salvador): changes the order's row
+    if (o.upsell) return json_(upsell_(o.upsell));
     if (o.country === "El Salvador") {
       const sheet = getOrdersSheet_(SALVADOR_SHEET, SALVADOR_HEADERS);
-      sheet.appendRow([
-        text_(o.number), // Réf. commande
-        text_(o.customer.fullName), // Nom du client
-        salvadorPhone_(o.customer.phone), // Téléphone: "7123 4567", like the LatinDrop example
-        text_(o.customer.region || ""), // Département
-        text_(o.customer.town || ""), // Municipalité
-        text_(o.customer.street || o.customer.city), // Adresse
-        text_(o.customer.landmark || ""), // Point de repère
-        text_(o.product.sku || ""), // SKU
-        "", // Code produit
-        "", // Variante
-        Number(o.product.qty) || 1, // Quantité
-        Number(o.total) || 0, // Prix COD
-        SALVADOR_CONFIRM, // Qui confirme
-        // Note: the product name (the site sends "Name (sku)")
-        text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : o.product.name),
-      ]);
+      // Already there (sent twice, or its upsell arrived first): nothing to add
+      if (salvadorRowOf_(sheet, o.number)) return json_({ ok: true, duplicate: true });
+      sheet.appendRow(salvadorRow_(o));
       sendMetaPurchase_(o);
       notifyTelegram_(o.number, o);
       return json_({ ok: true });
@@ -159,6 +147,76 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+// One row of the "Orders El Salvador" tab (the 14 LatinDrop columns).
+function salvadorRow_(o) {
+  return [
+    text_(o.number), // Réf. commande
+    text_(o.customer.fullName), // Nom du client
+    salvadorPhone_(o.customer.phone), // Téléphone: "7123 4567", like the LatinDrop example
+    text_(o.customer.region || ""), // Département
+    text_(o.customer.town || ""), // Municipalité
+    text_(o.customer.street || o.customer.city), // Adresse
+    text_(o.customer.landmark || ""), // Point de repère
+    text_(o.product.sku || ""), // SKU
+    "", // Code produit
+    "", // Variante
+    Number(o.product.qty) || 1, // Quantité
+    Number(o.total) || 0, // Prix COD
+    SALVADOR_CONFIRM, // Qui confirme
+    // Note: the product name (the site sends "Name (sku)")
+    text_(o.product.sku ? o.product.name.replace(" (" + o.product.sku + ")", "") : o.product.name),
+  ];
+}
+
+// Row number of an order in the El Salvador tab (column A = Réf. commande), or 0.
+function salvadorRowOf_(sheet, number) {
+  const last = sheet.getLastRow();
+  if (last < 2 || !number) return 0;
+  const refs = sheet.getRange(2, 1, last - 1, 1).getValues();
+  for (let i = refs.length - 1; i >= 0; i--) if (String(refs[i][0]) === String(number)) return i + 2;
+  return 0;
+}
+
+// The customer pressed "Yes, add it to my order" on the thank-you page: new Quantité and
+// Prix COD in the order's row, "UPSELL" in its Note. If the order is not there yet, the
+// whole order is written with the new quantity (the first one is then skipped, see doPost).
+// A row already downloaded (grey) is changed too, and Telegram says to fix it in LatinDrop.
+function upsell_(o) {
+  if (o.country !== "El Salvador") return { ok: false, error: "upsell: El Salvador only" };
+  const sheet = getOrdersSheet_(SALVADOR_SHEET, SALVADOR_HEADERS);
+  const row = salvadorRowOf_(sheet, o.number);
+  const u = o.upsell || {};
+  const tag = "UPSELL: " + (u.fromQty || "?") + " → " + o.product.qty + " (+$" + (Number(u.extra) || 0).toFixed(2) + ")";
+  let downloaded = false;
+  if (row) {
+    downloaded = sheet.getRange(row, 1).getBackground() === SENT_COLOR;
+    sheet.getRange(row, 11, 1, 2).setValues([[Number(o.product.qty) || 1, Number(o.total) || 0]]);
+    const note = sheet.getRange(row, 14);
+    note.setValue(text_(String(note.getValue() || "") + " · " + tag));
+    sheet.getRange(row, 11, 1, 2).setFontWeight("bold").setFontColor("#b45309");
+  } else {
+    const r = salvadorRow_(o);
+    r[13] = text_(r[13] + " · " + tag);
+    sheet.appendRow(r);
+    sendMetaPurchase_({ ...o, product: { ...o.product, qty: u.fromQty || o.product.qty }, total: u.fromTotal || o.total });
+  }
+  const tg = telegram_();
+  if (tg.token && tg.chatId) {
+    try {
+      sendTelegram_([
+        "⬆️ Upsell " + o.number + " 🇸🇻 El Salvador",
+        o.product.name + " × " + o.product.qty + " (was × " + (u.fromQty || "?") + ")",
+        "💰 $ " + (Number(o.total) || 0).toFixed(2) + " (+$" + (Number(u.extra) || 0).toFixed(2) + ")",
+        "👤 " + o.customer.fullName,
+        downloaded ? "⚠️ This order was already downloaded: change it in LatinDrop too." : "",
+      ].filter(Boolean).join("\n"));
+    } catch (err) {
+      console.error("Telegram: " + err);
+    }
+  }
+  return { ok: true };
 }
 
 // Lets you check the URL works by opening it in a browser.
