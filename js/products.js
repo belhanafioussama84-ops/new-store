@@ -988,6 +988,11 @@ const PRODUCTS = [
     promo: "¡PROMO 2 TARROS!",
     // Customer videos, side by side under the order form (tap = sound)
     videos: ["images/crea-ugc1.mp4", "images/crea-ugc2.mp4", "images/crea-ugc3.mp4"],
+    videosTitle: ["🎥 En video", "Así la toman", "ellas", "Sin sabor: se mezcla con agua, jugo o tu batido."],
+    // Reviews of REAL customers only (screenshot of their WhatsApp message in images/ if you have it), e.g.
+    // { name: "Karla M.", place: "Santa Tecla", stars: 5, text: "…", image: "images/crea-review1.jpg" }
+    // Empty = the reviews block is not shown. Never invented ones (user agreed, 13 Nov 2026).
+    customerReviews: [],
     stat: {
       eyebrow: "🧠 ¿Sabías que…?",
       before: "Hasta", value: "80", unit: "%", after: "menos",

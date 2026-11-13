@@ -194,3 +194,14 @@ body.layout-glam h1 { font-family: "Inter", system-ui, sans-serif; font-weight: 
 .gl-final__box small { color: #c8bcc4; }
 .gl-final__box .btn { width: 100%; margin-top: .8rem; }
 @media (prefers-reduced-motion: reduce) { .gl-battery i { animation: none; width: 100%; } }
+.gl-videos > .wrap { max-width: 640px; }
+
+/* Real customer reviews */
+.gl-reviews__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: .8rem; }
+.gl-reviews article { display: grid; gap: .45rem; align-content: start; padding: 1.1rem; border: 1px solid #f3cfdc; border-radius: 18px; background: #fff; box-shadow: 0 12px 24px -20px rgba(110, 29, 69, .5); }
+.gl-reviews img { width: 100%; border-radius: 12px; }
+.gl-stars { color: #f5a623; font-size: 1.05rem; letter-spacing: .1em; }
+.gl-reviews p { margin: 0; color: #3b3038; line-height: 1.5; }
+.gl-reviews strong { font-size: .92rem; }
+.gl-reviews strong small { color: #6b5d66; font-weight: 600; }
+.gl-verified { color: #1d8a4c; font-size: .78rem; font-weight: 700; }

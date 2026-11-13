@@ -217,8 +217,25 @@
     const s = p.stat, pa = p.pains, h = p.how, m = p.myths, n = p.nutrition, r = p.route, sp = p.special, ide = p.ideal, sf = p.safe;
     const parts = [];
     if (p.videos?.length) parts.push(`
-      <section class="gl-videos"><div class="gl-videos__row">${p.videos.map((v) => `
+      <section class="gl-videos">
+        ${p.videosTitle ? `<div class="wrap">${eye(p.videosTitle[0])}<h2 class="gl-title gl-title--plain">${E(p.videosTitle[1])} <em class="gl-script">${E(p.videosTitle[2])}</em></h2><p class="gl-text">${E(p.videosTitle[3])}</p></div>` : ""}
+        <div class="gl-videos__row">${p.videos.map((v) => `
         <figure>${vid(v)}<button type="button" class="gl-sound" aria-label="${E("Sonido")}">🔇</button></figure>`).join("")}
+      </div></section>`);
+    // Real customer reviews only (customerReviews in products.js): name, place, text, optional
+    // screenshot of their message. No reviews = no block.
+    if (p.customerReviews?.length) parts.push(`
+      <section class="gl-light"><div class="wrap gl-reviews">
+        ${eye("Opiniones de clientas")}<h2 class="gl-title gl-title--plain">${E("Lo que dicen")} <em class="gl-script">${E("nuestras clientas")}</em></h2>
+        <div class="gl-reviews__grid">${p.customerReviews.map((x) => `
+          <article>
+            ${x.image ? `<img src="${esc(x.image)}" alt="" loading="lazy" onerror="this.remove()" />` : ""}
+            <span class="gl-stars" aria-label="${x.stars || 5}/5">${"★".repeat(x.stars || 5)}${"☆".repeat(5 - (x.stars || 5))}</span>
+            ${x.text ? `<p>“${E(x.text)}”</p>` : ""}
+            <strong>${E(x.name)}${x.place ? ` · <small>${E(x.place)}</small>` : ""}</strong>
+            <small class="gl-verified">✓ ${E("Compra verificada")}</small>
+          </article>`).join("")}
+        </div>
       </div></section>`);
     if (s) parts.push(`
       <section class="gl-dark"><div class="wrap gl-stat">
