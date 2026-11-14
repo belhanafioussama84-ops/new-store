@@ -584,12 +584,26 @@
     const sel = document.createElement("select");
     sel.id = "city"; sel.name = "city"; sel.required = true;
     $("#city").replaceWith(sel);
+    // No departamento chosen yet: the list has every municipio, grouped by departamento, and picking
+    // one fills the departamento too (the customer often taps Ciudad first: an empty list looked broken).
+    const opt = (m, d) => `<option value="${esc(m)}" data-dept="${esc(d)}">${esc(m)}</option>`;
     const fill = () => {
-      const list = COUNTRY.municipios[$("#region").value] || [];
-      sel.innerHTML = `<option value="">${esc(T("City / municipality"))}</option>` +
-        list.map((m) => `<option value="${esc(m)}">${esc(m)}</option>`).join("");
+      const dept = $("#region").value;
+      const list = COUNTRY.municipios[dept];
+      sel.innerHTML = `<option value="">${esc(T("City / municipality"))}</option>` + (list
+        ? list.map((m) => opt(m, dept)).join("")
+        : Object.entries(COUNTRY.municipios).map(([d, ms]) => `<optgroup label="${esc(d)}">${ms.map((m) => opt(m, d)).join("")}</optgroup>`).join(""));
     };
     $("#region").addEventListener("change", () => { fill(); if (sel.closest(".has-error")) setError(sel, ""); });
+    sel.addEventListener("change", () => {
+      const dept = sel.selectedOptions[0]?.dataset.dept;
+      if (!dept || $("#region").value === dept) return;
+      const town = sel.value;
+      $("#region").value = dept;
+      fill();
+      sel.value = town;
+      if ($("#region").closest(".has-error")) setError($("#region"), "");
+    });
     fill();
   } else if (COUNTRY.regions) {
     const inp = document.createElement("input");

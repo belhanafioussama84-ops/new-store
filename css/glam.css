@@ -226,7 +226,7 @@ body.form-dark .input input, body.form-dark .input select { padding: 1.05rem 0; 
 body.form-dark .input input::placeholder { color: #8f8d9c; opacity: 1; }
 body.form-dark .input select { appearance: none; -webkit-appearance: none; padding-right: 2rem; }
 body.form-dark .input select:invalid { color: #8f8d9c; }
-body.form-dark .input select option { background: #1d1c27; color: #f2f1f7; }
+body.form-dark .input select option, body.form-dark .input select optgroup { background: #1d1c27; color: #f2f1f7; }
 body.form-dark .input--select::after { content: ""; position: absolute; right: 1.25rem; top: 50%; width: 9px; height: 9px; border-right: 2px solid #a9a7b6; border-bottom: 2px solid #a9a7b6; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
 body.form-dark .has-error .input { border-color: #ff6b81; }
 body.form-dark .error { margin-top: .4rem; color: #ff8a9b; }
