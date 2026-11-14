@@ -80,8 +80,6 @@ const COUNTRIES = {
     languages: ["es"], // Spanish only: ES in js/i18n.js
     fastCity: "san salvador",
     splitAddress: true,
-    // No WhatsApp buttons: customers must order with the form, not by message (user's choice)
-    noWhatsApp: true,
     // No phone number shown (footer, thank-you page): the Moroccan number is no use here
     noPhone: true,
     // Thank-you page: "add one more" button (next offer price), added to the same order
