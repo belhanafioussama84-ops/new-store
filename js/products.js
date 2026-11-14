@@ -965,7 +965,7 @@ const PRODUCTS = [
     sku: "LD-P-4187448", // LatinDrop SKU (El Salvador tab of the sheet)
     countries: ["sv"],
     category: "Health & comfort",
-    price: 40.99, // user's price; 2 tarros is my suggestion
+    price: 39.99, // user's price (40.99 until 14 Nov 2026); 2 tarros is my suggestion
     oldPrice: null,
     rating: 4.8,
     reviews: 0,
@@ -977,10 +977,13 @@ const PRODUCTS = [
     description: "El suplemento más estudiado del mundo, ahora pensado para ti. Creatina + colágeno + BCAAs en una medida. Sin sabor y sin azúcar.",
     // The user wants 2 choices: 1 or 2 tarros
     offers: [
-      { qty: 1, price: 40.99, label: "1 tarro · 30 días" },
+      { qty: 1, price: 39.99, label: "1 tarro · 30 días" },
       { qty: 2, price: 69.99, label: "2 tarros · 60 días", tag: "Best value" },
     ],
     layout: "glam",
+    // Order form like the user's screenshot (14 Nov 2026): dark purple box, uppercase labels,
+    // Departamento and Ciudad/Municipio picked from lists, "Completar pedido" button (js/landing.js, css/glam.css)
+    darkForm: true,
     timeline: [1, 1, 3],
     promo: "¡PROMO 2 TARROS!",
     // Customer videos, side by side under the order form (tap = sound)

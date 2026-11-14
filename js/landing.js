@@ -519,6 +519,7 @@
     renderRecap();
     const label = T("Order now · {price}", { price: fmt(offer().price) });
     ["#submitBtn", "#sticky", "#closingOrder"].forEach((s) => { $(s).textContent = label; });
+    if (p.darkForm) $("#submitBtn").innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg> ${esc(T("Complete order"))}`;
   };
 
   $("#offers").addEventListener("change", (e) => {
@@ -576,7 +577,21 @@
 
   // Region and landmark fields: only in the countries that have them (El Salvador).
   // The customer types the departamento and the city/municipio (no lists to pick from: user's choice).
-  if (COUNTRY.regions) {
+  if (COUNTRY.regions && p.darkForm && COUNTRY.municipios) {
+    // darkForm pages: the departamento from a list, then the city/municipio from that departamento's list
+    Shop.fillRegions($("#region"));
+    $("#region").options[0].textContent = T("Region");
+    const sel = document.createElement("select");
+    sel.id = "city"; sel.name = "city"; sel.required = true;
+    $("#city").replaceWith(sel);
+    const fill = () => {
+      const list = COUNTRY.municipios[$("#region").value] || [];
+      sel.innerHTML = `<option value="">${esc(T("City / municipality"))}</option>` +
+        list.map((m) => `<option value="${esc(m)}">${esc(m)}</option>`).join("");
+    };
+    $("#region").addEventListener("change", () => { fill(); if (sel.closest(".has-error")) setError(sel, ""); });
+    fill();
+  } else if (COUNTRY.regions) {
     const inp = document.createElement("input");
     inp.id = "region"; inp.name = "region"; inp.type = "text"; inp.required = true;
     inp.autocomplete = "address-level1";
@@ -590,6 +605,32 @@
     $("#cityField").remove();
     $("#addressLabel").textContent = T("City & delivery address");
     $("#address").placeholder = T("e.g. Dar es Salaam, Kinondoni, Mikocheni B");
+  }
+
+  // darkForm: the order form like the user's screenshot. Labels in capitals with a pink dot, each
+  // placeholder repeats its label, line icons, WhatsApp logo for the phone (css/glam.css).
+  if (p.darkForm) {
+    document.body.classList.add("form-dark");
+    const svg = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+    const down = svg('<path d="m6 9 6 6 6-6"/>');
+    const fields = {
+      fullName: ["Name and surname", svg('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>'), "Name and surname"],
+      phone: ["Phone", '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25d366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/><path fill="#fff" d="M16.9 14.4c-.3-.1-1.6-.8-1.8-.9-.3-.1-.4-.1-.6.1l-.8 1c-.2.2-.3.2-.6.1a7 7 0 0 1-3.4-3c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.4z"/></svg>', "Phone"],
+      region: ["Region", down],
+      city: ["City / municipality", down],
+      address: ["Delivery address", svg('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>')],
+    };
+    for (const [id, [label, icon, holder]] of Object.entries(fields)) {
+      const el = $("#" + id);
+      if (!el) continue;
+      const field = el.closest(".field");
+      field.querySelector("label").textContent = T(label);
+      const box = el.closest(".input");
+      box.querySelector("span").innerHTML = icon;
+      box.classList.toggle("input--select", el.tagName === "SELECT");
+      if (holder) el.placeholder = T(holder);
+    }
+    $("#phone").closest(".field").querySelector(".hint")?.remove();
   }
 
   /* ---------- Order ---------- */
