@@ -985,7 +985,6 @@ const PRODUCTS = [
     // Departamento and Ciudad/Municipio picked from lists, "Completar pedido" button (js/landing.js, css/glam.css)
     darkForm: true,
     timeline: [1, 1, 3],
-    promo: "¡PROMO 2 TARROS!",
     // Customer videos, side by side under the order form (tap = sound)
     videos: ["images/crea-ugc1.mp4", "images/crea-ugc2.mp4", "images/crea-ugc3.mp4"],
     videosTitle: ["🎥 En video", "Así la toman", "ellas", "Sin sabor: se mezcla con agua, jugo o tu batido."],
@@ -1053,7 +1052,6 @@ const PRODUCTS = [
       ],
       sugar: ["Azúcar añadida", "0 g"],
       chips: [["🚫", "Sin azúcar"], ["🥤", "Sin sabor"], ["📅", "30 días por tarro"]],
-      gift: "Con 2 tarros tienes 60 días de rutina por $69.99",
     },
     route: {
       eyebrow: "📅 La constancia es la clave",
@@ -1098,7 +1096,6 @@ const PRODUCTS = [
       stepsTitle: "Así de fácil es pedir",
       steps: ["Escribe tu nombre, teléfono y dirección", "Te llamamos para confirmar tu pedido", "Lo recibes y pagas en ese momento"],
     },
-    finalCta: ["Promo 2 tarros", "2 creatinas · 2 meses", "Pago al recibir · Envío gratis"],
     warning: "Suplemento alimenticio, no es un medicamento. Para mayores de 18 años. Si estás embarazada, amamantando, tomas medicamentos o tienes una enfermedad (por ejemplo de los riñones), consulta a tu médico antes de usarlo. No exceder la porción recomendada.",
     faq: [
       { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento." },

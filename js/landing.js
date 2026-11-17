@@ -293,7 +293,7 @@
           <div class="gl-label__foot"><span>${E(n.sugar[0])}</span><strong>${E(n.sugar[1])}</strong></div>
         </div>
         <div class="gl-chips">${n.chips.map(([i, t]) => `<span><b>${esc(i)}</b>${E(t)}</span>`).join("")}</div>
-        <p class="gl-gift">🎁 ${E(n.gift)}</p>
+        ${n.gift ? `<p class="gl-gift">🎁 ${E(n.gift)}</p>` : ""}
       </section>`);
     if (r) parts.push(`
       <section class="gl-dark"><div class="wrap gl-route">
