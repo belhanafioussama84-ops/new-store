@@ -1,0 +1,121 @@
+/* layout: "pro" — navy and green blocks, like the user's drain-claw reference page (js/landing.js).
+   Loaded after product.css on the product page. */
+body.layout-pro {
+  --accent: #16a34a; --accent-2: #15803d; --accent-soft: #f0fbf4;
+  --pr-navy: #101a2b; --pr-ink: #16233a; --pr-muted: #4a5a75; --pr-line: #e4e9f2; --pr-orange: #ff6a13;
+  background: #fff; color: var(--pr-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+}
+body.layout-pro .gallery__thumbs, body.layout-pro .closing { display: none; }
+body.layout-pro h1 { font-family: inherit; font-weight: 800; letter-spacing: -.02em; text-align: center; color: var(--pr-ink); }
+body.layout-pro .buy__cat { text-align: center; }
+body.layout-pro .buy__price { justify-content: center; }
+body.layout-pro .buy__price strong { color: var(--accent); font-size: 2.3rem; font-weight: 900; }
+body.layout-pro .buy__price s { color: #dc2626; font-weight: 700; }
+body.layout-pro .btn { background: var(--accent); border-color: var(--accent); border-radius: 999px; font-weight: 800; }
+body.layout-pro #submitBtn { animation: pr-beat 2.6s infinite; }
+
+/* Offers: white cards, green border on the chosen one */
+body.layout-pro .offer { border: 2px solid var(--pr-line); border-radius: 14px; background: #fff; }
+body.layout-pro .offer.is-active { border-color: var(--accent); background: var(--accent-soft); }
+body.layout-pro .offer__tag { background: var(--accent); color: #fff; }
+body.layout-pro .offer__price { color: var(--pr-ink); font-weight: 800; }
+
+/* Dark name bar + green strip on top */
+.pr-top { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 12px 16px; background: var(--pr-navy); color: #fff; text-align: center; }
+.pr-top strong { font-size: 1.35rem; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; }
+.pr-top small { color: #c8d3e4; font-size: .8rem; font-weight: 500; }
+.pr-strip { margin: 0; padding: 8px 12px; background: var(--accent); color: #fff; font-size: .88rem; font-weight: 700; text-align: center; }
+
+/* The long column */
+.pr-story { max-width: 720px; padding-top: 1.5rem; padding-bottom: 1rem; font-size: 1.06rem; line-height: 1.6; }
+.pr-img { margin: 1.25rem 0; }
+.pr-img img, .pr-img video { display: block; width: 100%; height: auto; border-radius: 16px; }
+.pr-h { margin: 2rem 0 .6rem; font-family: inherit; font-size: 1.45rem; font-weight: 800; line-height: 1.2; color: var(--pr-ink); }
+.pr-h--big { margin: .5rem 0 .25rem; font-size: clamp(1.6rem, 7.5vw, 1.9rem); letter-spacing: -.02em; }
+.pr-p { margin: 0 0 1rem; color: #111; }
+
+/* "A plumber costs… / this claw, once" */
+.pr-anchor { margin: 1.75rem 0; padding: 26px 24px; border-radius: 18px; background: var(--pr-navy); color: #fff; text-align: center; }
+.pr-anchor > small { display: block; margin-bottom: 4px; color: #93a3bd; font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; }
+.pr-anchor > s { display: block; margin-bottom: 16px; color: #ff5c5c; font-size: 2.4rem; font-weight: 900; line-height: 1; }
+.pr-anchor > b { display: block; color: #4ade80; font-size: 2.75rem; font-weight: 900; line-height: 1; }
+.pr-anchor > p { margin: 12px 0 0; color: #c8d3e4; }
+
+/* Before / after */
+.pr-ba { margin: 2rem 0; padding: 24px; border-radius: 20px; background: #f5f7fb; }
+.pr-ba__title { margin: 0 0 14px; color: #000; font-size: .82rem; font-weight: 800; letter-spacing: .1em; text-align: center; text-transform: uppercase; }
+.pr-ba .pr-img { margin: 0 0 14px; }
+.pr-ba__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pr-ba__row figure { margin: 0; text-align: center; }
+.pr-ba__row figure > div { overflow: hidden; border-radius: 14px; }
+.pr-ba__before > div { box-shadow: 0 0 0 3px #ef4444; }
+.pr-ba__after > div { box-shadow: 0 0 0 3px #22c55e; }
+.pr-ba__row img { display: block; width: 100%; }
+.pr-ba__row strong { display: block; margin-top: 10px; font-size: .95rem; }
+.pr-ba__before strong { color: #ef4444; }
+.pr-ba__after strong { color: var(--accent); }
+.pr-ba__row small { color: #000; font-size: .85rem; }
+
+/* 3 benefits with a big emoji */
+.pr-feats { margin: 2rem 0; padding: 0; list-style: none; }
+.pr-feats li { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; }
+.pr-feats span { font-size: 1.9rem; line-height: 1; }
+.pr-feats strong { display: block; margin-bottom: 3px; font-size: 1.12rem; font-weight: 800; }
+.pr-feats p { margin: 0; color: #000; }
+
+/* Green order buttons between the blocks */
+.pr-cta { margin: 1.5rem 0; text-align: center; }
+.pr-btn { display: block; max-width: 420px; margin: 0 auto; padding: 16px 20px; border-radius: 999px; background: var(--accent); color: #fff !important; font-size: 1.06rem; font-weight: 800; text-decoration: none; animation: pr-beat 2.6s infinite; }
+.pr-cta small { display: block; margin-top: 8px; color: #475569; font-size: .82rem; font-weight: 600; }
+@keyframes pr-beat { 0%, 70%, 100% { transform: scale(1); } 78% { transform: scale(1.05); } 86% { transform: scale(.98); } }
+
+/* Without / with table */
+.pr-table { overflow: hidden; margin: 1.9rem 0; border: 1px solid var(--pr-line); border-radius: 18px; font-size: .95rem; }
+.pr-table > div { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--pr-line); }
+.pr-table > div:first-child { border-top: 0; }
+.pr-table span { padding: 13px 16px; color: #000; }
+.pr-table span:last-child { background: #f4fbf7; }
+.pr-table .pr-table__head { background: #f0f3f8; font-weight: 800; }
+.pr-table__head span:first-child { color: #8794ad; }
+.pr-table__head span:last-child { background: #e8f7ee; color: var(--accent); }
+.pr-table b { color: #ff2a00; }
+
+/* "Not only for the drain" tiles */
+.pr-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 0 0 1.6rem; }
+.pr-tiles div { padding: 15px 17px; border-radius: 14px; background: #f7f9fc; }
+.pr-tiles strong { display: block; }
+.pr-tiles small { color: #6b7a94; font-size: .93rem; }
+
+/* 4 steps */
+.pr-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin: 0 0 1rem; padding: 0; list-style: none; }
+.pr-steps figure { overflow: hidden; margin: 0; border-radius: 14px; }
+.pr-steps img, .pr-steps video { display: block; width: 100%; }
+.pr-steps p { margin: 10px 0 0; }
+.pr-steps b { color: var(--pr-orange); }
+
+/* Specs on dark */
+.pr-dark { margin: 2rem 0; padding: 26px 28px; border-radius: 20px; background: var(--pr-ink); color: #e8eef8; }
+.pr-dark h3 { margin: 0 0 .75rem; color: #fff; font-size: 1.2rem; font-weight: 800; }
+.pr-dark ul { margin: 0; padding-left: 20px; line-height: 1.9; }
+.pr-dark b { color: #fff; }
+
+.pr-warn { margin: 1.5rem 0; padding: 16px 18px; border-radius: 14px; background: #fff7ed; border: 1px solid #fed7aa; font-size: .95rem; }
+.pr-warn p { margin: .3rem 0 0; }
+
+/* FAQ like theirs: one box with lines */
+body.layout-pro .faq { max-width: 720px; }
+body.layout-pro .faq h2, body.layout-pro .order__step h2, .pr-dark h3 { font-family: inherit; }
+body.layout-pro .faq h2 { font-size: 1.45rem; font-weight: 800; text-align: left; color: var(--pr-ink); }
+
+/* Guarantee box + last orange button */
+.pr-end { max-width: 720px; padding-bottom: 2.5rem; text-align: center; }
+.pr-box { margin: 1rem 0 2rem; padding: 22px 24px; border-radius: 18px; background: #e8f7ee; text-align: left; }
+.pr-box strong { display: block; margin-bottom: 6px; color: var(--accent); font-size: 1.12rem; font-weight: 800; }
+.pr-box p { margin: 0; color: #3f6b52; }
+.pr-final { display: inline-block; padding: 17px 44px; border-radius: 999px; background: var(--pr-orange); color: #fff; font-size: 1.12rem; font-weight: 800; text-decoration: none; box-shadow: 0 8px 22px rgba(255, 106, 19, .35); }
+.pr-end small { display: block; margin-top: 12px; color: #8794ad; font-size: .88rem; }
+
+/* Sticky order button: green pill */
+body.layout-pro .sticky { background: var(--accent); border-color: var(--accent); border-radius: 999px; }
+@media (prefers-reduced-motion: reduce) { .pr-btn, body.layout-pro #submitBtn { animation: none; } }

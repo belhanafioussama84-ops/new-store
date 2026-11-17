@@ -388,6 +388,63 @@
     }));
     // "Is it for me?": tap to choose
     document.querySelectorAll(".gl-ideal__card").forEach((c) => c.addEventListener("click", () => c.classList.toggle("is-on")));
+  } else if (p.layout === "pro") {
+    // layout: "pro" — navy and green blocks like the user's drain-claw reference page (css/pro.css):
+    // dark name bar + green strip on top, then the page is a list of blocks ("blocks" in products.js),
+    // each one typed by its key: img, h, p, anchor, ba, feats, cta, table, tiles, steps, dark, box.
+    document.body.classList.add("layout-story", "layout-pro");
+    const E = (s) => esc(T(s));
+    const B = (s) => E(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>"); // **bold** inside a text
+    const below = document.createElement("div");
+    below.className = "buy__after";
+    ["#pDesc", ".buy__hot", ".buy__check", ".buy__perks", ".eta"].forEach((s) => { const el = $(s); if (el) below.appendChild(el); });
+    $("#order").after(below);
+    $("main").insertAdjacentHTML("afterbegin", `
+      <div class="pr-top"><strong>${E(p.shortName || p.name)}</strong>${p.claim ? `<small>${E(p.claim)}</small>` : ""}</div>
+      ${p.strip ? `<p class="pr-strip">${E(p.strip)}</p>` : ""}`);
+    const pic = (src, alt = "") => /\.mp4$/i.test(src)
+      ? `<video src="${esc(src)}" poster="${esc(src.replace(/\.mp4$/i, ".jpg"))}" autoplay muted loop playsinline preload="metadata"></video>`
+      : `<img src="${esc(src)}" alt="${E(alt)}" loading="lazy" onerror="this.remove()" />`;
+    const cta = () => `<div class="pr-cta"><a href="#order" class="pr-btn">🛒 ${E(p.ctaText || "Lo quiero · Pago al recibir")}</a>${p.ctaNote ? `<small>${E(p.ctaNote)}</small>` : ""}</div>`;
+    const block = (b) => {
+      if (b.img) return `<figure class="pr-img">${pic(b.img, b.alt)}</figure>`;
+      if (b.h) return `<h2 class="pr-h${b.big ? " pr-h--big" : ""}">${E(b.h)}</h2>`;
+      if (b.p) return `<p class="pr-p">${B(b.p)}</p>`;
+      if (b.cta) return cta();
+      if (b.anchor) { const a = b.anchor; return `
+        <div class="pr-anchor">
+          <small>${E(a.them)}</small><s>${E(a.themPrice)}</s>
+          <small>${E(a.us)}</small><b>${fmt(p.price)}</b>
+          <p>${B(a.note)}</p>
+        </div>`; }
+      if (b.ba) { const x = b.ba; return `
+        <div class="pr-ba">
+          <p class="pr-ba__title">${E(x.title)}</p>
+          ${x.video ? `<figure class="pr-img">${pic(x.video)}</figure>` : ""}
+          <div class="pr-ba__row">
+            ${[["before", x.before], ["after", x.after]].map(([k, v]) => `
+              <figure class="pr-ba__${k}"><div>${pic(v.img, v.label)}</div><figcaption><strong>${E(v.label)}</strong><small>${E(v.text)}</small></figcaption></figure>`).join("")}
+          </div>
+        </div>`; }
+      if (b.feats) return `<ul class="pr-feats">${b.feats.map(([i, t, x]) => `<li><span>${esc(i)}</span><div><strong>${E(t)}</strong><p>${B(x)}</p></div></li>`).join("")}</ul>`;
+      if (b.table) { const t = b.table; return `
+        <div class="pr-table">
+          <div class="pr-table__head"><span>${E(t.head[0])}</span><span>${E(t.head[1])}</span></div>
+          ${t.rows.map(([n, y]) => `<div><span>${B(n)}</span><span>${B(y)}</span></div>`).join("")}
+        </div>`; }
+      if (b.tiles) return `<div class="pr-tiles">${b.tiles.map(([t, x]) => `<div><strong>${E(t)}</strong><small>${E(x)}</small></div>`).join("")}</div>`;
+      if (b.steps) return `<ol class="pr-steps">${b.steps.map((x, i) => `<li>${x.img ? `<figure>${pic(x.img)}</figure>` : ""}<p><b>0${i + 1}</b> ${E(x.text)}</p></li>`).join("")}</ol>`;
+      if (b.dark) return `<div class="pr-dark"><h3>${E(b.dark.title)}</h3><ul>${b.dark.items.map(([k, v]) => `<li><b>${E(k)}:</b> ${B(v)}</li>`).join("")}</ul></div>`;
+      if (b.box) return `<div class="pr-box"><strong>${E(b.box.title)}</strong><p>${E(b.box.text)}</p></div>`;
+      return "";
+    };
+    $("#story").innerHTML = `<section class="wrap pr-story">${(p.blocks || []).map(block).join("")}</section>`;
+    if (p.warning) $("#story .pr-story").insertAdjacentHTML("beforeend", `<div class="pr-warn"><strong>⚠️ ${T("Important")}</strong><p>${E(p.warning)}</p></div>`);
+    if (p.box) $("#faq").insertAdjacentHTML("afterend", `
+      <section class="wrap pr-end">${block({ box: p.box })}
+        <a href="#order" class="pr-final">${E(p.finalText || "Lo quiero ahora")}</a>
+        ${p.ctaNote ? `<small>${E(p.ctaNote)}</small>` : ""}
+      </section>`);
   } else if (p.layout === "story") {
     // layout: "story" — one long centred column like the big COD landing pages: big uppercase
     // titles, text, full-width photos, ✓ lists, ⚠️ box, what's in the box. Same product fields.
