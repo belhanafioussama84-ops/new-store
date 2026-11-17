@@ -1072,7 +1072,6 @@ const PRODUCTS = [
       eyebrow: "¿Qué hace especial a Creatine for Women?",
       title: ["Apoya la fuerza y el rendimiento físico", "en cada porción"],
       video: "images/crea-tarro.mp4",
-      badge: ["Llévate 2", "$69.99"],
       tag: "Tu mejor versión ♡",
       items: [
         ["⚡", "Creatina monohidratada", "Apoya el rendimiento muscular."],

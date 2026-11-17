@@ -311,7 +311,7 @@
     if (sp) parts.push(`
       <section class="wrap gl-special">
         ${eye(sp.eyebrow)}<h2 class="gl-title gl-title--plain">${E(sp.title[0])} <em class="gl-script">${E(sp.title[1])}</em></h2>
-        <div class="gl-orbit">${vid(sp.video)}<span class="gl-orbit__badge"><small>${E(sp.badge[0])}</small>${E(sp.badge[1])}</span><span class="gl-orbit__tag">${E(sp.tag)}</span></div>
+        <div class="gl-orbit">${vid(sp.video)}${sp.badge ? `<span class="gl-orbit__badge"><small>${E(sp.badge[0])}</small>${E(sp.badge[1])}</span>` : ""}<span class="gl-orbit__tag">${E(sp.tag)}</span></div>
         <div class="gl-feats">${sp.items.map(([i, t, x]) => `<article><span>${esc(i)}</span><strong>${E(t)}</strong><p>${E(x)}</p></article>`).join("")}</div>
         <p class="gl-note gl-note--dark">${E(sp.note)}</p>
       </section>`);
