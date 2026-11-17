@@ -1111,6 +1111,73 @@ const PRODUCTS = [
       { q: "¿Cuánto tomo al día?", a: "1 medida (8 g) al día, todos los días, también los días que no entrenas. Sigue las indicaciones de la etiqueta." },
     ],
   },
+  {
+    id: "destapador-flexible",
+    // El Salvador only: texts in Spanish, prices in US dollars. Reference page: mundotecno.shop
+    // (pinza-garra-flexible-desagote). Their site blocked my downloads (429), so: no photos yet,
+    // hidden from the home page until the user sends them. Length not stated: waiting for the real one.
+    name: "Destapador Flexible",
+    sku: "LD-P-19538", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    home: false, // until the photos are in
+    category: "Home & cleaning",
+    price: 31.99, // user's price; 2 pieces is my suggestion
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "🪠",
+    image: "images/destapador-main.webp",
+    squarePhotos: true,
+    images: ["images/destapador-main.webp"],
+    description: "Una pinza flexible con garras en la punta: entra por el desagüe, agarra el pelo y la suciedad que lo tapan y los saca. Sin químicos y sin llamar al fontanero.",
+    offers: [
+      { qty: 1, price: 31.99 },
+      { qty: 2, price: 54.99, tag: "Best value" },
+    ],
+    layout: "story",
+    timeline: [1, 1, 3],
+    headline: "¡Destapa tu lavamanos, ducha o fregadero en segundos!",
+    subheadline: "Pinza flexible con garras que llega hasta el fondo del tubo y saca el pelo y la suciedad que lo tapan.",
+    inBox: ["1 destapador flexible con pinza de garras"],
+    warning: "No lo uses con químicos destapacaños dentro del tubo. Úsalo con guantes y lávalo con agua y jabón después de cada uso.",
+    problem: {
+      title: "¿El agua ya no baja?",
+      text: "Pelo, jabón y restos de comida se acumulan dentro del tubo. El agua se estanca, huele mal y los químicos no siempre lo resuelven.",
+    },
+    solution: {
+      title: "Sácalo de raíz, sin químicos",
+      text: "El destapador entra por el desagüe, se dobla con las curvas del tubo y sus garras agarran lo que lo tapa para sacarlo afuera.",
+    },
+    benefits: [
+      { icon: "🌀", title: "Flexible", text: "Se dobla y pasa por las curvas del tubo." },
+      { icon: "🦀", title: "Pinza de garras", text: "Aprietas el mango y las garras se abren y se cierran para agarrar." },
+      { icon: "🧪", title: "Sin químicos", text: "Nada de productos que dañan los tubos o tus manos." },
+      { icon: "💵", title: "Ahorra dinero", text: "Lo haces tú mismo, sin pagarle al fontanero." },
+    ],
+    sections: [
+      {
+        title: "Para toda la casa",
+        text: "Lavamanos, ducha, bañera, fregadero de la cocina o lavadero: úsalo donde el agua ya no baja bien.",
+        list: ["Lavamanos y ducha", "Fregadero de la cocina", "Lavadero"],
+      },
+      {
+        title: "Recoge lo que se te cayó",
+        text: "También sirve para recuperar un anillo, un tapón o cualquier objeto pequeño que cayó en un lugar donde la mano no llega.",
+      },
+    ],
+    steps: [
+      { title: "Introdúcelo", text: "Mete la punta en el desagüe y empújalo hasta donde está la suciedad." },
+      { title: "Agarra", text: "Aprieta el mango: las garras se abren y se cierran sobre el pelo y la suciedad." },
+      { title: "Saca y enjuaga", text: "Retíralo, limpia la punta y deja correr el agua." },
+    ],
+    faq: [
+      { q: "¿Sirve para cualquier desagüe?", a: "Sirve para lavamanos, duchas, bañeras, fregaderos y lavaderos de la casa." },
+      { q: "¿Necesito químicos?", a: "No. El destapador saca la suciedad con su pinza, sin ningún producto." },
+      { q: "¿Cómo lo limpio?", a: "Con agua y jabón después de cada uso. Usa guantes si quieres." },
+      { q: "¿Cómo pago?", a: "Pagas en efectivo cuando recibes tu pedido. No necesitas tarjeta." },
+    ],
+  },
 ];
 
 // A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened

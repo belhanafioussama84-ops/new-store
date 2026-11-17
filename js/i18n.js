@@ -839,6 +839,7 @@ const ES = {
   "Fitness": "Deporte",
   "Health & comfort": "Salud y bienestar",
   "Jewelry": "Joyería",
+  "Home & cleaning": "Hogar y limpieza",
 
   // Reward Watch
   "Elegant, durable watch with a premium finish. Perfect for everyday wear or as a gift.":
