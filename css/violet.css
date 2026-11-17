@@ -1,0 +1,28 @@
+/* layout: "violet" — purple and white, like the user's black-seed-oil reference page (js/landing.js).
+   Uses the "pro" blocks (css/pro.css) with other colours. Loaded after pro.css. */
+body.layout-violet {
+  --accent: #5b2a86; --accent-2: #4e2364; --accent-soft: #f5eefb; --pr-ink: #1d1d1f;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+body.layout-violet h1 { text-align: left; font-size: 1.45rem; }
+body.layout-violet .buy__cat { text-align: left; }
+body.layout-violet .buy__price { justify-content: flex-start; }
+body.layout-violet .buy__price strong { color: #1d1d1f; font-size: 1.9rem; }
+body.layout-violet .buy__save { background: #b42318; border-radius: 4px; }
+body.layout-violet .offer.is-active { border-color: var(--accent); background: #fff; }
+body.layout-violet .offer__tag { background: #b42318; border-radius: 4px; }
+body.layout-violet .btn, body.layout-violet .sticky { background: var(--accent); border-color: var(--accent); border-radius: 12px; }
+body.layout-violet #submitBtn { animation: none; }
+body.layout-violet .pr-topchecks { border: 1px solid #ece7f3; background: #faf8fc; }
+body.layout-violet .pr-topchecks span { color: var(--accent); }
+body.layout-violet .pr-band { background: var(--accent-2); }
+body.layout-violet .pr-img img, body.layout-violet .pr-img video { border-radius: 18px; }
+body.layout-violet .pr-feats span { font-size: 1.4rem; color: var(--accent); }
+body.layout-violet .pr-feats strong { font-size: 1.02rem; }
+body.layout-violet .pr-feats p { color: #6b7280; font-size: .95rem; }
+body.layout-violet .pr-btn { border-radius: 12px; background: var(--accent); animation: none; }
+body.layout-violet .pr-final { border-radius: 12px; background: var(--accent); box-shadow: 0 8px 22px rgba(91, 42, 134, .3); }
+body.layout-violet .pr-box { background: var(--accent-soft); }
+body.layout-violet .pr-box strong { color: var(--accent); }
+body.layout-violet .pr-box p { color: #4b5563; }
+body.layout-violet h1, body.layout-violet .pr-lead h2, body.layout-violet .pr-h, body.layout-violet .pr-safe h2, body.layout-violet .faq h2 { font-family: "Poppins", "Inter", sans-serif; font-weight: 700; }

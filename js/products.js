@@ -1236,6 +1236,80 @@ const PRODUCTS = [
       { q: "¿Cuánto cuesta el envío?", a: "El envío es GRATIS a todo El Salvador. Te llega en 1 a 3 días hábiles, según tu departamento." },
     ],
   },
+  {
+    id: "aceite-comino-negro",
+    // El Salvador only: texts in Spanish, prices in US dollars. Page made like the user's reference
+    // (kenku.pe, black seed oil): layout "violet", purple and white (css/violet.css).
+    // Photos: 3 of its 7. Left out: the ones with "reduce la inflamación crónica" and the sick →
+    // healthy before/after pictures. Without its health claims (parasites, fungi, inflammation,
+    // "89% / 87% … clinical studies"), its "+20,000 clientes", its fake 40% discount or its Peru prices.
+    name: "SUPER HUMAN Ethiopian Black Seed Oil Aceite de Comino Negro - 60 Cápsulas",
+    sku: "LD-P-4953470", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    category: "Health & comfort",
+    price: 37.99, // user's price; 2 and 3 frascos are my suggestion
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "🌿",
+    image: "images/comino-main.jpg",
+    images: ["images/comino-main.jpg", "images/comino-campo.webp", "images/comino-mano.webp"],
+    description: "Aceite de semilla negra (comino negro) de Etiopía, en cápsulas fáciles de tomar. 60 cápsulas por frasco: 2 al día, para 30 días.",
+    offers: [
+      { qty: 1, price: 37.99, label: "1 frasco · 30 días" },
+      { qty: 2, price: 64.99, label: "2 frascos · 60 días", tag: "Best value" },
+      { qty: 3, price: 89.99, label: "3 frascos · 90 días", tag: "¡Mejor oferta!" },
+    ],
+    layout: "violet",
+    timeline: [1, 1, 3],
+    topChecks: [
+      ["✓", "Aceite de semilla negra etíope"],
+      ["✓", "60 cápsulas · 30 días"],
+      ["✓", "2 cápsulas al día"],
+      ["🚚", "Envío gratis"],
+      ["💵", "Pagas al recibir"],
+      ["🔒", "Compra segura"],
+    ],
+    ctaText: "Comprar ahora · Pago al recibir",
+    ctaNote: "🚚 Envío gratis a todo El Salvador",
+    finalText: "Comprar ahora",
+    blocks: [
+      { band: ["SUPER HUMAN – Ethiopian Black Seed Oil", "Aceite de comino negro", "60 cápsulas"] },
+      { lead: { h: "Un clásico de la tradición, en cápsulas", p: "El aceite de semilla negra (Nigella sativa), también llamado comino negro, se usa desde hace siglos en la cocina y en la tradición de Medio Oriente, África y Asia." } },
+      { img: "images/comino-campo.webp", alt: "Frasco de aceite de semilla negra etíope" },
+      { lead: { h: "¡El producto que buscabas!", p: "Aceite de semilla negra de Etiopía en cápsulas: todo lo bueno de la semilla, **sin el sabor fuerte del aceite**." } },
+      { feats: [
+        ["🌱", "Semilla negra etíope", "Aceite de semillas de Nigella sativa cultivadas en Etiopía."],
+        ["💊", "En cápsulas", "Sin sabor y sin manchar: más práctico que el aceite en botella."],
+        ["🌙", "Fácil de incorporar", "Solo 2 cápsulas al día, con un vaso de agua."],
+        ["📦", "30 días por frasco", "Cada frasco trae 60 cápsulas."],
+      ] },
+      { band: ["Calidad premium", "SUPER HUMAN – Ethiopian Black Seed Oil", "Aceite de comino negro"] },
+      { lead: { h: "Agrégalo a tu rutina", p: "Tómalo todos los días a la misma hora, por ejemplo antes de dormir: así no se te olvida." } },
+      { img: "images/comino-mano.webp", alt: "Cápsulas de aceite de semilla negra" },
+      { pills: ["60 cápsulas por frasco", "2 cápsulas al día", "Suplemento alimenticio"] },
+      { lead: { h: "¿Por qué en cápsulas?", p: "El aceite de semilla negra tiene un sabor muy fuerte. En cápsulas lo tomas en segundos, sin medir cucharadas y sin sabor." } },
+      { checks: ["Sin sabor y sin olor", "La misma cantidad cada día", "Fácil de llevar en tu bolso o de viaje"] },
+      { cta: true },
+      { safe: { eyebrow: "Compra sin riesgo", title: "Pagas cuando lo recibes", items: [
+        ["💵", "Pagas al recibir", "Pagas en efectivo cuando recibes tu pedido. Sin adelantos."],
+        ["🚚", "Envío gratis", "A todo El Salvador, en 1 a 3 días hábiles."],
+        ["📞", "Te llamamos", "Antes de enviarlo te llamamos para confirmar tu pedido y tu dirección."],
+        ["🔄", "Cambio sin costo", "Si llega dañado o no es el que pediste, te lo cambiamos."],
+      ] } },
+    ],
+    warning: "Suplemento alimenticio, no es un medicamento. No lo uses si estás embarazada o amamantando. Si tomas medicamentos (por ejemplo para la presión, el azúcar o la sangre) o tienes una enfermedad, consulta a tu médico antes de usarlo. No exceder la porción recomendada. Mantener fuera del alcance de los niños.",
+    // Real reviews from the user's own customers only: { name, place, text, stars, image }.
+    customerReviews: [],
+    faq: [
+      { q: "¿Cómo se toma?", a: "2 cápsulas al día con un vaso de agua, por ejemplo antes de dormir. Sigue las indicaciones de la etiqueta." },
+      { q: "¿Cuánto dura un frasco?", a: "Cada frasco trae 60 cápsulas: tomando 2 al día, te dura 30 días." },
+      { q: "¿Tiene sabor?", a: "No. Al venir en cápsulas no sientes el sabor fuerte del aceite." },
+      { q: "¿Cómo pago?", a: "Pagas en efectivo cuando recibes tu pedido. No necesitas tarjeta." },
+      { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
+    ],
+  },
 ];
 
 // A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened
