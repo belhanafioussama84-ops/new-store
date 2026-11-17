@@ -1240,9 +1240,9 @@ const PRODUCTS = [
     id: "aceite-comino-negro",
     // El Salvador only: texts in Spanish, prices in US dollars. Page made like the user's reference
     // (kenku.pe, black seed oil): layout "violet", purple and white (css/violet.css).
-    // Photos: 3 of its 7. Left out: the ones with "reduce la inflamación crónica" and the sick →
-    // healthy before/after pictures. Without its health claims (parasites, fungi, inflammation,
-    // "89% / 87% … clinical studies"), its "+20,000 clientes", its fake 40% discount or its Peru prices.
+    // All its 7 photos (user's choice, 17 Nov 2026). Without its disease claims (parasites, fungi,
+    // chronic inflammation), its "89% / 87% … clinical studies", its "+20,000 clientes", its fake 40%
+    // discount or its Peru prices.
     name: "SUPER HUMAN Ethiopian Black Seed Oil Aceite de Comino Negro - 60 Cápsulas",
     sku: "LD-P-4953470", // LatinDrop SKU (El Salvador tab of the sheet)
     countries: ["sv"],
@@ -1254,7 +1254,7 @@ const PRODUCTS = [
     badge: "New",
     icon: "🌿",
     image: "images/comino-main.jpg",
-    images: ["images/comino-main.jpg", "images/comino-campo.webp", "images/comino-mano.webp"],
+    images: ["images/comino-main.jpg", "images/comino-campo.webp", "images/comino-especias.webp", "images/comino-mano.webp", "images/comino-como-usar.webp"],
     description: "Aceite de semilla negra (comino negro) de Etiopía, en cápsulas fáciles de tomar. 60 cápsulas por frasco: 2 al día, para 30 días.",
     offers: [
       { qty: 1, price: 37.99, label: "1 frasco · 30 días" },
@@ -1275,22 +1275,38 @@ const PRODUCTS = [
     ctaNote: "🚚 Envío gratis a todo El Salvador",
     finalText: "Comprar ahora",
     blocks: [
-      { band: ["SUPER HUMAN – Ethiopian Black Seed Oil", "Aceite de comino negro", "60 cápsulas"] },
-      { lead: { h: "Un clásico de la tradición, en cápsulas", p: "El aceite de semilla negra (Nigella sativa), también llamado comino negro, se usa desde hace siglos en la cocina y en la tradición de Medio Oriente, África y Asia." } },
+      // Same order as the reference page. Health texts written as "supports" (no cure / disease claims);
+      // left out: parasites, fungi, chronic inflammation, "9 times stronger" and the clinical percentages.
+      { band: ["SUPER HUMAN – Ethiopian Black Seed Oil", "Renueva tu rutina desde adentro", "Potencia natural"] },
+      { lead: { h: "Más energía, más equilibrio", p: "Un suplemento de aceite de semilla negra etíope para acompañar **tu energía, tu digestión y tus defensas**, como parte de una rutina saludable." } },
       { img: "images/comino-campo.webp", alt: "Frasco de aceite de semilla negra etíope" },
-      { lead: { h: "¡El producto que buscabas!", p: "Aceite de semilla negra de Etiopía en cápsulas: todo lo bueno de la semilla, **sin el sabor fuerte del aceite**." } },
+      { lead: { h: "¡El producto que buscabas!", p: "Solo aceite de semilla negra etíope, cultivada a 8,000 pies de altura, con **hasta 4.64% de timoquinona** según el fabricante." } },
       { feats: [
-        ["🌱", "Semilla negra etíope", "Aceite de semillas de Nigella sativa cultivadas en Etiopía."],
-        ["💊", "En cápsulas", "Sin sabor y sin manchar: más práctico que el aceite en botella."],
-        ["🌙", "Fácil de incorporar", "Solo 2 cápsulas al día, con un vaso de agua."],
-        ["📦", "30 días por frasco", "Cada frasco trae 60 cápsulas."],
+        ["🎯", "Alta potencia:", "Semilla negra de las tierras altas de Etiopía, con alta concentración de timoquinona."],
+        ["💊", "Un solo ingrediente:", "100% aceite de semilla negra, sin rellenos ni aditivos, en cápsulas: se conserva mejor y tomas siempre la misma cantidad."],
       ] },
-      { band: ["Calidad premium", "SUPER HUMAN – Ethiopian Black Seed Oil", "Aceite de comino negro"] },
-      { lead: { h: "Agrégalo a tu rutina", p: "Tómalo todos los días a la misma hora, por ejemplo antes de dormir: así no se te olvida." } },
+      { img: "images/comino-especias.webp", alt: "Aceite de semilla negra etíope y especias" },
+      { feats: [
+        ["🌙", "Fácil de incorporar:", "Solo 2 cápsulas antes de dormir."],
+        ["🌿", "Apoyo integral:", "Acompaña tu energía, tu digestión y tus defensas."],
+      ] },
+      { band: ["Calidad premium", "SUPER HUMAN – Ethiopian Black Seed Oil", "Renueva tu rutina desde adentro"] },
+      { lead: { h: "Energía, defensas y equilibrio natural", p: "Desde hace más de 3,000 años, el aceite de semilla negra se usa para cuidar la salud en general. La semilla etíope crece en clima extremo y suelo volcánico." } },
       { img: "images/comino-mano.webp", alt: "Cápsulas de aceite de semilla negra" },
-      { pills: ["60 cápsulas por frasco", "2 cápsulas al día", "Suplemento alimenticio"] },
-      { lead: { h: "¿Por qué en cápsulas?", p: "El aceite de semilla negra tiene un sabor muy fuerte. En cápsulas lo tomas en segundos, sin medir cucharadas y sin sabor." } },
-      { checks: ["Sin sabor y sin olor", "La misma cantidad cada día", "Fácil de llevar en tu bolso o de viaje"] },
+      { pills: ["Hasta 4.64% de timoquinona", "Cultivado a 8,000 pies de altura", "Sin rellenos ni aditivos"] },
+      { feats: [
+        ["⚡", "Energía:", "Apoya tu energía del día a día."],
+        ["⚖️", "Equilibrio natural:", "Acompaña el equilibrio natural de tu cuerpo."],
+        ["🛡️", "Digestión y defensas:", "Apoya tu digestión y las defensas de tu cuerpo."],
+      ] },
+      { lead: { h: "¿Por qué elegir SUPER HUMAN Ethiopian Black Seed Oil?", p: "No todos los aceites de semilla negra son iguales. Según el fabricante, la mayoría tiene entre 0.7% y 1.2% de timoquinona, y SUPER HUMAN hasta 4.64%, gracias a la altura, el suelo volcánico y el clima de las tierras altas de Etiopía." } },
+      { img: "images/comino-antes-despues.webp" },
+      { img: "images/comino-antes-despues-2.webp" },
+      { lead: { h: "¿Qué contiene?", p: "La timoquinona es el compuesto principal de la semilla negra. El aceite trae también antioxidantes y ácidos grasos omega 3, 6 y 9." } },
+      { checks: ["Apoya tus defensas", "Apoya tu digestión", "Acompaña tu energía del día a día"] },
+      { img: "images/comino-como-usar.webp", alt: "Cómo usar: 2 cápsulas con agua" },
+      { lead: { h: "SUPER HUMAN – Potencia natural en su máxima expresión", p: "¿Listo para cuidarte desde adentro? Agrégalo a tu rutina de la noche:" } },
+      { checks: ["💪 Para acompañar tu energía", "🛡️ Para apoyar tus defensas", "🌿 Para apoyar tu digestión", "🌙 2 cápsulas antes de dormir, todos los días"] },
       { cta: true },
       { safe: { eyebrow: "Compra sin riesgo", title: "Pagas cuando lo recibes", items: [
         ["💵", "Pagas al recibir", "Pagas en efectivo cuando recibes tu pedido. Sin adelantos."],
