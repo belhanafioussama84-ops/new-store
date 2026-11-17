@@ -1218,7 +1218,15 @@ const PRODUCTS = [
       ] } },
       { img: "images/garra-completo.jpg" },
       { img: "images/garra-garras.webp", alt: "Las 4 garras de acero" },
+      // Photos of the claw in use (from the reference page's review photos, without names or texts;
+      // the one with a branded glove left out)
+      { h: "Así se ve en casa" },
+      { gallery: ["images/garra-casa-banera.jpg", "images/garra-casa-rejilla.jpg", "images/garra-casa-suciedad.jpg", "images/garra-casa-alfombra.jpg", "images/garra-casa-mesa.jpg", "images/garra-casa-producto.jpg"] },
+      { cta: true },
     ],
+    // Real reviews from the user's own customers only: { name, place, text, stars, image }.
+    // Empty = the block doesn't show.
+    customerReviews: [],
     box: { title: "Estamos para ayudarte", text: "Si te llega algo mal o no entiendes cómo usarla, te ayudamos a resolverlo. Antes de enviarte el pedido te llamamos para confirmarlo." },
     faq: [
       { q: "¿Sirve para mi desagüe?", a: "Sí, siempre que la rejilla se pueda quitar o tenga una ranura por donde pase el cable. La punta es delgada (poco más de 1 cm): entra en desagües de ducha, lavamanos, fregaderos y rejillas del patio." },

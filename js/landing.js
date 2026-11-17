@@ -436,9 +436,22 @@
       if (b.steps) return `<ol class="pr-steps">${b.steps.map((x, i) => `<li>${x.img ? `<figure>${pic(x.img)}</figure>` : ""}<p><b>0${i + 1}</b> ${E(x.text)}</p></li>`).join("")}</ol>`;
       if (b.dark) return `<div class="pr-dark"><h3>${E(b.dark.title)}</h3><ul>${b.dark.items.map(([k, v]) => `<li><b>${E(k)}:</b> ${B(v)}</li>`).join("")}</ul></div>`;
       if (b.box) return `<div class="pr-box"><strong>${E(b.box.title)}</strong><p>${E(b.box.text)}</p></div>`;
+      if (b.gallery) return `<div class="pr-gallery">${b.gallery.map((src) => `<figure>${pic(src)}</figure>`).join("")}</div>`;
       return "";
     };
-    $("#story").innerHTML = `<section class="wrap pr-story">${(p.blocks || []).map(block).join("")}</section>`;
+    // Real customer reviews only (customerReviews in products.js: name, place, text, stars, image).
+    // None yet = no block.
+    const reviews = p.customerReviews?.length ? `
+      <h2 class="pr-h">${E("Opiniones de nuestros clientes")}</h2>
+      <div class="pr-reviews">${p.customerReviews.map((x) => `
+        <article>
+          ${x.image ? `<img src="${esc(x.image)}" alt="" loading="lazy" onerror="this.remove()" />` : ""}
+          <span class="pr-stars" aria-label="${x.stars || 5}/5">${"★".repeat(x.stars || 5)}${"☆".repeat(5 - (x.stars || 5))}</span>
+          ${x.text ? `<p>“${E(x.text)}”</p>` : ""}
+          <strong>${E(x.name)}${x.place ? ` · <small>${E(x.place)}</small>` : ""}</strong>
+        </article>`).join("")}
+      </div>` : "";
+    $("#story").innerHTML = `<section class="wrap pr-story">${(p.blocks || []).map(block).join("")}${reviews}</section>`;
     if (p.warning) $("#story .pr-story").insertAdjacentHTML("beforeend", `<div class="pr-warn"><strong>⚠️ ${T("Important")}</strong><p>${E(p.warning)}</p></div>`);
     if (p.box) $("#faq").insertAdjacentHTML("afterend", `
       <section class="wrap pr-end">${block({ box: p.box })}

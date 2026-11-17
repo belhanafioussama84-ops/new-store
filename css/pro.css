@@ -119,3 +119,17 @@ body.layout-pro .faq h2 { font-size: 1.45rem; font-weight: 800; text-align: left
 /* Sticky order button: green pill */
 body.layout-pro .sticky { background: var(--accent); border-color: var(--accent); border-radius: 999px; }
 @media (prefers-reduced-motion: reduce) { .pr-btn, body.layout-pro #submitBtn { animation: none; } }
+
+/* Photos of the claw at home: 2 per row */
+.pr-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1rem 0 1.5rem; }
+.pr-gallery figure { overflow: hidden; margin: 0; border-radius: 14px; aspect-ratio: 3 / 4; background: #f5f7fb; }
+.pr-gallery img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Real customer reviews (customerReviews in products.js) */
+.pr-reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 0 0 1.5rem; }
+.pr-reviews article { padding: 14px 16px; border: 1px solid var(--pr-line); border-radius: 14px; background: #fff; }
+.pr-reviews img { display: block; width: 100%; margin-bottom: 10px; border-radius: 10px; }
+.pr-stars { color: #f5b50a; letter-spacing: 2px; }
+.pr-reviews p { margin: .4rem 0; color: #000; font-size: .95rem; }
+.pr-reviews strong { font-size: .9rem; }
+.pr-reviews small { color: #6b7a94; font-weight: 500; }
