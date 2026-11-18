@@ -1332,7 +1332,7 @@ const PRODUCTS = [
     sku: "LD-P-5100244", // LatinDrop SKU (El Salvador tab of the sheet)
     countries: ["sv"],
     category: "Home & cleaning",
-    price: 39.99, // user's price; 2 and 3 pieces are my suggestion
+    price: 39.99, // user's price; 2 pieces is my suggestion (no 3: user, 18 Nov 2026)
     oldPrice: null,
     rating: 4.8,
     reviews: 0,
@@ -1345,7 +1345,6 @@ const PRODUCTS = [
     offers: [
       { qty: 1, price: 39.99, label: "1 esquinero" },
       { qty: 2, price: 69.99, label: "2 esquineros · Para 2 baños", tag: "Best value" },
-      { qty: 3, price: 94.99, label: "3 esquineros" },
     ],
     layout: "story",
     timeline: [1, 1, 3],
