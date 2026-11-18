@@ -1322,6 +1322,109 @@ const PRODUCTS = [
       { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
     ],
   },
+  {
+    id: "esquinero-bano",
+    // El Salvador only: texts in Spanish, prices in US dollars. Page like the user's reference
+    // (cuelhome.com/products/esquinero-de-bano-ajustable-multifuncional), model = baston-plegable
+    // (layout "story"). Its photos and its GIF (as MP4), without its Peru-only images (shipping
+    // agencies, Yape/Plin payments), its "garantía de 1 año" badges or its "pocas unidades" GIF.
+    name: "Esquinero de Baño Ajustable Multifuncional",
+    sku: "LD-P-5100244", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    category: "Home & cleaning",
+    price: 39.99, // user's price; 2 and 3 pieces are my suggestion
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "🚿",
+    image: "images/esquinero-main.webp",
+    squarePhotos: true,
+    images: ["images/esquinero-main.webp", "images/esquinero-medidas.webp", "images/esquinero-partes.webp", "images/esquinero-ducha.webp"],
+    description: "Un organizador de esquina para la ducha con 4 bandejas. Se instala a presión entre el piso y el techo, sin perforar la pared, y se ajusta a la altura de tu baño.",
+    offers: [
+      { qty: 1, price: 39.99, label: "1 esquinero" },
+      { qty: 2, price: 69.99, label: "2 esquineros · Para 2 baños", tag: "Best value" },
+      { qty: 3, price: 94.99, label: "3 esquineros" },
+    ],
+    layout: "story",
+    timeline: [1, 1, 3],
+    headline: "¡Tu baño ordenado en minutos, sin perforar la pared!",
+    subheadline: "Esquinero de acero inoxidable con 4 bandejas: shampoos, cremas, jabones y toallas en su lugar.",
+    inBox: ["Poste ajustable de acero inoxidable", "4 bandejas organizadoras", "Toallero", "Bases de silicona antideslizante"],
+    problem: {
+      title: "¿Tu baño se ve desordenado aunque limpies todos los días?",
+      text: "Botes en el piso, jabones en la orilla de la ducha y nada en su lugar: el baño se ve pequeño y la humedad lo ensucia todo.",
+    },
+    solution: {
+      title: "Cada cosa en su lugar, desde el primer día",
+      text: "Shampoos, cremas, jabones, cepillos y accesorios quedan ordenados, a la mano y lejos de la humedad del piso. Tu baño se ve más limpio, más amplio y más elegante.",
+    },
+    benefits: [
+      { icon: "🔩", title: "Sin perforaciones", text: "Se instala a presión entre el piso y el techo. No maltrata tus paredes." },
+      { icon: "↕️", title: "Altura ajustable", text: "El poste se alarga hasta unos 3.20 metros para adaptarse a tu baño." },
+      { icon: "🧴", title: "4 niveles", text: "4 bandejas para todo lo que usas en la ducha, más un toallero." },
+      { icon: "💧", title: "Resiste la humedad", text: "Acero inoxidable y bandejas de ABS, hechos para el agua del baño." },
+    ],
+    sections: [
+      {
+        image: "images/esquinero-antes-despues.webp",
+        title: "¿Qué cambia cuando lo instalas?",
+        text: "Del desorden en el piso a un baño ordenado: cada producto tiene su lugar, a la altura de tu mano.",
+      },
+      {
+        image: "images/esquinero-instalar.mp4",
+        title: "Se instala en minutos",
+        text: "Pon el poste en la esquina, ajusta la altura hasta que toque el techo y gira para apretar. Luego coloca las bandejas donde las quieras.",
+      },
+      {
+        image: "images/esquinero-partes.webp",
+        title: "Firme, sin moverse",
+        text: "Su sistema de presión ajustable, el resorte reforzado y las bases de silicona antideslizante mantienen toda la estructura firme y estable en el uso diario.",
+        list: ["Silicona antideslizante arriba y abajo", "Resorte fuerte y flexible", "Altura del poste ajustable", "Base con toallero"],
+      },
+      {
+        image: "images/esquinero-beneficios.webp",
+        title: "Aprovecha cada rincón",
+        text: "Su diseño vertical usa esa esquina que normalmente está vacía y la convierte en espacio útil, sin ocupar más lugar en el piso.",
+      },
+      {
+        image: "images/esquinero-medidas.webp",
+        title: "Se adapta a tu baño",
+        text: "El poste se alarga hasta unos 3.20 metros: queda bien en baños de casa, apartamentos y espacios pequeños.",
+      },
+      {
+        image: "images/esquinero-ducha.webp",
+        title: "Ideal para baños pequeños, modernos y funcionales",
+        text: "Si te gusta que tu casa se vea limpia y ordenada, es de esos productos que después piensas: \"¿Cómo no lo compré antes?\"",
+      },
+      {
+        image: "images/esquinero-proceso.webp",
+        title: "Así de fácil es pedirlo",
+        text: "Haces tu pedido aquí, te llamamos para confirmarlo y te lo llevamos a tu puerta. Pagas en efectivo cuando lo recibes.",
+      },
+    ],
+    steps: [
+      { title: "Colócalo en la esquina", text: "Pon la base de silicona en el piso de la esquina de tu ducha." },
+      { title: "Ajusta la altura", text: "Alarga el poste hasta que toque el techo y gíralo para que quede firme." },
+      { title: "Acomoda las bandejas", text: "Pon las 4 bandejas a la altura que quieras y llénalas con tus cosas." },
+    ],
+    // Specs: from the reference page's text and photos
+    specs: {
+      "Material": "Acero inoxidable + bandejas de ABS",
+      "Altura": "Ajustable, hasta 3.20 metros aprox.",
+      "Niveles": "4 bandejas organizadoras",
+      "Extras": "Toallero en la base",
+      "Instalación": "A presión, sin perforaciones",
+    },
+    faq: [
+      { q: "¿Tengo que perforar la pared?", a: "No. Se instala a presión entre el piso y el techo, sin tornillos ni taladro." },
+      { q: "¿Sirve para la altura de mi baño?", a: "El poste es ajustable y se alarga hasta unos 3.20 metros. Mide la altura de tu baño, del piso al techo, antes de instalarlo." },
+      { q: "¿Se oxida con el agua?", a: "Está hecho de acero inoxidable con bandejas de ABS, materiales pensados para la humedad del baño." },
+      { q: "¿Cómo pago?", a: "Pagas en efectivo cuando recibes tu pedido. No necesitas tarjeta." },
+      { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
+    ],
+  },
 ];
 
 // A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened
