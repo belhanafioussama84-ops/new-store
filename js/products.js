@@ -1424,6 +1424,104 @@ const PRODUCTS = [
       { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
     ],
   },
+  {
+    id: "aspiradora-recargable",
+    // El Salvador only: texts in Spanish, prices in US dollars. Page like the user's reference
+    // (cuelhome.com/products/aspiradora-inalambrica-4-en-1), model = baston-plegable (layout "story").
+    // Its photos and its GIF (as MP4). The user sells it as "2 en 1" (floor + hand): the reference's
+    // "4 en 1" title is cropped off the uses photo and no text says 4 en 1 / 4 modos. Without its Peru
+    // shipping/payment images, its warranty badges or its "pocas unidades" GIF.
+    name: "Aspiradora Recargable 2 En 1",
+    sku: "LD-P-5170622", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    category: "Home & cleaning",
+    price: 47.99, // user's price; the 2-piece price is my suggestion (user: 2 offers only)
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "🌪️",
+    image: "images/aspiradora-main.webp",
+    squarePhotos: true,
+    images: ["images/aspiradora-main.webp", "images/aspiradora-2en1.webp", "images/aspiradora-sala.webp", "images/aspiradora-accesorios.webp"],
+    description: "Una aspiradora inalámbrica y recargable 2 en 1: úsala como aspiradora vertical para el piso o quita el tubo y úsala de mano en sofás, esquinas y el carro.",
+    offers: [
+      { qty: 1, price: 47.99, label: "1 aspiradora" },
+      { qty: 2, price: 84.99, label: "2 aspiradoras · Casa y carro", tag: "Best value" },
+    ],
+    layout: "story",
+    timeline: [1, 1, 3],
+    headline: "¡Limpieza en cada rincón, sin cables!",
+    subheadline: "Aspiradora recargable 2 en 1: vertical para el piso y de mano para muebles, esquinas y el carro.",
+    inBox: ["Aspiradora de mano", "Tubo largo", "Cepillo para piso", "Boquillas y cepillos para rincones y tapicería", "Cable de carga USB tipo C"],
+    problem: {
+      title: "¿Sacar la aspiradora es todo un problema?",
+      text: "Aspiradoras pesadas, cables que no llegan y un enchufe en cada cuarto: por unas migajas en la mesa o pelos en el sofá, terminas dejándolo para después.",
+    },
+    solution: {
+      title: "Una aspiradora ligera, siempre lista",
+      text: "Sin cable y recargable: la tomas, limpias y la guardas. Para el piso, con el tubo largo, o de mano, para los muebles, las esquinas o el interior del carro.",
+    },
+    benefits: [
+      { icon: "🔋", title: "Sin cables", text: "Recargable con cable USB tipo C. Limpia donde quieras, sin buscar enchufe." },
+      { icon: "🔄", title: "2 en 1", text: "Vertical para el piso o de mano para muebles y el carro." },
+      { icon: "🌪️", title: "Buena succión", text: "Motor de 120W para migajas, polvo, tierra y pelos." },
+      { icon: "🪶", title: "Ligera", text: "Fácil de llevar por toda la casa y por las escaleras." },
+    ],
+    sections: [
+      {
+        image: "images/aspiradora-antes-despues.webp",
+        title: "¿Cómo cambia tu limpieza diaria?",
+        text: "Una aspiradora ligera y lista en segundos: limpiar deja de ser una tarea pesada y la casa se mantiene limpia todos los días.",
+      },
+      {
+        image: "images/aspiradora-uso.mp4",
+        title: "Del piso a la cama, en segundos",
+        text: "Con el tubo largo limpias el piso sin agacharte. Quítalo y tienes una aspiradora de mano para la cama, los muebles o los estantes.",
+      },
+      {
+        image: "images/aspiradora-usos.webp",
+        title: "Fácil de usar",
+        text: "Se arma en segundos y sin herramientas. Sus boquillas se cambian fácil para llegar a los rincones más estrechos.",
+        list: ["Fácil armado", "Piso, rincones, tapicería y carro", "Diseño ligero y cómodo"],
+      },
+      {
+        image: "images/aspiradora-accesorios.webp",
+        title: "Accesorios para cada lugar",
+        text: "Cepillo para el piso, boquilla larga para esquinas y cepillos para sofás, alfombras y asientos del carro.",
+      },
+      {
+        image: "images/aspiradora-sala.webp",
+        title: "Ideal para un hogar más limpio",
+        text: "Migajas en la mesa, tierra en la entrada o pelos de tu mascota en la alfombra: lo limpias en segundos, sin sacar aparatos gigantes.",
+      },
+      {
+        image: "images/aspiradora-medidas.webp",
+        title: "Ligera y fácil de guardar",
+        text: "Mide unos 105 cm de alto con el tubo puesto. La guardas en cualquier rincón, sin ocupar espacio.",
+      },
+    ],
+    steps: [
+      { title: "Cárgala", text: "Conecta el cable USB tipo C hasta que esté cargada." },
+      { title: "Elige el modo", text: "Pon el tubo y el cepillo para el piso, o úsala de mano con la boquilla que necesites." },
+      { title: "Vacía el depósito", text: "Al terminar, abre el depósito transparente y bótalo en la basura." },
+    ],
+    // Specs: from the reference page's text and photos
+    specs: {
+      "Potencia": "120W",
+      "Uso": "2 en 1: vertical para piso y de mano",
+      "Carga": "Recargable, USB tipo C",
+      "Accesorios": "Cepillo para piso, boquillas y cepillos",
+      "Medidas": "Aprox. 105.5 cm de alto, cepillo de 21 cm",
+    },
+    faq: [
+      { q: "¿Necesita cable para funcionar?", a: "No. Es recargable: la cargas con el cable USB tipo C y la usas sin cable por toda la casa." },
+      { q: "¿Sirve para el carro?", a: "Sí. Quítale el tubo y úsala de mano con las boquillas para los asientos y los rincones del carro." },
+      { q: "¿Sirve para pelos de mascota?", a: "Sí, en sofás, camas y alfombras, con el cepillo para tapicería." },
+      { q: "¿Cómo pago?", a: "Pagas en efectivo cuando recibes tu pedido. No necesitas tarjeta." },
+      { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
+    ],
+  },
 ];
 
 // A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened
