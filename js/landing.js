@@ -664,11 +664,11 @@
   }
 
   // Region and landmark fields: only in the countries that have them (El Salvador).
-  // The customer types the departamento and the city/municipio (no lists to pick from: user's choice).
-  if (COUNTRY.regions && p.darkForm && COUNTRY.municipios) {
-    // darkForm pages: the departamento from a list, then the city/municipio from that departamento's list
+  // Every page (user, 18 Nov 2026): the departamento from a list of the 14, then the city/municipio
+  // from that departamento's list (COUNTRY.municipios in js/products.js).
+  if (COUNTRY.regions && COUNTRY.municipios) {
     Shop.fillRegions($("#region"));
-    $("#region").options[0].textContent = T("Region");
+    if (p.darkForm) $("#region").options[0].textContent = T("Region");
     const sel = document.createElement("select");
     sel.id = "city"; sel.name = "city"; sel.required = true;
     $("#city").replaceWith(sel);
