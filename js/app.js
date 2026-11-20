@@ -53,11 +53,9 @@
 
   /* ---------- El Salvador home, like the user's reference (cuelhome.com):
      a slider with one banner per product, categories, and shop cards with "Ver oferta".
-     Only real prices: "Desde $X" and the real 2-piece offer, no made-up discounts. ---------- */
+     No discounts at all (user, 20 Nov 2026): only the price. ---------- */
   function svHome(items) {
     const short2 = (s, n) => (s.length > n ? `${s.slice(0, n).replace(/\s+\S*$/, "")}…` : s);
-    const pack = (p) => (p.offers || []).find((o) => o.qty === 2);
-    const save = (p) => { const o = pack(p); return o ? +(p.price * 2 - o.price).toFixed(2) : 0; };
 
     // Slider: one banner per product
     $("#svTrack").innerHTML = items.map((p, i) => `
@@ -66,7 +64,7 @@
           <p class="svh__kicker">${esc(T(p.category || ""))}</p>
           <h2>${esc(p.name)}</h2>
           <p class="svh__text">${esc(short2(p.claim || T(p.description || ""), 120))}</p>
-          <p class="svh__price"><strong>${fmt(p.price)}</strong>${save(p) ? `<span>Lleva 2 y ahorra ${fmt(save(p))}</span>` : ""}</p>
+          <p class="svh__price"><strong>${fmt(p.price)}</strong><span>Envío gratis</span></p>
           <span class="svh__btn">Lo quiero →</span>
         </div>
         <div class="svh__img"><img src="${esc(p.image)}" alt="" ${i ? `loading="lazy"` : `fetchpriority="high"`} /></div>
@@ -103,7 +101,7 @@
     $("#shop .label").textContent = "Lo más pedido";
     $("#shop .h-title").innerHTML = "Nuestros productos";
     $("#shop .h-title").insertAdjacentHTML("afterend",
-      `<p class="svh__sub">Envío gratis y pagas al recibir. Packs de 2 y 3 unidades para ahorrar todavía más.</p>`);
+      `<p class="svh__sub">Envío gratis a todo El Salvador y pagas al recibir.</p>`);
 
     // Shop cards
     const grid = $("#productGrid");
@@ -111,13 +109,13 @@
     const card = (p) => `
       <a class="svc" href="${esc(productUrl(p))}" data-cat="${esc(p.category || "")}">
         <div class="svc__photo">
-          ${save(p) ? `<span class="svc__tag">2x ahorra ${fmt(save(p))}</span>` : p.badge ? `<span class="svc__tag svc__tag--new">${esc(T(p.badge))}</span>` : ""}
+          ${p.badge ? `<span class="svc__tag svc__tag--new">${esc(T(p.badge))}</span>` : ""}
           ${photo(p)}
         </div>
         <div class="svc__body">
           <h3>${esc(p.name)}</h3>
           <p class="svc__price"><strong>${fmt(p.price)}</strong></p>
-          ${pack(p) ? `<p class="svc__pack">2 por ${fmt(pack(p).price)}</p>` : `<p class="svc__pack">Envío gratis</p>`}
+          <p class="svc__pack">🚚 Envío gratis · Pagas al recibir</p>
           <span class="svc__btn">Ver oferta</span>
         </div>
       </a>`;
