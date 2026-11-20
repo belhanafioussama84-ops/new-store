@@ -82,6 +82,8 @@ const COUNTRIES = {
     splitAddress: true,
     // No phone number shown (footer, thank-you page): the Moroccan number is no use here
     noPhone: true,
+    // No WhatsApp button or link anywhere (user, 20 Nov 2026)
+    noWhatsApp: true,
     // Thank-you page: "add one more" button (next offer price), added to the same order
     // in the sheet (upsell_ in google-sheet/orders.gs). Off for now (user, 13 Nov 2026): to turn it
     // on, deploy the new orders.gs in Apps Script first, then put true here.
