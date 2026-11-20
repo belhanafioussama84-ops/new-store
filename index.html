@@ -273,61 +273,35 @@
             </ul>
           </div>
 
-          <!-- Same map for El Salvador (x = (lon + 90.15) × 165 + 10, y = (14.5 − lat) × 165 + 60), routes from San Salvador -->
-          <div class="tzm tzm--sv" data-country="sv">
-            <div class="tzm__head">
-              <strong>Welcome! <svg class="tz-flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#0047ab" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 16h72v16H0z"/><circle cx="36" cy="24" r="5.5" fill="none" stroke="#c9a227" stroke-width="1.8"/><path fill="#2e7d32" d="M33 27l3-6 3 6z"/></svg></strong>
-              <span>We deliver across El Salvador</span>
-            </div>
-            <svg class="tzm__map" viewBox="-6 -4 420 362" role="img" aria-label="Mapa de entregas en El Salvador: San Salvador hoy o mañana; Santa Ana, San Miguel, Sonsonate y La Libertad 1–2 días; Chalatenango, Usulután y La Unión 2–3 días">
-              <text class="tzm__sea" x="120" y="318">PACIFIC OCEAN</text>
-              <path class="tzm__land" d="M18 187 L43 159 L68 134 L92 110 L109 93 L117 73 L142 72 L167 80 L191 88 L224 110 L249 126 L282 134 L315 151 L348 146 L381 159 L406 167 L398 233 L389 266 L365 279 L315 279 L266 271 L224 261 L183 241 L150 228 L109 225 L68 220 Z" />
-
-              <path id="s1" class="tzm__route" d="M168 194 Q130 160 107 144" />
-              <path id="s2" class="tzm__route" d="M168 194 Q120 200 81 189" />
-              <path id="s3" class="tzm__route" d="M168 194 Q195 165 210 136" />
-              <path id="s4" class="tzm__route" d="M168 194 Q260 190 335 228" />
-              <path id="s5" class="tzm__route" d="M168 194 Q235 230 292 250" />
-              <path id="s6" class="tzm__route" d="M168 194 Q290 170 391 251" />
-              <path id="s7" class="tzm__route" d="M168 194 Q160 215 147 227" />
-
-              <g class="tzm__dots">
-                <circle r="3.2"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#s1" /></animateMotion></circle>
-                <circle r="3.2"><animateMotion dur="2.6s" begin="-.8s" repeatCount="indefinite"><mpath href="#s2" /></animateMotion></circle>
-                <circle r="3.2"><animateMotion dur="2.2s" begin="-1.4s" repeatCount="indefinite"><mpath href="#s3" /></animateMotion></circle>
-                <circle r="3.2"><animateMotion dur="3.2s" begin="-.4s" repeatCount="indefinite"><mpath href="#s4" /></animateMotion></circle>
-                <circle r="3.2"><animateMotion dur="2.8s" begin="-2s" repeatCount="indefinite"><mpath href="#s5" /></animateMotion></circle>
-                <circle r="3.2"><animateMotion dur="3.6s" begin="-1s" repeatCount="indefinite"><mpath href="#s6" /></animateMotion></circle>
-              </g>
-
-              <circle class="tzm__pulse" cx="168" cy="194" r="8" />
-              <circle class="tzm__pin tzm__pin--hub" cx="168" cy="194" r="7" />
-              <circle class="tzm__pin" cx="107" cy="144" r="4.5" />
-              <circle class="tzm__pin" cx="81" cy="189" r="4.5" />
-              <circle class="tzm__pin" cx="210" cy="136" r="4.5" />
-              <circle class="tzm__pin" cx="335" cy="228" r="4.5" />
-              <circle class="tzm__pin" cx="292" cy="250" r="4.5" />
-              <circle class="tzm__pin" cx="391" cy="251" r="4.5" />
-              <circle class="tzm__pin" cx="147" cy="227" r="3.5" />
-
-              <text x="176" y="186"><tspan class="tzm__city">San Salvador</tspan><tspan x="176" dy="14">Same / next day</tspan></text>
-              <text x="107" y="126" text-anchor="middle"><tspan class="tzm__city">Santa Ana</tspan><tspan x="107" dy="14">1–2 days</tspan></text>
-              <text x="70" y="210" text-anchor="middle"><tspan class="tzm__city">Sonsonate</tspan><tspan x="70" dy="14">1–2 days</tspan></text>
-              <text x="210" y="118" text-anchor="middle"><tspan class="tzm__city">Chalatenango</tspan><tspan x="210" dy="14">2–3 days</tspan></text>
-              <text x="335" y="210" text-anchor="middle"><tspan class="tzm__city">San Miguel</tspan><tspan x="335" dy="14">1–2 days</tspan></text>
-              <text x="282" y="272" text-anchor="middle"><tspan class="tzm__city">Usulután</tspan><tspan x="282" dy="14">2–3 days</tspan></text>
-              <text x="398" y="292" text-anchor="end"><tspan class="tzm__city">La Unión</tspan><tspan x="398" dy="14">2–3 days</tspan></text>
-              <text x="138" y="250" text-anchor="middle"><tspan class="tzm__city">La Libertad</tspan><tspan x="138" dy="14">1–2 days</tspan></text>
-            </svg>
-            <ul class="tzm__legend">
-              <li><i class="is-hub"></i>San Salvador: same / next day</li>
-              <li><i></i>Big cities: 1–2 days</li>
-              <li><i class="is-far"></i>Other areas: 2–3 days</li>
-            </ul>
-          </div>
           <span class="h-pill h-pill--1">💵 Lipa ukipokea</span>
           <span class="h-pill h-pill--2">🚚 Free delivery</span>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ El Salvador home (built by js/app.js, like the user's reference cuelhome.com):
+         product slider, 4 promise cards, categories. The hero and key numbers are hidden there (css/index.css). ============ -->
+    <section class="svh" data-country="sv" aria-label="Ofertas destacadas">
+      <div class="wrap">
+        <div class="svh__slider">
+          <div class="svh__track" id="svTrack"></div>
+        </div>
+        <div class="svh__nav">
+          <button type="button" class="svh__arrow" id="svPrev" aria-label="Anterior">‹</button>
+          <div class="svh__dots" id="svDots"></div>
+          <button type="button" class="svh__arrow" id="svNext" aria-label="Siguiente">›</button>
+        </div>
+        <ul class="svh__perks">
+          <li><span>🚚</span><div><strong>Envío gratis a todo El Salvador</strong><small>Te lo llevamos hasta tu puerta.</small></div></li>
+          <li><span>💵</span><div><strong>Pagas al recibir</strong><small>En efectivo, cuando te llega. Nada por adelantado.</small></div></li>
+          <li><span>📞</span><div><strong>Te llamamos para confirmar</strong><small>Una persona real revisa tu pedido contigo.</small></div></li>
+          <li><span>🔄</span><div><strong>Cambio en 30 días</strong><small>Si llega con un defecto, te lo cambiamos.</small></div></li>
+        </ul>
+        <div class="svh__head">
+          <h2>Compra por categoría</h2>
+          <p>Todo lo que tu casa necesita, en un solo lugar.</p>
+        </div>
+        <div class="svh__cats" id="svCats"></div>
       </div>
     </section>
 
