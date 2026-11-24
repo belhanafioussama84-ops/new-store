@@ -64,6 +64,9 @@ const SALVADOR_HEADERS = [
   "Réf. commande", "Nom du client", "Téléphone", "Département", "Municipalité", "Adresse",
   "Point de repère", "SKU", "Code produit", "Variante", "Quantité", "Prix COD", "Qui confirme", "Note",
 ];
+// LatinDrop Guatemala template: the same plus "Zone / village" after Municipalité (15 columns, user 24 Nov 2026).
+// The site has no zone field: that column stays empty.
+const GUATEMALA_HEADERS = SALVADOR_HEADERS.slice(0, 5).concat(["Zone / village"], SALVADOR_HEADERS.slice(5));
 // Column order of the "Orders" tab = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
 // PAYS (Tanzania / Zambia, last column) is not in the Simon Express table: PRIX is in TSh
@@ -98,10 +101,13 @@ function doPost(e) {
     // "Add one more" on the thank-you page (El Salvador): changes the order's row
     if (o.upsell) return json_(upsell_(o.upsell));
     if (o.country === "El Salvador" || o.country === "Guatemala") {
-      const sheet = getOrdersSheet_(o.country === "Guatemala" ? GUATEMALA_SHEET : SALVADOR_SHEET, SALVADOR_HEADERS);
+      const gt = o.country === "Guatemala";
+      const sheet = gt ? getOrdersSheet_(GUATEMALA_SHEET, GUATEMALA_HEADERS) : getOrdersSheet_(SALVADOR_SHEET, SALVADOR_HEADERS);
       // Already there (sent twice, or its upsell arrived first): nothing to add
       if (salvadorRowOf_(sheet, o.number)) return json_({ ok: true, duplicate: true });
-      sheet.appendRow(salvadorRow_(o));
+      const row = salvadorRow_(o);
+      if (gt) row.splice(5, 0, ""); // Zone / village
+      sheet.appendRow(row);
       sendMetaPurchase_(o);
       notifyTelegram_(o.number, o);
       return json_({ ok: true });
@@ -256,9 +262,9 @@ const EXPORTS_ = {
     textCols: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "M", "N"],
   },
   gt: {
-    sheet: GUATEMALA_SHEET, headers: SALVADOR_HEADERS, label: "Guatemala", format: "xlsx", tab: "Commandes",
+    sheet: GUATEMALA_SHEET, headers: GUATEMALA_HEADERS, label: "Guatemala", format: "xlsx", tab: "Commandes",
     title: "LatinDrop Guatemala import ", timeZone: "America/Guatemala", prop: "GT_EXPORT_FILE",
-    textCols: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "M", "N"],
+    textCols: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "N", "O"],
   },
 };
 
@@ -329,6 +335,7 @@ function getOrdersSheet_(name = SHEET_NAME, headers = HEADERS) {
       .setFontWeight("bold").setBackground("#0d1f17").setFontColor("#f3c36b");
     sheet.setFrozenRows(1);
     if (headers === SALVADOR_HEADERS) sheet.getRange("L:L").setNumberFormat("0.00"); // Prix COD (USD)
+    else if (headers === GUATEMALA_HEADERS) sheet.getRange("M:M").setNumberFormat("0.00"); // Prix COD (quetzales)
     else sheet.getRange(headers === HEADERS ? "E:E" : "H:H").setNumberFormat("#,##0"); // PRIX / price
   }
   return sheet;
