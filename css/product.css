@@ -714,3 +714,30 @@ body.layout-ritual h1, .rt-band h2, .rt-compare h2, body.layout-ritual .faq h2 {
     linear-gradient(160deg, var(--accent) 0%, var(--deep) 75%);
 }
 [data-country="sv"] .tz-cats a:hover { background: #dbe8fb; }
+
+/* ==========================================================
+   Lists with a search box (Guatemala order form, searchList in js/landing.js), like LatinDrop's form
+   ========================================================== */
+.has-pick { position: relative; }
+.field label .opt { font-size: .85em; font-weight: 500; color: #8a93a3; }
+.pick { cursor: pointer; }
+.pick.is-open { border-color: var(--blue, var(--accent)); background: #fff; }
+.pick__btn { all: unset; box-sizing: border-box; flex: 1; min-width: 0; padding: .95rem 0; font-size: 1rem; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+.pick__btn--empty { color: #8a93a3; }
+body.form-dark .pick__btn { color: #f2f1f7; font-size: 1.05rem; padding: 1.05rem 0; }
+body.form-dark .pick__btn--empty { color: #8f8d9c; }
+body.form-dark .pick.is-open { background: #221f30; border-color: #8b5cf6; }
+body.form-dark .input--select.pick::after { margin: 0; }
+.pick__btn:disabled { opacity: .55; cursor: not-allowed; }
+.pick::after { content: ""; width: 8px; height: 8px; margin: 0 .2rem 0 auto; border: solid #8a93a3; border-width: 0 2px 2px 0; transform: translateY(-3px) rotate(45deg); flex-shrink: 0; }
+.pick__pop { position: absolute; left: 0; right: 0; z-index: 40; margin-top: 6px; background: #fff; color: var(--ink); border: 1.5px solid var(--line); border-radius: 16px; box-shadow: 0 22px 50px -18px rgba(0, 0, 0, .35); overflow: hidden; }
+.pick__pop[hidden] { display: none; }
+.pick__q { display: flex; align-items: center; gap: .5rem; margin: .6rem; padding: 0 .75rem; border: 1.5px solid var(--blue, var(--accent)); border-radius: 12px; background: #f6f7fb; }
+.pick__q span { font-size: .9rem; opacity: .7; }
+.pick__q input { flex: 1; min-width: 0; padding: .75rem 0; border: 0; background: none; font: inherit; font-size: 1rem; color: var(--ink); outline: none; }
+.pick__pop ul { list-style: none; margin: 0; padding: 0; max-height: 260px; overflow: auto; }
+.pick__pop li { display: flex; align-items: center; gap: .35rem; min-height: 46px; padding: 0 1rem; border-top: 1px solid var(--line); font-size: .98rem; cursor: pointer; }
+.pick__pop li small { color: #8a93a3; }
+.pick__pop li:hover, .pick__pop li[aria-selected="true"] { background: var(--accent-soft); font-weight: 700; }
+.pick__note { margin: 0; padding: .6rem 1rem; border-top: 1px solid var(--line); font-size: .8rem; color: #8a93a3; }
+body.form-dark .field label:has(.opt)::after { display: none; }

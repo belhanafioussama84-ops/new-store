@@ -121,6 +121,9 @@ const COUNTRIES = {
     upsell: false,
     // Order form: "Zona / aldea" field (a list from "zones" below), for the "Zone / village" column of LatinDrop Guatemala
     zone: true,
+    // Like LatinDrop's own Guatemala form: "Punto de referencia (opcional)", and lists with a search box
+    landmark: "optional",
+    searchLists: true,
     // Products of El Salvador ("countries": ["sv"]) are sold here too. Their price in quetzales:
     // the product's "gt" part (gt: { price, offers }) when it has one, else the dollar price × usdRate,
     // rounded up to the next Q..9 (e.g. $36.99 → Q289). To confirm with the user.

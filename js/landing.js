@@ -722,11 +722,81 @@
     zsel.addEventListener("focus", fillZones);
     fillZones();
     fetch(COUNTRY.zones).then((r) => r.json()).then((z) => { zones = z; fillZones(); }).catch(() => {
+      zsel.closest(".input").classList.remove("pick");
+      zsel.closest(".field").querySelectorAll(".pick__btn, .pick__pop").forEach((el) => el.remove());
       const inp = document.createElement("input");
       inp.id = "zone"; inp.name = "zone"; inp.type = "text"; inp.required = true;
       inp.placeholder = T("e.g. Zone 10, or village name");
       zsel.replaceWith(inp);
     });
+  }
+  // Landmark asked but optional (Guatemala, like LatinDrop's own form)
+  if (COUNTRY.landmark === "optional") {
+    $("#landmark").required = false;
+    $("#landmark").placeholder = T("House colour, a shop nearby…");
+    $("#landmarkField label b").outerHTML = `<small class="opt">${esc(T("(optional)"))}</small>`;
+  }
+  // COUNTRY.searchLists (Guatemala, like LatinDrop's own form): departamento, municipio and zone
+  // open a list with a search box instead of the phone's long select.
+  if (COUNTRY.searchLists) ["region", "city", "zone"].forEach((id) => { const s = $("#" + id); if (s?.tagName === "SELECT") searchList(s); });
+  function searchList(sel) {
+    const box = sel.closest(".input");
+    const field = sel.closest(".field");
+    box.classList.add("pick");
+    field.classList.add("has-pick");
+    sel.hidden = true; // keeps the value; the button and list below show it
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "pick__btn";
+    btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false");
+    sel.after(btn);
+    const pop = document.createElement("div");
+    pop.className = "pick__pop"; pop.hidden = true;
+    pop.innerHTML = `<div class="pick__q"><span aria-hidden="true">🔎</span><input type="search" autocomplete="off" placeholder="${esc(T("Search"))}" /></div><ul role="listbox"></ul><p class="pick__note"></p>`;
+    box.after(pop);
+    const q = pop.querySelector("input");
+    const ul = pop.querySelector("ul");
+    const fold = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+    const opts = () => [...sel.options].filter((o) => o.value);
+    const show = () => {
+      const o = sel.selectedOptions[0];
+      btn.textContent = o && o.value ? o.text : (sel.options[0]?.text || "");
+      btn.classList.toggle("pick__btn--empty", !sel.value);
+      btn.disabled = !opts().length;
+    };
+    const close = () => { pop.hidden = true; btn.setAttribute("aria-expanded", "false"); box.classList.remove("is-open"); };
+    let hits = [];
+    const draw = () => {
+      const t = fold(q.value);
+      const all = opts();
+      hits = all.filter((o) => fold(o.text).includes(t));
+      const shown = hits.slice(0, 80);
+      ul.innerHTML = shown.map((o, k) => `<li role="option" data-k="${k}" aria-selected="${o.selected}">${esc(o.text)}${o.dataset.dept && !$("#region").value ? ` <small>· ${esc(o.dataset.dept)}</small>` : ""}</li>`).join("");
+      pop.querySelector(".pick__note").textContent = hits.length > shown.length
+        ? T("{n} of {all} · type to search", { n: shown.length, all: hits.length }) : T("{n} of {all}", { n: hits.length, all: all.length });
+    };
+    const choose = (o) => {
+      o.selected = true;
+      sel.dispatchEvent(new Event("change", { bubbles: true }));
+      close(); show(); btn.focus();
+      if (field.classList.contains("has-error")) setError(sel, "");
+    };
+    btn.addEventListener("click", () => {
+      if (!pop.hidden) return close();
+      document.querySelectorAll(".pick__pop").forEach((p) => { p.hidden = true; });
+      pop.hidden = false; btn.setAttribute("aria-expanded", "true"); box.classList.add("is-open");
+      q.value = ""; draw(); q.focus();
+    });
+    q.addEventListener("input", draw);
+    q.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); if (hits[0]) choose(hits[0]); }
+      if (e.key === "Escape") { close(); btn.focus(); }
+    });
+    ul.addEventListener("mousedown", (e) => e.preventDefault());
+    ul.addEventListener("click", (e) => { const li = e.target.closest("li"); if (li) choose(hits[+li.dataset.k]); });
+    document.addEventListener("click", (e) => { if (!field.contains(e.target)) close(); });
+    sel.addEventListener("change", show);
+    new MutationObserver(show).observe(sel, { childList: true, subtree: true });
+    show();
   }
 
   // One "City & delivery address" field, except in countries with splitAddress (Lebanon, El Salvador)
