@@ -57,8 +57,6 @@ const LEBANON_HEADERS = [
 // To import them: menu Duka Bora → Download El Salvador orders (.xlsx).
 // "Qui confirme" column: who calls the customer to confirm, "Latine Drop" or "Moi".
 const SALVADOR_CONFIRM = "Latine Drop";
-// Guatemala: the user confirms the orders themself (24 Nov 2026)
-const GUATEMALA_CONFIRM = "Moi";
 const SALVADOR_SHEET = "Orders El Salvador";
 // Guatemala orders (?country=gt): same LatinDrop columns, their own tab (Prix COD in quetzales).
 const GUATEMALA_SHEET = "Orders Guatemala";
@@ -108,10 +106,7 @@ function doPost(e) {
       // Already there (sent twice, or its upsell arrived first): nothing to add
       if (salvadorRowOf_(sheet, o.number)) return json_({ ok: true, duplicate: true });
       const row = salvadorRow_(o);
-      if (gt) {
-        row[12] = GUATEMALA_CONFIRM; // Qui confirme
-        row.splice(5, 0, text_(o.customer.zone || "")); // Zone / village
-      }
+      if (gt) row.splice(5, 0, text_(o.customer.zone || "")); // Zone / village
       sheet.appendRow(row);
       sendMetaPurchase_(o);
       notifyTelegram_(o.number, o);
