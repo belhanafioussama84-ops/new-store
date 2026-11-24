@@ -9,7 +9,7 @@
   <meta name="facebook-domain-verification" content="qilscr32sx6clvu4s4x3e5hyfcysfq" />
   <meta name="theme-color" content="#1f4d3a" />
   <!-- Lebanon and El Salvador have their own colours: set them before the page shows (same choice as js/products.js) -->
-  <script>try{var c=new URLSearchParams(location.search).get("country")||localStorage.getItem("dukabora_country");if(!c)c={"America/El_Salvador":"sv"}[Intl.DateTimeFormat().resolvedOptions().timeZone];if(c==="sv")document.documentElement.dataset.country=c}catch(e){}</script>
+  <script>try{var c=new URLSearchParams(location.search).get("country")||localStorage.getItem("dukabora_country");if(!c)c={"America/El_Salvador":"sv","America/Guatemala":"gt"}[Intl.DateTimeFormat().resolvedOptions().timeZone];if(c==="sv"||c==="gt")document.documentElement.dataset.country="sv"}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600..800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -42,6 +42,11 @@
           <svg class="gate__flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#0047ab" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 16h72v16H0z"/><circle cx="36" cy="24" r="5.5" fill="none" stroke="#c9a227" stroke-width="1.8"/><path fill="#2e7d32" d="M33 27l3-6 3 6z"/></svg>
           <strong>El Salvador</strong>
           <small>Prices in US dollars ($) · Spanish</small>
+        </button>
+        <button type="button" class="gate__choice" data-set-country="gt">
+          <svg class="gate__flag" viewBox="0 0 72 48" aria-hidden="true"><path fill="#4997d0" d="M0 0h24v48H0zM48 0h24v48H48z"/><path fill="#fff" d="M24 0h24v48H24z"/><circle cx="36" cy="24" r="6" fill="none" stroke="#3a7d44" stroke-width="2"/></svg>
+          <strong>Guatemala</strong>
+          <small>Prices in quetzales (Q) · Spanish</small>
         </button>
       </div>
       <p class="gate__note">🚚 Free delivery · 💵 Pay on delivery</p>
@@ -281,7 +286,7 @@
 
     <!-- ============ El Salvador home (built by js/app.js, like the user's reference cuelhome.com):
          product slider, 4 promise cards, categories. The hero and key numbers are hidden there (css/index.css). ============ -->
-    <section class="svh" data-country="sv" aria-label="Ofertas destacadas">
+    <section class="svh" data-country="sv gt" aria-label="Ofertas destacadas">
       <div class="wrap">
         <div class="svh__slider">
           <div class="svh__track" id="svTrack"></div>
@@ -395,6 +400,9 @@
           </ul>
           <ul class="h-cities" data-country="sv">
             <li>San Salvador</li><li>Santa Ana</li><li>San Miguel</li><li>Soyapango</li><li>Santa Tecla</li><li>Sonsonate</li><li>La Libertad</li><li>Usulután</li><li>Ahuachapán</li><li>Chalatenango</li><li>La Unión</li><li>+ all other areas</li>
+          </ul>
+          <ul class="h-cities" data-country="gt">
+            <li>Ciudad de Guatemala</li><li>Mixco</li><li>Villa Nueva</li><li>Quetzaltenango</li><li>Escuintla</li><li>Antigua Guatemala</li><li>Cobán</li><li>Huehuetenango</li><li>Chimaltenango</li><li>Puerto Barrios</li><li>Mazatenango</li><li>+ all other areas</li>
           </ul>
           <ul class="h-cities" data-country="tz">
             <li>Dar es Salaam</li><li>Arusha</li><li>Dodoma</li><li>Mwanza</li><li>Mbeya</li><li>Zanzibar</li><li>Morogoro</li><li>Tanga</li><li>Moshi</li><li>Kigoma</li><li>Mtwara</li><li>+ all other regions</li>

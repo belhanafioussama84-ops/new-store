@@ -68,6 +68,7 @@ async function shortLink(request, env, url, cc, id) {
 // name, text and photo from js/products.js — never the name of another country.
 const PREVIEW_TEXT = {
   sv: "Envío gratis · Pagas al recibir",
+  gt: "Envío gratis · Pagas al recibir",
   tz: "Free delivery · Pay on delivery",
   zm: "Free delivery · Pay on delivery",
   lb: "Free delivery · Pay on delivery",
@@ -83,7 +84,9 @@ async function productInfo(env, url, id, cc) {
   // Product's own fields only (4 spaces in): not the names inside its offers or sections.
   const field = (k) => block.match(new RegExp(`\\n    ${k}: "((?:[^"\\\\]|\\\\.)*)"`))?.[1]?.replace(/\\(.)/g, "$1");
   // The country's own name, e.g. sv: { name: "Corrector de Postura" }
-  const local = cc && block.match(new RegExp(`\\n    ${cc}: \\{[^\\n]*?name: "((?:[^"\\\\]|\\\\.)*)"`))?.[1]?.replace(/\\(.)/g, "$1");
+  const own = (c) => c && block.match(new RegExp(`\\n    ${c}: \\{[^\\n]*?name: "((?:[^"\\\\]|\\\\.)*)"`))?.[1]?.replace(/\\(.)/g, "$1");
+  // Guatemala sells the El Salvador products: their "gt" name, else their "sv" one
+  const local = own(cc) || (cc === "gt" ? own("sv") : "");
   return { name: local || field("name"), description: field("description"), image: field("image") };
 }
 async function withPreview(env, url, id, cc, page) {
@@ -109,7 +112,7 @@ const PAGES = ["index", "product", "thank-you", "policies"];
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    const cc = url.pathname.match(/^\/(tz|zm|lb|sv)(?:\/(.*))?$/);
+    const cc = url.pathname.match(/^\/(tz|zm|lb|sv|gt)(?:\/(.*))?$/);
     if (cc) {
       const rest = cc[2] || "";
       if (!rest) return Response.redirect(`${url.origin}/?country=${cc[1]}`, 302);

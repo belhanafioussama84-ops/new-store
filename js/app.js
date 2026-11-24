@@ -13,7 +13,7 @@
 
   /* ---------- Products (those with home: false only have their own page) ---------- */
   const list = PRODUCTS.filter((p) => p.home !== false);
-  if (COUNTRY.id === "sv" && list.length) svHome(list);
+  if (COUNTRY.look === "sv" && list.length) svHome(list); // also Guatemala
   else if (!list.length) {
     $("#productGrid").outerHTML = `<p class="shop__soon">${T("✦ New products are coming soon. Check back shortly!")}</p>`;
   } else $("#productGrid").innerHTML = list.map((p) => {
@@ -101,7 +101,7 @@
     $("#shop .label").textContent = "Lo más pedido";
     $("#shop .h-title").innerHTML = "Nuestros productos";
     $("#shop .h-title").insertAdjacentHTML("afterend",
-      `<p class="svh__sub">Envío gratis a todo El Salvador y pagas al recibir.</p>`);
+      `<p class="svh__sub">${localize("Envío gratis a todo El Salvador y pagas al recibir.")}</p>`);
 
     // Shop cards
     const grid = $("#productGrid");

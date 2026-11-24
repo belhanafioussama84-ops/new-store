@@ -108,13 +108,68 @@ const COUNTRIES = {
       "Usulután": ["Alegría", "Berlín", "California", "Concepción Batres", "El Triunfo", "Ereguayquín", "Estanzuelas", "Jiquilisco", "Jucuapa", "Jucuarán", "Mercedes Umaña", "Nueva Granada", "Ozatlán", "Puerto El Triunfo", "San Agustín", "San Buenaventura", "San Dionisio", "San Francisco Javier", "Santa Elena", "Santa María", "Santiago de María", "Tecapán", "Usulután"],
     },
   },
+  gt: {
+    // Guatemala (user, 24 Nov 2026): same design and same products as El Salvador (look: "sv":
+    // its colours, its home page and its Spanish texts), prices in quetzales.
+    id: "gt", look: "sv", name: "Guatemala", currency: "Q", currencyCode: "GTQ",
+    dial: "502", phone: /^[2-7]\d{7}$/, // 8 digits: mobile 3/4/5XXX XXXX, landline 2/6/7XXX XXXX
+    languages: ["es"],
+    fastCity: "guatemala",
+    splitAddress: true,
+    noPhone: true,
+    noWhatsApp: true,
+    upsell: false,
+    // Products of El Salvador ("countries": ["sv"]) are sold here too. Their price in quetzales:
+    // the product's "gt" part (gt: { price, offers }) when it has one, else the dollar price × usdRate,
+    // rounded up to the next Q..9 (e.g. $36.99 → Q289). To confirm with the user.
+    usdRate: 7.7,
+    // The El Salvador Spanish texts, said for Guatemala (js/i18n.js and product texts)
+    replace: [
+      [/de San Salvador a San Miguel/g, "de la capital a Quetzaltenango"],
+      [/(a|en) todo El Salvador/g, "$1 toda Guatemala"],
+      [/todo El Salvador/g, "toda Guatemala"],
+      [/San Salvador/g, "Ciudad de Guatemala"],
+      [/El Salvador/g, "Guatemala"],
+      [/Col\. Escalón/g, "zona 10"],
+      [/\+503 7XXX XXXX/g, "+502 5XXX XXXX"],
+      [/7123 4567/g, "5123 4567"],
+      [/dólares estadounidenses \(USD\)/g, "quetzales (GTQ)"],
+      [/(en|los) dólares/g, "$1 quetzales"],
+    ],
+    // LatinDrop Guatemala coverage, sent by the user (24 Nov 2026): 22 departamentos, 341 municipios
+    // (Petatán and San Miguel Sigüilá left out: "pas encore couvert"). Order form: Departamento, then Municipio.
+    municipios: {
+      "Guatemala": ["Amatitlán", "Chinautla", "Chuarrancho", "Fraijanes", "Guatemala", "Mixco", "Palencia", "San José del Golfo", "San José Pinula", "San Juan Sacatepéquez", "San Miguel Petapa", "San Pedro Ayampuc", "San Pedro Sacatepéquez", "San Raymundo", "Santa Catarina Pinula", "Villa Canales", "Villa Nueva"],
+      "Alta Verapaz": ["Chahal", "Chisec", "Cobán", "Fray Bartolomé de Las Casas", "Lanquín", "Panzós", "Raxruhá", "San Cristóbal Verapaz", "San Juan Chamelco", "San Pedro Carchá", "Santa Catalina La Tinta", "Santa Cruz Verapaz", "Santa María Cahabón", "Senahú", "Tactic", "Tamahú", "Tucurú"],
+      "Baja Verapaz": ["Cubulco", "Granados", "Purulhá", "Rabinal", "Salamá", "San Jerónimo", "San Miguel Chicaj", "Santa Cruz El Chol"],
+      "Chimaltenango": ["Acatenango", "Chimaltenango", "El Tejar", "Parramos", "Patzicía", "Patzún", "Pochuta", "San Andrés Itzapa", "San José Poaquil", "San Juan Comalapa", "San Martín Jilotepeque", "San Pedro Yepocapa", "Santa Apolonia", "Santa Cruz Balanyá", "Tecpán", "Zaragoza"],
+      "Chiquimula": ["Camotán", "Chiquimula", "Concepción Las Minas", "Esquipulas", "Ipala", "Jocotán", "Olopa", "Quezaltepeque", "San Jacinto", "San José La Arada", "San Juan Ermita"],
+      "El Progreso": ["El Jícaro", "Guastatoya", "Morazán", "San Agustín Acasaguastlán", "San Antonio La Paz", "San Cristóbal Acasaguastlán", "Sanarate", "Sansare"],
+      "Escuintla": ["Escuintla", "Guanagazapa", "Iztapa", "La Democracia", "La Gomera", "Masagua", "Nueva Concepción", "Palín", "Puerto San José", "San Vicente Pacaya", "Santa Lucía Cotzumalguapa", "Sipacate", "Siquinalá", "Tiquisate"],
+      "Huehuetenango": ["Aguacatán", "Chiantla", "Colotenango", "Concepción Huista", "Cuilco", "Huehuetenango", "Jacaltenango", "La Democracia", "La Libertad", "Malacatancito", "Nentón", "San Antonio Huista", "San Gaspar Ixchil", "San Ildefonso Ixtahuacán", "San Juan Atitán", "San Juan Ixcoy", "San Mateo Ixtatán", "San Miguel Acatán", "San Pedro Necta", "San Pedro Soloma", "San Rafael La Independencia", "San Rafael Petzal", "San Sebastián Coatán", "San Sebastián Huehuetenango", "Santa Ana Huista", "Santa Bárbara", "Santa Cruz Barillas", "Santa Eulalia", "Santiago Chimaltenango", "Soloma", "Tectitán", "Todos Santos Cuchumatán", "Unión Cantinil"],
+      "Izabal": ["El Estor", "Livingston", "Los Amates", "Morales", "Puerto Barrios"],
+      "Jalapa": ["Jalapa", "Mataquescuintla", "Monjas", "San Carlos Alzatate", "San Luis Jilotepeque", "San Manuel Chaparrón", "San Pedro Pinula"],
+      "Jutiapa": ["Agua Blanca", "Asunción Mita", "Atescatempa", "Comapa", "Conguaco", "El Adelanto", "El Progreso", "Jalpatagua", "Jerez", "Jutiapa", "Moyuta", "Pasaco", "Quesada", "San José Acatempa", "Santa Catarina Mita", "Yupiltepeque", "Zapotitlán"],
+      "Petén": ["Dolores", "El Chal", "Flores", "La Libertad", "Las Cruces", "Melchor de Mencos", "Poptún", "San Andrés", "San Benito", "San Francisco", "San José", "San Luis", "Santa Ana", "Sayaxché"],
+      "Quetzaltenango": ["Almolonga", "Cabricán", "Cajolá", "Cantel", "Coatepeque", "Colomba", "Concepción Chiquirichapa", "El Palmar", "Flores Costa Cuca", "Génova", "Huitán", "La Esperanza", "Olintepeque", "Palestina de Los Altos", "Quetzaltenango", "Salcajá", "San Carlos Sija", "San Francisco La Unión", "San Juan Ostuncalco", "San Martín Sacatepéquez", "San Mateo", "Sibilia", "Zunil"],
+      "Quiché": ["Canillá", "Chajul", "Chicamán", "Chiché", "Chichicastenango", "Chinique", "Cunén", "Ixcán", "Joyabaj", "Nebaj", "Pachalum", "Patzité", "Sacapulas", "San Andrés Sajcabajá", "San Antonio Ilotenango", "San Bartolomé Jocotenango", "San Juan Cotzal", "San Pedro Jocopilas", "Santa Cruz del Quiché", "Santa María Nebaj", "Uspantán", "Zacualpa"],
+      "Retalhuleu": ["Champerico", "El Asintal", "Nuevo San Carlos", "Retalhuleu", "San Andrés Villa Seca", "San Felipe", "San Martín Zapotitlán", "San Sebastián", "Santa Cruz Muluá"],
+      "Sacatepéquez": ["Alotenango", "Antigua Guatemala", "Ciudad Vieja", "Jocotenango", "Magdalena Milpas Altas", "Pastores", "San Antonio Aguas Calientes", "San Bartolomé Milpas Altas", "San Juan Alotenango", "San Lucas Sacatepéquez", "San Miguel Dueñas", "Santa Catarina Barahona", "Santa Lucía Milpas Altas", "Santa María de Jesús", "Santiago Sacatepéquez", "Santo Domingo Xenacoj", "Sumpango"],
+      "San Marcos": ["Ayutla", "Catarina", "Comitancillo", "Concepción Tutuapa", "El Quetzal", "El Rodeo", "El Tumbador", "Esquipulas Palo Gordo", "Ixchiguán", "La Blanca", "La Reforma", "Malacatán", "Nuevo Progreso", "Ocós", "Pajapita", "Río Blanco", "San Antonio Sacatepéquez", "San Cristóbal Cucho", "San José Ojetenam", "San Lorenzo", "San Marcos", "San Miguel Ixtahuacán", "San Pablo", "San Pedro Sacatepéquez", "San Rafael Pie de La Cuesta", "Sibinal", "Sipacapa", "Tacaná", "Tajumulco", "Tejutla"],
+      "Santa Rosa": ["Barberena", "Casillas", "Chiquimulilla", "Cuilapa", "Guazacapán", "Nueva Santa Rosa", "Oratorio", "Pueblo Nuevo Viñas", "San Juan Tecuaco", "San Rafael Las Flores", "Santa Cruz Naranjo", "Santa María Ixhuatán", "Santa Rosa de Lima", "Taxisco"],
+      "Sololá": ["Concepción", "Nahualá", "Panajachel", "San Andrés Semetabaj", "San Antonio Palopó", "San José Chacayá", "San Juan La Laguna", "San Lucas Tolimán", "San Marcos La Laguna", "San Pablo La Laguna", "San Pedro La Laguna", "Santa Catarina Ixtahuacán", "Santa Catarina Palopó", "Santa Clara La Laguna", "Santa Cruz La Laguna", "Santa Lucía Utatlán", "Santa María Visitación", "Santiago Atitlán", "Sololá"],
+      "Suchitepéquez": ["Chicacao", "Cuyotenango", "Mazatenango", "Patulul", "Pueblo Nuevo", "Río Bravo", "Samayac", "San Antonio Suchitepéquez", "San Bernardino", "San Francisco Zapotitlán", "San Gabriel", "San José El Ídolo", "San José La Máquina", "San Juan Bautista", "San Lorenzo Suchitepéquez", "San Miguel Panán", "San Pablo Jocopilas", "Santa Bárbara", "Santo Domingo Suchitepéquez", "Santo Tomás La Unión", "Zunilito"],
+      "Totonicapán": ["Momostenango", "San Andrés Xecul", "San Bartolo", "San Cristóbal Totonicapán", "San Francisco El Alto", "Santa Lucía La Reforma", "Santa María Chiquimula", "Totonicapán"],
+      "Zacapa": ["Cabañas", "Estanzuela", "Gualán", "Huité", "La Unión", "Río Hondo", "San Diego", "San Jorge", "Teculután", "Usumatlán", "Zacapa"],
+    },
+  },
 };
 // Phones set to these time zones get that country until the visitor picks one.
 // A country with "municipios" gets its departamento list from them
 for (const c of Object.values(COUNTRIES)) if (c.municipios) c.regions = Object.keys(c.municipios);
 // Lebanon store closed (user, 10 Nov 2026): its settings stay above, delete this line to reopen it.
 delete COUNTRIES.lb;
-const ZONES = { "Africa/Lusaka": "zm", "America/El_Salvador": "sv" };
+const ZONES = { "Africa/Lusaka": "zm", "America/El_Salvador": "sv", "America/Guatemala": "gt" };
 
 // COUNTRY_CHOSEN: false when the visitor has not picked a country yet (the home page then asks).
 const { COUNTRY, COUNTRY_CHOSEN } = (() => {
@@ -134,13 +189,23 @@ const { COUNTRY, COUNTRY_CHOSEN } = (() => {
   };
 })();
 // Country colours (css/product.css). The <head> of each page sets it early too, so Lebanon doesn't flash green.
-document.documentElement.dataset.country = COUNTRY.id;
+// look: a country dressed like another one (Guatemala = El Salvador's colours, home and texts)
+COUNTRY.look = COUNTRY.look || COUNTRY.id;
+document.documentElement.dataset.country = COUNTRY.look;
+// Texts of the look's country said for this one (COUNTRY.replace), and "$12" → "Q99" (usdRate)
+const toLocalPrice = (usd) => Math.ceil(usd * COUNTRY.usdRate / 10) * 10 - 1;
+function localize(s) {
+  if (!COUNTRY.replace || typeof s !== "string" || s === "El Salvador") return s;
+  for (const [re, by] of COUNTRY.replace) s = s.replace(re, by);
+  if (COUNTRY.usdRate) s = s.replace(/\$(\d+(?:\.\d+)?)/g, (m, n) => `${COUNTRY.currency}${Number(n) ? toLocalPrice(Number(n)) : 0}`);
+  return s;
+}
 // Countries with noWhatsApp: no WhatsApp number = every WhatsApp button and link is hidden
 if (COUNTRY.noWhatsApp) STORE.whatsapp = "";
 // Countries with noPhone: no "Call" links (each page removes them when STORE.phone is empty)
 if (COUNTRY.noPhone) STORE.phone = "";
 if (COUNTRY.id === "lb") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#c8102e");
-if (COUNTRY.id === "sv") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#0b3a82");
+if (COUNTRY.look === "sv") document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#0b3a82");
 
 /* ==========================================================
    PRODUCTS — add, remove or edit products here.
@@ -1531,7 +1596,7 @@ const PRODUCTS = [
 {
   const p = PRODUCTS.find((x) => x.id === new URLSearchParams(location.search).get("id"));
   const open = p?.countries?.filter((c) => COUNTRIES[c]) || [];
-  if (open.length && !open.includes(COUNTRY.id)) {
+  if (open.length && !open.includes(COUNTRY.id) && !open.includes(COUNTRY.look)) {
     const url = new URL(location.href);
     url.searchParams.set("country", open[0]);
     location.replace(url.href);
@@ -1540,14 +1605,38 @@ const PRODUCTS = [
 
 // A product with "countries" is only sold there, at its own prices.
 for (let i = PRODUCTS.length - 1; i >= 0; i--) {
-  if (PRODUCTS[i].countries && !PRODUCTS[i].countries.includes(COUNTRY.id)) PRODUCTS.splice(i, 1);
+  const c = PRODUCTS[i].countries;
+  if (c && !c.includes(COUNTRY.id) && !c.includes(COUNTRY.look)) PRODUCTS.splice(i, 1);
+}
+
+// A country with a look (Guatemala): the look country's products, in its own money and words.
+if (COUNTRY.look !== COUNTRY.id) {
+  const deep = (v) => typeof v === "string" ? localize(v)
+    : Array.isArray(v) ? v.map(deep)
+    : v && typeof v === "object" && !(v instanceof RegExp) ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, deep(x)]))
+    : v;
+  const keep = new Set(["id", "sku", "price", "oldPrice", "countries"]);
+  for (const p of PRODUCTS) {
+    const own = p[COUNTRY.id];
+    if (!p.countries?.includes(COUNTRY.id)) {
+      // Prices: the product's own (gt: { price, offers }) or the dollar ones × usdRate
+      if (!own?.price) {
+        const conv = (n) => (n ? toLocalPrice(n) : n);
+        p.price = conv(p.price);
+        p.oldPrice = conv(p.oldPrice);
+        if (p.offers) p.offers = p.offers.map((o) => ({ ...o, price: conv(o.price) }));
+      }
+      Object.assign(p, p[COUNTRY.look] || {}, own || {});
+    }
+    for (const k of Object.keys(p)) if (!keep.has(k)) p[k] = deep(p[k]);
+  }
 }
 
 // Outside Tanzania each product takes its local prices; a product without them is not sold there.
 if (COUNTRY.id !== "tz") {
   for (let i = PRODUCTS.length - 1; i >= 0; i--) {
     // "countries" products are already in that country's prices; their local part only changes the name etc.
-    if (PRODUCTS[i].countries) { Object.assign(PRODUCTS[i], PRODUCTS[i][COUNTRY.id] || {}); continue; }
+    if (PRODUCTS[i].countries) { if (COUNTRY.look === COUNTRY.id) Object.assign(PRODUCTS[i], PRODUCTS[i][COUNTRY.id] || {}); continue; }
     const local = PRODUCTS[i][COUNTRY.id];
     if (!local) { PRODUCTS.splice(i, 1); continue; }
     const { sectionImages, ...rest } = local;

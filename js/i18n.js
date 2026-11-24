@@ -518,6 +518,8 @@ const ES = {
   "Prices in Kwacha (KW) · English": "Precios en kwacha (KW) · Inglés",
   "Prices in US dollars ($) · English": "Precios en dólares ($) · Inglés",
   "Prices in US dollars ($) · Spanish": "Precios en dólares ($) · Español",
+  "Prices in quetzales (Q) · Spanish": "Precios en quetzales (Q) · Español",
+  "Guatemala": "Guatemala",
   "🚚 Free delivery · 💵 Pay on delivery": "🚚 Envío gratis · 💵 Pago contra entrega",
 
   /* ---------- Trust bars ---------- */
@@ -1011,13 +1013,14 @@ const { LANG, T } = (() => {
   const DICT = LANG === "sw" ? SW : LANG === "es" ? ES : { zm: ZM, lb: LB }[COUNTRY.id] || null;
 
   const T = (en, vars) => {
-    let s = DICT && DICT[en] != null ? DICT[en] : en;
+    let s = localize(DICT && DICT[en] != null ? DICT[en] : en); // localize: Guatemala (js/products.js)
     if (vars) s = s.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
     return s;
   };
 
   /* ---------- Parts of the page for one country only (data-country="tz" / "zm" / "lb" / "sv") ---------- */
-  document.querySelectorAll("body [data-country]").forEach((el) => { if (el.dataset.country !== COUNTRY.id) el.remove(); });
+  // (several countries: data-country="sv gt")
+  document.querySelectorAll("body [data-country]").forEach((el) => { if (!el.dataset.country.split(" ").includes(COUNTRY.id)) el.remove(); });
 
   /* ---------- Translate the page's own HTML (text written by JavaScript uses T) ---------- */
   if (DICT) {
@@ -1027,9 +1030,14 @@ const { LANG, T } = (() => {
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     for (let n; (n = walker.nextNode());) {
       const key = n.nodeValue.replace(/\s+/g, " ").trim();
-      if (!key || DICT[key] == null) continue;
+      if (!key) continue;
+      if (DICT[key] == null) { // Spanish written in the HTML: said for Guatemala
+        const l = localize(n.nodeValue);
+        if (l !== n.nodeValue) n.nodeValue = l;
+        continue;
+      }
       const [, before, after] = n.nodeValue.match(/^(\s*)[\s\S]*?(\s*)$/);
-      n.nodeValue = before + DICT[key] + after;
+      n.nodeValue = before + localize(DICT[key]) + after;
     }
     document.querySelectorAll("[aria-label], [placeholder]").forEach((el) => {
       ["aria-label", "placeholder"].forEach((a) => {

@@ -58,6 +58,8 @@ const LEBANON_HEADERS = [
 // "Qui confirme" column: who calls the customer to confirm, "Latine Drop" or "Moi".
 const SALVADOR_CONFIRM = "Latine Drop";
 const SALVADOR_SHEET = "Orders El Salvador";
+// Guatemala orders (?country=gt): same LatinDrop columns, their own tab (Prix COD in quetzales).
+const GUATEMALA_SHEET = "Orders Guatemala";
 const SALVADOR_HEADERS = [
   "Réf. commande", "Nom du client", "Téléphone", "Département", "Municipalité", "Adresse",
   "Point de repère", "SKU", "Code produit", "Variante", "Quantité", "Prix COD", "Qui confirme", "Note",
@@ -95,8 +97,8 @@ function doPost(e) {
     const o = JSON.parse(e.postData.contents);
     // "Add one more" on the thank-you page (El Salvador): changes the order's row
     if (o.upsell) return json_(upsell_(o.upsell));
-    if (o.country === "El Salvador") {
-      const sheet = getOrdersSheet_(SALVADOR_SHEET, SALVADOR_HEADERS);
+    if (o.country === "El Salvador" || o.country === "Guatemala") {
+      const sheet = getOrdersSheet_(o.country === "Guatemala" ? GUATEMALA_SHEET : SALVADOR_SHEET, SALVADOR_HEADERS);
       // Already there (sent twice, or its upsell arrived first): nothing to add
       if (salvadorRowOf_(sheet, o.number)) return json_({ ok: true, duplicate: true });
       sheet.appendRow(salvadorRow_(o));
@@ -232,6 +234,9 @@ function onOpen() {
     .addSeparator()
     .addItem("Download NEW El Salvador orders (.xlsx)", "downloadNewSalvadorOrders")
     .addItem("Download ALL El Salvador orders (.xlsx)", "downloadAllSalvadorOrders")
+    .addSeparator()
+    .addItem("Download NEW Guatemala orders (.xlsx)", "downloadNewGuatemalaOrders")
+    .addItem("Download ALL Guatemala orders (.xlsx)", "downloadAllGuatemalaOrders")
     .addToUi();
 }
 
@@ -250,12 +255,19 @@ const EXPORTS_ = {
     title: "LatinDrop import ", timeZone: "America/El_Salvador", prop: "SV_EXPORT_FILE",
     textCols: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "M", "N"],
   },
+  gt: {
+    sheet: GUATEMALA_SHEET, headers: SALVADOR_HEADERS, label: "Guatemala", format: "xlsx", tab: "Commandes",
+    title: "LatinDrop Guatemala import ", timeZone: "America/Guatemala", prop: "GT_EXPORT_FILE",
+    textCols: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "M", "N"],
+  },
 };
 
 function downloadNewLebanonOrders() { downloadOrders_(EXPORTS_.lb, true); }
 function downloadAllLebanonOrders() { downloadOrders_(EXPORTS_.lb, false); }
 function downloadNewSalvadorOrders() { downloadOrders_(EXPORTS_.sv, true); }
 function downloadAllSalvadorOrders() { downloadOrders_(EXPORTS_.sv, false); }
+function downloadNewGuatemalaOrders() { downloadOrders_(EXPORTS_.gt, true); }
+function downloadAllGuatemalaOrders() { downloadOrders_(EXPORTS_.gt, false); }
 
 // Puts the orders of one tab (only the ones not downloaded yet, or all) in a separate file with
 // exactly that tab's columns, shows its download link, then greys those rows out.
@@ -335,18 +347,18 @@ function nextCode_(sheet) {
 // The leading ' keeps it as text so Sheets does not drop the 0 or the +.
 function localPhone_(v) {
   const s = String(v == null ? "" : v);
-  if (/^\+?(961|503)/.test(s.trim())) return "'" + s.trim(); // Lebanon, El Salvador: kept as "+503 7000 0000"
+  if (/^\+?(961|503|502)/.test(s.trim())) return "'" + s.trim(); // Lebanon, El Salvador, Guatemala: kept as "+503 7000 0000"
   const digits = s.replace(/\D/g, "").replace(/^(255|260)/, "").replace(/^0/, "");
   return digits ? "'0" + digits : "";
 }
 
 // "+503 71234567" → "7123 4567" (the format of the LatinDrop example; the ' keeps it as text).
 function salvadorPhone_(v) {
-  const d = String(v == null ? "" : v).replace(/\D/g, "").replace(/^503(?=\d{8}$)/, "");
+  const d = String(v == null ? "" : v).replace(/\D/g, "").replace(/^50[23](?=\d{8}$)/, "");
   return d.length === 8 ? "'" + d.slice(0, 4) + " " + d.slice(4) : "'" + d;
 }
 
-const FLAGS_ = { Tanzania: "🇹🇿", Zambia: "🇿🇲", Lebanon: "🇱🇧", "El Salvador": "🇸🇻" };
+const FLAGS_ = { Tanzania: "🇹🇿", Zambia: "🇿🇲", Lebanon: "🇱🇧", "El Salvador": "🇸🇻", Guatemala: "🇬🇹" };
 
 // Sends the new order to your Telegram. A failure here never loses the order (the row is already saved).
 function notifyTelegram_(code, o) {
@@ -399,7 +411,7 @@ function sha256_(s) {
 // "Santa Tecla" → "santatecla" (Meta's format for cities: lowercase a-z, no accents or spaces)
 const plain_ = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z]/g, "");
 
-const META_COUNTRY_ = { Tanzania: ["tz", "TZS"], Zambia: ["zm", "ZMW"], Lebanon: ["lb", "USD"], "El Salvador": ["sv", "USD"] };
+const META_COUNTRY_ = { Tanzania: ["tz", "TZS"], Zambia: ["zm", "ZMW"], Lebanon: ["lb", "USD"], "El Salvador": ["sv", "USD"], Guatemala: ["gt", "GTQ"] };
 
 // The Purchase event of one order, with the same event_id (order number) as the pixel on the
 // thank-you page: Meta keeps only one of the two. Customer details are hashed (SHA-256).

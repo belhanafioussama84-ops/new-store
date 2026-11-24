@@ -162,7 +162,7 @@
   $("#pBody").innerHTML = ids.map((id, i) => `
     <section class="p-sec" id="${id}">
       <h2>${esc(t.nav[i])}</h2>
-      ${id === "contact" ? `${t.contact}<ul class="p-contact">${links}</ul><p>${esc(t.contactNote)}</p>` : t[id]}
+      ${id === "contact" ? `${localize(t.contact)}<ul class="p-contact">${links}</ul><p>${esc(localize(t.contactNote))}</p>` : localize(t[id])}
     </section>`).join("");
   // The browser jumped before the sections existed: go to the one in the link now
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
