@@ -701,6 +701,8 @@ const ES = {
   "Zone / village": "Zona / aldea",
   "e.g. Zone 10, or village name": "Ej.: Zona 10, o nombre de la aldea",
   "Please enter your zone or village.": "Escribe tu zona o aldea.",
+  "Choose your municipality first": "Elige primero tu municipio",
+  "Please choose your zone or village.": "Elige tu zona o aldea.",
   "City & delivery address": "Ciudad y dirección de entrega",
   "e.g. Dar es Salaam, Kinondoni, Mikocheni B": "Ej.: San Salvador, Col. Escalón, calle 3, casa 12",
   "💵 Pay cash when you receive it ·": "💵 Pagas en efectivo al recibir ·",

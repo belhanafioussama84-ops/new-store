@@ -702,6 +702,32 @@
   } else $("#regionField").remove();
   if (!COUNTRY.landmark) $("#landmarkField").remove();
   if (!COUNTRY.zone) $("#zoneField").remove(); // Guatemala: Zona / aldea (LatinDrop "Zone / village")
+  // COUNTRY.zones: the zones of each municipio (LatinDrop names), a list filled once the municipio is
+  // chosen. If the file can't be loaded, the customer types the zone instead.
+  else if (COUNTRY.zones) {
+    const zsel = document.createElement("select");
+    zsel.id = "zone"; zsel.name = "zone"; zsel.required = true;
+    $("#zone").replaceWith(zsel);
+    let zones = null;
+    const fillZones = () => {
+      if (!zsel.isConnected) return;
+      const list = zones?.[$("#region").value]?.[$("#city").value] || [];
+      const keep = zsel.value;
+      zsel.innerHTML = `<option value="">${esc(T(list.length ? "Zone / village" : "Choose your municipality first"))}</option>`
+        + list.map((z) => `<option value="${esc(z)}">${esc(z)}</option>`).join("");
+      if (list.includes(keep)) zsel.value = keep;
+    };
+    $("#region").addEventListener("change", fillZones);
+    $("#city").addEventListener("change", fillZones);
+    zsel.addEventListener("focus", fillZones);
+    fillZones();
+    fetch(COUNTRY.zones).then((r) => r.json()).then((z) => { zones = z; fillZones(); }).catch(() => {
+      const inp = document.createElement("input");
+      inp.id = "zone"; inp.name = "zone"; inp.type = "text"; inp.required = true;
+      inp.placeholder = T("e.g. Zone 10, or village name");
+      zsel.replaceWith(inp);
+    });
+  }
 
   // One "City & delivery address" field, except in countries with splitAddress (Lebanon, El Salvador)
   if (!COUNTRY.splitAddress) {

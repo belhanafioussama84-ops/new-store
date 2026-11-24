@@ -72,7 +72,7 @@ const Shop = (() => {
     check(form.region, form.region?.value.trim().length >= 2, T("Please choose your region."));
     check(form.city, form.city?.value.trim().length >= 2, T("Please enter your city."));
     check(form.landmark, form.landmark?.value.trim().length >= 3, T("Please enter a landmark near your home."));
-    check(form.zone, form.zone?.value.trim().length >= 2, T("Please enter your zone or village."));
+    check(form.zone, form.zone?.value.trim().length >= 2, T(form.zone?.tagName === "SELECT" ? "Please choose your zone or village." : "Please enter your zone or village."));
     check(form.address, form.address?.value.trim().length >= (form.city ? 3 : 5),
       T(form.city ? "Please enter your delivery address." : "Please enter your city and delivery address."));
 
