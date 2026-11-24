@@ -1035,6 +1035,7 @@ const PRODUCTS = [
     // Without its reviews / "+8,750 clientas", its Guatemala prices or its "si llega dañado te lo cambiamos".
     name: "Creatina Monohidratada Para Mujer 240g",
     sku: "LD-P-4187448", // LatinDrop SKU (El Salvador tab of the sheet)
+    gt: { sku: "LD-P-5635388" }, // LatinDrop Guatemala SKU (user, 24 Nov 2026)
     countries: ["sv"],
     category: "Health & comfort",
     price: 39.99, // user's price (40.99 until 14 Nov 2026); 2 tarros is my suggestion
