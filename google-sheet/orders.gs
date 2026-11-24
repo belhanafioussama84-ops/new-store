@@ -65,7 +65,7 @@ const SALVADOR_HEADERS = [
   "Point de repère", "SKU", "Code produit", "Variante", "Quantité", "Prix COD", "Qui confirme", "Note",
 ];
 // LatinDrop Guatemala template: the same plus "Zone / village" after Municipalité (15 columns, user 24 Nov 2026).
-// The site has no zone field: that column stays empty.
+// Filled from the "Zona / aldea" field of the Guatemala order form.
 const GUATEMALA_HEADERS = SALVADOR_HEADERS.slice(0, 5).concat(["Zone / village"], SALVADOR_HEADERS.slice(5));
 // Column order of the "Orders" tab = Simon Express import table.
 // VILLE and PRODUIT are left empty on purpose; the product name goes in REF.
@@ -106,7 +106,7 @@ function doPost(e) {
       // Already there (sent twice, or its upsell arrived first): nothing to add
       if (salvadorRowOf_(sheet, o.number)) return json_({ ok: true, duplicate: true });
       const row = salvadorRow_(o);
-      if (gt) row.splice(5, 0, ""); // Zone / village
+      if (gt) row.splice(5, 0, text_(o.customer.zone || "")); // Zone / village
       sheet.appendRow(row);
       sendMetaPurchase_(o);
       notifyTelegram_(o.number, o);

@@ -126,6 +126,12 @@
               <div class="input"><span>🏙️</span><input id="city" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Dar es Salaam" required /></div>
               <small class="error"></small>
             </div>
+            <!-- Zone / village: only in countries with "zone" (Guatemala, LatinDrop column); elsewhere removed -->
+            <div class="field" id="zoneField">
+              <label for="zone">Zone / village <b>*</b></label>
+              <div class="input"><span>🏘️</span><input id="zone" name="zone" type="text" placeholder="e.g. Zone 10, or village name" required /></div>
+              <small class="error"></small>
+            </div>
             <div class="field">
               <label for="address"><span id="addressLabel">Delivery address</span> <b>*</b></label>
               <div class="input"><span>📍</span><input id="address" name="address" type="text" autocomplete="street-address" placeholder="e.g. Kinondoni, Mikocheni B, near the market" required /></div>

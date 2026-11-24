@@ -72,6 +72,7 @@ const Shop = (() => {
     check(form.region, form.region?.value.trim().length >= 2, T("Please choose your region."));
     check(form.city, form.city?.value.trim().length >= 2, T("Please enter your city."));
     check(form.landmark, form.landmark?.value.trim().length >= 3, T("Please enter a landmark near your home."));
+    check(form.zone, form.zone?.value.trim().length >= 2, T("Please enter your zone or village."));
     check(form.address, form.address?.value.trim().length >= (form.city ? 3 : 5),
       T(form.city ? "Please enter your delivery address." : "Please enter your city and delivery address."));
 
@@ -109,10 +110,11 @@ const Shop = (() => {
         region: form.region?.value.trim() || "",
         // city = "City, address" all in one (the sheet's ADRESSE column for Simon Express);
         // town and street are the two fields on their own (VILLE / ADRESSE in the Lebanon tab).
-        city: [form.city?.value.trim(), form.region?.value.trim(), form.address?.value.trim(), form.landmark?.value.trim()].filter(Boolean).join(", "),
+        city: [form.city?.value.trim(), form.region?.value.trim(), form.zone?.value.trim(), form.address?.value.trim(), form.landmark?.value.trim()].filter(Boolean).join(", "),
         town: form.city?.value.trim() || "",
         street: form.address?.value.trim() || "",
         landmark: form.landmark?.value.trim() || "", // El Salvador only
+        zone: form.zone?.value.trim() || "", // Guatemala only
       },
       // For the Meta Conversions API (google-sheet/orders.gs sends the Purchase from the sheet too):
       // the Facebook cookies of this visitor, so Meta can match the order to the ad click.

@@ -701,6 +701,7 @@
     $("#region").replaceWith(inp);
   } else $("#regionField").remove();
   if (!COUNTRY.landmark) $("#landmarkField").remove();
+  if (!COUNTRY.zone) $("#zoneField").remove(); // Guatemala: Zona / aldea (LatinDrop "Zone / village")
 
   // One "City & delivery address" field, except in countries with splitAddress (Lebanon, El Salvador)
   if (!COUNTRY.splitAddress) {
@@ -720,6 +721,7 @@
       phone: ["Phone", '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25d366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/><path fill="#fff" d="M16.9 14.4c-.3-.1-1.6-.8-1.8-.9-.3-.1-.4-.1-.6.1l-.8 1c-.2.2-.3.2-.6.1a7 7 0 0 1-3.4-3c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.4z"/></svg>', "Phone"],
       region: ["Region", down],
       city: ["City / municipality", down],
+      zone: ["Zone / village", svg('<path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M10 21v-6h4v6"/>'), "e.g. Zone 10, or village name"],
       address: ["Delivery address", svg('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>')],
     };
     for (const [id, [label, icon, holder]] of Object.entries(fields)) {
