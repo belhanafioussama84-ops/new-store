@@ -1598,6 +1598,104 @@ const PRODUCTS = [
       { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
     ],
   },
+  {
+    id: "lonchera-electrica",
+    // El Salvador only: texts in Spanish, prices in US dollars. Page like the user's reference
+    // (importamostodoecuador.myshopify.com/products/lonchera-electrica-portatil, saved by the user):
+    // its 7 tall images minus the "Opiniones de nuestros clientes" one (made-up reviews, not ours).
+    // Their price box ($35.99, "Antes $59.98", "Garantía de 30 días") replaced by $45.99 + "Envío
+    // gratis" on the hero and offer images. The reference page has no GIF.
+    name: "Lonchera Eléctrica Portátil",
+    sku: "LD-P-6537152", // LatinDrop SKU (El Salvador tab of the sheet)
+    countries: ["sv"],
+    category: "Home & kitchen",
+    price: 45.99, // user's price; the 2-piece price is my suggestion
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "🍱",
+    image: "images/lonchera-main.webp",
+    squarePhotos: true,
+    images: ["images/lonchera-main.webp"],
+    description: "Una lonchera eléctrica que calienta tu comida donde estés: la conectas, esperas unos minutos y comes caliente en el trabajo, sin hacer fila en el microondas.",
+    offers: [
+      { qty: 1, price: 45.99, label: "1 lonchera" },
+      { qty: 2, price: 79.99, label: "2 loncheras · Para ti y tu pareja", tag: "Best value" },
+    ],
+    layout: "story",
+    timeline: [1, 1, 3],
+    headline: "Tu almuerzo frío ya no te quita la tarde",
+    subheadline: "Lonchera eléctrica portátil: calienta tu comida en minutos, en la oficina o donde estés.",
+    inBox: ["Lonchera eléctrica", "Bandeja interior con divisor", "Cable de corriente", "Cuchara"],
+    problem: {
+      title: "¿Comida fría o filas en el microondas?",
+      text: "Llevas tu comida de casa, pero a la hora del almuerzo el microondas está ocupado o hay fila. Al final comes frío, o gastas en comida rápida cara cada día.",
+    },
+    solution: {
+      title: "Tu propio calentador, en tu escritorio",
+      text: "Pones tu comida en la lonchera, la conectas y en unos minutos está caliente. Sin filas, sin microondas, sin gastar de más.",
+    },
+    benefits: [
+      { icon: "🔥", title: "Calienta rápido", text: "Comida caliente en minutos, lista cuando tienes hambre." },
+      { icon: "🔌", title: "Solo conéctala", text: "Se conecta a cualquier enchufe de la oficina o la casa." },
+      { icon: "🍱", title: "Dos compartimentos", text: "Bandeja con divisor para el plato fuerte y el acompañamiento." },
+      { icon: "💼", title: "Fácil de llevar", text: "Diseño compacto con asa y seguros laterales." },
+      { icon: "💵", title: "Ahorras cada día", text: "Comes casero y dejas de gastar en comida rápida." },
+    ],
+    sections: [
+      {
+        image: "images/lonchera-hero.webp",
+        title: "Come caliente todos los días",
+        text: "Gastar cada día en comida rápida cara te deja con hambre y sin presupuesto. Con tu lonchera eléctrica llevas tu comida de casa y la comes caliente.",
+      },
+      {
+        image: "images/lonchera-microondas.webp",
+        title: "Adiós a las filas del microondas",
+        text: "Tu comida se calienta en tu escritorio mientras trabajas. La luz LAMP te avisa que está calentando.",
+        list: ["Comida fría en tu escritorio → caliente", "Calienta de manera rápida", "Compacta y fácil de transportar"],
+      },
+      {
+        image: "images/lonchera-comida-fria.webp",
+        title: "Comer frío te quita la energía",
+        text: "Perder tiempo esperando el microondas o comer frío te deja sin ganas para el resto del día. Una comida caliente lo cambia todo.",
+      },
+      {
+        image: "images/lonchera-pasos.webp",
+        title: "Fácil en 3 pasos",
+        text: "Coloca la comida en la bandeja, conecta la lonchera y en minutos disfrutas tu comida caliente.",
+      },
+      {
+        image: "images/lonchera-preguntas.webp",
+        title: "Rápida, compacta y en 4 colores",
+        text: "Calienta rápido, se lleva fácil en tu bolso o mochila y viene en azul, rosado, naranja y verde.",
+      },
+      {
+        image: "images/lonchera-oferta.webp",
+        title: "Tu comida caliente donde estés",
+        text: "Pídela hoy, la recibes en casa y pagas en efectivo al recibirla. Envío gratis.",
+      },
+    ],
+    steps: [
+      { title: "Coloca la comida", text: "Pon tus alimentos en la bandeja interior con divisor y cierra los seguros." },
+      { title: "Conecta y calienta", text: "Con la lonchera sobre la mesa, conéctala al enchufe. La luz LAMP se enciende." },
+      { title: "Disfruta", text: "Después de unos minutos, desconéctala, abre los seguros laterales y sirve tu comida caliente." },
+    ],
+    warning: "Antes de calentar, abre la válvula de la tapa para dejar salir el vapor (así lo indica la etiqueta \"Tips\" de la tapa).",
+    specs: {
+      "Uso": "Calentar comida ya preparada",
+      "Conexión": "Enchufe de pared",
+      "Interior": "Bandeja con 2 compartimentos",
+      "Colores": "Azul, rosado, naranja y verde",
+    },
+    faq: [
+      { q: "¿Cuánto tarda en calentar?", a: "Unos minutos, según la comida y la cantidad. Conéctala un rato antes de tu hora de almuerzo." },
+      { q: "¿Cocina la comida cruda?", a: "No. Está hecha para calentar comida ya preparada, como tu almuerzo de casa." },
+      { q: "¿Puedo escoger el color?", a: "Escríbelo en tu pedido o díselo al agente cuando te llame para confirmar; te enviamos el color disponible más cercano." },
+      { q: "¿Cómo pago?", a: "Pagas en efectivo cuando recibes tu pedido. No necesitas tarjeta." },
+      { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
+    ],
+  },
 ];
 
 // A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened
