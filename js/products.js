@@ -1617,7 +1617,7 @@ const PRODUCTS = [
     icon: "🍱",
     image: "images/lonchera-main.webp",
     squarePhotos: true,
-    images: ["images/lonchera-main.webp"],
+    images: ["images/lonchera-main.webp"], // blue: the user sells it in blue only
     description: "Una lonchera eléctrica que calienta tu comida donde estés: la conectas, esperas unos minutos y comes caliente en el trabajo, sin hacer fila en el microondas.",
     offers: [
       { qty: 1, price: 45.99, label: "1 lonchera" },
@@ -1667,8 +1667,8 @@ const PRODUCTS = [
       },
       {
         image: "images/lonchera-preguntas.webp",
-        title: "Rápida, compacta y en 4 colores",
-        text: "Calienta rápido, se lleva fácil en tu bolso o mochila y viene en azul, rosado, naranja y verde.",
+        title: "Rápida y compacta",
+        text: "Calienta rápido y se lleva fácil en tu bolso o mochila. Te llega en color azul.",
       },
       {
         image: "images/lonchera-oferta.webp",
@@ -1686,12 +1686,12 @@ const PRODUCTS = [
       "Uso": "Calentar comida ya preparada",
       "Conexión": "Enchufe de pared",
       "Interior": "Bandeja con 2 compartimentos",
-      "Colores": "Azul, rosado, naranja y verde",
+      "Color": "Azul",
     },
     faq: [
       { q: "¿Cuánto tarda en calentar?", a: "Unos minutos, según la comida y la cantidad. Conéctala un rato antes de tu hora de almuerzo." },
       { q: "¿Cocina la comida cruda?", a: "No. Está hecha para calentar comida ya preparada, como tu almuerzo de casa." },
-      { q: "¿Puedo escoger el color?", a: "Escríbelo en tu pedido o díselo al agente cuando te llame para confirmar; te enviamos el color disponible más cercano." },
+      { q: "¿De qué color es?", a: "Te llega en color azul." },
       { q: "¿Cómo pago?", a: "Pagas en efectivo cuando recibes tu pedido. No necesitas tarjeta." },
       { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
     ],
