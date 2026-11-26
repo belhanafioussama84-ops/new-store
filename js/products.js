@@ -1698,13 +1698,14 @@ const PRODUCTS = [
   },
   {
     id: "clearzal-fast",
-    // El Salvador (and Guatemala, via look "sv"): texts in Spanish, prices in US dollars.
+    // El Salvador only, NOT Guatemala (user, 26 Nov 2026): texts in Spanish, prices in US dollars.
     // Reference: ofertazogt.com/products/gel-pain-relief-clearzal-fast-acting-x-60-ml. It has one
     // photo only and no GIF; its Q189/Q299/Q379 price box is cropped off the bottom of the photo.
     // No medical claims in our texts (cooling gel for tired muscles, not a medicine).
     name: "Clearzal Fast",
     sku: "LD-P-19240", // LatinDrop SKU (user, 26 Nov 2026)
     countries: ["sv"],
+    notIn: ["gt"],
     category: "Health & comfort",
     price: 39, // user's price; the 2-piece price is my suggestion
     oldPrice: null,
@@ -1775,7 +1776,7 @@ const PRODUCTS = [
 {
   const p = PRODUCTS.find((x) => x.id === new URLSearchParams(location.search).get("id"));
   const open = p?.countries?.filter((c) => COUNTRIES[c]) || [];
-  if (open.length && !open.includes(COUNTRY.id) && !open.includes(COUNTRY.look)) {
+  if (open.length && ((!open.includes(COUNTRY.id) && !open.includes(COUNTRY.look)) || p.notIn?.includes(COUNTRY.id))) {
     const url = new URL(location.href);
     url.searchParams.set("country", open[0]);
     location.replace(url.href);
@@ -1785,7 +1786,8 @@ const PRODUCTS = [
 // A product with "countries" is only sold there, at its own prices.
 for (let i = PRODUCTS.length - 1; i >= 0; i--) {
   const c = PRODUCTS[i].countries;
-  if (c && !c.includes(COUNTRY.id) && !c.includes(COUNTRY.look)) PRODUCTS.splice(i, 1);
+  // notIn: ["gt"] = not sold in that country even if it has the look of one in "countries"
+  if ((c && !c.includes(COUNTRY.id) && !c.includes(COUNTRY.look)) || PRODUCTS[i].notIn?.includes(COUNTRY.id)) PRODUCTS.splice(i, 1);
 }
 
 // A country with a look (Guatemala): the look country's products, in its own money and words.
