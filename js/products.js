@@ -1711,7 +1711,7 @@ const PRODUCTS = [
     countries: ["sv"],
     notIn: ["gt"],
     category: "Health & comfort",
-    price: 39, // user's price; 2 and 3 pieces are my suggestion
+    price: 39, // user's price; 2 pieces is my suggestion (no 3: user, 26 Nov 2026)
     oldPrice: null,
     rating: 4.8,
     reviews: 0,
@@ -1723,7 +1723,6 @@ const PRODUCTS = [
     offers: [
       { qty: 1, price: 39, label: "1 unidad" },
       { qty: 2, price: 69, label: "2 unidades", tag: "Best value" },
-      { qty: 3, price: 89, label: "3 unidades" },
     ],
     layout: "clear",
     ticker: ["⚡ VE LAS OFERTAS BLACK FRIDAY", "🔥 ENTRA Y COMPRA A PRECIO BLACK FRIDAY", "RECIBE TU PEDIDO CON ENVÍO GRATIS"],
