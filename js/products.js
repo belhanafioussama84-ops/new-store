@@ -1696,6 +1696,78 @@ const PRODUCTS = [
       { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
     ],
   },
+  {
+    id: "clearzal-fast",
+    // El Salvador (and Guatemala, via look "sv"): texts in Spanish, prices in US dollars.
+    // Reference: ofertazogt.com/products/gel-pain-relief-clearzal-fast-acting-x-60-ml. It has one
+    // photo only and no GIF; its Q189/Q299/Q379 price box is cropped off the bottom of the photo.
+    // No medical claims in our texts (cooling gel for tired muscles, not a medicine).
+    name: "Clearzal Fast",
+    sku: "LD-P-19240", // LatinDrop SKU (user, 26 Nov 2026)
+    countries: ["sv"],
+    category: "Health & comfort",
+    price: 39, // user's price; the 2-piece price is my suggestion
+    oldPrice: null,
+    rating: 4.8,
+    reviews: 0,
+    badge: "New",
+    icon: "🧴",
+    image: "images/clearzal-main.webp",
+    squarePhotos: true,
+    images: ["images/clearzal-main.webp"],
+    description: "Gel frío Clearzal Fast de 60 ml para músculos y articulaciones cansadas: se absorbe rápido, no deja grasa y refresca con mentol.",
+    offers: [
+      { qty: 1, price: 39, label: "1 gel Clearzal Fast" },
+      { qty: 2, price: 69, label: "2 geles · Para ti y tu familia", tag: "Best value" },
+    ],
+    layout: "story",
+    timeline: [1, 1, 3],
+    headline: "Siente el frío que calma tus piernas cansadas",
+    subheadline: "Clearzal Fast: gel con mentol de efecto frío para músculos y articulaciones, 60 ml.",
+    inBox: ["1 tubo de gel Clearzal Fast de 60 ml", "Caja original"],
+    problem: {
+      title: "¿Piernas pesadas y músculos cargados al final del día?",
+      text: "Después del trabajo, de estar de pie muchas horas o de hacer ejercicio, tus piernas y articulaciones se sienten cansadas y no te dejan descansar bien.",
+    },
+    solution: {
+      title: "Un gel frío que aplicas en segundos",
+      text: "Pones un poco de Clearzal Fast en la zona, masajeas en círculos y sientes de inmediato la sensación fresca del mentol. Se absorbe rápido y no mancha la ropa.",
+    },
+    benefits: [
+      { icon: "❄️", title: "Efecto frío", text: "Fórmula con mentol que refresca al instante." },
+      { icon: "💧", title: "Rápida absorción", text: "No deja la piel grasosa ni pegajosa." },
+      { icon: "🌿", title: "Con extractos", text: "Boswellia serrata, glucosamina e ilex." },
+      { icon: "👕", title: "No mancha", text: "Te vistes enseguida, sin marcas en la ropa." },
+      { icon: "🌱", title: "Aroma a menta", text: "Olor fresco y agradable, nada fuerte." },
+    ],
+    sections: [
+      {
+        image: "images/clearzal-main.webp",
+        title: "Frescura inmediata para tus piernas",
+        text: "Clearzal Fast es un gel tópico con mentol que da una sensación fría en músculos y articulaciones. Ideal después del trabajo, de caminar mucho o del gimnasio.",
+        list: ["Fórmula con mentol de efecto frío", "Se absorbe rápido, sin grasa", "Con Boswellia serrata, glucosamina e ilex", "Tubo de 60 ml fácil de llevar"],
+      },
+    ],
+    steps: [
+      { title: "Aplica", text: "Pon una pequeña cantidad de gel sobre la piel limpia, en la zona cansada." },
+      { title: "Masajea", text: "Masajea suavemente en círculos hasta que se absorba." },
+      { title: "Repite", text: "Úsalo 2 o 3 veces al día, cuando lo necesites. Lávate las manos después." },
+    ],
+    warning: "Solo para uso externo. No lo apliques en los ojos, en mucosas ni en heridas abiertas. No es un medicamento: si el dolor es fuerte o no se va, consulta a un profesional de la salud.",
+    specs: {
+      "Contenido": "60 ml",
+      "Tipo": "Gel tópico de efecto frío",
+      "Ingredientes destacados": "Mentol, Boswellia serrata, glucosamina, ilex",
+      "Aroma": "Menta",
+    },
+    faq: [
+      { q: "¿Cuántas veces al día lo uso?", a: "De 2 a 3 veces al día, o cuando lo necesites." },
+      { q: "¿Mancha la ropa?", a: "No. Se absorbe rápido y no deja residuo grasoso." },
+      { q: "¿Es un medicamento?", a: "No. Es un gel tópico de efecto frío. Si el dolor es fuerte o no se va, consulta a un profesional de la salud." },
+      { q: "¿Cómo pago?", a: "Pagas en efectivo cuando recibes tu pedido. No necesitas tarjeta." },
+      { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
+    ],
+  },
 ];
 
 // A link to a product sold in other countries only (e.g. an ad link without &country=lb, opened
