@@ -1698,15 +1698,15 @@ const PRODUCTS = [
   },
   {
     id: "clearzal-fast",
-    // Guatemala only (user, 26 Nov 2026: "nn salvador"): texts in Spanish, prices in quetzales.
+    // El Salvador (and Guatemala, via look "sv"): texts in Spanish, prices in US dollars.
     // Reference: ofertazogt.com/products/gel-pain-relief-clearzal-fast-acting-x-60-ml. It has one
     // photo only and no GIF; its Q189/Q299/Q379 price box is cropped off the bottom of the photo.
     // No medical claims in our texts (cooling gel for tired muscles, not a medicine).
     name: "Clearzal Fast",
-    sku: "LD-P-19240", // LatinDrop Guatemala SKU (user, 26 Nov 2026)
-    countries: ["gt"],
+    sku: "LD-P-19240", // LatinDrop SKU (user, 26 Nov 2026)
+    countries: ["sv"],
     category: "Health & comfort",
-    price: 309, // user said "39": taken as $39 × 7.7 → Q309 (to confirm); the 2-piece price is my suggestion
+    price: 39, // user's price; the 2-piece price is my suggestion
     oldPrice: null,
     rating: 4.8,
     reviews: 0,
@@ -1717,8 +1717,8 @@ const PRODUCTS = [
     images: ["images/clearzal-main.webp"],
     description: "Gel frío Clearzal Fast de 60 ml para músculos y articulaciones cansadas: se absorbe rápido, no deja grasa y refresca con mentol.",
     offers: [
-      { qty: 1, price: 309, label: "1 gel Clearzal Fast" },
-      { qty: 2, price: 539, label: "2 geles · Para ti y tu familia", tag: "Best value" },
+      { qty: 1, price: 39, label: "1 gel Clearzal Fast" },
+      { qty: 2, price: 69, label: "2 geles · Para ti y tu familia", tag: "Best value" },
     ],
     layout: "story",
     timeline: [1, 1, 3],
