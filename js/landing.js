@@ -388,13 +388,16 @@
     }));
     // "Is it for me?": tap to choose
     document.querySelectorAll(".gl-ideal__card").forEach((c) => c.addEventListener("click", () => c.classList.toggle("is-on")));
-  } else if (p.layout === "pro" || p.layout === "violet") {
+  } else if (p.layout === "pro" || p.layout === "violet" || p.layout === "clear") {
     // layout: "pro" — navy and green blocks like the user's drain-claw reference page (css/pro.css):
     // dark name bar + green strip on top, then the page is a list of blocks ("blocks" in products.js),
     // each one typed by its key: img, h, p, anchor, ba, feats, cta, table, tiles, steps, dark, box,
     // gallery, lead, band, checks, pills, safe.
     // layout: "violet" — same blocks, purple and white like the user's black-seed-oil reference
     // page (css/violet.css): moving purple bands, centred titles, ✓ grid under the price.
+    // layout: "clear" — like the user's Clearzal reference page (css/clear.css): dark moving
+    // announcement bar on top (ticker), green pill button with a black border, then the ad images
+    // one under the other with no gap and no text.
     document.body.classList.add("layout-story", "layout-pro", `layout-${p.layout}`);
     const E = (s) => esc(T(s));
     const B = (s) => E(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>"); // **bold** inside a text
@@ -402,6 +405,10 @@
     below.className = "buy__after";
     ["#pDesc", ".buy__hot", ".buy__check", ".buy__perks", ".eta"].forEach((s) => { const el = $(s); if (el) below.appendChild(el); });
     $("#order").after(below);
+    if (p.ticker?.length) { const row = p.ticker.map((w) => `<span>${E(w)}<i aria-hidden="true">✦</i></span>`).join(""); document.body.insertAdjacentHTML("afterbegin", `
+      <div class="ck-ticker" role="region" aria-label="Anuncios"><div class="ck-ticker__track"><div>${row}</div><div aria-hidden="true">${row}</div></div></div>`); }
+    // buyNote: small line under the order button
+    if (p.buyNote) $("#submitBtn").insertAdjacentHTML("afterend", `<p class="ck-note">${E(p.buyNote)}</p>`);
     if (p.claim) $("main").insertAdjacentHTML("afterbegin", `
       <div class="pr-top"><strong>${E(p.shortName || p.name)}</strong><small>${E(p.claim)}</small></div>
       ${p.strip ? `<p class="pr-strip">${E(p.strip)}</p>` : ""}`);
@@ -605,7 +612,8 @@
   const renderButton = () => {
     renderPrice();
     renderRecap();
-    const label = T("Order now · {price}", { price: fmt(offer().price) });
+    // buyText: the reference page's own button words (e.g. "¡PIDE AHORA Y PAGA AL RECIBIR! 🚛")
+    const label = p.buyText ? T(p.buyText) : T("Order now · {price}", { price: fmt(offer().price) });
     ["#submitBtn", "#sticky", "#closingOrder"].forEach((s) => { $(s).textContent = label; });
     if (p.darkForm) $("#submitBtn").innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg> ${esc(T("Complete order"))}`;
   };

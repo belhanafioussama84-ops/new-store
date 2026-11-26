@@ -1698,73 +1698,49 @@ const PRODUCTS = [
   },
   {
     id: "clearzal-fast",
-    // El Salvador only, NOT Guatemala (user, 26 Nov 2026): texts in Spanish, prices in US dollars.
-    // Reference: ofertazogt.com/products/gel-pain-relief-clearzal-fast-acting-x-60-ml. It has one
-    // photo only and no GIF; its Q189/Q299/Q379 price box is cropped off the bottom of the photo.
-    // No medical claims in our texts (cooling gel for tired muscles, not a medicine).
+    // El Salvador only, NOT Guatemala (user, 26 Nov 2026): Spanish, US dollars.
+    // Page = the user's reference landing page, copied whole (user: "hez lia dik landing page kamla"):
+    // ofertazogt.com/products/gel-pain-relief-clearzal-fast-acting-x-60-ml, saved by the user with
+    // Ctrl+S. Layout "clear" (css/clear.css): its dark "Black Friday" moving bar, hero image, green
+    // "¡PIDE AHORA Y PAGA AL RECIBIR! 🚛" button, then its ad images one under the other.
+    // Changes to their images: Q price boxes cut off the hero and offer images; FAQ image says
+    // "en todo El Salvador" (was Guatemala) and "producto original" (was "dispositivo médico").
+    // Their customer-reviews image (Diego M., Andrés P., Carlos R.) left out: not our customers.
     name: "Clearzal Fast",
     sku: "LD-P-19240", // LatinDrop SKU (user, 26 Nov 2026)
     countries: ["sv"],
     notIn: ["gt"],
     category: "Health & comfort",
-    price: 39, // user's price; the 2-piece price is my suggestion
+    price: 39, // user's price; 2 and 3 pieces are my suggestion
     oldPrice: null,
     rating: 4.8,
     reviews: 0,
     badge: "New",
     icon: "🧴",
-    image: "images/clearzal-main.webp",
-    squarePhotos: true,
-    images: ["images/clearzal-main.webp"],
-    description: "Gel frío Clearzal Fast de 60 ml para músculos y articulaciones cansadas: se absorbe rápido, no deja grasa y refresca con mentol.",
+    image: "images/clearzal-hero.webp",
+    images: ["images/clearzal-hero.webp"],
+    description: "Gel frío Clearzal Fast de 60 ml para músculos y articulaciones: fórmula con mentol, se absorbe rápido y no mancha la ropa.",
     offers: [
-      { qty: 1, price: 39, label: "1 gel Clearzal Fast" },
-      { qty: 2, price: 69, label: "2 geles · Para ti y tu familia", tag: "Best value" },
+      { qty: 1, price: 39, label: "1 unidad" },
+      { qty: 2, price: 69, label: "2 unidades", tag: "Best value" },
+      { qty: 3, price: 89, label: "3 unidades" },
     ],
-    layout: "story",
-    timeline: [1, 1, 3],
-    headline: "Siente el frío que calma tus piernas cansadas",
-    subheadline: "Clearzal Fast: gel con mentol de efecto frío para músculos y articulaciones, 60 ml.",
-    inBox: ["1 tubo de gel Clearzal Fast de 60 ml", "Caja original"],
-    problem: {
-      title: "¿Piernas pesadas y músculos cargados al final del día?",
-      text: "Después del trabajo, de estar de pie muchas horas o de hacer ejercicio, tus piernas y articulaciones se sienten cansadas y no te dejan descansar bien.",
-    },
-    solution: {
-      title: "Un gel frío que aplicas en segundos",
-      text: "Pones un poco de Clearzal Fast en la zona, masajeas en círculos y sientes de inmediato la sensación fresca del mentol. Se absorbe rápido y no mancha la ropa.",
-    },
-    benefits: [
-      { icon: "❄️", title: "Efecto frío", text: "Fórmula con mentol que refresca al instante." },
-      { icon: "💧", title: "Rápida absorción", text: "No deja la piel grasosa ni pegajosa." },
-      { icon: "🌿", title: "Con extractos", text: "Boswellia serrata, glucosamina e ilex." },
-      { icon: "👕", title: "No mancha", text: "Te vistes enseguida, sin marcas en la ropa." },
-      { icon: "🌱", title: "Aroma a menta", text: "Olor fresco y agradable, nada fuerte." },
+    layout: "clear",
+    ticker: ["⚡ VE LAS OFERTAS BLACK FRIDAY", "🔥 ENTRA Y COMPRA A PRECIO BLACK FRIDAY", "RECIBE TU PEDIDO CON ENVÍO GRATIS"],
+    buyText: "¡PIDE AHORA Y PAGA AL RECIBIR! 🚛",
+    buyNote: "🔒 Pago Seguro · 🚚 Envío Gratis",
+    ctaText: "¡PIDE AHORA Y PAGA AL RECIBIR! 🚛",
+    blocks: [
+      { img: "images/clearzal-antes-despues.webp", alt: "Antes y después" },
+      { img: "images/clearzal-beneficios.webp", alt: "Crioterapia con mentol, absorción rápida, extractos naturales" },
+      { img: "images/clearzal-como-funciona.webp", alt: "Cómo funciona en 3 pasos" },
+      { img: "images/clearzal-faq.webp", alt: "Preguntas frecuentes" },
+      { img: "images/clearzal-oferta.webp", alt: "Clearzal Fast 60 ml" },
+      { cta: true },
     ],
-    sections: [
-      {
-        image: "images/clearzal-main.webp",
-        title: "Frescura inmediata para tus piernas",
-        text: "Clearzal Fast es un gel tópico con mentol que da una sensación fría en músculos y articulaciones. Ideal después del trabajo, de caminar mucho o del gimnasio.",
-        list: ["Fórmula con mentol de efecto frío", "Se absorbe rápido, sin grasa", "Con Boswellia serrata, glucosamina e ilex", "Tubo de 60 ml fácil de llevar"],
-      },
-    ],
-    steps: [
-      { title: "Aplica", text: "Pon una pequeña cantidad de gel sobre la piel limpia, en la zona cansada." },
-      { title: "Masajea", text: "Masajea suavemente en círculos hasta que se absorba." },
-      { title: "Repite", text: "Úsalo 2 o 3 veces al día, cuando lo necesites. Lávate las manos después." },
-    ],
-    warning: "Solo para uso externo. No lo apliques en los ojos, en mucosas ni en heridas abiertas. No es un medicamento: si el dolor es fuerte o no se va, consulta a un profesional de la salud.",
-    specs: {
-      "Contenido": "60 ml",
-      "Tipo": "Gel tópico de efecto frío",
-      "Ingredientes destacados": "Mentol, Boswellia serrata, glucosamina, ilex",
-      "Aroma": "Menta",
-    },
     faq: [
-      { q: "¿Cuántas veces al día lo uso?", a: "De 2 a 3 veces al día, o cuando lo necesites." },
       { q: "¿Mancha la ropa?", a: "No. Se absorbe rápido y no deja residuo grasoso." },
-      { q: "¿Es un medicamento?", a: "No. Es un gel tópico de efecto frío. Si el dolor es fuerte o no se va, consulta a un profesional de la salud." },
+      { q: "¿Cuántas veces al día lo uso?", a: "De 2 a 3 veces al día, o cuando lo necesites. Solo uso externo: no en ojos, mucosas ni heridas." },
       { q: "¿Cómo pago?", a: "Pagas en efectivo cuando recibes tu pedido. No necesitas tarjeta." },
       { q: "¿Cuánto tarda en llegar?", a: "Entre 1 y 3 días hábiles, según tu departamento. El envío es gratis." },
     ],

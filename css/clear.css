@@ -1,0 +1,48 @@
+/* layout: "clear" — like the user's Clearzal reference page (ofertazogt.com, saved 26 Nov 2026).
+   Uses the "pro" blocks (css/pro.css); loaded after it. Light grey-blue page, dark moving
+   announcement bar on top, green pill buttons with a thick black border that shake,
+   then the ad images stacked with no gap and no text. */
+body.layout-clear {
+  --accent: #0ad64a; --accent-2: #09b83f; --accent-soft: #effcf3; --pr-ink: #111;
+  background: #f2f5f9;
+}
+body.layout-clear h1 { font-size: 1.5rem; }
+
+/* Dark moving bar at the very top */
+.ck-ticker { overflow: hidden; padding: 10px 0; background: #2e2a39; color: #fff; }
+.ck-ticker__track { display: flex; width: max-content; animation: ck-scroll 15s linear infinite; }
+.ck-ticker__track > div { display: flex; flex: 0 0 auto; }
+.ck-ticker span { display: inline-flex; align-items: center; gap: 16px; padding: 0 0 0 24px; font-size: 15px; font-weight: 600; white-space: nowrap; }
+.ck-ticker i { color: #dfd02b; font-size: 1.25em; font-style: normal; line-height: 1; }
+@keyframes ck-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* Green pill button, thick black border, black text, shakes */
+body.layout-clear #submitBtn, body.layout-clear .sticky, body.layout-clear .pr-btn, body.layout-clear .pr-final {
+  background: linear-gradient(270deg, #b4f108 0%, #0ad64a 100%);
+  border: 4px solid #000; border-radius: 38px; color: #000 !important; font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+  animation: ck-shake 3s ease-in-out infinite;
+}
+body.layout-clear .sticky { min-height: 60px; }
+@keyframes ck-shake {
+  0%, 82%, 100% { transform: translateX(0); }
+  85% { transform: translateX(-6px) rotate(-1deg); }
+  88% { transform: translateX(6px) rotate(1deg); }
+  91% { transform: translateX(-4px); }
+  94% { transform: translateX(4px); }
+  97% { transform: translateX(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-ticker__track, body.layout-clear #submitBtn, body.layout-clear .sticky, body.layout-clear .pr-btn { animation: none; }
+}
+.ck-note { margin: 8px 0 0; color: #333; font-size: .9rem; font-weight: 600; text-align: center; }
+
+/* The ad images, full width, one under the other, no gap */
+body.layout-clear .pr-story { max-width: 600px; padding: 1rem 0 0; }
+body.layout-clear .pr-img { margin: 0; }
+body.layout-clear .pr-img img, body.layout-clear .pr-img video { border-radius: 0; }
+body.layout-clear .pr-cta { margin: 1.25rem 16px; }
+
+/* Hero image shown whole, at its own height, like the reference */
+body.layout-clear .gallery__main { aspect-ratio: auto; border: 0; }
+body.layout-clear .gallery__main img { height: auto; object-fit: initial; }
