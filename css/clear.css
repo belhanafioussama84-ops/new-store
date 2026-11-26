@@ -16,14 +16,24 @@ body.layout-clear h1 { font-size: 1.5rem; }
 .ck-ticker i { color: #dfd02b; font-size: 1.25em; font-style: normal; line-height: 1; }
 @keyframes ck-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* Green pill button, thick black border, black text, shakes */
-body.layout-clear #submitBtn, body.layout-clear .sticky, body.layout-clear .pr-btn, body.layout-clear .pr-final {
+/* Green pill button, thick black border, black text, shakes.
+   body.cod-green = every El Salvador product (js/landing.js); the order button at the bottom of
+   the screen always stays there, at every scroll position and on computers too. */
+html body.cod-green #submitBtn, html body.cod-green .sticky, body.layout-clear .pr-btn, body.layout-clear .pr-final {
   background: linear-gradient(270deg, #b4f108 0%, #0ad64a 100%);
   border: 4px solid #000; border-radius: 38px; color: #000 !important; font-weight: 800;
   box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
   animation: ck-shake 3s ease-in-out infinite;
 }
-body.layout-clear .sticky { min-height: 60px; }
+html body.cod-green #submitBtn { line-height: 1.25; white-space: normal; }
+html body.cod-green .sticky {
+  display: flex; justify-content: center; align-items: center; text-align: center;
+  position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 20;
+  width: auto; max-width: 480px; min-height: 60px; margin: 0 auto; padding: 10px 16px;
+  font-size: 1.05rem; line-height: 1.2; transform: none;
+}
+body.cod-green { padding-bottom: 84px; }
+body.cod-green .wa-float { bottom: 84px; }
 @keyframes ck-shake {
   0%, 82%, 100% { transform: translateX(0); }
   85% { transform: translateX(-6px) rotate(-1deg); }
@@ -33,7 +43,7 @@ body.layout-clear .sticky { min-height: 60px; }
   97% { transform: translateX(-2px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ck-ticker__track, body.layout-clear #submitBtn, body.layout-clear .sticky, body.layout-clear .pr-btn { animation: none; }
+  .ck-ticker__track, body.cod-green #submitBtn, body.cod-green .sticky, body.layout-clear .pr-btn { animation: none; }
 }
 .ck-note { margin: 8px 0 0; color: #333; font-size: .9rem; font-weight: 600; text-align: center; }
 

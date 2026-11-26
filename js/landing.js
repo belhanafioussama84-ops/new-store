@@ -21,6 +21,14 @@
   const images = [...(p.images?.length ? p.images : [p.image]), ...(p.realPhotos || [])];
   // squarePhotos: true shows the top photos whole (square box, nothing cut off)
   if (p.squarePhotos) document.body.classList.add("gallery-square");
+  // El Salvador (user, 26 Nov 2026): on every product, the Clearzal reference's green pill button
+  // "¡PIDE AHORA Y PAGA AL RECIBIR! 🚛" with a black border, that shakes and always stays at the
+  // bottom of the screen (css/clear.css, body.cod-green). A product's own buyText / buyNote win.
+  const codGreen = COUNTRY.id === "sv";
+  const buyText = p.buyText || (codGreen ? "¡PIDE AHORA Y PAGA AL RECIBIR! 🚛" : "");
+  const buyNote = p.buyNote || (codGreen ? "🔒 Pago Seguro · 🚚 Envío Gratis" : "");
+  if (codGreen) document.body.classList.add("cod-green");
+  if (buyNote) $("#submitBtn").insertAdjacentHTML("afterend", `<p class="ck-note">${esc(T(buyNote))}</p>`);
   const unitFull = p.oldPrice || p.price; // price per item before any discount
   // Bundle offers: [{ qty, price, tag? }]. Without them there is a single "1 piece" offer.
   const offers = p.offers?.length ? p.offers : [{ qty: 1, price: p.price }];
@@ -407,8 +415,6 @@
     $("#order").after(below);
     if (p.ticker?.length) { const row = p.ticker.map((w) => `<span>${E(w)}<i aria-hidden="true">✦</i></span>`).join(""); document.body.insertAdjacentHTML("afterbegin", `
       <div class="ck-ticker" role="region" aria-label="Anuncios"><div class="ck-ticker__track"><div>${row}</div><div aria-hidden="true">${row}</div></div></div>`); }
-    // buyNote: small line under the order button
-    if (p.buyNote) $("#submitBtn").insertAdjacentHTML("afterend", `<p class="ck-note">${E(p.buyNote)}</p>`);
     if (p.claim) $("main").insertAdjacentHTML("afterbegin", `
       <div class="pr-top"><strong>${E(p.shortName || p.name)}</strong><small>${E(p.claim)}</small></div>
       ${p.strip ? `<p class="pr-strip">${E(p.strip)}</p>` : ""}`);
@@ -613,9 +619,9 @@
     renderPrice();
     renderRecap();
     // buyText: the reference page's own button words (e.g. "¡PIDE AHORA Y PAGA AL RECIBIR! 🚛")
-    const label = p.buyText ? T(p.buyText) : T("Order now · {price}", { price: fmt(offer().price) });
+    const label = buyText ? T(buyText) : T("Order now · {price}", { price: fmt(offer().price) });
     ["#submitBtn", "#sticky", "#closingOrder"].forEach((s) => { $(s).textContent = label; });
-    if (p.darkForm) $("#submitBtn").innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg> ${esc(T("Complete order"))}`;
+    if (p.darkForm && !buyText) $("#submitBtn").innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg> ${esc(T("Complete order"))}`;
   };
 
   $("#offers").addEventListener("change", (e) => {
