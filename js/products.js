@@ -60,6 +60,7 @@ const COUNTRIES = {
     dial: "255", phone: /^[67]\d{8}$/, // mobile numbers: 6XX / 7XX XXX XXX
     languages: ["sw", "en"],
     fastCity: "dar", // same / next day delivery
+    noWhatsApp: true, // user, 27 Nov 2026: no WhatsApp button in Tanzania
   },
   zm: {
     id: "zm", name: "Zambia", currency: "KW", currencyCode: "ZMW",
